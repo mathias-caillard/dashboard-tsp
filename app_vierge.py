@@ -38,8 +38,10 @@ app.layout = html.Div([
     html.H1('Bonjour, voici mon application web vierge en Dash sur Python !'),
 
     #Images
-    #html.Img(src = 'https://rapids.ai/assets/images/Plotly_Dash_logo.png'), #affichage d'une image sur une site web
-    #html.Img(src = app.get_asset_url('graphe_tennis.png')),  #affichage d'une image locale
+    html.H2('Affichage d\'une image à partir d\'un site web'),
+    html.Img(src = 'https://rapids.ai/assets/images/Plotly_Dash_logo.png'), #affichage d'une image sur une site web
+    html.H2('Affichage d\'une image locale'),
+    html.Img(src = app.get_asset_url('graphe_tennis.png')),  #affichage d'une image locale
 
     dcc.Graph(
         id='example-graph',
