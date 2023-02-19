@@ -24,7 +24,12 @@ df = pd.DataFrame({
 
 fig = px.bar(df, x="Année", y="Nb de nationalités étrangères différentes", color = "Nb de nationalités étrangères différentes")
 
+df2 = pd.DataFrame({
+    'type de promo' : ['FISE', 'FIPA', 'DNM', 'FTLV'],
+    'nombre' : [355, 452, 34, 78]
+})
 
+fig2 = px.pie(df2, values='nombre', names='type de promo')
 
 #Définition du layout
 app.layout = html.Div([
@@ -39,7 +44,15 @@ app.layout = html.Div([
     dcc.Graph(
         id='example-graph',
         figure=fig
-    )
+    ),
+
+     dcc.Graph(
+        id='example-graph2',
+        figure=fig2
+    ),
+
+
+
 
     
 
@@ -49,5 +62,5 @@ app.layout = html.Div([
 
 #Démarrage de l'application
 if __name__ == '__main__':
-    #Activation du debuggage
+    #Activation du debuggage (permet le hot-reloading)
     app.run_server(debug=True)
