@@ -6,7 +6,6 @@ import os
 import pandas as pd
 import plotly.express as px
 
-
 #Initialisation de l'application
 app = dash.Dash(__name__)
 
@@ -15,6 +14,9 @@ root_directory = os.path.abspath(os.path.dirname(__file__))
 
 #Chemin relatif de l'image graphe_tennis_séparés.png
 image_path = os.path.join(root_directory, 'assets\\graphe_tennis_séparés.png')
+
+#Chemin relatif du fichier excel
+excel_path = os.path.join(root_directory, 'assets\\Saisie-2023-INDICATEUR-DE-SUIVI-Ti.xlsx')
 
 
 df = pd.DataFrame({
@@ -30,6 +32,9 @@ df2 = pd.DataFrame({
 })
 
 fig2 = px.pie(df2, values='nombre', names='type de promo')
+
+df3 = pd.read_excel(excel_path,sheet_name = '2023-Ti-DF')
+print(df3)
 
 #Définition du layout
 app.layout = html.Div([
@@ -53,16 +58,14 @@ app.layout = html.Div([
         figure=fig2
     ),
 
-
-
-
-    
-
-
 ])
 
+
+#2ème layout
+app.layout
 
 #Démarrage de l'application
 if __name__ == '__main__':
     #Activation du debuggage (permet le hot-reloading)
     app.run_server(debug=True)
+    
