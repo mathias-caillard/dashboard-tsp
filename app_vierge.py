@@ -93,7 +93,7 @@ app.layout = html.Div([
 
     #Images
     html.H2('Affichage d\'une image à partir d\'un site web'),
-    html.Img(src = 'https://rapids.ai/assets/images/Plotly_Dash_logo.png'), #affichage d'une image sur une site web
+    html.Img(src = 'https://mobilitydb.com/images/plotly.png'), #affichage d'une image sur une site web
     html.H2('Affichage d\'une image locale'),
     html.Img(src = app.get_asset_url('graphe_tennis.png')),  #affichage d'une image locale
 
