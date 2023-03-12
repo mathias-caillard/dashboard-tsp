@@ -10,15 +10,13 @@ dash.register_page(
 
 layout = html.Div(children=[
     html.H1(children='Bienvenue sur la page concernant la Direction des formations'),
-	"""html.Div([
-        "Select a city: ",
-        dcc.RadioItems(['New York City', 'Montreal','San Francisco'],
-        'Montreal',
-        id='analytics-input')
-    ]),
-	html.Br(),
-    html.Div(id='analytics-output'),
-    """
+
+    html.Div(children='''
+        Pas encore d\'indicateur a afficher
+    ''')
+    
+  
+
 ])
 
 
