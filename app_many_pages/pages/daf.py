@@ -66,6 +66,11 @@ fig = go.Figure()
 for col_name in df.columns[débutColonneData: FinColonneData + 1]:
     fig.add_trace(go.Bar(x=[col_name], y=[df[col_name].iloc[0]], name=col_name))
 
+#Calcul de la moyenne
+mean_value = df.mean(axis=1, numeric_only=True).iloc[0]
+
+# Ajouter la ligne moyenne à la figure
+fig.add_trace(go.Scatter(x=df.columns[débutColonneData: FinColonneData + 1], y=[mean_value] * (FinColonneData + 1 - débutColonneData), mode='lines', name='Moyenne'))
 
 #Ajout d'un titre
 fig.update_layout(title = "Chiffre d\'affaire de la recherche à Télécom Sudparis", xaxis_title='Départements', yaxis_title = y_axis[0])

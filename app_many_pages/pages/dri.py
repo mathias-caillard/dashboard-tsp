@@ -27,6 +27,7 @@ débutColonneTrimestre = 4
 df = pd.read_excel(excel_path,sheet_name = sheetName, header = ligneDesTitres, nrows = nombreLignesData)
 
 
+
 #ajouter d'une colonne artificielle "trimestre" dans le dataframe facilitant la création du graphe associé
 valeurNouvelleColonne = []
 for i in range(débutColonneTrimestre,débutColonneTrimestre + 4) :
@@ -47,6 +48,8 @@ for indicateur in df.Indicateur :
 y_axis = []
 for indicateur in df.Indicateur :
     y_axis.append(indicateur)
+
+
 
 #création de la figure
 fig = px.bar(df, x = "trimestre", y = y_axis)
