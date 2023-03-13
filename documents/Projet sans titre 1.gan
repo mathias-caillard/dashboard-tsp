@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Cassiopée" company="" webLink="http://" view-date="2023-02-01" view-index="0" gantt-divider-location="549" resource-divider-location="300" version="3.2.3247" locale="fr_FR">
+    <description/>
+    <view zooming-state="default:8" id="gantt-chart">
+        <field id="tpd3" name="Nom" width="360" order="0"/>
+        <field id="tpd4" name="Date de début" width="83" order="1"/>
+        <field id="tpd5" name="Date de fin" width="90" order="2"/>
+        <option id="filter.completedTasks" value="false"/>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nom" width="210" order="0"/>
+        <field id="1" name="Rôle par défaut" width="86" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="0" name="choix des outils, librairies, langage de programmation" color="#8cb6ce" meeting="false" start="2023-02-10" duration="2" complete="0" thirdDate="2023-03-13" thirdDate-constraint="0" expand="true">
+            <depend id="6" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="2" name="définition des attentes" color="#8cb6ce" meeting="false" start="2023-02-10" duration="7" complete="0" thirdDate="2023-02-02" thirdDate-constraint="0" expand="true"/>
+        <task id="6" name="création d'une application squelette multi-page en Dash" color="#8cb6ce" meeting="false" start="2023-02-14" duration="11" complete="0" thirdDate="2023-02-24" thirdDate-constraint="0" expand="true"/>
+        <task id="7" name="filtrage des indicateurs selon un système de libellés" color="#8cb6ce" meeting="false" start="2023-03-20" duration="6" complete="0" thirdDate="2023-02-17" thirdDate-constraint="0" expand="true"/>
+        <task id="8" name="corrélation entre indicateurs à l'échelle d'un département" color="#8cb6ce" meeting="false" start="2023-03-27" duration="6" complete="0" thirdDate="2023-02-17" thirdDate-constraint="0" expand="true"/>
+        <task id="9" name="création de catégories d'utilisateurs (admin, simple utilisateur)" color="#8cb6ce" meeting="false" start="2023-04-03" duration="6" complete="0" thirdDate="2023-02-17" thirdDate-constraint="0" expand="true"/>
+        <task id="10" name="amélioration de l'UX (icônes, nombre de clics nécessaire, …)" color="#8cb6ce" meeting="false" start="2023-04-25" duration="6" complete="0" thirdDate="2023-02-17" thirdDate-constraint="0" expand="true">
+            <depend id="12" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="11" name="codage des tests unitaires" color="#8cb6ce" meeting="false" start="2023-04-17" duration="6" complete="0" thirdDate="2023-02-17" thirdDate-constraint="0" expand="true">
+            <depend id="10" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="12" name="&quot;A/B testing&quot; aurpès des utilisateurs pour améliorer l'UX" color="#8cb6ce" meeting="false" start="2023-05-03" duration="6" complete="0" thirdDate="2023-02-17" thirdDate-constraint="0" expand="true"/>
+        <task id="15" name="rédaction de la documentation" color="#8cb6ce" meeting="false" start="2023-05-08" duration="16" complete="0" thirdDate="2023-02-17" thirdDate-constraint="0" expand="true"/>
+        <task id="18" name="préparation de la soutenance" color="#8cb6ce" meeting="false" start="2023-06-06" duration="5" complete="0" thirdDate="2023-02-17" thirdDate-constraint="0" expand="true">
+            <depend id="19" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="28" name="élaboration du planning détaillé" color="#8cb6ce" meeting="false" start="2023-05-31" duration="6" complete="0" thirdDate="2023-02-10" thirdDate-constraint="0" expand="true"/>
+        <task id="19" name="soutenance" color="#8cb6ce" meeting="false" start="2023-06-13" duration="1" complete="0" thirdDate="2023-02-17" thirdDate-constraint="0" expand="true"/>
+        <task id="22" name="réalisation du poster" color="#8cb6ce" meeting="false" start="2023-05-15" duration="6" complete="0" thirdDate="2023-02-17" thirdDate-constraint="0" expand="true"/>
+        <task id="21" name="rédaction du rapport de synthèse" color="#8cb6ce" meeting="false" start="2023-05-24" duration="11" complete="0" thirdDate="2023-02-17" thirdDate-constraint="0" expand="true"/>
+        <task id="23" name="rédaction d'une synthèse du travail à réaliser" color="#8cb6ce" meeting="false" start="2023-03-13" duration="5" complete="0" thirdDate="2023-02-17" thirdDate-constraint="0" expand="true"/>
+        <task id="24" name="rendre l'application utilisable à distance" color="#8cb6ce" meeting="false" start="2023-05-10" duration="6" complete="0" thirdDate="2023-02-17" thirdDate-constraint="0" expand="true"/>
+        <task id="26" name="création de graphes pour chaque indicateur" color="#8cb6ce" meeting="false" start="2023-03-01" duration="44" complete="0" thirdDate="2023-02-17" thirdDate-constraint="0" expand="true"/>
+        <task id="25" name="comparaison des indicateurs saisonniers, et annuels" color="#8cb6ce" meeting="false" start="2023-04-10" duration="6" complete="0" thirdDate="2023-02-17" thirdDate-constraint="0" expand="true"/>
+    </tasks>
+    <resources/>
+    <allocations/>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+</project>
