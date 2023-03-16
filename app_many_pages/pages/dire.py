@@ -3,6 +3,7 @@ from dash import html, dcc
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+import plotly.subplots as subplt
 from app_many_pages import config
 
 dash.register_page(
@@ -43,21 +44,36 @@ for i in range(6):
     indice_annuelle.append((j_annuel))
 
 
-
-labels = []
+#Regroupement des titres et valeurs voulues pour tracer les figures
+labels_annuel, labels_trim = [], []
 valeur_annuelle1, valeur_annuelle3 =  [], []
+valeur_trim1 = []
 
 for j in indice_annuelle:
-    labels.append(x_axis[j])
+    labels_annuel.append(x_axis[j])
     valeur_annuelle1.append(df.iloc[0,j])
     valeur_annuelle3.append((df.iloc[2,j]))
+    valeur_trim_j, label_trim_j =[], []
+    for i in range(4):
+        label_trim_j.append(x_axis[j+i-4])
+        valeur_trim_j.append(df.iloc[0,j+i-4])
+    valeur_trim1.append(valeur_trim_j)
+    labels_trim.append(label_trim_j)
 
-fig1 = go.Figure(data=[go.Pie(labels=labels, values=valeur_annuelle1)])
+
+#Création d'une figure avec 6 sous-figure pour y placer des histogrammes
+fig1 = subplt.make_subplots(rows=1, cols=6, shared_yaxes=True, horizontal_spacing=0.05)
+
+#Ajout des histogrammes dans chacune des sous-figures
+for i in range(6):
+    labels_i = labels_trim[i]
+    valeur_i = valeur_trim1[i]
+    fig1.add_trace(go.Bar(x=labels_i, y=valeur_i, name=labels_i[0][:-3]), row=1, col=i+1)
 
 # Personnaliser l'apparence du graphique
 fig1.update_layout(title='Suivi des contrats de recherche')
 
-fig3 = go.Figure(data=[go.Pie(labels=labels, values=valeur_annuelle3)])
+fig3 = go.Figure(data=[go.Pie(labels=labels_annuel, values=valeur_annuelle3)])
 
 # Personnaliser l'apparence du graphique
 fig3.update_layout(title='Contribution au financement de l\'école')
