@@ -61,6 +61,7 @@ for j in indice_annuelle:
     labels_trim.append(label_trim_j)
 
 
+
 #Création d'une figure avec 6 sous-figure pour y placer des histogrammes
 fig1 = subplt.make_subplots(rows=1, cols=6, shared_yaxes=True, horizontal_spacing=0.05)
 
