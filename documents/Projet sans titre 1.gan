@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Cassiopée" company="" webLink="http://" view-date="2023-02-01" view-index="0" gantt-divider-location="549" resource-divider-location="300" version="3.2.3247" locale="fr_FR">
+<?xml version="1.0" encoding="UTF-8"?><project name="Cassiopée" company="" webLink="http://" view-date="2023-02-01" view-index="0" gantt-divider-location="534" resource-divider-location="300" version="3.2.3247" locale="fr_FR">
     <description/>
     <view zooming-state="default:8" id="gantt-chart">
-        <field id="tpd3" name="Nom" width="360" order="0"/>
-        <field id="tpd4" name="Date de début" width="83" order="1"/>
-        <field id="tpd5" name="Date de fin" width="90" order="2"/>
+        <field id="tpd3" name="Nom" width="349" order="0"/>
+        <field id="tpd4" name="Date de début" width="82" order="1"/>
+        <field id="tpd5" name="Date de fin" width="87" order="2"/>
         <option id="filter.completedTasks" value="false"/>
     </view>
     <view id="resource-table">
@@ -53,7 +53,7 @@
         <task id="18" name="préparation de la soutenance" color="#8cb6ce" meeting="false" start="2023-06-06" duration="5" complete="0" thirdDate="2023-02-17" thirdDate-constraint="0" expand="true">
             <depend id="19" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="28" name="élaboration du planning détaillé" color="#8cb6ce" meeting="false" start="2023-05-31" duration="6" complete="0" thirdDate="2023-02-10" thirdDate-constraint="0" expand="true"/>
+        <task id="28" name="élaboration du planning détaillé" color="#8cb6ce" meeting="false" start="2023-04-14" duration="35" complete="0" thirdDate="2023-02-10" thirdDate-constraint="0" expand="true"/>
         <task id="19" name="soutenance" color="#8cb6ce" meeting="false" start="2023-06-13" duration="1" complete="0" thirdDate="2023-02-17" thirdDate-constraint="0" expand="true"/>
         <task id="22" name="réalisation du poster" color="#8cb6ce" meeting="false" start="2023-05-15" duration="6" complete="0" thirdDate="2023-02-17" thirdDate-constraint="0" expand="true"/>
         <task id="21" name="rédaction du rapport de synthèse" color="#8cb6ce" meeting="false" start="2023-05-24" duration="11" complete="0" thirdDate="2023-02-17" thirdDate-constraint="0" expand="true"/>
