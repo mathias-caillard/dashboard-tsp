@@ -79,7 +79,7 @@ for i in range(débutColonneData, finColonneData + 1, 4):
     valeur4.append(sum(liste))
 tab_valeur.append(valeur4)
 
-#Réorganisation des données
+#Réorganisation des données (transposition)
 data = []
 nb_indicateur = len (tab_valeur)        #5 indicateurs
 for i in range (len(tab_valeur[0])):
@@ -90,6 +90,28 @@ for i in range (len(tab_valeur[0])):
 
 #Simulation pour une autre année
 data_sim_0 = [x + rd.randint(-5, 10) for x in data[0]]
+
+
+#Pondération des données par la taille du département
+ligneDesTitres = 0  #Numérotation comme dans les liste, matrices...
+nombreLignesData = 2    #Nombre de lignes de données
+sheetName = '2023-DRH-Annuel'   #Nom de la feuille
+df5 = pd.read_excel(excel_path,sheet_name = sheetName, header = ligneDesTitres, nrows = nombreLignesData)
+
+#Récupération des effectifs des départements
+effectif = []
+for i in range(10,16):
+    effectif.append(df5.iloc[1,i])
+
+#Création des données pondérées
+data_ponderees = []
+for i in range(len(data)):
+    data_ponderees_i = []
+    for j in range(len(data[i])):
+        data_ponderees_i.append((data[i][j] / effectif[i]))
+    data_ponderees.append(data_ponderees_i)
+
+
 
 
 #Création des figures
@@ -120,6 +142,14 @@ for i in range(len(labels)):
     )
     list_fig.append(fig2)
 
+fig3 = go.Figure()
+for i in range(len(data_ponderees)):
+    fig3.add_trace(go.Scatterpolar(r = data_ponderees[i],theta = indic,fill = 'toself',name = labels[i] + " 2023",))
+
+fig3.update_layout(
+    title="Graphes radar des département pondérés par leurs effectifs",
+    polar=dict(radialaxis=dict(dtick = 1.0))
+)
 
 
 
@@ -156,6 +186,11 @@ layout = html.Div(children=[
         id='example-graph7',
         figure=list_fig[5]
     ),
+    dcc.Graph(
+        id='example-graph8',
+        figure=fig3
+    ),
+
 
     html.Div(children='''
 
