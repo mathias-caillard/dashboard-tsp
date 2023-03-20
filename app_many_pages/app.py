@@ -3,6 +3,7 @@ import dash
 
 
 app = Dash(__name__, use_pages=True)
+app._favicon = "favicon.ico"
 
 app.layout = html.Div([
 	html.H1('Application multipage pour la visualisation d\'indicateurs'),
