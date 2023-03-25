@@ -154,7 +154,9 @@ fig3.update_layout(
 
 
 
-layout = html.Div(children=[
+layout = html.Div(
+    style={},
+    children=[
     html.H1(children='Bienvenue sur la page concernant les départements de Télécom SudParis'),
 
     dcc.Graph(
