@@ -121,7 +121,7 @@ fig = go.Figure()
 fig.add_trace(go.Scatterpolar(r = data[0],theta = indic,fill = 'toself',name = labels[0] + " 2023",))
 fig.add_trace(go.Scatterpolar(r=data_sim_0, theta=indic, fill='toself', name=labels[0] + " 2024"))
 fig.update_layout(
-    title = "Graphe radar du département " + labels[0] ,
+    title = "Graphe radar du département " + labels[0] + " pondéré par les effectifs (2023 et 2024)",
     polar=dict(radialaxis=dict(range=[0, 65]))
 )
 
@@ -137,7 +137,7 @@ for i in range(len(labels)):
         name = labels[i] + " 2023"
     ))
     fig2.update_layout(
-        title="Graphe radar du département " + labels[i],
+        title="Graphe radar du département " + labels[i] + " pondéré par les effectifs",
         polar=dict(radialaxis=dict(range=[0, 65]))
     )
     list_fig.append(fig2)
