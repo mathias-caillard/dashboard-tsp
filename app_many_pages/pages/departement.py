@@ -125,6 +125,7 @@ fig.update_layout(
     polar=dict(radialaxis=dict(range=[0, 65]))
 )
 
+
 #Affichage de plusieurs graphe radar
 
 list_fig = []
