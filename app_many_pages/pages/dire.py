@@ -5,6 +5,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import plotly.subplots as subplt
 from app_many_pages import config
+import dash_bootstrap_components as dbc
 
 dash.register_page(
     __name__,
@@ -83,14 +84,18 @@ fig3.update_layout(title='Contribution au financement de l\'école')
 layout = html.Div(children=[
     html.H1(children='Bienvenue sur la page concernant la DIRE'),
 
-    dcc.Graph(
+        dcc.Graph(
         id='example-graph1',
         figure=fig1,
-    ),
+        config = {'displaylogo': False}
+        ),
+
+
 
     dcc.Graph(
         id='example-graph3',
         figure=fig3,
-    )
+        config = {'displaylogo': False}
+    ),
 
 ])

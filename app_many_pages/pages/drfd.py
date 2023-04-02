@@ -89,14 +89,17 @@ layout = html.Div(children=[
     dcc.Graph(
         id='example-graph',
         figure=fig,
+        config = {'displaylogo': False}
     ),
     dcc.Graph(
         id='example-graph2',
         figure=fig2,
+        config = {'displaylogo': False}
     ),
     dcc.Graph(
         id='example-graph3',
         figure=fig3,
+        config = {'displaylogo': False}
     ),
 
 

@@ -162,36 +162,44 @@ layout = html.Div(
 
     dcc.Graph(
         id='example-graph',
-        figure=fig
+        figure=fig,
+        config = {'displaylogo': False}
     ),
 
     dcc.Graph(
         id='example-graph2',
-        figure=list_fig[0]
+        figure=list_fig[0],
+        config = {'displaylogo': False}
     ),
     dcc.Graph(
         id='example-graph3',
-        figure=list_fig[1]
+        figure=list_fig[1],
+        config = {'displaylogo': False}
     ),
     dcc.Graph(
         id='example-graph4',
-        figure=list_fig[2]
+        figure=list_fig[2],
+        config = {'displaylogo': False}
     ),
     dcc.Graph(
         id='example-graph5',
-        figure=list_fig[3]
+        figure=list_fig[3],
+        config = {'displaylogo': False}
     ),
     dcc.Graph(
         id='example-graph6',
-        figure=list_fig[4]
+        figure=list_fig[4],
+        config = {'displaylogo': False}
     ),
     dcc.Graph(
         id='example-graph7',
-        figure=list_fig[5]
+        figure=list_fig[5],
+        config = {'displaylogo': False}
     ),
     dcc.Graph(
         id='example-graph8',
-        figure=fig3
+        figure=fig3,
+        config = {'displaylogo': False}
     ),
 
 
