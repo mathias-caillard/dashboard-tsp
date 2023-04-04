@@ -14,6 +14,20 @@ app.layout = dbc.Container([
 	
         dbc.NavbarSimple(
             children=[
+	
+
+        html.Div(
+        [
+	
+                dbc.Button(
+                    f"{page['name']}", href=page["relative_path"], outline=True, color="primary", className="me-1",
+                    style = {'marginTop': '0px'}
+                )
+                
+            for page in dash.page_registry.values()
+	    
+        ]
+    ),
                 """dbc.NavItem(dbc.NavLink("Page 1", href="#")),
                 dbc.DropdownMenu(
                     children=[
@@ -26,25 +40,15 @@ app.layout = dbc.Container([
                     label="...",
                 ),"""
             ], 
+            className="navbar navbar-expand-lg navbar-light bg-light fixed-top",
             brand="Indicateurs de Télécom SudParis",
             brand_href="#",
             color="dark",
             dark=True,
+	        fluid = True
 	    ),
 	    
-    html.Div(
-        [
-	
-    
- 
-                dbc.Button(
-                    f"{page['name']}", href=page["relative_path"], outline=True, color="dark", className="me-1"
-                )
 
-            for page in dash.page_registry.values()
-	    
-        ]
-    ),
 	dash.page_container,
 	
 
