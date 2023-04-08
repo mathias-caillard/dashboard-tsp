@@ -1,11 +1,14 @@
 from dash import Dash, html, dcc
 import dash
 import os
+import sys
 import dash_bootstrap_components as dbc
 from dash_bootstrap_templates import load_figure_template
 from config import chemin_absolu_rep_parent
 
 
+
+sys.path.append(chemin_absolu_rep_parent + '\\app_many_pages\\pages')   #pour pouvoir importer les variables entre fichiers dans /pages
 
 
 app = Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.BOOTSTRAP])
@@ -27,12 +30,12 @@ app.layout = dbc.Container([
                 )
 
             for page in dash.page_registry.values()
-            if not 'departement' in page['relative_path']  # Filtrer les pages du dossier "pages" qui ne sont pas des departements
+            if not 'departements' in page['relative_path']  # Filtrer les pages du dossier "pages" qui ne sont pas des departements
 	    
         ],
         className="d-flex"
     ),
-            #Menu déroulant pour les départements
+            #Menu déroulant pour les departements
 
             dbc.DropdownMenu(
                 children=[
@@ -68,6 +71,9 @@ app.layout = dbc.Container([
 style={'marginTop': '60px'},    #Contenu des pages sous la barre de navigation (et pas caché derrière)
 fluid = True,
 )
+
+#for page in dash.page_registry.values():
+    #print(page['relative_path'])
 
 if __name__ == '__main__':
 	app.run_server(debug=True)

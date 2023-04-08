@@ -1,4 +1,4 @@
-#fichier pour indicateurs avec sélection libre selon les départements.
+#fichier pour indicateurs avec sélection libre selon les departements.
 
 import dash
 from dash import html, dcc
@@ -21,7 +21,7 @@ dash.register_page(
 layout = html.Div(children=[
     html.H1(children='Dans cette page, vous pouvez croiser les directions'),
 
-    html.H2(children='sélection des départements'),
+    html.H2(children='sélection des departements'),
     dcc.Checklist(['ARTEMIS', 'CITI', 'EPH', 'INF','RS2M','RST'])
 
 

@@ -84,13 +84,13 @@ fig3.update_layout(title='Contribution au financement de l\'école')
 layout = html.Div(children=[
     html.H1(children='Bienvenue sur la page concernant la DIRE'),
 
-        dcc.Graph(
+    dcc.Graph(
         id='example-graph1',
         figure=fig1,
         config = {'displaylogo': False}
         ),
 
-
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
 
     dcc.Graph(
         id='example-graph3',

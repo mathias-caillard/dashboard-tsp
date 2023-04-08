@@ -4,6 +4,8 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from app_many_pages import config
+from app_many_pages import pages
+from departement import effectif
 
 dash.register_page(
     __name__,
@@ -44,6 +46,9 @@ for indicateur in df.Indicateur :
     ligne += 1
 '''
 
+effectif.append(sum(effectif))
+
+
 #définition de l'axe des abscisses
 x_axis = df.columns.tolist()[débutColonneData: FinColonneData + 1]
 
@@ -56,8 +61,11 @@ for indicateur in df.Indicateur :
 fig = go.Figure()
 
 # Ajouter chaque bâton à la figure
+i=0
 for col_name in df.columns[débutColonneData: FinColonneData + 1]:
-    fig.add_trace(go.Bar(x=[col_name], y=[df[col_name].iloc[0]], name=col_name))
+    taille = str(int(effectif[i]))
+    fig.add_trace(go.Bar(x=[col_name  + " (" + taille + ")"], y=[df[col_name].iloc[0]], name=col_name))  #effectif du département entre parenthèse
+    i+=1
 
 #Ajout d'un titre
 fig.update_layout(title = "Chiffres sur la recherche à Télécom Sudparis", xaxis_title='Départements', yaxis_title = y_axis[0])
@@ -67,8 +75,11 @@ fig.update_layout(title = "Chiffres sur la recherche à Télécom Sudparis", xax
 fig2 = go.Figure()
 
 # Ajouter chaque bâton à la figure
+i=0
 for col_name in df.columns[débutColonneData: FinColonneData + 1]:
-    fig2.add_trace(go.Bar(x=[col_name], y=[df[col_name].iloc[1]], name=col_name))
+    taille = str(int(effectif[i]))
+    fig2.add_trace(go.Bar(x=[col_name  + " (" + taille + ")"], y=[df[col_name].iloc[1]], name=col_name))    #effectif du département entre parenthèse
+    i+=1
 
 #Ajout d'un titre
 fig2.update_layout(xaxis_title='Départements', yaxis_title = y_axis[1])
@@ -91,16 +102,15 @@ layout = html.Div(children=[
         figure=fig,
         config = {'displaylogo': False}
     ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
     dcc.Graph(
         id='example-graph2',
         figure=fig2,
         config = {'displaylogo': False}
     ),
-    dcc.Graph(
-        id='example-graph3',
-        figure=fig3,
-        config = {'displaylogo': False}
-    ),
+
 
 
 

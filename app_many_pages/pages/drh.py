@@ -67,6 +67,8 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
     dcc.Graph(
         id='example-graph2',
         figure=fig2,

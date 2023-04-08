@@ -28,7 +28,7 @@ finColonneData = 9
 df = pd.read_excel(excel_path,sheet_name = sheetName, header = ligneDesTitres, nrows = nombreLignesData)
 
 
-labels = df.columns.tolist()[débutColonneData: finColonneData + 1]      #Nom des départements
+labels = df.columns.tolist()[débutColonneData: finColonneData + 1]      #Nom des departements
 indic = []      #Nom des indicateurs
 tab_valeur=[]   #Tableau des données
 
@@ -98,10 +98,12 @@ nombreLignesData = 2    #Nombre de lignes de données
 sheetName = '2023-DRH-Annuel'   #Nom de la feuille
 df5 = pd.read_excel(excel_path,sheet_name = sheetName, header = ligneDesTitres, nrows = nombreLignesData)
 
-#Récupération des effectifs des départements
+#Récupération des effectifs des departements
 effectif = []
 for i in range(10,16):
     effectif.append(df5.iloc[1,i])
+
+
 
 #Création des données pondérées
 data_ponderees = []
@@ -166,36 +168,56 @@ layout = html.Div(
         config = {'displaylogo': False}
     ),
 
+    html.Hr(style={'borderTop': '2px solid #000000'}),  #Ligne horizontale pour mieux séparer les graphes
+
     dcc.Graph(
         id='example-graph2',
         figure=list_fig[0],
         config = {'displaylogo': False}
     ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  #Ligne horizontale pour mieux séparer les graphes
+
     dcc.Graph(
         id='example-graph3',
         figure=list_fig[1],
         config = {'displaylogo': False}
     ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  #Ligne horizontale pour mieux séparer les graphes
+
     dcc.Graph(
         id='example-graph4',
         figure=list_fig[2],
         config = {'displaylogo': False}
     ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  #Ligne horizontale pour mieux séparer les graphes
+
     dcc.Graph(
         id='example-graph5',
         figure=list_fig[3],
         config = {'displaylogo': False}
     ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  #Ligne horizontale pour mieux séparer les graphes
+
     dcc.Graph(
         id='example-graph6',
         figure=list_fig[4],
         config = {'displaylogo': False}
     ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  #Ligne horizontale pour mieux séparer les graphes
+
     dcc.Graph(
         id='example-graph7',
         figure=list_fig[5],
         config = {'displaylogo': False}
     ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
     dcc.Graph(
         id='example-graph8',
         figure=fig3,
