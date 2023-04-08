@@ -7,8 +7,8 @@ from app_many_pages import config
 
 dash.register_page(
     __name__,
-    title = "Direction des ressources humaines",
-    name = "Direction des ressources humaines",
+    title = "DRH",
+    name = "DRH",
     order=6
                    )
 

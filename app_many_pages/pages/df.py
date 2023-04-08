@@ -9,8 +9,8 @@ from app_many_pages import config
 
 dash.register_page(
     __name__,
-    title="Direction des formations",
-    name="Direction des formations",
+    title="DF",
+    name="DF",
     order=2
     )
 

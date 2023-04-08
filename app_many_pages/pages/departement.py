@@ -9,8 +9,8 @@ from app_many_pages import config
 
 dash.register_page(
     __name__,
-    title = "Départements",
-    name = "Départements",
+    title = "Comparaison départements",
+    name = "Comparaison départements",
     order=8
                    )
 

@@ -10,8 +10,8 @@ import random as rd
 
 dash.register_page(
     __name__,
-    title = "Direction des relations internationales",
-    name = "Direction des relations internationales",
+    title = "DRI",
+    name = "DRI",
     order=7
                    )
 
