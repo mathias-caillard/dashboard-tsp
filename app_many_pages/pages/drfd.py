@@ -1,11 +1,12 @@
+import random
+
 import dash
 from dash import html, dcc
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from app_many_pages import config
-from app_many_pages import pages
-from departement import effectif
+from app_many_pages import config, effectifs
+
 
 dash.register_page(
     __name__,
@@ -46,7 +47,7 @@ for indicateur in df.Indicateur :
     ligne += 1
 '''
 
-effectif.append(sum(effectif))
+effectif = effectifs.effectif
 
 
 #définition de l'axe des abscisses
@@ -82,17 +83,38 @@ for col_name in df.columns[débutColonneData: FinColonneData + 1]:
     i+=1
 
 #Ajout d'un titre
-fig2.update_layout(xaxis_title='Départements', yaxis_title = y_axis[1])
+fig2.update_layout(title = "Nombre de doctorants à Télécom SudParis", xaxis_title='Départements', yaxis_title = y_axis[1])
 
-# Créer une figure avec des sous-figures pour chaque bâton
+#Figure pour l'évolution sur l'ecole
 fig3 = go.Figure()
 
-# Ajouter chaque bâton à la figure
-for col_name in df.columns[débutColonneData: FinColonneData + 1]:
-    fig3.add_trace(go.Bar(x=[col_name], y=[df[col_name].iloc[2]], name=col_name))
+#Création des valeurs simulées
+titre_années = []
+donnees_ecole = [df.iloc[0][FinColonneData]]
+for i in range(2023,2027):
+    titre_années.append(str(i))
+for i in range(2024,2027):
+    donnees_ecole.append(donnees_ecole[0] + random.randint(-40, 40))
+fig3.add_trace(go.Scatter(x=titre_années, y=donnees_ecole))
 
-# Ajout d'un titre
-fig3.update_layout(xaxis_title='Départements', yaxis_title=y_axis[2])
+
+#Ajout d'un titre
+fig3.update_layout(title = "Evolution des publications dans le temps" ,xaxis_title='Années', yaxis_title = y_axis[0])
+
+
+#Figure pour l'évolution sur l'ecole
+fig4 = go.Figure()
+
+#Création des valeurs simulées
+donnees_ecole = [df.iloc[1][FinColonneData]]
+
+for i in range(2024,2027):
+    donnees_ecole.append(donnees_ecole[0] + random.randint(-20, 20))
+fig4.add_trace(go.Scatter(x=titre_années, y=donnees_ecole))
+
+
+#Ajout d'un titre
+fig4.update_layout(title = "Evolution du nombre de doctorants dans le temps", xaxis_title='Années', yaxis_title = y_axis[1])
 
 layout = html.Div(children=[
     html.H1(children='Bienvenue sur la page concernant la DRFD'),
@@ -111,7 +133,20 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
 
+    dcc.Graph(
+        id='example-graph3',
+        figure=fig3,
+        config = {'displaylogo': False}
+    ),
 
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
+        id='example-graph4',
+        figure=fig4,
+        config = {'displaylogo': False}
+    ),
 
 ])

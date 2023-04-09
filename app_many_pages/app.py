@@ -75,6 +75,7 @@ fluid = True,
 #for page in dash.page_registry.values():
     #print(page['relative_path'])
 
+
 if __name__ == '__main__':
 	app.run_server(debug=True)
 

@@ -75,6 +75,26 @@ for i in range(6):
 # Personnaliser l'apparence du graphique
 fig1.update_layout(title='Suivi des contrats de recherche')
 
+
+
+#Création d'une figure avec 6 sous-figure pour y placer des histogrammes
+fig2 = subplt.make_subplots(rows=1, cols=4, shared_yaxes=True, horizontal_spacing=0.05)
+
+#Ajout des histogrammes dans chacune des sous-figures
+for i in range(4):
+    labels_i = []
+    valeur_i = []
+    for j in range(6):
+        labels_i.append(labels_trim[j][i])
+        valeur_i.append((valeur_trim1[j][i]))
+    labels_i.append( "ECOLE T" + str(i+1))
+    valeur_i.append(sum(valeur_i))
+    fig2.add_trace(go.Bar(x=labels_i, y=valeur_i, name= "Trimestre " + str(i+1)), row=1, col=i+1)
+
+# Personnaliser l'apparence du graphique
+fig2.update_layout(title='Suivi des contrats de recherche, vision trimestrielle')
+
+
 fig3 = go.Figure(data=[go.Pie(labels=labels_annuel, values=valeur_annuelle3)])
 
 # Personnaliser l'apparence du graphique
@@ -87,6 +107,15 @@ layout = html.Div(children=[
     dcc.Graph(
         id='example-graph1',
         figure=fig1,
+        config = {'displaylogo': False}
+        ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+
+    dcc.Graph(
+        id='example-graph2',
+        figure=fig2,
         config = {'displaylogo': False}
         ),
 
