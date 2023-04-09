@@ -21,16 +21,19 @@ app.layout = dbc.Container([
             children=[
 	
 
+        
+	
+
         html.Div(
         [
                 #Boutons pour les différentes pages
                 dbc.Button(
-                    f"{page['name']}", href=page["relative_path"], outline=True, color="primary", className="me-1 btn-sm",  #btn-sm rend les boutons un peu plus petits
+                    f"{page['name']}", href=page["relative_path"], outline=False, color="dark", className="me-1 btn-sm",  #btn-sm rend les boutons un peu plus petits
                     style = {'marginTop': '0px', 'flex': '1', 'height': '50px', 'display': 'flex', 'alignItems': 'center', 'justifyContent': 'center', 'whiteSpace': 'nowrap'}
                 )
 
             for page in dash.page_registry.values()
-            if not 'departements' in page['relative_path']  # Filtrer les pages du dossier "pages" qui ne sont pas des departements
+            if not 'departements' in page['relative_path'] and not 'Accueil' in page['name']  # Filtrer les pages du dossier "pages" qui ne sont pas des departements, et la page accueil (qui est remplacé par le bouton tout à gauche)
 	    
         ],
         className="d-flex"
@@ -48,12 +51,15 @@ app.layout = dbc.Container([
                 label="Départements",  # Texte du bouton de menu déroulant
                 color="dark",
 
-            )
+            ),
+	    
+
+            dbc.NavItem(dbc.NavLink("À propos", href="#")),
 
             ], 
             className="navbar navbar-expand-lg navbar-light bg-light fixed-top",
             brand="Indicateurs de Télécom SudParis",
-            brand_href="#",
+            brand_href="/",
             color="dark",
             dark=True,
 	        fluid = True,
