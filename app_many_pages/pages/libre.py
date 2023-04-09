@@ -13,7 +13,7 @@ dash.register_page(
     order=9
 )
 
-layout = html.Div(children=[
+layout = dbc.Container(children=[
     html.H1(children='Dans cette page, vous pouvez croiser les directions'),
 
     html.H2(children='sélection des departements'),
@@ -59,79 +59,59 @@ layout = html.Div(children=[
 
     #CITI
     dbc.Collapse(
-        dbc.Row([
-            dbc.Col(
+
                 dcc.Graph(
                     figure=fig_dept_3(),
                     config={'displaylogo': False}
                 ),
-                width="auto"
-            )
-        ]),
 
         id="collapse2",
         is_open=False,
     ),
 
     dbc.Collapse(
-        dbc.Row([
-            dbc.Col(
+
                 dcc.Graph(
                     figure=fig_dept_4(),
                     config={'displaylogo': False}
                 ),
-                width="auto"
-            )
-        ]),
 
         id="collapse3",
         is_open=False,
     ),
 
     dbc.Collapse(
-        dbc.Row([
-            dbc.Col(
+
                 dcc.Graph(
                     figure=fig_dept_5(),
                     config={'displaylogo': False}
                 ),
-                width="auto"
-            )
-        ]),
 
         id="collapse4",
         is_open=False,
     ),
 
     dbc.Collapse(
-        dbc.Row([
-            dbc.Col(
                 dcc.Graph(
                     figure=fig_dept_6(),
                     config={'displaylogo': False}
                 ),
-                width="auto"
-            )
-        ]),
 
         id="collapse5",
         is_open=False,
     ),
     dbc.Collapse(
-        dbc.Row([
-            dbc.Col(
+
                 dcc.Graph(
                     figure=fig_dept_7(),
                     config={'displaylogo': False}
                 ),
-                width="auto"
-            )
-        ]),
 
         id="collapse6",
         is_open=False,
     ),
-])
+],
+fluid = True)
 
 
 
@@ -216,3 +196,6 @@ def toggle_collapse_6(value, is_open, data):
     if (6 in value and 6 in data) or (6 not in value and 6 not in data) : 
         return is_open
     return not is_open
+
+
+
