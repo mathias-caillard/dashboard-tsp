@@ -8,7 +8,7 @@ import plotly.graph_objects as go
 from app_many_pages import config
 import random as rd
 import dash_bootstrap_components as dbc
-from figures import retourne_fig
+from df_fig import fig_nb_etudiants
 
 
 dash.register_page(
@@ -35,11 +35,10 @@ layout = html.Div(children=[
         dbc.Collapse(
                 
             dcc.Graph(
-                figure=retourne_fig(),
+                figure=fig_nb_etudiants(),
                 config = {'displaylogo': False}
                 ),
 
-            #dbc.Card(dbc.CardBody("This content is hidden in the collapse")),
             id="collapse",
             is_open=False,
         ),

@@ -1,11 +1,10 @@
+
 from app_many_pages import config
 import pandas as pd
 import plotly.express as px
 
 
-def retourne_fig() : 
-
-    
+def fig_nb_etudiants() : 
     #Chemin du fichier excel défini dans config.py
     excel_path = config.excel_path
 
@@ -48,7 +47,4 @@ def retourne_fig() :
     #Ajout d'un titre
     fig.update_layout(title = "Nombre d'étudiants à Télécom Sudparis")
 
-
     return fig
-
-
