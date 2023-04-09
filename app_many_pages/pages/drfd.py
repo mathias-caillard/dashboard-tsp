@@ -6,6 +6,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from app_many_pages import config, effectifs
+from drfd_fig import *
 
 
 dash.register_page(
@@ -15,113 +16,14 @@ dash.register_page(
     order=3
                    )
 
-#Chemin du fichier excel défini dans config.py
-excel_path = config.excel_path
 
-#afficher toutes les colonnes (dans le terminal) des dataframes issues des lectures des fichiers Excel
-pd.set_option('display.max_columns', None)
-
-#Pour construire le plot de df, j'ai essayé d'écrire du code le plus générique possible en utilisant le moins possible de "hardcoded values". Cela permettra de facilier la réutilisation du code
-ligneDesTitres = 0  #Numérotation comme dans les liste, matrices...
-nombreLignesData = 3    #Nombre de lignes de données
-sheetName = '2023-DRFD-Annuel'   #Nom de la feuille
-débutColonneData = 4    #Première colonne de données
-FinColonneData = 10  #Dernière colonne de données
-df = pd.read_excel(excel_path,sheet_name = sheetName, header = ligneDesTitres, nrows = nombreLignesData)
-
-'''
-#ajouter d'une colonne artificielle "trimestre" dans le dataframe facilitant la création du graphe associé
-valeurNouvelleColonne = []
-for i in range(débutColonneData, FinColonneData) :
-    valeurNouvelleColonne.append(df.columns[i])
-df["Départements"] = valeurNouvelleColonne
-
-
-#ajout de nouvelles colonnes dans le dataframe pour chaque type d'étudiant.
-ligne = 0
-for indicateur in df.Indicateur :
-    valeurPourIndicateur = []
-    for i in range(0, nombreLignesData) :
-        valeurPourIndicateur.append(df.iloc[ligne][df["Départements"]][i])
-    df[indicateur] = valeurPourIndicateur
-    ligne += 1
-'''
-
-effectif = effectifs.effectif
-
-
-#définition de l'axe des abscisses
-x_axis = df.columns.tolist()[débutColonneData: FinColonneData + 1]
-
-#définition de l'axe des ordnnées
-y_axis = []
-for indicateur in df.Indicateur :
-    y_axis.append(indicateur)
-
-# Créer une figure avec des sous-figures pour chaque bâton
-fig = go.Figure()
-
-# Ajouter chaque bâton à la figure
-i=0
-for col_name in df.columns[débutColonneData: FinColonneData + 1]:
-    taille = str(int(effectif[i]))
-    fig.add_trace(go.Bar(x=[col_name  + " (" + taille + ")"], y=[df[col_name].iloc[0]], name=col_name))  #effectif du département entre parenthèse
-    i+=1
-
-#Ajout d'un titre
-fig.update_layout(title = "Chiffres sur la recherche à Télécom Sudparis", xaxis_title='Départements', yaxis_title = y_axis[0])
-
-
-# Créer une figure avec des sous-figures pour chaque bâton
-fig2 = go.Figure()
-
-# Ajouter chaque bâton à la figure
-i=0
-for col_name in df.columns[débutColonneData: FinColonneData + 1]:
-    taille = str(int(effectif[i]))
-    fig2.add_trace(go.Bar(x=[col_name  + " (" + taille + ")"], y=[df[col_name].iloc[1]], name=col_name))    #effectif du département entre parenthèse
-    i+=1
-
-#Ajout d'un titre
-fig2.update_layout(title = "Nombre de doctorants à Télécom SudParis", xaxis_title='Départements', yaxis_title = y_axis[1])
-
-#Figure pour l'évolution sur l'ecole
-fig3 = go.Figure()
-
-#Création des valeurs simulées
-titre_années = []
-donnees_ecole = [df.iloc[0][FinColonneData]]
-for i in range(2023,2027):
-    titre_années.append(str(i))
-for i in range(2024,2027):
-    donnees_ecole.append(donnees_ecole[0] + random.randint(-40, 40))
-fig3.add_trace(go.Scatter(x=titre_années, y=donnees_ecole))
-
-
-#Ajout d'un titre
-fig3.update_layout(title = "Evolution des publications dans le temps" ,xaxis_title='Années', yaxis_title = y_axis[0])
-
-
-#Figure pour l'évolution sur l'ecole
-fig4 = go.Figure()
-
-#Création des valeurs simulées
-donnees_ecole = [df.iloc[1][FinColonneData]]
-
-for i in range(2024,2027):
-    donnees_ecole.append(donnees_ecole[0] + random.randint(-20, 20))
-fig4.add_trace(go.Scatter(x=titre_années, y=donnees_ecole))
-
-
-#Ajout d'un titre
-fig4.update_layout(title = "Evolution du nombre de doctorants dans le temps", xaxis_title='Années', yaxis_title = y_axis[1])
 
 layout = html.Div(children=[
     html.H1(children='Bienvenue sur la page concernant la DRFD'),
 
     dcc.Graph(
-        id='example-graph',
-        figure=fig,
+        id='example-graph1',
+        figure=fig_drfd_1(),
         config = {'displaylogo': False}
     ),
 
@@ -129,7 +31,7 @@ layout = html.Div(children=[
 
     dcc.Graph(
         id='example-graph2',
-        figure=fig2,
+        figure=fig_drfd_2(),
         config = {'displaylogo': False}
     ),
 
@@ -137,7 +39,7 @@ layout = html.Div(children=[
 
     dcc.Graph(
         id='example-graph3',
-        figure=fig3,
+        figure=fig_drfd_3(),
         config = {'displaylogo': False}
     ),
 
@@ -145,7 +47,7 @@ layout = html.Div(children=[
 
     dcc.Graph(
         id='example-graph4',
-        figure=fig4,
+        figure=fig_drfd_4(),
         config = {'displaylogo': False}
     ),
 
