@@ -5,7 +5,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from app_many_pages import config
 import random as rd
-
+from departement_fig import *
 
 
 dash.register_page(

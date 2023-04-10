@@ -39,17 +39,19 @@ for i in range(6):
 #Regroupement des titres et valeurs voulues pour tracer les figures
 labels_annuel, labels_trim = [], []
 valeur_annuelle1, valeur_annuelle3 =  [], []
-valeur_trim1 = []
+valeur_trim1, valeur_trim3 = [], []
 
 for j in indice_annuelle:
     labels_annuel.append(x_axis[j])
     valeur_annuelle1.append(df.iloc[0,j])
     valeur_annuelle3.append((df.iloc[2,j]))
-    valeur_trim_j, label_trim_j =[], []
+    valeur_trim1_j, valeur_trim3_j, label_trim_j =[], [], []
     for i in range(4):
         label_trim_j.append(x_axis[j+i-4])
-        valeur_trim_j.append(df.iloc[0,j+i-4])
-    valeur_trim1.append(valeur_trim_j)
+        valeur_trim1_j.append(df.iloc[0,j+i-4])
+        valeur_trim3_j.append(df.iloc[2, j + i - 4])
+    valeur_trim1.append(valeur_trim1_j)
+    valeur_trim3.append(valeur_trim3_j)
     labels_trim.append(label_trim_j)
 
 
