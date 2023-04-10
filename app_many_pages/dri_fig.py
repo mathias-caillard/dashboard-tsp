@@ -62,7 +62,7 @@ def fig_dri_1():
         labels.append("ECOLE T" + str(j))
         valeur.append(valeur[i%4] + rd.randint(-5, 5))
 
-        return fig
+    return fig
 
 
 def fig_dri_2():

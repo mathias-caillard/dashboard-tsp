@@ -53,6 +53,9 @@ for j in indice_annuelle:
     labels_trim.append(label_trim_j)
 
 
+departement = ['ARTEMIS', 'CITI', 'EPH', 'INF', 'RS2M', 'RST']
+trimestre = ['Trimestre 1', 'Trimestre 2', 'Trimestre 3', 'Trimestre 4']
+
 def fig_dire_1() : 
     #Création d'une figure avec 6 sous-figure pour y placer des histogrammes
     fig1 = subplt.make_subplots(rows=1, cols=6, shared_yaxes=True, horizontal_spacing=0.05)
@@ -69,20 +72,23 @@ def fig_dire_1() :
     return fig1
 
 
-def fig_dire_2():
-    #Création d'une figure avec 6 sous-figure pour y placer des histogrammes
-    fig2 = subplt.make_subplots(rows=1, cols=4, shared_yaxes=True, horizontal_spacing=0.05)
 
+def fig_dire_2():
+
+    #Création d'une figure avec 4 sous-figure pour y placer des histogrammes
+    #fig2 = subplt.make_subplots(rows=1, cols=4, shared_yaxes=True, horizontal_spacing=0.05)
+    fig2 = go.Figure()
     #Ajout des histogrammes dans chacune des sous-figures
+
     for i in range(4):
         labels_i = []
         valeur_i = []
         for j in range(6):
             labels_i.append(labels_trim[j][i])
             valeur_i.append((valeur_trim1[j][i]))
-        labels_i.append( "ECOLE T" + str(i+1))
-        valeur_i.append(sum(valeur_i))
-        fig2.add_trace(go.Bar(x=labels_i, y=valeur_i, name= "Trimestre " + str(i+1)), row=1, col=i+1)
+
+    for i in range(6):
+        fig2.add_trace(go.Bar(x=trimestre, y=valeur_trim1[i], name= departement[i]))
 
     # Personnaliser l'apparence du graphique
     fig2.update_layout(title='Suivi des contrats de recherche, vision trimestrielle')
@@ -90,9 +96,27 @@ def fig_dire_2():
     return fig2
 
 def fig_dire_3():
-    fig3 = go.Figure(data=[go.Pie(labels=labels_annuel, values=valeur_annuelle3)])
+    fig3 = go.Figure()
+    labels = []
+    valeur= []
+    for i in range(4):
+        labels_i = []
+        valeur_i = []
+        for j in range(6):
+            labels_i.append(labels_trim[j][i])
+            valeur_i.append((valeur_trim1[j][i]))
+        labels.append( "ECOLE T" + str(i+1))
+        valeur.append(sum(valeur_i))
+    fig3.add_trace(go.Scatter(x=labels, y=valeur))
+
+    return fig3
+
+
+
+def fig_dire_4():
+    fig4 = go.Figure(data=[go.Pie(labels=labels_annuel, values=valeur_annuelle3)])
 
 
     # Personnaliser l'apparence du graphique
-    fig3.update_layout(title='Contribution au financement de l\'école')
-    return fig3
+    fig4.update_layout(title='Contribution au financement de l\'école')
+    return fig4

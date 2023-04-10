@@ -30,6 +30,22 @@ layout = html.Div(children=[
         id='example-graph2',
         figure=fig_drh_2(),
         config = {'displaylogo': False}
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
+        id='example-graph3',
+        figure=fig_drh_3(),
+        config = {'displaylogo': False}
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
+        id='example-graph4',
+        figure=fig_drh_4(),
+        config = {'displaylogo': False}
     )
 
 ])
