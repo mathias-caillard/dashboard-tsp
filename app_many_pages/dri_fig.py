@@ -44,11 +44,23 @@ for indicateur in df.Indicateur :
     y_axis.append(indicateur)
 
 
-#Evolution temporelle avec des valeurs simulées
+trimestre = ['Trimestre 1', 'Trimestre 2', 'Trimestre 3', 'Trimestre 4']
+
+df2 = pd.read_excel(excel_path,sheet_name = sheetName, header = ligneDesTitres, nrows = nombreLignesData + 1)
+
 labels, valeur = [], []
 for i in range(débutColonneTrimestre,débutColonneTrimestre + 4):
-    labels.append(df.columns[i])
-    valeur.append((df.iloc[2,i]))
+    labels.append(df2.columns[i])
+
+for i in range(5):
+    valeur_i=[]
+    for j in range(débutColonneTrimestre,débutColonneTrimestre + 4):
+        valeur_i.append((df2.iloc[i,j]))
+    valeur.append(valeur_i)
+
+y_axis2 = []
+for indicateur in df2.Indicateur :
+    y_axis2.append(indicateur)
 
 def fig_dri_1():
     #création de la figure
@@ -57,17 +69,40 @@ def fig_dri_1():
     #Ajout d'un titre
     fig.update_layout(title = "Chiffres sur l'international à Télécom Sudparis")
 
-    #Ajout de valeur simulées
-    for j in range(5, 17):
-        labels.append("ECOLE T" + str(j))
-        valeur.append(valeur[i%4] + rd.randint(-5, 5))
 
     return fig
 
 
+def fig_dri_3():
+
+    fig3=go.Figure()
+    for i in range(5):
+        fig3.add_trace(go.Bar(x=labels, y=valeur[i], name=y_axis2[i]))
+
+    # Ajout d'un titre
+    fig3.update_layout(title="Chiffres sur l'international à Télécom Sudparis")
+    return fig3
+
+valeur2 = valeur[2].copy()
+labels2=labels.copy()
+# Ajout de valeur simulées
+for j in range(5, 17):
+    labels2.append("ECOLE T" + str(j))
+    valeur2.append(valeur2[i % 4] + rd.randint(-5, 5))
+
 def fig_dri_2():
-    fig2  = go.Figure(data=[go.Bar(x=labels, y=valeur)])
+
+    fig2  = go.Figure(data=[go.Bar(x=labels2, y=valeur2)])
 
     #Ajout d'un titre
     fig2.update_layout(title = "Evolution dans le temps du nombre d'étudiants étrangers à Télécom Sudparis")
     return fig2
+
+def fig_dri_4():
+    fig4 = go.Figure()
+    for i in range(4):
+        valeur2_i=valeur2[4*i: 4*(i+1)]
+        fig4.add_trace(go.Scatter(x=labels, y=valeur2_i, name= "Année 202" + str(3+i)))
+
+    fig4.update_layout(title="Evolution dans le temps du nombre d'étudiants étrangers à Télécom Sudparis")
+    return fig4
