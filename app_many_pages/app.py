@@ -45,7 +45,7 @@ app.layout = dbc.Container([
                 children=[
                     dbc.DropdownMenuItem(page['name'], href=page['relative_path'])
                     for page in dash.page_registry.values()
-                    if 'departements' in page['relative_path']  # Filtrer les pages du dossier "departments"
+                    if 'departements' in page['relative_path']  # Filtrer les pages du dossier "departements"
                 ],
                 nav=True,
                 in_navbar=True,

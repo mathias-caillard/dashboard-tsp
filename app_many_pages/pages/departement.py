@@ -1,12 +1,6 @@
 import dash
 from dash import html, dcc
-import pandas as pd
-import plotly.express as px
-import random as rd
-import plotly.graph_objects as go
-import plotly.subplots as subplt
-from app_many_pages import config
-from departements.departement_fig import * 
+from app_many_pages.departement_fig import *
 
 dash.register_page(
     __name__,

@@ -3,7 +3,7 @@
 import dash
 from dash import html, dcc, Output, Input, State, callback
 import dash_bootstrap_components as dbc
-from departements.departement_fig import * 
+from app_many_pages.departement_fig import *
 
 
 dash.register_page(

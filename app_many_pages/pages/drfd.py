@@ -1,12 +1,6 @@
-import random
-
 import dash
 from dash import html, dcc
-import pandas as pd
-import plotly.express as px
-import plotly.graph_objects as go
-from app_many_pages import config, effectifs
-from drfd_fig import *
+from app_many_pages.drfd_fig import *
 
 
 dash.register_page(

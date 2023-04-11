@@ -1,10 +1,6 @@
 import dash
 from dash import html, dcc
-import os,sys
-import pandas as pd
-import plotly.express as px
-from app_many_pages import config
-from df_fig import fig_nb_etudiants
+from app_many_pages.df_fig import fig_nb_etudiants
 
 
 
