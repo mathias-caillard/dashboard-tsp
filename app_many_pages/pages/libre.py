@@ -3,35 +3,46 @@
 import dash
 from dash import html, dcc, Output, Input, State, callback
 import dash_bootstrap_components as dbc
+
 from app_many_pages.departement_fig import *
 
+categories = [
+            {"label": "ARTEMIS - Graphe radar année 2023", "value": 1},
+            {"label": "CITI - Graphe radar année 2023", "value": 2},
+            {"label": "EPH - Graphe radar année 2023", "value": 3},
+            {"label": "INF - Graphe radar année 2023", "value": 4},
+            {"label": "RS2M - Graphe radar année 2023", "value": 5},
+            {"label": "RST - Graphe radar année 2023", "value": 6},
+        ]
 
 dash.register_page(
     __name__,
     title = "Choix libre des indicateurs",
     name = "Choix libre des indicateurs",
-    order=9
+    order=9,
+
 )
 
 layout = dbc.Container(children=[
-    html.H1(children='Dans cette page, vous pouvez croiser les directions'),
+    html.H1(children='Dans cette page, vous pouvez afficher les graphes de votre choix'),
 
-    html.H2(children='sélection des departements'),
+    html.H2(children='Sélections des graphes à afficher'),
 
     #joue le rôle de variable globale 
     dcc.Store(id='old-value', data=[]),
 
-     dbc.Checklist(
-        options=[
-            {"label": "ARTEMIS", "value": 1},
-            {"label": "CITI", "value": 2},
-            {"label": "EPH", "value": 3},
-            {"label": "INF", "value": 4},
-            {"label": "RS2M", "value": 5},
-            {"label": "RST", "value": 6},
-        ],
+    dcc.Dropdown(
+        options=categories,
         id="checklist-input",
+        multi=True
     ),
+
+    # Boucle pour générer les graphiques
+    html.Div(id="graph-container",
+             children=[]),
+
+
+
 
     #ARTEMIS
     dbc.Collapse(
@@ -110,8 +121,16 @@ layout = dbc.Container(children=[
         id="collapse6",
         is_open=False,
     ),
+
+
+
+
+
 ],
+
+
 fluid = True)
+
 
 
 
@@ -123,6 +142,64 @@ fluid = True)
 )
 def update_old_value(value, old_value):
     return value
+
+"""
+# Boucle pour générer les callbacks pour chaque département
+for i, cat in enumerate(categories):
+    cat_id = cat["value"]
+
+    @callback(
+        Output(f"collapse{i + 1}", "is_open"),
+        [Input("checklist-input", "value")],
+        [State(f"collapse{i + 1}", "is_open"), State("old-value", "data")],
+        prevent_initial_call=True
+    )
+    def toggle_collapse(value, is_open, data, cat_id=cat_id):
+        if (cat_id in value and cat_id in data) or (cat_id not in value and cat_id not in data):
+            return is_open
+        return not is_open
+        
+"""
+
+"""
+# Définissez le callback pour générer les graphiques par département
+@callback(
+    Output("graph-container", "children"),
+    [Input("checklist-input", "value")]
+)
+
+def generate_graphs(value):
+    # Liste des graphiques disponibles
+    graphs = {
+        1: fig_dept_2(),
+        2: fig_dept_3(),
+        3: fig_dept_4(),
+        4: fig_dept_5(),
+        5: fig_dept_6(),
+        6: fig_dept_7(),
+    }
+    if value is None:
+        value = []
+    # Création de la liste des IDs de collapse ouverts
+    open_collapse_ids = ["collapse{}".format(val) for val in value]
+
+    # Génération des graphiques et des collapses
+    graph_output = []
+    for val in value:
+
+        graph_output.append(
+            dbc.Collapse(
+                dcc.Graph(
+                    figure=graphs[val],
+                    config={'displaylogo': False}
+                ),
+                id="collapse{}".format(val),
+                is_open=("collapse{}".format(val) in open_collapse_ids)
+            )
+        )
+
+    return graph_output
+"""
 
 
 #ARTEMIS
