@@ -47,13 +47,21 @@ def fig_rs2m_3():
     return fig
 
 def fig_rs2m_4():
-    return list_fig_rs2m[0]
+    fig = list_fig_rs2m[0]
+    fig.update_layout(title='Les dépenses de vacataires à RS2M')
+    return fig
 
 def fig_rs2m_5():
-    return list_fig_rs2m[1]
+    fig = list_fig_rs2m[1]
+    fig.update_layout(title='Les ressources propres à RS2M')
+    return fig
 
 def fig_rs2m_6():
-    return list_fig_rs2m[2]
+    fig = list_fig_rs2m[2]
+    fig.update_layout(title='Les ressources d\'état à RS2M')
+    return fig
 
 def fig_rs2m_7():
-    return list_fig_rs2m[3]
+    fig = list_fig_rs2m[3]
+    fig.update_layout(title='Le total des dépenses à RS2M')
+    return fig

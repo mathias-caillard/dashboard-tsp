@@ -45,14 +45,20 @@ def fig_citi_3():
     return fig
 
 def fig_citi_4():
-    return list_fig_citi[0]
+    fig = list_fig_citi[0]
+    fig.update_layout(title='Les dépenses de vacataires à CITI')
+    return fig
 
 def fig_citi_5():
-    return list_fig_citi[1]
-
+    fig = list_fig_citi[1]
+    fig.update_layout(title='Les ressources propres à CITI')
+    return fig
 def fig_citi_6():
-    return list_fig_citi[2]
-
+    fig = list_fig_citi[2]
+    fig.update_layout(title='Les ressources d\'état à CITI')
+    return fig
 def fig_citi_7():
-    return list_fig_citi[3]
+    fig = list_fig_citi[3]
+    fig.update_layout(title='Le total des dépenses à CITI')
+    return fig
 

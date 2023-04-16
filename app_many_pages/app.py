@@ -12,7 +12,7 @@ sys.path.append(chemin_absolu_rep_parent + '\\app_many_pages\\pages')   #pour po
 sys.path.append(chemin_absolu_rep_parent + '\\app_many_pages\\pages\\departements')   #pour pouvoir importer les variables entre fichiers dans /pages/departements
 
 
-app = Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.BOOTSTRAP])   #, suppress_callback_exceptions=True
+app = Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True)   #, suppress_callback_exceptions=True
 load_figure_template("bootstrap")
 app._favicon = "favicon.ico"
 

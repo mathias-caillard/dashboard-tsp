@@ -47,13 +47,21 @@ def fig_inf_3():
     return fig
 
 def fig_inf_4():
-    return list_fig_inf[0]
+    fig = list_fig_inf[0]
+    fig.update_layout(title='Les dépenses de vacataires à INF')
+    return fig
 
 def fig_inf_5():
-    return list_fig_inf[1]
+    fig = list_fig_inf[1]
+    fig.update_layout(title='Les ressources propres à INF')
+    return fig
 
 def fig_inf_6():
-    return list_fig_inf[2]
+    fig = list_fig_inf[2]
+    fig.update_layout(title='Les ressources d\'état à INF')
+    return fig
 
 def fig_inf_7():
-    return list_fig_inf[3]
+    fig = list_fig_inf[3]
+    fig.update_layout(title='Le total des dépenses à INF')
+    return fig

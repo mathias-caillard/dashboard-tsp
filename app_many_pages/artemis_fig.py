@@ -46,15 +46,22 @@ def fig_artemis_3():
     return fig
 
 def fig_artemis_4():
-    return list_fig_artemis[0]
+    fig = list_fig_artemis[0]
+    fig.update_layout(title='Les dépenses de vacataires à ARTEMIS')
+    return fig
 
 def fig_artemis_5():
-    return list_fig_artemis[1]
+    fig = list_fig_artemis[1]
+    fig.update_layout(title='Les ressources propres à ARTEMIS')
+    return fig
 
 def fig_artemis_6():
-    return list_fig_artemis[2]
-
+    fig = list_fig_artemis[2]
+    fig.update_layout(title='Les ressources d\'état à ARTEMIS')
+    return fig
 def fig_artemis_7():
-    return list_fig_artemis[3]
+    fig = list_fig_artemis[3]
+    fig.update_layout(title='Le total des dépenses à ARTEMIS')
+    return fig
 
 

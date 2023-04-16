@@ -47,13 +47,20 @@ def fig_rst_3():
     return fig
 
 def fig_rst_4():
-    return list_fig_rst[0]
+    fig = list_fig_rst[0]
+    fig.update_layout(title='Les dépenses de vacataires à RST')
+    return fig
 
 def fig_rst_5():
-    return list_fig_rst[1]
+    fig = list_fig_rst[1]
+    fig.update_layout(title='Les ressources propres à RST')
+    return fig
 
 def fig_rst_6():
-    return list_fig_rst[2]
-
+    fig = list_fig_rst[2]
+    fig.update_layout(title='Les ressources d\'état à RST')
+    return fig
 def fig_rst_7():
-    return list_fig_rst[3]
+    fig = list_fig_rst[3]
+    fig.update_layout(title='Le total des dépenses à RST')
+    return fig

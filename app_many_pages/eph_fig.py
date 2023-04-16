@@ -47,14 +47,22 @@ def fig_eph_3():
     return fig
 
 def fig_eph_4():
-    return list_fig_eph[0]
+    fig = list_fig_eph[0]
+    fig.update_layout(title='Les dépenses de vacataires à EPH')
+    return fig
 
 def fig_eph_5():
-    return list_fig_eph[1]
+    fig = list_fig_eph[1]
+    fig.update_layout(title='Les ressources propres à EPH')
+    return fig
 
 def fig_eph_6():
-    return list_fig_eph[2]
+    fig = list_fig_eph[2]
+    fig.update_layout(title='Les ressources d\'état à EPH')
+    return fig
 
 def fig_eph_7():
-    return list_fig_eph[3]
+    fig = list_fig_eph[3]
+    fig.update_layout(title='Le total des dépenses à EPH')
+    return fig
 

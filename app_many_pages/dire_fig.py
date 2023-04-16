@@ -111,6 +111,8 @@ def fig_dire_3():
         valeur.append(sum(valeur_i))
     fig3.add_trace(go.Scatter(x=labels, y=valeur))
 
+    # Personnaliser l'apparence du graphique
+    fig3.update_layout(title='Suivi des contrats de recherche, total école')
     return fig3
 
 
