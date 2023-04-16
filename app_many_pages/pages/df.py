@@ -1,6 +1,6 @@
 import dash
 from dash import html, dcc
-from app_many_pages.df_fig import fig_nb_etudiants
+from app_many_pages.df_fig import *
 
 
 
@@ -18,10 +18,18 @@ layout = html.Div(children=[
     html.H1(children='Bienvenue sur la page concernant la Direction des formations'),
 
     dcc.Graph(
-        id='example-graph',
-        figure=fig_nb_etudiants(),
+        id='example-graph1',
+        figure=fig_df_1(),
         config = {'displaylogo': False}
 
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
+        id='example-graph2',
+        figure=fig_df_2(),
+        config = {'displaylogo': False}
     ),
 ])
 

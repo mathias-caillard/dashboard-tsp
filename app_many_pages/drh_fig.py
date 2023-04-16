@@ -64,7 +64,7 @@ FinColonneData2 = 31  # Dernière colonne de données
 df2 = pd.read_excel(excel_path, sheet_name=sheetName2, header=ligneDesTitres2, nrows=nombreLignesData2)
 
 # définition de l'axe des abscisses
-x_axis_tri = df.columns.tolist()[débutColonneData2: FinColonneData2 + 1]
+x_axis_tri = df2.columns.tolist()[débutColonneData2: FinColonneData2 + 1]
 
 departement = ['ARTEMIS', 'CITI', 'EPH', 'INF', 'RS2M', 'RST', 'ECOLE']
 trimestre = ['Trimestre 1', 'Trimestre 2', 'Trimestre 3', 'Trimestre 4']
