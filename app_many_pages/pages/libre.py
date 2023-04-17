@@ -18,109 +18,134 @@ from app_many_pages.rs2m_fig import *
 from app_many_pages.rst_fig import *
 
 
+
+
+
+
+
 categories = [
     #DF
-    {"label": "DF - Nombre d\'étudiants", "value": "df_1"},
-    {"label": "DF - Nombre d\'UP", "value": "df_2"},
+    {"label": html.Span(["DF - Nombre d\'étudiants"], style={'color': 'green'}), "value": "df_1"},
+    {"label": html.Span(["DF - Nombre d\'UP"], style = {'color' : "green"}), "value": "df_2"},
 
-    # DRFD
-    {"label": "DRFD - Publications", "value": "drfd_1"},
-    {"label": "DRFD - Nombre de doctorants", "value": "drfd_2"},
-    {"label": "DRFD - Evolutions des publications", "value": "drfd_3"},
-    {"label": "DRFD - Evolution du nombre de doctorants", "value": "drfd_4"},
+    #DRFD
+    {"label": html.Span(["DRFD - Publications"], style={'color': 'blue'}), "value": "drfd_1"},
+    {"label": html.Span(["DRFD - Nombre de doctorants"], style={'color': 'blue'}), "value": "drfd_2"},
+    {"label": html.Span(["DRFD - Evolutions des publications"], style={'color': 'blue'}), "value": "drfd_3"},
+    {"label": html.Span(["DRFD - Evolution du nombre de doctorants"], style={'color': 'blue'}), "value": "drfd_4"},
 
-    # DIRE
-    {"label": "DIRE - Suivi des contrats de recherches", "value": "dire_1"},
-    {"label": "DIRE - Suivi des contrats de recherches, vision trimestrielle", "value": "dire_2"},
-    {"label": "DIRE - Suivi des contrats de recherches, total école", "value": "dire_3"},
-    {"label": "DIRE - Contribution au financement de l'école, graphe camembert", "value": "dire_4"},
+    #DIRE
+    {"label": html.Span(["DIRE - Suivi des contrats de recherches"], style={'color': 'purple'}), "value": "dire_1"},
+    {"label": html.Span(["DIRE - Suivi des contrats de recherches, vision trimestrielle"], style={'color': 'purple'}), "value": "dire_2"},
+    {"label": html.Span(["DIRE - Suivi des contrats de recherches, total école"], style={'color': 'purple'}), "value": "dire_3"},
+    {"label": html.Span(["DIRE - Contribution au financement de l'école, graphe camembert"], style={'color': 'purple'}), "value": "dire_4"},
 
 
-    # DAF
-    {"label": "DAF - Chiffre d\'affaire de la recherche", "value": "daf_1"},
-    {"label": "DAF - Dépenses de vacataires", "value": "diaf_2"},
-    {"label": "DAF - Dépenses de vacataires, vision trimestrielle", "value": "daf_3"},
-    {"label": "DAF - Ressource propres", "value": "daf_4"},
-    {"label": "DAF - Ressource propres, vision trimestrielle", "value": "daf_5"},
-    {"label": "DAF - Ressource d\'état", "value": "daf_6"},
-    {"label": "DAF - Ressource d\'état, vision trimestrielle", "value": "daf_7"},
-    {"label": "DAF - Total des dépenses", "value": "daf_8"},
-    {"label": "DAF - Total des dépenses, vision trimestrielle", "value": "daf_9"},
+    #DAF
+    {"label": html.Span(["DAF - Chiffre d\'affaire de la recherche"], style={'color': 'orange'}), "value": "daf_1"},
+    {"label": html.Span(["DAF - Dépenses de vacataires"], style={'color': 'orange'}), "value": "diaf_2"},
+    {"label": html.Span(["DAF - Dépenses de vacataires, vision trimestrielle"], style={'color': 'orange'}), "value": "daf_3"},
+    {"label": html.Span(["DAF - Ressource propres"], style={'color': 'orange'}), "value": "daf_4"},
+    {"label": html.Span(["DAF - Ressource propres, vision trimestrielle"], style={'color': 'orange'}), "value": "daf_5"},
+    {"label": html.Span(["DAF - Ressource d\'état"], style={'color': 'orange'}), "value": "daf_6"},
+    {"label": html.Span(["DAF - Ressource d\'état, vision trimestrielle"], style={'color': 'orange'}), "value": "daf_7"},
+    {"label": html.Span(["DAF - Total des dépenses"], style={'color': 'orange'}), "value": "daf_8"},
+    {"label": html.Span(["DAF - Total des dépenses, vision trimestrielle"], style={'color': 'orange'}), "value": "daf_9"},
 
-    # DRH
-    {"label": "DRH - Nombre de permanents", "value": "drh_1"},
-    {"label": "DRH - Répartition des permanents, vision trimestrielle", "value": "drh_2"},
-    {"label": "DRH - Nombre de non-permanents", "value": "drh_3"},
-    {"label": "DRH - Evolution du nombre de non-permanents", "value": "drh_4"},
 
-    # DRI
-    {"label": "DRI - Chiffres sur l'international", "value": "dri_2"},
-    {"label": "DRI - Evolution du nombre d\'étudiants étrangers, bâtons", "value": "dri_3"},
-    {"label": "DRI - Evolution du nombre d\'étudiants étrangers, courbe", "value": "dri_4"},
+
+   #DRH
+    {"label": html.Span("DRH - Nombre de permanents", style={'color': 'black'}), "value": "drh_1"},
+    {"label": html.Span("DRH - Répartition des permanents, vision trimestrielle", style={'color': 'black'}), "value": "drh_2"},
+    {"label": html.Span("DRH - Nombre de non-permanents", style={'color': 'black'}), "value": "drh_3"},
+    {"label": html.Span("DRH - Evolution du nombre de non-permanents", style={'color': 'black'}), "value": "drh_4"},
+
+    #DRI
+    {"label": html.Span("DRI - Chiffres sur l'international", style={'color': 'Maroon'}), "value": "dri_2"},
+    {"label": html.Span("DRI - Evolution du nombre d\'étudiants étrangers, bâtons", style={'color': 'Maroon'}), "value": "dri_3"},
+    {"label": html.Span("DRI - Evolution du nombre d\'étudiants étrangers, courbe", style={'color': 'Maroon'}), "value": "dri_4"},
 
     #ARTEMIS
-    {"label": "ARTEMIS - Graphe radar année 2023", "value": "dept_2"},
-    {"label": "ARTEMIS - Graphe radar année 2023-2024", "value": "dept_1"},
-    {"label": "ARTEMIS - Ressources humaines", "value": "artemis_1"},
-    {"label": "ARTEMIS - Contrats de recherche", "value": "artemis_2"},
-    {"label": "ARTEMIS - Contribution au financement de l\'école", "value": "artemis_3"},
-    {"label": "ARTEMIS - Dépense de vacataires", "value": "artemis_4"},
-    {"label": "ARTEMIS - Ressources propres", "value": "artemis_5"},
-    {"label": "ARTEMIS - Ressources d\'états", "value": "artemis_6"},
-    {"label": "ARTEMIS - Total des dépenses", "value": "artemis_7"},
+    {"label": html.Span("ARTEMIS - Graphe radar année 2023", style={'color': 'Navy'}), "value": "dept_2"},
+    {"label": html.Span("ARTEMIS - Graphe radar année 2023-2024", style={'color': 'Navy'}), "value": "dept_1"},
+    {"label": html.Span("ARTEMIS - Ressources humaines", style={'color': 'Navy'}), "value": "artemis_1"},
+    {"label": html.Span("ARTEMIS - Contrats de recherche", style={'color': 'Navy'}), "value": "artemis_2"},
+    {"label": html.Span("ARTEMIS - Contribution au financement de l'école", style={'color': 'Navy'}), "value": "artemis_3"},
+    {"label": html.Span("ARTEMIS - Dépense de vacataires", style={'color': 'Navy'}), "value": "artemis_4"},
+    {"label": html.Span("ARTEMIS - Ressources propres", style={'color': 'Navy'}), "value": "artemis_5"},
+    {"label": html.Span("ARTEMIS - Ressources d'états", style={'color': 'Navy'}), "value": "artemis_6"},
+    {"label": html.Span("ARTEMIS - Total des dépenses", style={'color': 'Navy'}), "value": "artemis_7"},
 
     #CITI
-    {"label": "CITI - Graphe radar année 2023", "value": "dept_3"},
-    {"label": "CITI - Ressources humaines", "value": "citi_1"},
-    {"label": "CITI - Contrats de recherche", "value": "citi_2"},
-    {"label": "CITI - Contribution au financement de l\'école", "value": "citi_3"},
-    {"label": "CITI - Dépense de vacataires", "value": "citi_4"},
-    {"label": "CITI - Ressources propres", "value": "citi_5"},
-    {"label": "CITI - Ressources d\'états", "value": "citi_6"},
-    {"label": "CITI - Total des dépenses", "value": "citi_7"},
+    {"label": html.Span("CITI - Graphe radar année 2023", style={'color': 'Olive'}), "value": "dept_3"},
+    {"label": html.Span("CITI - Ressources humaines", style={'color': 'Olive'}), "value": "citi_1"},
+    {"label": html.Span("CITI - Contrats de recherche", style={'color': 'Olive'}), "value": "citi_2"},
+    {"label": html.Span("CITI - Contribution au financement de l'école", style={'color': 'Olive'}), "value": "citi_3"},
+    {"label": html.Span("CITI - Dépense de vacataires", style={'color': 'Olive'}), "value": "citi_4"},
+    {"label": html.Span("CITI - Ressources propres", style={'color': 'Olive'}), "value": "citi_5"},
+    {"label": html.Span("CITI - Ressources d'états", style={'color': 'Olive'}), "value": "citi_6"},
+    {"label": html.Span("CITI - Total des dépenses", style = {'color':'Olive'}), "value": "citi_7"},
 
     #EPH
-    {"label": "EPH - Graphe radar année 2023", "value": "dept_4"},
-    {"label": "EPH - Ressources humaines", "value": "eph_1"},
-    {"label": "EPH - Contrats de recherche", "value": "eph_2"},
-    {"label": "EPH - Contribution au financement de l\'école", "value": "eph_3"},
-    {"label": "EPH - Dépense de vacataires", "value": "eph_4"},
-    {"label": "EPH - Ressources propres", "value": "eph_5"},
-    {"label": "EPH - Ressources d\'états", "value": "eph_6"},
-    {"label": "EPH - Total des dépenses", "value": "eph_7"},
+    {"label": html.Span("EPH - Graphe radar année 2023", style={'color': 'Salmon'}), "value": "dept_4"},
+    {"label": html.Span("EPH - Ressources humaines", style={'color': 'Salmon'}), "value": "eph_1"},
+    {"label": html.Span("EPH - Contrats de recherche", style={'color': 'Salmon'}), "value": "eph_2"},
+    {"label": html.Span("EPH - Contribution au financement de l'école", style={'color': 'Salmon'}), "value": "eph_3"},
+    {"label": html.Span("EPH - Dépense de vacataires", style={'color': 'Salmon'}), "value": "eph_4"},
+    {"label": html.Span("EPH - Ressources propres", style={'color': 'Salmon'}), "value": "eph_5"},
+    {"label": html.Span("EPH - Ressources d'états", style={'color': 'Salmon'}), "value": "eph_6"},
+    {"label": html.Span("EPH - Total des dépenses", style={'color': 'Salmon'}), "value": "eph_7"},
 
     #INF
-    {"label": "INF - Graphe radar année 2023", "value": "dept_5"},
-    {"label": "INF - Ressources humaines", "value": "inf_1"},
-    {"label": "INF - Contrats de recherche", "value": "inf_2"},
-    {"label": "INF - Contribution au financement de l\'école", "value": "inf_3"},
-    {"label": "INF - Dépense de vacataires", "value": "inf_4"},
-    {"label": "INF - Ressources propres", "value": "inf_5"},
-    {"label": "INF - Ressources d\'états", "value": "inf_6"},
-    {"label": "INF - Total des dépenses", "value": "inf_7"},
+    {"label": html.Span("INF - Graphe radar année 2023", style={'color': 'MediumVioletRed'}), "value": "dept_5"},
+    {"label": html.Span("INF - Ressources humaines", style={'color': 'MediumVioletRed'}), "value": "inf_1"},
+    {"label": html.Span("INF - Contrats de recherche", style={'color': 'MediumVioletRed'}), "value": "inf_2"},
+    {"label": html.Span("INF - Contribution au financement de l'école", style={'color': 'MediumVioletRed'}), "value": "inf_3"},
+    {"label": html.Span("INF - Dépense de vacataires", style={'color': 'MediumVioletRed'}), "value": "inf_4"},
+    {"label": html.Span("INF - Ressources propres", style={'color': 'MediumVioletRed'}), "value": "inf_5"},
+
+    {"label": html.Span("INF - Ressources propres", style={'color': 'BlueViolet'}), "value": "inf_5"},
+    {"label": html.Span("INF - Ressources d\'états", style={'color': 'BlueViolet'}), "value": "inf_6"},
+    {"label": html.Span("INF - Total des dépenses", style={'color': 'BlueViolet'}), "value": "inf_7"},
 
     #RS2M
-    {"label": "RS2M - Graphe radar année 2023", "value": "dept_6"},
-    {"label": "RS2M - Ressources humaines", "value": "rs2m_1"},
-    {"label": "RS2M - Contrats de recherche", "value": "rs2m_2"},
-    {"label": "RS2M - Contribution au financement de l\'école", "value": "rs2m_3"},
-    {"label": "RS2M - Dépense de vacataires", "value": "rs2m_4"},
-    {"label": "RS2M - Ressources propres", "value": "rs2m_5"},
-    {"label": "RS2M - Ressources d\'états", "value": "rs2m_6"},
-    {"label": "RS2M - Total des dépenses", "value": "rs2m_7"},
+    {"label": html.Span("RS2M - Graphe radar année 2023", style={'color': 'Indigo'}), "value": "dept_6"},
+    {"label": html.Span("RS2M - Ressources humaines", style={'color': 'Indigo'}), "value": "rs2m_1"},
+    {"label": html.Span("RS2M - Contrats de recherche", style={'color': 'Indigo'}), "value": "rs2m_2"},
+    {"label": html.Span("RS2M - Contribution au financement de l\'école", style={'color': 'Indigo'}), "value": "rs2m_3"},
+    {"label": html.Span("RS2M - Dépense de vacataires", style={'color': 'Indigo'}), "value": "rs2m_4"},
+    {"label": html.Span("RS2M - Ressources propres", style={'color': 'Indigo'}), "value": "rs2m_5"},
+    {"label": html.Span("RS2M - Ressources d\'états", style={'color': 'Indigo'}), "value": "rs2m_6"},
+    {"label": html.Span("RS2M - Total des dépenses", style={'color': 'Indigo'}), "value": "rs2m_7"},
 
     #RST
-    {"label": "RST - Graphe radar année 2023", "value": "dept_7"},
-    {"label": "RST - Ressources humaines", "value": "rst_1"},
-    {"label": "RST - Contrats de recherche", "value": "rst_2"},
-    {"label": "RST - Contribution au financement de l\'école", "value": "rst_3"},
-    {"label": "RST - Dépense de vacataires", "value": "rst_4"},
-    {"label": "RST - Ressources propres", "value": "rst_5"},
-    {"label": "RST - Ressources d\'états", "value": "rst_6"},
-    {"label": "RST - Total des dépenses", "value": "rst_7"},
+    {"label": html.Span("RST - Graphe radar année 2023", style={'color': 'DarkGreen'}), "value": "dept_7"},
+    {"label": html.Span("RST - Ressources humaines", style={'color': 'DarkGreen'}), "value": "rst_1"},
+    {"label": html.Span("RST - Contrats de recherche", style={'color': 'DarkGreen'}), "value": "rst_2"},
+    {"label": html.Span("RST - Contribution au financement de l\'école", style={'color': 'DarkGreen'}), "value": "rst_3"},
+    {"label": html.Span("RST - Dépense de vacataires", style={'color': 'DarkGreen'}), "value": "rst_4"},
 
-    {"label": "Graphes radar des départements", "value": "dept_8"},
+
+    #RST
+    {"label": html.Span("RST - Graphe radar année 2023", style={'color': 'SaddleBrown'}), "value": "dept_7"},
+    {"label": html.Span("RST - Ressources humaines", style={'color': 'SaddleBrown'}), "value": "rst_1"},
+    {"label": html.Span("RST - Contrats de recherche", style={'color': 'SaddleBrown'}), "value": "rst_2"},
+    {"label": html.Span("RST - Contribution au financement de l\'école", style={'color': 'SaddleBrown'}), "value": "rst_3"},
+    {"label": html.Span("RST - Dépense de vacataires", style={'color': 'SaddleBrown'}), "value": "rst_4"},
+    {"label": html.Span("RST - Dépense de vacataires", style={'color': 'SaddleBrown'}), "value": "rst_4"},
+    {"label": html.Span("RST - Ressources propres", style={'color': 'SaddleBrown'}), "value": "rst_5"},
+    {"label": html.Span("RST - Ressources d\'états", style={'color': 'SaddleBrown'}), "value": "rst_6"},
+    {"label": html.Span("RST - Total des dépenses", style={'color': 'SaddleBrown'}), "value": "rst_7"},
+
+    {"label": html.Span("Graphes radar des départements", style={'color': 'DarkSlateGray'}), "value": "dept_8"},
     ]
+
+
+
+
+
+
+
 
 dash.register_page(
     __name__,
@@ -141,7 +166,8 @@ layout = dbc.Container(children=[
     dcc.Dropdown(
         options=categories,
         id="checklist-input",
-        multi=True
+        multi=True,
+
     ),
 
     # Boucle pour générer les graphiques
