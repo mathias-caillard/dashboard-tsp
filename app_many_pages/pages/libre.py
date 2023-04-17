@@ -171,13 +171,10 @@ layout = dbc.Container(children=[
     ),
 
     # Boucle pour générer les graphiques
-    dbc.Container(id="graph-container",
-             children=[],
-             fluid = True),
 
-
-
-
+        dbc.Container(id="graph-container",
+            children=[],
+            fluid = True),
 
 
 ],
@@ -342,7 +339,9 @@ def generate_graphs(value):
                     config={'displaylogo': False}
                 ),
                 id="collapse{}".format(val),
-                is_open=("collapse{}".format(val) in open_collapse_ids)
+                is_open=("collapse{}".format(val) in open_collapse_ids),
+
+
             )
         )
 
@@ -361,6 +360,7 @@ def generate_graphs(value):
                     dbc.Col(graph2, width = 6)
                 ])
             )
+            new_graph_output.append(html.Hr(style={'borderTop': '2px solid #000000'}))  # Ligne horizontale pour mieux séparer les graphes)
         
         else : 
             graph = graph_output[2*i]
@@ -369,6 +369,7 @@ def generate_graphs(value):
                     dbc.Col(graph)
                 ])
             )
+            new_graph_output.append(html.Hr(style={'borderTop': '2px solid #000000'}))  # Ligne horizontale pour mieux séparer les graphes)
         i += 1
 
 
