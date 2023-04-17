@@ -145,8 +145,9 @@ layout = dbc.Container(children=[
     ),
 
     # Boucle pour générer les graphiques
-    html.Div(id="graph-container",
-             children=[]),
+    dbc.Container(id="graph-container",
+             children=[],
+             fluid = True),
 
 
 
@@ -319,7 +320,33 @@ def generate_graphs(value):
             )
         )
 
-    return graph_output
+    new_graph_output = []
+
+    i = 0
+    while 2*i < len(graph_output) : 
+        if (2*i + 1 < len(graph_output)) :
+
+            graph1 = graph_output[2*i]
+            graph2 = graph_output[2*i+1]
+            
+            new_graph_output.append(
+                dbc.Row(children = [
+                    dbc.Col(graph1, width = 6),
+                    dbc.Col(graph2, width = 6)
+                ])
+            )
+        
+        else : 
+            graph = graph_output[2*i]
+            new_graph_output.append(
+                dbc.Row(children = [
+                    dbc.Col(graph)
+                ])
+            )
+        i += 1
+
+
+    return new_graph_output
 
 
 """
