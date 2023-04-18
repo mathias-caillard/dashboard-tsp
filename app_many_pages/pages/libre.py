@@ -43,7 +43,7 @@ categories = [
 
     #DAF
     {"label": html.Span(["DAF - Chiffre d\'affaire de la recherche"], style={'color': 'orange'}), "value": "daf_1"},
-    {"label": html.Span(["DAF - Dépenses de vacataires"], style={'color': 'orange'}), "value": "diaf_2"},
+    {"label": html.Span(["DAF - Dépenses de vacataires"], style={'color': 'orange'}), "value": "daf_2"},
     {"label": html.Span(["DAF - Dépenses de vacataires, vision trimestrielle"], style={'color': 'orange'}), "value": "daf_3"},
     {"label": html.Span(["DAF - Ressource propres"], style={'color': 'orange'}), "value": "daf_4"},
     {"label": html.Span(["DAF - Ressource propres, vision trimestrielle"], style={'color': 'orange'}), "value": "daf_5"},
@@ -103,10 +103,8 @@ categories = [
     {"label": html.Span("INF - Contribution au financement de l'école", style={'color': 'MediumVioletRed'}), "value": "inf_3"},
     {"label": html.Span("INF - Dépense de vacataires", style={'color': 'MediumVioletRed'}), "value": "inf_4"},
     {"label": html.Span("INF - Ressources propres", style={'color': 'MediumVioletRed'}), "value": "inf_5"},
-
-    {"label": html.Span("INF - Ressources propres", style={'color': 'BlueViolet'}), "value": "inf_5"},
-    {"label": html.Span("INF - Ressources d\'états", style={'color': 'BlueViolet'}), "value": "inf_6"},
-    {"label": html.Span("INF - Total des dépenses", style={'color': 'BlueViolet'}), "value": "inf_7"},
+    {"label": html.Span("INF - Ressources d\'états", style={'color': 'MediumVioletRed'}), "value": "inf_6"},
+    {"label": html.Span("INF - Total des dépenses", style={'color': 'MediumVioletRed'}), "value": "inf_7"},
 
     #RS2M
     {"label": html.Span("RS2M - Graphe radar année 2023", style={'color': 'Indigo'}), "value": "dept_6"},
@@ -118,12 +116,6 @@ categories = [
     {"label": html.Span("RS2M - Ressources d\'états", style={'color': 'Indigo'}), "value": "rs2m_6"},
     {"label": html.Span("RS2M - Total des dépenses", style={'color': 'Indigo'}), "value": "rs2m_7"},
 
-    #RST
-    {"label": html.Span("RST - Graphe radar année 2023", style={'color': 'DarkGreen'}), "value": "dept_7"},
-    {"label": html.Span("RST - Ressources humaines", style={'color': 'DarkGreen'}), "value": "rst_1"},
-    {"label": html.Span("RST - Contrats de recherche", style={'color': 'DarkGreen'}), "value": "rst_2"},
-    {"label": html.Span("RST - Contribution au financement de l\'école", style={'color': 'DarkGreen'}), "value": "rst_3"},
-    {"label": html.Span("RST - Dépense de vacataires", style={'color': 'DarkGreen'}), "value": "rst_4"},
 
 
     #RST
@@ -131,7 +123,6 @@ categories = [
     {"label": html.Span("RST - Ressources humaines", style={'color': 'SaddleBrown'}), "value": "rst_1"},
     {"label": html.Span("RST - Contrats de recherche", style={'color': 'SaddleBrown'}), "value": "rst_2"},
     {"label": html.Span("RST - Contribution au financement de l\'école", style={'color': 'SaddleBrown'}), "value": "rst_3"},
-    {"label": html.Span("RST - Dépense de vacataires", style={'color': 'SaddleBrown'}), "value": "rst_4"},
     {"label": html.Span("RST - Dépense de vacataires", style={'color': 'SaddleBrown'}), "value": "rst_4"},
     {"label": html.Span("RST - Ressources propres", style={'color': 'SaddleBrown'}), "value": "rst_5"},
     {"label": html.Span("RST - Ressources d\'états", style={'color': 'SaddleBrown'}), "value": "rst_6"},

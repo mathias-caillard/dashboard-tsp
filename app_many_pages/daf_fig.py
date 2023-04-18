@@ -7,6 +7,12 @@ from app_many_pages import effectifs
 
 effectif = effectifs.effectif
 
+#Import des couleurs
+couleurs = config.colors_dept
+
+departement = ['ARTEMIS', 'CITI', 'EPH', 'INF', 'RS2M', 'RST']
+trimestre = ['Trimestre 1', 'Trimestre 2', 'Trimestre 3', 'Trimestre 4']
+
 #Chemin du fichier excel défini dans config.py
 excel_path = config.excel_path
 
@@ -59,7 +65,8 @@ def fig_daf_1():
     # Ajouter chaque bâton à la figure
     i=0
     for col_name in df.columns[débutColonneData: FinColonneData + 1]:
-        fig.add_trace(go.Bar(x=[col_name], y=[df[col_name].iloc[0]], name=col_name + " (" + str(int(effectif[i])) + ")"))
+        fig.add_trace(go.Bar(x=[col_name], y=[df[col_name].iloc[0]], name=col_name + " (" + str(int(effectif[i])) + ")",
+                             marker=dict(color = [couleurs[i]])))
         i+=1
 
     #Calcul de la moyenne
@@ -144,7 +151,8 @@ def fig_daf_2():
     for i in range(6):
         labels_i = labels_tri[i]
         valeur_i = valeur_tri[0][i]
-        fig2.add_trace(go.Bar(x=labels_i, y=valeur_i, name=labels_annuel[i].replace('Année', '') + " (" + str(int(effectif[i])) + ")"), row=1, col=i + 1)
+        fig2.add_trace(go.Bar(x=labels_i, y=valeur_i, name=labels_annuel[i].replace('Année', '') + " (" + str(int(effectif[i])) + ")"
+                              , marker=dict(color = 4*[couleurs[i]])), row=1, col=i + 1)
 
     # Personnaliser l'apparence du graphique
     fig2.update_layout(title='Dépenses de vacataires', yaxis_title = y_axis_tri[0])
@@ -153,13 +161,14 @@ def fig_daf_2():
 
 def fig_daf_3():
     # Création d'une figure avec 6 sous-figure pour y placer des histogrammes
-    fig3 = subplt.make_subplots(rows=1, cols=4, shared_yaxes=True, horizontal_spacing=0.05)
+    fig3 = go.Figure()
 
     # Ajout des histogrammes dans chacune des sous-figures
-    for i in range(4):
-        labels_i = labels_tri_dep[i]
-        valeur_i = valeur_tri_dep[0][i]
-        fig3.add_trace(go.Bar(x=labels_i, y=valeur_i, name="Trimestre " + str(i+1)), row=1, col=i + 1)
+    for i in range(6):
+        #labels_i = labels_tri_dep[i]
+        valeur_i = valeur_tri[0][i]
+        fig3.add_trace(go.Bar(x=trimestre, y=valeur_i, name=departement[i] + " (" + str(int(effectif[i])) + ")"
+                              , marker=dict(color = couleurs[i])))
 
     # Personnaliser l'apparence du graphique
     fig3.update_layout(title='Dépenses de vacataires, vision trimestrielle', yaxis_title=y_axis_tri[0])
@@ -175,7 +184,8 @@ def fig_daf_4():
         labels_i = labels_tri[i]
         valeur_i = valeur_tri[1][i]
         fig.add_trace(go.Bar(x=labels_i, y=valeur_i,
-                              name=labels_annuel[i].replace('Année', '') + " (" + str(int(effectif[i])) + ")"), row=1,
+                              name=labels_annuel[i].replace('Année', '') + " (" + str(int(effectif[i])) + ")"
+                             ,marker=dict(color = 4*[couleurs[i]])), row=1,
                        col=i + 1)
 
     # Personnaliser l'apparence du graphique
@@ -185,13 +195,14 @@ def fig_daf_4():
 
 def fig_daf_5():
     # Création d'une figure avec 6 sous-figure pour y placer des histogrammes
-    fig = subplt.make_subplots(rows=1, cols=4, shared_yaxes=True, horizontal_spacing=0.05)
+    fig = go.Figure()
 
     # Ajout des histogrammes dans chacune des sous-figures
-    for i in range(4):
-        labels_i = labels_tri_dep[i]
-        valeur_i = valeur_tri_dep[1][i]
-        fig.add_trace(go.Bar(x=labels_i, y=valeur_i, name="Trimestre " + str(i + 1)), row=1, col=i + 1)
+    for i in range(6):
+        #labels_i = labels_tri_dep[i]
+        valeur_i = valeur_tri[1][i]
+        fig.add_trace(go.Bar(x=trimestre, y=valeur_i, name=departement[i] + " (" + str(int(effectif[i])) + ")",
+                             marker=dict(color = couleurs[i])))
 
     # Personnaliser l'apparence du graphique
     fig.update_layout(title='Ressources propres, vision trimestrielle', yaxis_title=y_axis_tri[1])
@@ -207,7 +218,8 @@ def fig_daf_6():
         labels_i = labels_tri[i]
         valeur_i = valeur_tri[2][i]
         fig.add_trace(go.Bar(x=labels_i, y=valeur_i,
-                              name=labels_annuel[i].replace('Année', '') + " (" + str(int(effectif[i])) + ")"), row=1,
+                              name=labels_annuel[i].replace('Année', '') + " (" + str(int(effectif[i])) + ")"
+                             ,marker=dict(color = 4*[couleurs[i]])), row=1,
                        col=i + 1)
 
     # Personnaliser l'apparence du graphique
@@ -217,13 +229,15 @@ def fig_daf_6():
 
 def fig_daf_7():
     # Création d'une figure avec 6 sous-figure pour y placer des histogrammes
-    fig = subplt.make_subplots(rows=1, cols=4, shared_yaxes=True, horizontal_spacing=0.05)
+    fig = go.Figure()
 
     # Ajout des histogrammes dans chacune des sous-figures
-    for i in range(4):
-        labels_i = labels_tri_dep[i]
-        valeur_i = valeur_tri_dep[2][i]
-        fig.add_trace(go.Bar(x=labels_i, y=valeur_i, name="Trimestre " + str(i + 1)), row=1, col=i + 1)
+    for i in range(6):
+        #labels_i = labels_tri_dep[i]
+        valeur_i = valeur_tri[2][i]
+        fig.add_trace(go.Bar(x=trimestre, y=valeur_i,
+                             name=departement[i] + " (" + str(int(effectif[i])) + ")"
+                             , marker=dict(color = couleurs[i])))
 
     # Personnaliser l'apparence du graphique
     fig.update_layout(title='Ressources d\'état, vision trimestrielle', yaxis_title=y_axis_tri[2])
@@ -240,7 +254,8 @@ def fig_daf_8():
         labels_i = labels_tri[i]
         valeur_i = valeur_tri[3][i]
         fig.add_trace(go.Bar(x=labels_i, y=valeur_i,
-                              name=labels_annuel[i].replace('Année', '') + " (" + str(int(effectif[i])) + ")"), row=1,
+                              name=labels_annuel[i].replace('Année', '') + " (" + str(int(effectif[i])) + ")"
+                             ,marker=dict(color = 4*[couleurs[i]])), row=1,
                        col=i + 1)
 
     # Personnaliser l'apparence du graphique
@@ -250,13 +265,15 @@ def fig_daf_8():
 
 def fig_daf_9():
     # Création d'une figure avec 6 sous-figure pour y placer des histogrammes
-    fig = subplt.make_subplots(rows=1, cols=4, shared_yaxes=True, horizontal_spacing=0.05)
+    fig = go.Figure()
 
     # Ajout des histogrammes dans chacune des sous-figures
-    for i in range(4):
-        labels_i = labels_tri_dep[i]
-        valeur_i = valeur_tri_dep[3][i]
-        fig.add_trace(go.Bar(x=labels_i, y=valeur_i, name="Trimestre " + str(i + 1)), row=1, col=i + 1)
+    for i in range(6):
+        #labels_i = labels_tri_dep[i]
+        valeur_i = valeur_tri[3][i]
+        fig.add_trace(go.Bar(x=trimestre, y=valeur_i, name= departement[i] + " (" + str(int(effectif[i])) + ")"
+                             , marker=dict(color = couleurs[i])))
+
 
     # Personnaliser l'apparence du graphique
     fig.update_layout(title='Total des dépenses hors permanents et vacataires, vision trimestrielle', yaxis_title=y_axis_tri[3])

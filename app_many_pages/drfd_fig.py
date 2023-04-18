@@ -4,7 +4,8 @@ import plotly.express as px
 import plotly.graph_objects as go
 import random
 
-
+#Import des couleurs
+couleurs = config.colors_dept
 
 #Chemin du fichier excel défini dans config.py
 excel_path = config.excel_path
@@ -68,7 +69,8 @@ def fig_drfd_1() :
     i=0
     for col_name in df.columns[débutColonneData: FinColonneData + 1]:
         taille = str(int(effectif[i]))
-        fig.add_trace(go.Bar(x=[col_name  + " (" + taille + ")"], y=[df[col_name].iloc[0]], name=col_name))  #effectif du département entre parenthèse
+        fig.add_trace(go.Bar(x=[col_name  + " (" + taille + ")"], y=[df[col_name].iloc[0]], name=col_name,
+                             marker=dict(color = [couleurs[i]])))  #effectif du département entre parenthèse
         i+=1
 
     #Ajout d'un titre
@@ -86,7 +88,8 @@ def fig_drfd_2() :
     i=0
     for col_name in df.columns[débutColonneData: FinColonneData + 1]:
         taille = str(int(effectif[i]))
-        fig2.add_trace(go.Bar(x=[col_name  + " (" + taille + ")"], y=[df[col_name].iloc[1]], name=col_name))    #effectif du département entre parenthèse
+        fig2.add_trace(go.Bar(x=[col_name  + " (" + taille + ")"], y=[df[col_name].iloc[1]], name=col_name,
+                              marker=dict(color = [couleurs[i]])))    #effectif du département entre parenthèse
         i+=1
 
     #Ajout d'un titre
