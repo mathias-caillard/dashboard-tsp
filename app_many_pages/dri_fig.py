@@ -84,11 +84,15 @@ def fig_dri_3():
     return fig3
 
 valeur2 = valeur[2].copy()
-labels2=labels.copy()
+valeur2_sim = []
+labels2=[]
 # Ajout de valeur simulées
-for j in range(5, 17):
-    labels2.append("ECOLE T" + str(j))
-    valeur2.append(valeur2[i % 4] + rd.randint(-5, 5))
+for i in range(2020, 2024):
+    for j in range(4):
+        labels2.append("Année " + str(i) + " T" + str(j+1))
+        if i!=2023:
+            valeur2_sim.append(valeur2[j] + rd.randint(-5, 5))
+valeur2 = valeur2_sim + valeur2
 
 def fig_dri_2():
 
