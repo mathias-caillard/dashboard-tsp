@@ -4,6 +4,10 @@ import sys
 import dash_bootstrap_components as dbc
 from dash_bootstrap_templates import load_figure_template
 from config import chemin_absolu_rep_parent
+from datetime import datetime, timedelta, date
+import dash_mantine_components as dmc
+from dash import Input, Output, html, callback
+from dash.exceptions import PreventUpdate
 
 
 
@@ -27,9 +31,47 @@ offcanvas = html.Div(
             is_open=False,
             backdrop=False,
             scrollable=True,
-            style = {"marginTop" : "60px"}
+            close_button=False,
+            style = {"marginTop" : "60px"},
+            children = [
+                dbc.Switch(
+                    id="COP-switch",
+                    label="Objectifs COP",
+                    value=False,
+                ),
+                dbc.Switch(
+                    id="percentile25-switch",
+                    label="25ème de percentile",
+                    value=False,
+                ),
+                dbc.Switch(
+                    id="médiane-switch",
+                    label="médiane",
+                    value=False,
+                ),
+                dbc.Switch(
+                    id="percentile75-switch",
+                    label="75ème de percentile",
+                    value=False,
+                ),
+
+                html.Hr(style={'borderTop': '2px solid #000000'}),
+
+                dmc.DateRangePicker(
+                    id="date-range-picker",
+                    label="Plage temporelle",
+                    description="En construction",
+                    minDate=date(2010, 1, 1),
+                    maxDate = date(2025,1,1),
+                    value=[datetime.now().date() - timedelta(days=365), datetime.now().date()],
+                    style={"width": 330},
+                    inputFormat = "DD/MM/YYYY",
         ),
-    ]
+                dmc.Space(h=10),
+                dmc.Text(id="selected-date-date-range-picker"),      
+            ],
+        ),
+    ],
 )
 
 
@@ -111,6 +153,16 @@ id = "output-container-"
 
 
 
+@app.callback(
+    Output('output-container-', 'style'),
+    Input('open-offcanvas', 'n_clicks'),
+    [State("offcanvas", "is_open")],
+)
+def update_margin(n1, is_open):
+    if not is_open and n1 != 0: 
+        return {'margin-left': "25rem", 'marginTop': '60px'}
+    return {'margin-left': "0px", 'marginTop': '60px'}
+
 
 @callback(
     Output("offcanvas", "is_open"),
@@ -121,19 +173,6 @@ def toggle_offcanvas(n1, is_open):
     if n1:
         return not is_open
     return is_open
-
-
-@app.callback(
-    Output('output-container-', 'style'),
-    Input('open-offcanvas', 'n_clicks'),
-    [State("offcanvas", "is_open")],
-)
-def update_margin(n1, is_open):
-    if n1 % 2 == 1 : 
-        return {'margin-left': "25rem", 'marginTop': '60px'}
-    return {'margin-left': "0px", 'marginTop': '60px'}
-
-
 
 
 
