@@ -16,7 +16,7 @@ app = Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.BOOTSTRAP]
 load_figure_template("bootstrap")
 app._favicon = "favicon.ico"
 
-app.layout = dbc.Container([
+app.layout = dbc.Loading([dbc.Container([
 	
         dbc.NavbarSimple(
             children=[
@@ -72,15 +72,15 @@ app.layout = dbc.Container([
 	    
 
 	dash.page_container,
-	html.Div([
-        dcc.Link('Remonter la page', href='#top')
-    ], style={'position': 'fixed', 'bottom': '20px', 'right': '20px'})
 	
 
 ],
 style={'marginTop': '60px'},    #Contenu des pages sous la barre de navigation (et pas caché derrière)
 fluid = True,
 )
+])
+
+
 
 #for page in dash.page_registry.values():
     #print(page['relative_path'])

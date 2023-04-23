@@ -80,7 +80,7 @@ def fig_dri_3():
         fig3.add_trace(go.Bar(x=labels, y=valeur[i], name=y_axis2[i]))
 
     # Ajout d'un titre
-    fig3.update_layout(title="Chiffres sur l'international à Télécom Sudparis")
+    fig3.update_layout(title="Effectifs sur l'international à Télécom Sudparis")
     return fig3
 
 valeur2 = valeur[2].copy()
@@ -96,11 +96,13 @@ valeur2 = valeur2_sim + valeur2
 
 def fig_dri_2():
 
-    fig2  = go.Figure(data=[go.Bar(x=labels2, y=valeur2)])
+    #fig2  = go.Figure(data=[go.Bar(x=labels2, y=valeur2)])
+    fig2 = px.bar(x=labels2, y=valeur2, color=valeur2)
 
     #Ajout d'un titre
-    fig2.update_layout(title = "Evolution dans le temps du nombre d'étudiants étrangers à Télécom Sudparis")
+    fig2.update_layout(title = "Evolution temporelle du nombre d'étudiants étrangers à Télécom Sudparis")
     return fig2
+
 
 def fig_dri_4():
     fig4 = go.Figure()
@@ -108,5 +110,5 @@ def fig_dri_4():
         valeur2_i=valeur2[4*i: 4*(i+1)]
         fig4.add_trace(go.Scatter(x=labels, y=valeur2_i, name= "Année 202" + str(3+i)))
 
-    fig4.update_layout(title="Evolution dans le temps du nombre d'étudiants étrangers à Télécom Sudparis")
+    fig4.update_layout(title="Evolution temporelle du nombre d'étudiants étrangers à Télécom Sudparis")
     return fig4
