@@ -72,6 +72,9 @@ app.layout = dbc.Container([
 	    
 
 	dash.page_container,
+	html.Div([
+        dcc.Link('Back to top', href='#top')
+    ], style={'position': 'fixed', 'bottom': '20px', 'right': '20px'})
 	
 
 ],
