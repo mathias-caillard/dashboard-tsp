@@ -25,13 +25,14 @@ dash.register_page(
 layout = html.Div(children=[
     html.H1(children='Bienvenue sur la page concernant la Direction des relations internationales'),
 
-    dcc.Graph(
-        id='example-graph',
-        figure=fig_dri_1(),
-        config = {'displaylogo': False}
-    ),
+    #dcc.Graph(
+    #    id='example-graph',
+    #    figure=fig_dri_1(),
+    #    config = {'displaylogo': False}
+    #),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+    #html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+    #graphe redondant
 
     dcc.Graph(
         id='example-graph3',
