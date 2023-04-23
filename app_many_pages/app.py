@@ -77,6 +77,19 @@ offcanvas = html.Div(
 
                 html.Hr(style={'borderTop': '2px solid #000000'}),
 
+                dbc.Switch(
+                    id="école-switch",
+                    label="indicateur périmmètre école",
+                    value=False,
+                ),
+                dbc.Switch(
+                    id="dept-switch",
+                    label="indicateur périmètre départemental",
+                    value=False,
+                ),
+                
+                html.Hr(style={'borderTop': '2px solid #000000'}),
+
                 dmc.DateRangePicker(
                     id="date-range-picker",
                     label="Plage temporelle",
@@ -87,8 +100,6 @@ offcanvas = html.Div(
                     style={"width": 330},
                     inputFormat = "DD/MM/YYYY",
         ),
-                dmc.Space(h=10),
-                dmc.Text(id="selected-date-date-range-picker"),      
             ],
         ),
     ],
