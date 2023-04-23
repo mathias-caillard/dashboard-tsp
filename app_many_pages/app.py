@@ -1,6 +1,5 @@
-from dash import Dash, html, dcc
+from dash import Dash, html, dcc, Output, Input, callback, State
 import dash
-import os
 import sys
 import dash_bootstrap_components as dbc
 from dash_bootstrap_templates import load_figure_template
@@ -16,10 +15,35 @@ app = Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.BOOTSTRAP]
 load_figure_template("bootstrap")
 app._favicon = "favicon.ico"
 
+
+
+
+
+offcanvas = html.Div(
+    [
+        dbc.Offcanvas(
+            id="offcanvas",
+            title="Options",
+            is_open=False,
+            backdrop=False,
+            scrollable=True,
+            style = {"marginTop" : "60px"}
+        ),
+    ]
+)
+
+
+
+
 app.layout = dbc.Container([
+     
+
 	
         dbc.NavbarSimple(
             children=[
+     
+
+             dbc.Button("Options", id="open-offcanvas", n_clicks=0, color = "secondary", style = {"margin-right" : "15rem"}),
 	
 
         
@@ -74,16 +98,43 @@ app.layout = dbc.Container([
 	dash.page_container,
 	html.Div([
         dcc.Link('Remonter la page', href='#top')
-    ], style={'position': 'fixed', 'bottom': '20px', 'right': '20px'})
+    ], style={'position': 'fixed', 'bottom': '20px', 'right': '20px'}),
+    offcanvas
+
 	
 
 ],
 style={'marginTop': '60px'},    #Contenu des pages sous la barre de navigation (et pas caché derrière)
 fluid = True,
+id = "output-container-"
 )
 
-#for page in dash.page_registry.values():
-    #print(page['relative_path'])
+
+
+
+@callback(
+    Output("offcanvas", "is_open"),
+    Input("open-offcanvas", "n_clicks"),
+    [State("offcanvas", "is_open")],
+)
+def toggle_offcanvas(n1, is_open):
+    if n1:
+        return not is_open
+    return is_open
+
+
+@app.callback(
+    Output('output-container-', 'style'),
+    Input('open-offcanvas', 'n_clicks'),
+    [State("offcanvas", "is_open")],
+)
+def update_margin(n1, is_open):
+    if n1 % 2 == 1 : 
+        return {'margin-left': "25rem", 'marginTop': '60px'}
+    return {'margin-left': "0px", 'marginTop': '60px'}
+
+
+
 
 
 if __name__ == '__main__':
@@ -91,14 +142,3 @@ if __name__ == '__main__':
 
 
 
-"""dbc.NavItem(dbc.NavLink("Page 1", href="#")),
-                dbc.DropdownMenu(
-                    children=[
-                        dbc.DropdownMenuItem("Plus de pages", header=True),
-                        dbc.DropdownMenuItem("Page 2", href="#"),
-                        dbc.DropdownMenuItem("Page 3", href="#"),
-                    ],
-                    nav=True,
-                    in_navbar=True,
-                    label="...",
-                ),"""

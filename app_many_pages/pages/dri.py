@@ -80,8 +80,8 @@ def update_graph(selected_years):
     filtered_data = valeur_evolution[4*(selected_years[0] - min(annee)) : 4*(selected_years[1] - min(annee) + 1)]
     filtered_label = label_evolution[4*(selected_years[0] - min(annee)) : 4*(selected_years[1] - min(annee) + 1)]
     # Utiliser les données filtrées pour mettre à jour le graphe en bâton
-    fig2 = go.Figure(data=[go.Bar(x=filtered_label, y=filtered_data)])
+    fig2 = px.bar(x=filtered_label, y=filtered_data, color=filtered_data)
 
     # Ajout d'un titre
-    fig2.update_layout(title="Evolution dans le temps du nombre d'étudiants étrangers à Télécom Sudparis")
+    fig2.update_layout(title="Evolution temporelle du nombre d'étudiants étrangers à Télécom Sudparis")
     return fig2
