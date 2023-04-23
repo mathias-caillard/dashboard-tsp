@@ -36,9 +36,17 @@ offcanvas = html.Div(
             children = [
                 dbc.Switch(
                     id="COP-switch",
-                    label="Objectifs COP",
+                    label="Objectifs COP (IP Paris)",
                     value=False,
                 ),
+                dbc.Switch(
+                    id="IMT-switch",
+                    label="Objectifs IMT",
+                    value=False,
+                ),
+
+                html.Hr(style={'borderTop': '2px solid #000000'}),
+
                 dbc.Switch(
                     id="percentile25-switch",
                     label="25ème de percentile",
@@ -52,6 +60,18 @@ offcanvas = html.Div(
                 dbc.Switch(
                     id="percentile75-switch",
                     label="75ème de percentile",
+                    value=False,
+                ),
+                html.Hr(style={'borderTop': '2px solid #000000'}),
+
+                dbc.Switch(
+                    id="tri-switch",
+                    label="afficher indicateurs trimestriels",
+                    value=False,
+                ),
+                dbc.Switch(
+                    id="ann-switch",
+                    label="afficher indicateurs annuels",
                     value=False,
                 ),
 
