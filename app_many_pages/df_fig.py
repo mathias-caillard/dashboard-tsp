@@ -4,6 +4,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import effectifs
+import datetime as dt
 
 #Import des couleurs
 couleurs = config.colors_dept
@@ -14,48 +15,46 @@ excel_path = config.excel_path
 #afficher toutes les colonnes (dans le terminal) des dataframes issues des lectures des fichiers Excel
 pd.set_option('display.max_columns', None)
 
-#Pour construire le plot de df, j'ai essayé d'écrire du code le plus générique possible en utilisant le moins possible de "hardcoded values". Cela permettra de facilier la réutilisation du code
+
 ligneDesTitres = 0  #Numérotation comme dans les liste, matrices...
 nombreLignesData = 4    #Nombre de lignes de données
 sheetName = '2023-DF-Tri'   #Nom de la feuille
-débutColonneTrimestre = 4
-df = pd.read_excel(excel_path,sheet_name = sheetName, header = ligneDesTitres, nrows = nombreLignesData)
+
+df_raw_df = pd.read_excel(excel_path,sheet_name = sheetName, header = ligneDesTitres, nrows = nombreLignesData)
 
 
-#ajouter d'une colonne artificielle "trimestre" dans le dataframe facilitant la création du graphe associé
-valeurNouvelleColonne = []
-for i in range(débutColonneTrimestre,débutColonneTrimestre + 4) :
-    valeurNouvelleColonne.append(df.columns[i])
-df["trimestre"] = valeurNouvelleColonne
+df_melt = df_raw_df.melt(id_vars=['REF', 'Indicateur', 'Période', 'Périmètre'],
+                       value_vars=['Ecole T1', 'Ecole T2', 'Ecole T3', 'Ecole T4'],
+                       var_name='Trimestre', value_name='Nombre')
+    
+# Create a dictionary with trimesters as keys and start dates as values
+trimester_dates = {
+        "Ecole T1": pd.to_datetime("2022-01-01"),
+        "Ecole T2": pd.to_datetime("2022-04-01"),
+        "Ecole T3": pd.to_datetime("2022-07-01"),
+        "Ecole T4": pd.to_datetime("2022-10-01"),
+    }
 
+# Use map() to add a new "Date" column based on the values in the trimester_dates dictionary
+df_melt["Date"] = df_melt["Trimestre"].map(trimester_dates)
+df_melt["Date"] = pd.to_datetime(df_melt["Date"])
 
+def get_df_melt_df() :
+    return df_melt
 
-#ajout de nouvelles colonnes dans le dataframe pour chaque type d'étudiant.
-ligne = 0
-for indicateur in df.Indicateur :
-    valeurPourIndicateur = []
-    for i in range(0, nombreLignesData) :
-        valeurPourIndicateur.append(df.iloc[ligne][df["trimestre"]][i])
-    df[indicateur] = valeurPourIndicateur
-    ligne += 1
+def get_df_raw_df() :
+    return df_raw_df
 
-#définition de l'axe des ordnnées
-y_axis = []
-for indicateur in df.Indicateur :
-    y_axis.append(indicateur)
-
-effectif = effectifs.effectif
-
-def fig_df_1() :
-
-
-    #création de la figure
-    fig = px.bar(df, x = "trimestre", y = y_axis)
-
-    #Ajout d'un titre
-    fig.update_layout(title = "Nombre d'étudiants à Télécom Sudparis")
+def fig_df_1(df_arg) :
+    fig = px.bar(df_arg, x='Trimestre', y='Nombre', color='Indicateur',
+                labels={'Trimestre': 'Trimestre', 'Nombre': 'Nombre'},
+                title="Nombre d'étudiants à Télécom Sudparis")
 
     return fig
+
+
+
+
 
 
 #Pour construire le plot de df, j'ai essayé d'écrire du code le plus générique possible en utilisant le moins possible de "hardcoded values". Cela permettra de facilier la réutilisation du code
@@ -77,8 +76,13 @@ for indicateur in df2.Indicateur :
 valeur_annuel = []
 for i in range(débutColonneData, finColonneData):
     valeur_annuel.append(df2.iloc[0, i])
+
+
+
+
 def fig_df_2():
     fig = go.Figure()
+    effectif = effectifs.effectif
 
     # Ajouter chaque bâton à la figure
     i = 0

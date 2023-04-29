@@ -1,5 +1,5 @@
 import dash
-from dash import html, dcc
+from dash import html, dcc, dash_table
 from app_many_pages.df_fig import *
 
 
@@ -18,13 +18,16 @@ layout = html.Div(children=[
     html.H1(children='Bienvenue sur la page concernant la Direction des formations'),
 
     dcc.Graph(
-        id='example-graph1',
-        figure=fig_df_1(),
+        id='graph1_df',
+        #figure=fig_df_1(get_df_raw_df()),
         config = {'displaylogo': False}
 
     ),
 
     html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    html.H1(id="test_message"),
+
 
     dcc.Graph(
         id='example-graph2',

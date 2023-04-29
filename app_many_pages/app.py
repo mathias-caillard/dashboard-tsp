@@ -1,4 +1,4 @@
-from dash import Dash, html, dcc, Output, Input, callback, State
+from dash import Dash, html, dcc, Output, Input, callback, State, dash_table
 import dash
 import sys
 import dash_bootstrap_components as dbc
@@ -6,8 +6,9 @@ from dash_bootstrap_templates import load_figure_template
 from config import chemin_absolu_rep_parent
 from datetime import datetime, timedelta, date
 import dash_mantine_components as dmc
-from dash import Input, Output, html, callback
 from dash.exceptions import PreventUpdate
+import pandas as pd
+from app_many_pages.df_fig import *
 
 
 
@@ -34,6 +35,20 @@ offcanvas = html.Div(
             close_button=False,
             style = {"marginTop" : "60px"},
             children = [
+     
+                    dmc.DateRangePicker(
+                    id="date-range-picker",
+                    label="Plage temporelle",
+                    description="En construction",
+                    minDate=date(2010, 1, 1),
+                    maxDate = date(2025,1,1),
+                    value=[datetime.now().date() - timedelta(days=5), datetime.now().date()],
+                    style={"width": 330},
+                    inputFormat = "DD/MM/YYYY",
+        ),
+
+                html.Hr(style={'borderTop': '2px solid #000000'}),
+
                 dbc.Switch(
                     id="COP-switch",
                     label="Objectifs COP (IP Paris)",
@@ -89,22 +104,14 @@ offcanvas = html.Div(
                 ),
                 
                 html.Hr(style={'borderTop': '2px solid #000000'}),
+                
 
-                dmc.DateRangePicker(
-                    id="date-range-picker",
-                    label="Plage temporelle",
-                    description="En construction",
-                    minDate=date(2010, 1, 1),
-                    maxDate = date(2025,1,1),
-                    value=[datetime.now().date() - timedelta(days=365), datetime.now().date()],
-                    style={"width": 330},
-                    inputFormat = "DD/MM/YYYY",
-        ),
             ],
         ),
     ],
 )
-
+ 
+ 
 
 
 
@@ -195,7 +202,7 @@ def update_margin(n1, is_open):
     return {'margin-left': "0px", 'marginTop': '60px'}
 
 
-@callback(
+@app.callback(
     Output("offcanvas", "is_open"),
     Input("open-offcanvas", "n_clicks"),
     [State("offcanvas", "is_open")],
@@ -204,6 +211,41 @@ def toggle_offcanvas(n1, is_open):
     if n1:
         return not is_open
     return is_open
+
+
+
+
+
+# Define the callback to update the bar chart when the date range is changed
+@app.callback(
+    Output("graph1_df", "figure"),
+    Input("date-range-picker", "value"),
+)
+def update_bar_chart(value):
+    # Convert the start_date and end_date strings to pandas Timestamps
+    start_date = value[0]
+    end_date = value[1]
+
+    start_date = pd.to_datetime(start_date)
+    end_date = pd.to_datetime(end_date)
+    df_melt = get_df_melt_df()
+
+    # Filter the dataframe to include only rows where the date is within the selected range
+    filtered_df = df_melt.loc[(df_melt["Date"] >= start_date) & (df_melt["Date"] <= end_date)]
+    
+    # Create and return the bar chart
+    print(filtered_df, flush=True)
+    fig = fig_df_1(filtered_df)
+    return fig
+
+
+
+@app.callback(
+    Output("test_message", "children"),
+    Input("date-range-picker", "value"),
+)
+def test(dates) :
+    return "   -   ".join(dates)
 
 
 
