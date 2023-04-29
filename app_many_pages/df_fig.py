@@ -48,7 +48,7 @@ def get_df_raw_df() :
 def fig_df_1(df_arg) :
     fig = px.bar(df_arg, x='Trimestre', y='Nombre', color='Indicateur',
                 labels={'Trimestre': 'Trimestres', 'Nombre':'Nombre'},
-                 hover_data={"Date": '|%d/%m/%Y'},
+                #hover_data={"Date": '|%d/%m/%Y'},
                 title="Nombre d'étudiants à Télécom Sudparis")
 
     dates = df_arg['Date'].tolist()

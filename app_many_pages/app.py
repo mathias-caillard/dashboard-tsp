@@ -39,7 +39,6 @@ offcanvas = html.Div(
                     dmc.DateRangePicker(
                     id="date-range-picker",
                     label="Plage temporelle",
-                    description="En construction",
                     minDate=date(2010, 1, 1),
                     maxDate = date(2025,1,1),
                     value=[datetime.now().date() - timedelta(days=365*2), datetime.now().date()],
@@ -102,8 +101,6 @@ offcanvas = html.Div(
                     label="indicateur périmètre départemental",
                     value=False,
                 ),
-                
-                html.Hr(style={'borderTop': '2px solid #000000'}),
                 
 
             ],
