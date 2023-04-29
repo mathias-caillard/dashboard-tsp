@@ -17,6 +17,8 @@ dash.register_page(
 layout = html.Div(children=[
     html.H1(children='Bienvenue sur la page concernant la Direction des formations'),
 
+    html.H2(id="message_date"),
+
     dcc.Graph(
         id='graph1_df',
         #figure=fig_df_1(get_df_raw_df()),
@@ -26,7 +28,7 @@ layout = html.Div(children=[
 
     html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
 
-    html.H1(id="test_message"),
+
 
 
     dcc.Graph(

@@ -42,7 +42,7 @@ offcanvas = html.Div(
                     description="En construction",
                     minDate=date(2010, 1, 1),
                     maxDate = date(2025,1,1),
-                    value=[datetime.now().date() - timedelta(days=5), datetime.now().date()],
+                    value=[datetime.now().date() - timedelta(days=365*2), datetime.now().date()],
                     style={"width": 330},
                     inputFormat = "DD/MM/YYYY",
         ),
@@ -216,6 +216,9 @@ def toggle_offcanvas(n1, is_open):
 
 
 
+
+
+
 # Define the callback to update the bar chart when the date range is changed
 @app.callback(
     Output("graph1_df", "figure"),
@@ -241,11 +244,33 @@ def update_bar_chart(value):
 
 
 @app.callback(
-    Output("test_message", "children"),
+    Output("message_date", "children"),
     Input("date-range-picker", "value"),
 )
 def test(dates) :
-    return "   -   ".join(dates)
+    prefixe = "intervalle dates : "
+    # Input string in yyyy-mm-dd format
+    input_str1 = dates[0]
+
+    # Convert to datetime object
+    dt_obj = datetime.strptime(input_str1, '%Y-%m-%d')
+
+    # Convert back to string in dd/mm/yyyy format
+    output_str1 = dt_obj.strftime('%d/%m/%Y')
+
+        # Input string in yyyy-mm-dd format
+    input_str2 = dates[1]
+
+    # Convert to datetime object
+    dt_obj = datetime.strptime(input_str2, '%Y-%m-%d')
+
+    # Convert back to string in dd/mm/yyyy format
+    output_str2 = dt_obj.strftime('%d/%m/%Y')
+
+    datesModified = [output_str1, output_str2]
+
+
+    return prefixe + "   -   ".join(datesModified)
 
 
 

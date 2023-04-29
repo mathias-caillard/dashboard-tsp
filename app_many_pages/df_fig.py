@@ -47,8 +47,41 @@ def get_df_raw_df() :
 
 def fig_df_1(df_arg) :
     fig = px.bar(df_arg, x='Trimestre', y='Nombre', color='Indicateur',
-                labels={'Trimestre': 'Trimestre', 'Nombre': 'Nombre'},
+                labels={'Trimestre': 'Trimestres', 'Nombre':'Nombre'},
+                 hover_data={"Date": '|%d/%m/%Y'},
                 title="Nombre d'étudiants à Télécom Sudparis")
+
+    dates = df_arg['Date'].tolist()
+    trimestres = df_arg['Trimestre'].tolist()
+
+    #Suppression doublons
+    new_list = [] 
+    for i in dates : 
+        if i not in new_list: 
+            new_list.append(i) 
+    dates = new_list
+
+    new_list = [] 
+    for i in trimestres : 
+        if i not in new_list: 
+            new_list.append(i) 
+    trimestres = new_list
+
+    new_dates = []
+    for date in dates : 
+        date = date.strftime('%d/%m/%Y')
+        new_dates.append(date)
+    
+    dates = new_dates
+        
+    print(trimestres, flush=True)
+
+    final = []
+    for i in range(len(trimestres)) :
+        final.append(trimestres[i] + " - " + dates[i])
+
+    fig.update_xaxes(tickvals=[i for i in range(len(final))], ticktext=final)
+
 
     return fig
 
