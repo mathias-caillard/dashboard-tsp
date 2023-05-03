@@ -140,8 +140,8 @@ categories = [
 
 dash.register_page(
     __name__,
-    title = "Choix libre des indicateurs",
-    name = "Choix libre des indicateurs",
+    title = "Choix libre",
+    name = "Choix libre",
     order=9,
 
 )

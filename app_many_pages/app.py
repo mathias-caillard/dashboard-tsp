@@ -120,7 +120,7 @@ app.layout = dbc.Container([
             children=[
      
 
-             dbc.Button("Options", id="open-offcanvas", n_clicks=0, color = "secondary", style = {"margin-right" : "15rem"}),
+             dbc.Button("Options", id="open-offcanvas", n_clicks=0, color = "secondary", style = {"margin-right" : "4rem"}),
 	
 
         
@@ -138,7 +138,7 @@ app.layout = dbc.Container([
             if not 'departements' in page['relative_path'] and not 'Accueil' in page['name']  # Filtrer les pages du dossier "pages" qui ne sont pas des departements, et la page accueil (qui est remplacé par le bouton tout à gauche)
 	    
         ],
-        className="d-flex"
+        className="d-flex me-auto justify-content-me-end"
     ),
             #Menu déroulant pour les departements
 
@@ -152,6 +152,7 @@ app.layout = dbc.Container([
                 in_navbar=True,
                 label="Départements",  # Texte du bouton de menu déroulant
                 color="dark",
+                className="ms-auto"
 
             ),
 	    
