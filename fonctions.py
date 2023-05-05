@@ -27,3 +27,10 @@ def dfGenIndTri(ligneDesTitres, nombreLignesData, sheetName, débutColonneTrimes
 
 
     return df
+
+
+def concatenate(list_of_list):
+    list=[]
+    for i in range(len(list_of_list)):
+        list+=list_of_list[i]
+    return list

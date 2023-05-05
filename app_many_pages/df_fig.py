@@ -4,6 +4,8 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import effectifs
+import data
+import fonctions
 import datetime as dt
 
 #Import des couleurs
@@ -15,6 +17,7 @@ excel_path = config.excel_path
 #afficher toutes les colonnes (dans le terminal) des dataframes issues des lectures des fichiers Excel
 pd.set_option('display.max_columns', None)
 
+trimestre = ['T1', 'T2', 'T3', 'T4']
 
 ligneDesTitres = 0  #Numérotation comme dans les liste, matrices...
 nombreLignesData = 4    #Nombre de lignes de données
@@ -74,7 +77,7 @@ def fig_df_1(df_arg) :
     
     dates = new_dates
         
-    print(trimestres, flush=True)
+    #print(trimestres, flush=True)
 
     final = []
     for i in range(len(trimestres)) :
@@ -131,3 +134,48 @@ def fig_df_2():
 
     return fig
 
+
+def fig_old_df_1():
+    sheetName = data.sheet_names[0]
+    line = data.df_ligne[0]
+    titre = data.extract_titre(data.df_ligne)
+    annees = data.annees
+    tab = data.extract_data(sheetName, line)
+
+    donnee = []
+    for i, annee in enumerate(annees):
+        donnee.append(
+            go.Bar(
+                x=[str(annee) + ' - ' + trimestre[j] for j in range(4)],
+                y=tab[i],
+                name=str(annee),
+                width=0.8
+            )
+        )
+
+    fig = go.Figure(data=donnee)
+
+    # Ajout d'un titre
+    fig.update_layout(title="Total général des indicateurs en heures équivalentes de 2015 à 2019",
+                      xaxis_title="Années",
+                      yaxis_title=titre[0])
+                      #barmode="group")
+
+    return fig
+
+def fig_old_df_2():
+    sheetName = data.sheet_names[0]
+    line = data.df_ligne[0]
+    titre = data.extract_titre(data.df_ligne)
+    annees = data.annees
+    tab = data.extract_data(sheetName, line)
+
+    fig = go.Figure()
+    for i in range(len(annees)):
+
+        fig.add_trace(go.Scatter(x=trimestre, y=tab[i], name= "Année " + str(annees[i])))
+
+    fig.update_layout(title="Total général des indicateurs en heures équivalentes de 2015 à 2019",
+                      xaxis_title="Années",
+                      yaxis_title=titre[0])
+    return fig

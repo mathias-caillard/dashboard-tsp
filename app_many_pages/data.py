@@ -14,7 +14,7 @@ def quadri_to_tri(tab):
     l.append(0.25*tab[0] + 0.5*tab[1])
     l.append(0.5*tab[1] + 0.25*tab[2])
     l.append(0.75*tab[2])
-    l.append(sum(l))
+    #l.append(sum(l))
     return l
 
 sheet_names = ["Global", "artemis", "CITI", "EPH", "INF", "RST", "RS2M"]
@@ -22,7 +22,11 @@ annees = [2015, 2016, 2017, 2018, 2019]
 colonneDebutData = 3
 colonneFinData = 22
 colonneTitre = 0
-
+df_ligne = [10]     #Calcul bizarre
+daf_ligne = [24, 25, 27]
+dire_ligne = [19, 20, 26]
+drfd_ligne = [17, 18]
+drh_ligne = [22, 23]
 
 def extract_data(sheetName, ligneNumber):
     # Chemin du fichier excel défini dans config.py
@@ -50,4 +54,19 @@ def extract_data_all(ligneNumber):
         tab_sheet = extract_data(sheetName, ligneNumber)
         tab.append(tab_sheet)
     return tab
+
+def extract_titre(list_line):
+    # Chemin du fichier excel défini dans config.py
+    excel_path = config.excel_path2
+
+    # afficher toutes les colonnes (dans le terminal) des dataframes issues des lectures des fichiers Excel
+    pd.set_option('display.max_columns', None)
+
+    df = pd.read_excel(excel_path, sheet_name=sheet_names[0])
+
+    titles = []
+    for i in list_line:
+        titles.append(df.iloc[i-2, 0])
+    return titles
+
 
