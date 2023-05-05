@@ -13,8 +13,11 @@ chemin_absolu_rep_parent = os.path.abspath(rep_parent)
 
 #Chemin absolu des fichiers excels
 excel_path = os.path.join(chemin_absolu_rep_parent, 'assets\\Saisie-2023-INDICATEUR-DE-SUIVI-Ti-2.xlsx')
+excel_path2 = os.path.join(chemin_absolu_rep_parent, 'assets\\Historique-Indicateurs-Quadri.xlsx')
 
 
 #Couleurs pour les graphes
 colors_dept=['navy', 'olive', 'salmon', 'mediumvioletred', 'indigo', 'saddlebrown', 'red']
 colors_dir=['green', 'blue', 'purple', 'orange', 'black', 'maroon']
+
+
