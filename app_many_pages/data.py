@@ -28,6 +28,8 @@ dire_ligne = [19, 20, 26]
 drfd_ligne = [17, 18]
 drh_ligne = [22, 23]
 
+liste_lignes = df_ligne + daf_ligne + dire_ligne + drfd_ligne + drh_ligne
+
 def extract_data(sheetName, ligneNumber):
     # Chemin du fichier excel défini dans config.py
     excel_path = config.excel_path2
@@ -48,11 +50,11 @@ def extract_data(sheetName, ligneNumber):
         tab.append(tab_i)
     return tab
 
-def extract_data_all(ligneNumber):
+def extract_data_numerous(sheet_name, list_line):
     tab=[]
-    for sheetName in sheet_names:
-        tab_sheet = extract_data(sheetName, ligneNumber)
-        tab.append(tab_sheet)
+    for line in list_line:
+        tab_line = extract_data(sheet_name, line)
+        tab.append(tab_line)
     return tab
 
 def extract_titre(list_line):

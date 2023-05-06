@@ -134,29 +134,31 @@ def fig_df_2():
 
     return fig
 
+sheetName = data.sheet_names[0]
+line = data.df_ligne[0]
+titre = data.extract_titre(data.df_ligne)
+annees = data.annees
+data_old = data.extract_data(sheetName, line)
 
 def fig_old_df_1():
-    sheetName = data.sheet_names[0]
-    line = data.df_ligne[0]
-    titre = data.extract_titre(data.df_ligne)
-    annees = data.annees
-    tab = data.extract_data(sheetName, line)
+
 
     donnee = []
     for i, annee in enumerate(annees):
         donnee.append(
             go.Bar(
                 x=[str(annee) + ' - ' + trimestre[j] for j in range(4)],
-                y=tab[i],
+                y=data_old[i],
                 name=str(annee),
-                width=0.8
+                width=0.8,
+                marker=dict(color="blue")
             )
         )
 
     fig = go.Figure(data=donnee)
 
     # Ajout d'un titre
-    fig.update_layout(title="Total général des indicateurs en heures équivalentes de 2015 à 2019",
+    fig.update_layout(title="Total général des indicateurs en heures équivalentes de 2015 à 2019, graphique en bâton",
                       xaxis_title="Années",
                       yaxis_title=titre[0])
                       #barmode="group")
@@ -164,16 +166,10 @@ def fig_old_df_1():
     return fig
 
 def fig_old_df_2():
-    sheetName = data.sheet_names[0]
-    line = data.df_ligne[0]
-    titre = data.extract_titre(data.df_ligne)
-    annees = data.annees
-    tab = data.extract_data(sheetName, line)
-
     fig = go.Figure()
     for i in range(len(annees)):
 
-        fig.add_trace(go.Scatter(x=trimestre, y=tab[i], name= "Année " + str(annees[i])))
+        fig.add_trace(go.Scatter(x=trimestre, y=data_old[i], name="Année " + str(annees[i])))
 
     fig.update_layout(title="Total général des indicateurs en heures équivalentes de 2015 à 2019",
                       xaxis_title="Années",

@@ -88,8 +88,52 @@ layout = html.Div(children=[
         figure=fig_daf_9(),
         config = {'displaylogo': False}
     ),
-    html.Div(children='''
-        
-    '''),
 
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
+        id='old-graph1',
+        figure=fig_old_daf_1(),
+        config = {'displaylogo': False}
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
+        id='old-graph2',
+        figure=fig_old_daf_2(),
+        config = {'displaylogo': False}
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
+        id='old-graph3',
+        figure=fig_old_daf_3(),
+        config = {'displaylogo': False}
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
+        id='old-graph4',
+        figure=fig_old_daf_4(),
+        config = {'displaylogo': False}
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
+        id='old-graph5',
+        figure=fig_old_daf_5(),
+        config = {'displaylogo': False}
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
+        id='old-graph6',
+        figure=fig_old_daf_6(),
+        config = {'displaylogo': False}
+    ),
 ])

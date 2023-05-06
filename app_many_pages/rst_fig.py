@@ -5,6 +5,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from app_many_pages import config
 import random as rd
+import data
 
 from drh_fig import trimestre, valeur_tri,y_axis_tri
 from dire_fig import valeur_trim1, valeur_trim3, y_axis as y_axis_dire
@@ -63,4 +64,234 @@ def fig_rst_6():
 def fig_rst_7():
     fig = list_fig_rst[3]
     fig.update_layout(title='Le total des dépenses à RST')
+    return fig
+
+
+sheetName = data.sheet_names[6]
+list_line = data.liste_lignes
+titre = data.extract_titre(list_line)
+annees = data.annees
+data_old = data.extract_data_numerous(sheetName, list_line)
+
+list_old_fig_rst=[]
+for k in range(len(list_line)):
+    donnee = []
+    for i, annee in enumerate(annees):
+        donnee.append(
+            go.Bar(
+                x=[str(annee) + ' - ' + trimestre[j] for j in range(4)],
+                y=data_old[k][i],
+                name=str(annee),
+                width=0.8,
+                marker=dict(color="blue")
+            )
+        )
+    fig_baton = go.Figure(data=donnee)
+    list_old_fig_rst.append(fig_baton)
+
+    fig = go.Figure()
+    for i in range(len(annees)):
+        fig.add_trace(go.Scatter(x=trimestre, y=data_old[k][i], name="Année " + str(annees[i])))
+    list_old_fig_rst.append(fig)
+
+
+def fig_old_df_rst_1():
+    fig = list_old_fig_rst[0]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Total général des indicateurs en heures équivalentes à RST de 2015 à 2019, graphique en bâton",
+                      xaxis_title="Années",
+                      yaxis_title=titre[0])
+
+    return fig
+
+def fig_old_df_rst_2():
+    fig = list_old_fig_rst[1]
+    fig.update_layout(title="Total général des indicateurs en heures équivalentes à RST de 2015 à 2019",
+                      xaxis_title="Années",
+                      yaxis_title=titre[0])
+    return fig
+
+def fig_old_daf_rst_1():
+
+    fig = list_old_fig_rst[2]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Dépenses de vacataires à RST de 2015 à 2019, graphique en bâton",
+                      xaxis_title="Années",
+                      yaxis_title=titre[1])
+    # barmode="group")
+
+    return fig
+
+def fig_old_daf_rst_2():
+    fig = list_old_fig_rst[3]
+    fig.update_layout(title="Dépenses de vacataires à RST de 2015 à 2019",
+                      xaxis_title="Années",
+                      yaxis_title=titre[1])
+    return fig
+
+def fig_old_daf_rst_3():
+    fig = list_old_fig_rst[4]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Ressources propres totales à RST de 2015 à 2019, graphique en bâton",
+                      xaxis_title="Années",
+                      yaxis_title=titre[2])
+    # barmode="group")
+
+    return fig
+
+def fig_old_daf_rst_4():
+    fig = list_old_fig_rst[5]
+
+    fig.update_layout(title="Ressources propres totales à RST de 2015 à 2019",
+                      xaxis_title="Années",
+                      yaxis_title=titre[2])
+    return fig
+
+def fig_old_daf_rst_5():
+    fig = list_old_fig_rst[6]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Total des dépenses hors permanents et vacataires à RST de 2015 à 2019, graphique en bâton",
+                      xaxis_title="Années",
+                      yaxis_title=titre[3])
+    # barmode="group")
+
+    return fig
+
+def fig_old_daf_rst_6():
+    fig = list_old_fig_rst[7]
+
+    fig.update_layout(title="Total des dépenses hors permanents et vacataires à RST de 2015 à 2019",
+                      xaxis_title="Années",
+                      yaxis_title=titre[3])
+    return fig
+
+
+def fig_old_dire_rst_1():
+    fig = list_old_fig_rst[8]
+
+    # Ajout d'un titre
+    fig.update_layout(title="CA sur contrats de recherche à RST de 2015 à 2019, graphique en bâton",
+                      xaxis_title="Années",
+                      yaxis_title=titre[4])
+    return fig
+
+def fig_old_dire_rst_2():
+    fig = list_old_fig_rst[9]
+    fig.update_layout(title="CA sur contrats de recherche à RST de 2015 à 2019",
+                      xaxis_title="Années",
+                      yaxis_title=titre[4])
+    return fig
+
+def fig_old_dire_rst_3():
+    fig = list_old_fig_rst[10]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Brevets et logiciels déposés à RST de 2015 à 2019, graphique en bâton",
+                      xaxis_title="Années",
+                      yaxis_title=titre[5])
+    # barmode="group")
+
+    return fig
+
+def fig_old_dire_rst_4():
+    fig = list_old_fig_rst[11]
+
+    fig.update_layout(title="Brevets et logiciels déposés à RST de 2015 à 2019",
+                      xaxis_title="Années",
+                      yaxis_title=titre[5])
+    return fig
+
+def fig_old_dire_rst_5():
+    fig = list_old_fig_rst[12]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Contribution au financement de l\'école à RST de 2015 à 2019, graphique en bâton",
+                      xaxis_title="Années",
+                      yaxis_title=titre[6])
+    # barmode="group")
+
+    return fig
+
+def fig_old_dire_rst_6():
+    fig = list_old_fig_rst[13]
+
+    fig.update_layout(title="Contribution au financement de l\'école à RST de 2015 à 2019",
+                      xaxis_title="Années",
+                      yaxis_title=titre[6])
+    return fig
+
+def fig_old_drfd_rst_1():
+    fig = list_old_fig_rst[14]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Total des publications à RST de 2015 à 2019, graphique en bâton",
+                      xaxis_title="Années",
+                      yaxis_title=titre[7])
+
+    return fig
+
+def fig_old_drfd_rst_2():
+    fig = list_old_fig_rst[15]
+
+    fig.update_layout(title="Total des publications à RST de 2015 à 2019",
+                      xaxis_title="Années",
+                      yaxis_title=titre[7])
+    return fig
+
+def fig_old_drfd_rst_3():
+    fig = list_old_fig_rst[16]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Nombre de doctorants à RST de 2015 à 2019, graphique en bâton",
+                      xaxis_title="Années",
+                      yaxis_title=titre[8])
+    # barmode="group")
+
+    return fig
+
+def fig_old_drfd_rst_4():
+    fig = list_old_fig_rst[17]
+
+    fig.update_layout(title="Nombre de doctorants à RST de 2015 à 2019",
+                      xaxis_title="Années",
+                      yaxis_title=titre[8])
+    return fig
+
+def fig_old_drh_rst_1():
+    fig = list_old_fig_rst[18]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Permanents en ETPT à RST de 2015 à 2019, graphique en bâton",
+                      xaxis_title="Années",
+                      yaxis_title=titre[9])
+
+    return fig
+
+def fig_old_drh_rst_2():
+    fig = list_old_fig_rst[19]
+
+    fig.update_layout(title="Permanents en ETPT à RST de 2015 à 2019",
+                      xaxis_title="Années",
+                      yaxis_title=titre[9])
+    return fig
+
+def fig_old_drh_rst_3():
+    fig = list_old_fig_rst[20]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Non-permanents en ETPT à RST de 2015 à 2019, graphique en bâton",
+                      xaxis_title="Années",
+                      yaxis_title=titre[10])
+    return fig
+
+def fig_old_drh_rst_4():
+    fig = list_old_fig_rst[21]
+
+    fig.update_layout(title="Non-permanents en ETPT à RST de 2015 à 2019",
+                      xaxis_title="Années",
+                      yaxis_title=titre[10])
     return fig

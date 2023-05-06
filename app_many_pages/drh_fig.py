@@ -2,6 +2,7 @@
 import pandas as pd
 import plotly.graph_objects as go
 from app_many_pages import config
+import data
 
 
 #Import des couleurs
@@ -110,4 +111,83 @@ def fig_drh_4():
                                  , line=dict(color = couleurs_dept[i])))
 
     fig.update_layout(title='Evolution temporelle du nombre de non-permanents en ETPT', yaxis_title=y_axis_tri[0])
+    return fig
+
+
+sheetName = data.sheet_names[0]
+lines = data.drh_ligne
+titre = data.extract_titre(data.drh_ligne)
+annees = data.annees
+data_old_1 = data.extract_data(sheetName, lines[0])
+data_old_2 = data.extract_data(sheetName, lines[1])
+
+trimestre = ['T1', 'T2', 'T3', 'T4']
+
+
+def fig_old_drh_1():
+    donnee = []
+    for i, annee in enumerate(annees):
+        donnee.append(
+            go.Bar(
+                x=[str(annee) + ' - ' + trimestre[j] for j in range(4)],
+                y=data_old_1[i],
+                name=str(annee),
+                width=0.8,
+                marker=dict(color="blue")
+            )
+        )
+
+    fig = go.Figure(data=donnee)
+
+    # Ajout d'un titre
+    fig.update_layout(title="Permanents en ETPT de 2015 à 2019, graphique en bâton",
+                      xaxis_title="Années",
+                      yaxis_title=titre[0])
+    # barmode="group")
+
+    return fig
+
+def fig_old_drh_2():
+    fig = go.Figure()
+    for i in range(len(annees)):
+
+        fig.add_trace(go.Scatter(x=trimestre, y=data_old_1[i], name="Année " + str(annees[i])))
+
+    fig.update_layout(title="Permanents en ETPT de 2015 à 2019",
+                      xaxis_title="Années",
+                      yaxis_title=titre[0])
+    return fig
+
+def fig_old_drh_3():
+    donnee = []
+    for i, annee in enumerate(annees):
+        donnee.append(
+            go.Bar(
+                x=[str(annee) + ' - ' + trimestre[j] for j in range(4)],
+                y=data_old_2[i],
+                name=str(annee),
+                width=0.8,
+                marker=dict(color="blue")
+            )
+        )
+
+    fig = go.Figure(data=donnee)
+
+    # Ajout d'un titre
+    fig.update_layout(title="Non-permanents en ETPT de 2015 à 2019, graphique en bâton",
+                      xaxis_title="Années",
+                      yaxis_title=titre[1])
+    # barmode="group")
+
+    return fig
+
+def fig_old_drh_4():
+    fig = go.Figure()
+    for i in range(len(annees)):
+
+        fig.add_trace(go.Scatter(x=trimestre, y=data_old_2[i], name="Année " + str(annees[i])))
+
+    fig.update_layout(title="Non-permanents en ETPT de 2015 à 2019",
+                      xaxis_title="Années",
+                      yaxis_title=titre[1])
     return fig

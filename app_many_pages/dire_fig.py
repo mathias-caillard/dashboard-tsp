@@ -3,6 +3,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import plotly.subplots as subplt
+import data
 
 #Import des couleurs
 couleurs = config.colors_dept
@@ -129,3 +130,116 @@ def fig_dire_4():
     # Personnaliser l'apparence du graphique
     fig4.update_layout(title='Contribution au financement de l\'école')
     return fig4
+
+
+
+sheetName = data.sheet_names[0]
+lines = data.dire_ligne
+titre = data.extract_titre(data.dire_ligne)
+annees = data.annees
+data_old_1 = data.extract_data(sheetName, lines[0])
+data_old_2 = data.extract_data(sheetName, lines[1])
+data_old_3 = data.extract_data(sheetName, lines[2])
+
+
+def fig_old_dire_1():
+    donnee = []
+    for i, annee in enumerate(annees):
+        donnee.append(
+            go.Bar(
+                x=[str(annee) + ' - ' + trimestre[j] for j in range(4)],
+                y=data_old_1[i],
+                name=str(annee),
+                width=0.8,
+                marker=dict(color="blue")
+            )
+        )
+
+    fig = go.Figure(data=donnee)
+
+    # Ajout d'un titre
+    fig.update_layout(title="CA sur contrats de recherche de 2015 à 2019, graphique en bâton",
+                      xaxis_title="Années",
+                      yaxis_title=titre[0])
+    # barmode="group")
+
+    return fig
+
+def fig_old_dire_2():
+    fig = go.Figure()
+    for i in range(len(annees)):
+
+        fig.add_trace(go.Scatter(x=trimestre, y=data_old_1[i], name="Année " + str(annees[i])))
+
+    fig.update_layout(title="CA sur contrats de recherche de 2015 à 2019",
+                      xaxis_title="Années",
+                      yaxis_title=titre[0])
+    return fig
+
+def fig_old_dire_3():
+    donnee = []
+    for i, annee in enumerate(annees):
+        donnee.append(
+            go.Bar(
+                x=[str(annee) + ' - ' + trimestre[j] for j in range(4)],
+                y=data_old_2[i],
+                name=str(annee),
+                width=0.8,
+                marker=dict(color="blue")
+            )
+        )
+
+    fig = go.Figure(data=donnee)
+
+    # Ajout d'un titre
+    fig.update_layout(title="Brevets et logiciels déposés de 2015 à 2019, graphique en bâton",
+                      xaxis_title="Années",
+                      yaxis_title=titre[1])
+    # barmode="group")
+
+    return fig
+
+def fig_old_dire_4():
+    fig = go.Figure()
+    for i in range(len(annees)):
+
+        fig.add_trace(go.Scatter(x=trimestre, y=data_old_2[i], name="Année " + str(annees[i])))
+
+    fig.update_layout(title="Brevets et logiciels déposés de 2015 à 2019",
+                      xaxis_title="Années",
+                      yaxis_title=titre[1])
+    return fig
+
+def fig_old_dire_5():
+    donnee = []
+    for i, annee in enumerate(annees):
+        donnee.append(
+            go.Bar(
+                x=[str(annee) + ' - ' + trimestre[j] for j in range(4)],
+                y=data_old_3[i],
+                name=str(annee),
+                width=0.8,
+                marker=dict(color="blue")
+            )
+        )
+
+    fig = go.Figure(data=donnee)
+
+    # Ajout d'un titre
+    fig.update_layout(title="Contribution au financement de l\'école de 2015 à 2019, graphique en bâton",
+                      xaxis_title="Années",
+                      yaxis_title=titre[2])
+    # barmode="group")
+
+    return fig
+
+def fig_old_dire_6():
+    fig = go.Figure()
+    for i in range(len(annees)):
+
+        fig.add_trace(go.Scatter(x=trimestre, y=data_old_3[i], name="Année " + str(annees[i])))
+
+    fig.update_layout(title="Contribution au financement de l\'école de 2015 à 2019",
+                      xaxis_title="Années",
+                      yaxis_title=titre[2])
+    return fig

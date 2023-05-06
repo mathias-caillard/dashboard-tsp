@@ -46,6 +46,38 @@ layout = html.Div(children=[
         id='example-graph4',
         figure=fig_drh_4(),
         config = {'displaylogo': False}
-    )
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
+        id='old-graph1',
+        figure=fig_old_drh_1(),
+        config = {'displaylogo': False}
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
+        id='old-graph2',
+        figure=fig_old_drh_2(),
+        config = {'displaylogo': False}
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
+        id='old-graph3',
+        figure=fig_old_drh_3(),
+        config = {'displaylogo': False}
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
+        id='old-graph4',
+        figure=fig_old_drh_4(),
+        config = {'displaylogo': False}
+    ),
 
 ])

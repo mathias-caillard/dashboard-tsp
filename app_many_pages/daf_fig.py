@@ -4,6 +4,7 @@ import plotly.graph_objects as go
 import plotly.subplots as subplt
 from app_many_pages import config
 from app_many_pages import effectifs
+import data
 
 effectif = effectifs.effectif
 
@@ -278,4 +279,116 @@ def fig_daf_9():
     # Personnaliser l'apparence du graphique
     fig.update_layout(title='Total des dépenses hors permanents et vacataires, vision trimestrielle', yaxis_title=y_axis_tri[3])
 
+    return fig
+
+
+sheetName = data.sheet_names[0]
+lines = data.daf_ligne
+titre = data.extract_titre(data.daf_ligne)
+annees = data.annees
+data_old_1 = data.extract_data(sheetName, lines[0])
+data_old_2 = data.extract_data(sheetName, lines[1])
+data_old_3 = data.extract_data(sheetName, lines[2])
+
+
+def fig_old_daf_1():
+    donnee = []
+    for i, annee in enumerate(annees):
+        donnee.append(
+            go.Bar(
+                x=[str(annee) + ' - ' + trimestre[j] for j in range(4)],
+                y=data_old_1[i],
+                name=str(annee),
+                width=0.8,
+                marker=dict(color="blue")
+            )
+        )
+
+    fig = go.Figure(data=donnee)
+
+    # Ajout d'un titre
+    fig.update_layout(title="Dépenses de vacataires de 2015 à 2019, graphique en bâton",
+                      xaxis_title="Années",
+                      yaxis_title=titre[0])
+    # barmode="group")
+
+    return fig
+
+def fig_old_daf_2():
+    fig = go.Figure()
+    for i in range(len(annees)):
+
+        fig.add_trace(go.Scatter(x=trimestre, y=data_old_1[i], name="Année " + str(annees[i])))
+
+    fig.update_layout(title="Dépenses de vacataires de 2015 à 2019",
+                      xaxis_title="Années",
+                      yaxis_title=titre[0])
+    return fig
+
+def fig_old_daf_3():
+    donnee = []
+    for i, annee in enumerate(annees):
+        donnee.append(
+            go.Bar(
+                x=[str(annee) + ' - ' + trimestre[j] for j in range(4)],
+                y=data_old_2[i],
+                name=str(annee),
+                width=0.8,
+                marker=dict(color="blue")
+            )
+        )
+
+    fig = go.Figure(data=donnee)
+
+    # Ajout d'un titre
+    fig.update_layout(title="Ressources propres totales de 2015 à 2019, graphique en bâton",
+                      xaxis_title="Années",
+                      yaxis_title=titre[1])
+    # barmode="group")
+
+    return fig
+
+def fig_old_daf_4():
+    fig = go.Figure()
+    for i in range(len(annees)):
+
+        fig.add_trace(go.Scatter(x=trimestre, y=data_old_2[i], name="Année " + str(annees[i])))
+
+    fig.update_layout(title="Ressources propres totales de 2015 à 2019",
+                      xaxis_title="Années",
+                      yaxis_title=titre[1])
+    return fig
+
+def fig_old_daf_5():
+    donnee = []
+    for i, annee in enumerate(annees):
+        donnee.append(
+            go.Bar(
+                x=[str(annee) + ' - ' + trimestre[j] for j in range(4)],
+                y=data_old_3[i],
+                name=str(annee),
+                width=0.8,
+                marker=dict(color="blue")
+            )
+        )
+
+    fig = go.Figure(data=donnee)
+
+    # Ajout d'un titre
+    fig.update_layout(title="Total des dépenses hors permanents et vacataires de 2015 à 2019, graphique en bâton",
+                      xaxis_title="Années",
+                      yaxis_title=titre[2])
+    # barmode="group")
+
+    return fig
+
+def fig_old_daf_6():
+    fig = go.Figure()
+    for i in range(len(annees)):
+
+        fig.add_trace(go.Scatter(x=trimestre, y=data_old_3[i], name="Année " + str(annees[i])))
+
+    fig.update_layout(title="Total des dépenses hors permanents et vacataires de 2015 à 2019",
+                      xaxis_title="Années",
+                      yaxis_title=titre[2])
     return fig
