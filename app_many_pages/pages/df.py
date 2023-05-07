@@ -21,7 +21,7 @@ layout = html.Div(children=[
 
     dcc.Graph(
         id='graph1_df',
-        #figure=fig_df_1(get_df_raw_df()),
+        figure=fig_df_1(),
         config = {'displaylogo': False}
 
     ),

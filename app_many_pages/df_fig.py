@@ -48,7 +48,9 @@ def get_df_melt_df() :
 def get_df_raw_df() :
     return df_raw_df
 
-def fig_df_1(df_arg) :
+
+
+def fig_df_1_update(df_arg) :
     fig = px.bar(df_arg, x='Trimestre', y='Nombre', color='Indicateur',
                 labels={'Trimestre': 'Trimestres', 'Nombre':'Nombre'},
                 #hover_data={"Date": '|%d/%m/%Y'},
@@ -88,7 +90,49 @@ def fig_df_1(df_arg) :
 
     return fig
 
+ligneDesTitres = 0  # Numérotation comme dans les liste, matrices...
+nombreLignesData = 4  # Nombre de lignes de données
+sheetName = '2023-DF-Tri'  # Nom de la feuille
+débutColonneTrimestre = 4
 
+df = pd.read_excel(excel_path, sheet_name=sheetName, header=ligneDesTitres, nrows=nombreLignesData)
+
+#ajouter d'une colonne artificielle "trimestre" dans le dataframe facilitant la création du graphe associé
+valeurNouvelleColonne = []
+for i in range(débutColonneTrimestre,débutColonneTrimestre + 4) :
+    valeurNouvelleColonne.append(df.columns[i])
+df["trimestre"] = valeurNouvelleColonne
+
+
+#ajout de nouvelles colonnes dans le dataframe pour chaque type d'étudiant.
+ligne = 0
+for indicateur in df.Indicateur :
+    valeurPourIndicateur = []
+    for i in range(0, nombreLignesData) :
+        valeurPourIndicateur.append(df.iloc[ligne][df["trimestre"]][i])
+    df[indicateur] = valeurPourIndicateur
+    ligne += 1
+
+
+#définition de l'axe des ordnnées
+y_axis = []
+for indicateur in df.Indicateur :
+    y_axis.append(indicateur)
+
+effectif = effectifs.effectif
+
+
+def fig_df_1():
+
+
+
+    # création de la figure
+    fig = px.bar(df, x="trimestre", y=y_axis)
+    fig.update_layout(title="Nombre d'étudiants à Télécom Sudparis")
+
+    return fig
+
+    return fig
 
 
 

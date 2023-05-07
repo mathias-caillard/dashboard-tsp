@@ -236,7 +236,7 @@ def update_bar_chart(value):
     
     # Create and return the bar chart
     print(filtered_df, flush=True)
-    fig = fig_df_1(filtered_df)
+    fig = fig_df_1_update(filtered_df)
     return fig
 
 
