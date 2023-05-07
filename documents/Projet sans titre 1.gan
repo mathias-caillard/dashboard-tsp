@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Cassiopée - JACQUET Marin, CAILLARD Mathias" company="" webLink="http://" view-date="2023-02-01" view-index="0" gantt-divider-location="733" resource-divider-location="300" version="3.2.3247" locale="fr_FR">
+<?xml version="1.0" encoding="UTF-8"?><project name="Cassiopée - JACQUET Marin, CAILLARD Mathias" company="" webLink="http://" view-date="2023-02-01" view-index="0" gantt-divider-location="718" resource-divider-location="300" version="3.2.3247" locale="fr_FR">
     <description/>
     <view zooming-state="default:8" id="gantt-chart">
-        <field id="tpd3" name="Nom" width="483" order="0"/>
-        <field id="tpd4" name="Date de début" width="114" order="1"/>
-        <field id="tpd5" name="Date de fin" width="120" order="2"/>
+        <field id="tpd3" name="Nom" width="473" order="0"/>
+        <field id="tpd4" name="Date de début" width="112" order="1"/>
+        <field id="tpd5" name="Date de fin" width="117" order="2"/>
         <option id="filter.completedTasks" value="false"/>
         <option id="color.recent">
             <![CDATA[#f4f4f4 #ff6666]]>
@@ -44,7 +44,6 @@
         <task id="6" name="création d'une application squelette multi-page en Dash" color="#8cb6ce" meeting="false" start="2023-02-14" duration="11" complete="100" thirdDate="2023-02-24" thirdDate-constraint="0" expand="true"/>
         <task id="7" name="Implémentation catégorie &quot;libre&quot; des indicateurs" color="#8cb6ce" meeting="false" start="2023-03-20" duration="6" complete="100" thirdDate="2023-02-17" thirdDate-constraint="0" expand="true"/>
         <task id="8" name="corrélation entre indicateurs à l'échelle d'un département" color="#8cb6ce" meeting="false" start="2023-03-27" duration="6" complete="0" thirdDate="2023-02-17" thirdDate-constraint="0" expand="true"/>
-        <task id="9" name="création de catégories d'utilisateurs (admin, simple utilisateur)" color="#8cb6ce" meeting="false" start="2023-04-03" duration="6" complete="0" thirdDate="2023-02-17" thirdDate-constraint="0" expand="true"/>
         <task id="10" name="amélioration de l'UX (icônes, nombre de clics nécessaire, …)" color="#8cb6ce" meeting="false" start="2023-04-25" duration="6" complete="50" thirdDate="2023-02-17" thirdDate-constraint="0" expand="true">
             <depend id="12" type="2" difference="0" hardness="Strong"/>
         </task>
