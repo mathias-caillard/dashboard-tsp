@@ -132,7 +132,7 @@ def fig_df_1():
 
     return fig
 
-    return fig
+
 
 
 
@@ -157,26 +157,34 @@ valeur_annuel = []
 for i in range(débutColonneData, finColonneData):
     valeur_annuel.append(df2.iloc[0, i])
 
+df2['Date'] = pd.to_datetime("2022-01-01")
+print(df2, flush = True)
 
 
+def get_df_DF_annuel():
+    return df2
 
-def fig_df_2():
+def fig_df_2_update(df_arg):
+
     fig = go.Figure()
-    effectif = effectifs.effectif
+    if df_arg.empty :
+        return fig
+    else : 
+        effectif = effectifs.effectif
 
-    # Ajouter chaque bâton à la figure
-    i = 0
-    for col_name in df2.columns[débutColonneData: finColonneData + 1]:
-        taille = str(int(effectif[i]))
-        fig.add_trace(go.Bar(x=[col_name + " (" + taille + ")"], y=[df2[col_name].iloc[0]],
-                             name=col_name, marker=dict(color = [couleurs[i]])))  # effectif du département entre parenthèse
-        i += 1
+        # Ajouter chaque bâton à la figure
+        i = 0
+        for col_name in df_arg.columns[débutColonneData: finColonneData + 1]:
+            taille = str(int(effectif[i]))
+            fig.add_trace(go.Bar(x=[col_name + " (" + taille + ")"], y=[df_arg[col_name].iloc[0]],
+                                name=col_name, marker=dict(color = [couleurs[i]])))  # effectif du département entre parenthèse
+            i += 1
 
-    # Ajout d'un titre
-    fig.update_layout(title="Nombre d\'UP produites par Télécom SudParis", xaxis_title='Départements',
-                      yaxis_title=y_axis_annuel[0])
+        # Ajout d'un titre
+        fig.update_layout(title="Nombre d\'UP produites par Télécom SudParis", xaxis_title='Départements',
+                        yaxis_title=y_axis_annuel[0])
 
-    return fig
+        return fig
 
 sheetName = data.sheet_names[0]
 line = data.df_ligne[0]
@@ -219,3 +227,5 @@ def fig_old_df_2():
                       xaxis_title="Années",
                       yaxis_title=titre[0])
     return fig
+
+
