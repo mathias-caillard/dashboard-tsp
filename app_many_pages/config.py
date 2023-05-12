@@ -21,3 +21,7 @@ colors_dept=['navy', 'olive', 'salmon', 'mediumvioletred', 'indigo', 'saddlebrow
 colors_dir=['green', 'blue', 'purple', 'orange', 'black', 'maroon']
 
 
+def get_colorscale() :
+    return 'Tealgrn'
+
+

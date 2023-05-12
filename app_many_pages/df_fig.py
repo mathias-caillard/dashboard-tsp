@@ -7,6 +7,7 @@ import effectifs
 import data
 import fonctions
 import datetime as dt
+from config import *
 
 #Import des couleurs
 couleurs = config.colors_dept
@@ -203,7 +204,8 @@ def fig_old_df_1():
                 y=data_old[i],
                 name=str(annee),
                 width=0.8,
-                marker=dict(color="blue")
+                #marker=dict(color=data_old[i], colorscale = [[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']])
+                marker=dict(color=data_old[i], colorscale = get_colorscale())
             )
         )
 

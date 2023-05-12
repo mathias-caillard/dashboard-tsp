@@ -1,4 +1,4 @@
-from dash import Dash, html, dcc, Output, Input, callback, State, dash_table
+from dash import Dash, html, dcc, Output, Input, State
 import dash
 import sys
 import dash_bootstrap_components as dbc
@@ -6,8 +6,6 @@ from dash_bootstrap_templates import load_figure_template
 from config import chemin_absolu_rep_parent
 from datetime import datetime, timedelta, date
 import dash_mantine_components as dmc
-from dash.exceptions import PreventUpdate
-import pandas as pd
 from app_many_pages.df_fig import *
 
 
