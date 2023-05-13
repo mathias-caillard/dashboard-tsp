@@ -16,7 +16,8 @@ dash.register_page(
     __name__,
     title = "DRI",
     name = "DRI",
-    order=7
+    order=7,
+    active= False
                    )
 
 

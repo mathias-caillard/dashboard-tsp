@@ -6,7 +6,8 @@ dash.register_page(
     __name__,
     title = "Comparaison départements",
     name = "Comparaison départements",
-    order=8
+    order=8,
+    active= False
                    )
 
 

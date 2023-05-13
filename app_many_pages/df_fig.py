@@ -159,7 +159,7 @@ for i in range(débutColonneData, finColonneData):
     valeur_annuel.append(df2.iloc[0, i])
 
 df2['Date'] = pd.to_datetime("2022-01-01")
-print(df2, flush = True)
+#print(df2, flush = True)
 
 
 def get_df_DF_annuel():
@@ -205,7 +205,7 @@ def fig_old_df_1():
                 name=str(annee),
                 width=0.8,
                 #marker=dict(color=data_old[i], colorscale = [[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']])
-                marker=dict(color=data_old[i], colorscale = get_colorscale())
+                #marker=dict(color=data_old[i], colorscale = get_colorscale())
             )
         )
 

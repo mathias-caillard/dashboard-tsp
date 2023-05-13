@@ -302,6 +302,7 @@ dash.register_page(
     title = "Choix libre",
     name = "Choix libre",
     order=9,
+    active= False
 
 )
 
@@ -374,7 +375,7 @@ def generate_graphs(value):
     graphs = {
         #DF
         "df_1": fig_df_1(),
-        "df_2": fig_df_2(),
+        "df_2": fig_df_2_update(get_df_DF_annuel()),
         "df_old_1": fig_old_df_1(),
         "df_old_2": fig_old_df_2(),
 

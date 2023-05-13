@@ -11,7 +11,8 @@ dash.register_page(
     __name__,
     title = "EPH",
     name = "EPH",
-    order=12
+    order=12,
+    active= False
                    )
 
 

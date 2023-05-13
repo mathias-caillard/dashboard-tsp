@@ -1,7 +1,9 @@
-from dash import Dash, html, dcc, Output, Input, State
+from dash import Dash, html, dcc, Output, Input, State, ALL
 import dash
 import sys
+
 import dash_bootstrap_components as dbc
+from dash.exceptions import PreventUpdate
 from dash_bootstrap_templates import load_figure_template
 from config import chemin_absolu_rep_parent
 from datetime import datetime, timedelta, date
@@ -18,7 +20,8 @@ app = Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.BOOTSTRAP]
 load_figure_template("bootstrap")
 app._favicon = "favicon.ico"
 
-
+# Définir une variable active_page initialement à la page d'accueil
+active_page = "/"
 
 
 
@@ -121,15 +124,16 @@ app.layout = dbc.Container([
              dbc.Button("Options", id="open-offcanvas", n_clicks=0, color = "secondary", style = {"margin-right" : "4rem"}),
 	
 
-        
-	
+
+
 
         html.Div(
         [
                 #Boutons pour les différentes pages
                 dbc.Button(
-                    f"{page['name']}", href=page["relative_path"], outline=False, color="dark", className="me-1 btn-sm",  #btn-sm rend les boutons un peu plus petits
-                    style = {'marginTop': '0px', 'flex': '1', 'height': '50px', 'display': 'flex', 'alignItems': 'center', 'justifyContent': 'center', 'whiteSpace': 'nowrap'}
+                    f"{page['name']}", href=page["relative_path"], outline=False, color="dark", className="me-1 btn-sm" + (" active" if page["active"] else ""),  #btn-sm rend les boutons un peu plus petits
+                    style = {'marginTop': '0px', 'flex': '1', 'height': '60px', 'display': 'flex', 'alignItems': 'center', 'justifyContent': 'center'},#, 'whiteSpace': 'nowrap'}
+                    id={'type': 'tab-button', 'index': page["relative_path"]}  # Ajoutez cette ligne pour identifier le bouton d'onglet
                 )
 
             for page in dash.page_registry.values()
@@ -138,6 +142,8 @@ app.layout = dbc.Container([
         ],
         className="d-flex me-auto justify-content-me-end"
     ),
+
+
             #Menu déroulant pour les departements
 
             dbc.DropdownMenu(
@@ -164,12 +170,15 @@ app.layout = dbc.Container([
             color="dark",
             dark=True,
 	        fluid = True,
-            style={'height': '60px'},
+            style={'height': '60px', 'justifyContent': 'center', 'alignItems': 'center'},
 
 
 
 	    ),
-	    
+
+
+    dcc.Location(id='url', refresh=False),
+    dbc.Container(id="page-content", className="pt-4"),
 
 	dash.page_container,
 	html.Div([
@@ -184,6 +193,58 @@ style={'marginTop': '60px'},    #Contenu des pages sous la barre de navigation (
 fluid = True,
 id = "output-container-"
 )
+
+
+@app.callback(
+    Output('page-content', 'children'),
+    Output({'type': 'tab-button', 'index': ALL}, 'className'),
+    Input('url', 'pathname')
+)
+def render_page_content(pathname):
+    for page in dash.page_registry.values():
+        if 'departements' not in page['relative_path'] and not 'Accueil' in page['name']:
+            if page['relative_path'] == pathname:
+                page['active'] = True
+            else:
+                page['active'] = False
+
+    return html.Div([
+
+    ]), [
+               "me-1 btn-sm active" if page["active"] else "me-1 btn-sm"
+               for page in dash.page_registry.values() if not 'departements' in page['relative_path'] and not 'Accueil' in page['name']
+           ]
+
+
+@app.callback(
+    Output('output', 'children'),
+    Input('input', 'value'),
+    State('input', 'id')
+)
+# Fonction pour déterminer l'onglet actif en fonction du chemin relatif de la page
+def update_active_tab(value, input_id):
+    print("TEST")
+
+    ctx = dash.callback_context
+    if not ctx.triggered:
+        raise PreventUpdate
+
+    if input_id == ctx.triggered[0]['prop_id'].split('.')[0]:
+        active_path = ctx.inputs[input_id]['pathname']
+
+        for page in dash.page_registry.values():
+            if page['relative_path'] == active_path:
+                page['active'] = True
+
+            else:
+                page['active'] = False
+        return active_path
+
+        return f'Output: {active_path}'
+
+    raise PreventUpdate
+
+
 
 
 

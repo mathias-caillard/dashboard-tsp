@@ -13,7 +13,8 @@ dash.register_page(
     __name__,
     title = "DIRE",
     name = "DIRE",
-    order=4
+    order=4,
+    active= False
                    )
 
 

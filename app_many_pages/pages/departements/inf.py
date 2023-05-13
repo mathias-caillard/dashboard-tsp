@@ -8,7 +8,8 @@ dash.register_page(
     __name__,
     title = "INF",
     name = "INF",
-    order=13
+    order=13,
+    active= False
                    )
 
 layout = html.Div(children=[

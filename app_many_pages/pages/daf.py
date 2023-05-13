@@ -11,7 +11,8 @@ dash.register_page(
     __name__,
     title = "DAF",
     name = "DAF",
-    order=5
+    order=5,
+    active= False
                    )
 
 

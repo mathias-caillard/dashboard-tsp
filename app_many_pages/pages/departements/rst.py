@@ -8,7 +8,8 @@ dash.register_page(
     __name__,
     title = "RST",
     name = "RST",
-    order=15
+    order=15,
+    active= False
                    )
 
 layout = html.Div(children=[

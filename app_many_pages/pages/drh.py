@@ -10,7 +10,8 @@ dash.register_page(
     __name__,
     title = "DRH",
     name = "DRH",
-    order=6
+    order=6,
+    active= False
                    )
 
 
