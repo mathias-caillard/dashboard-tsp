@@ -24,7 +24,10 @@ dash.register_page(
 
 
 layout = html.Div(children=[
-    html.H1(children='Bienvenue sur la page concernant la Direction des relations internationales'),
+    html.H1(
+        children='Bienvenue sur la page concernant la Direction des relations internationales',
+        style={'text-align': 'justify'}
+    ),
 
     #dcc.Graph(
     #    id='example-graph',

@@ -84,7 +84,7 @@ for k in range(len(list_line)):
                 y=data_old[k][i],
                 name=str(annee),
                 width=0.8,
-                marker=dict(color="blue")
+
             )
         )
     fig_baton = go.Figure(data=donnee)

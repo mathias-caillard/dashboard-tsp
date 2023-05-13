@@ -17,7 +17,10 @@ dash.register_page(
 
 
 layout = html.Div(children=[
-    html.H1(children='Bienvenue sur la page concernant la Direction des ressources humaines'),
+    html.H1(
+        children='Bienvenue sur la page concernant la Direction des ressources humaines',
+        style={'text-align': 'justify'}
+    ),
 
     dcc.Graph(
         id='example-graph',

@@ -14,7 +14,10 @@ dash.register_page(
 layout = html.Div(
     style={},
     children=[
-    html.H1(children='Bienvenue sur la page concernant les départements de Télécom SudParis'),
+    html.H1(
+        children='Bienvenue sur la page concernant les départements de Télécom SudParis',
+        style={'text-align': 'justify'}
+    ),
 
     dcc.Graph(
         id='example-graph',

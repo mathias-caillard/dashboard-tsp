@@ -151,7 +151,7 @@ def fig_old_dire_1():
                 y=data_old_1[i],
                 name=str(annee),
                 width=0.8,
-                marker=dict(color="blue")
+
             )
         )
 
@@ -185,7 +185,7 @@ def fig_old_dire_3():
                 y=data_old_2[i],
                 name=str(annee),
                 width=0.8,
-                marker=dict(color="blue")
+
             )
         )
 
@@ -219,7 +219,7 @@ def fig_old_dire_5():
                 y=data_old_3[i],
                 name=str(annee),
                 width=0.8,
-                marker=dict(color="blue")
+
             )
         )
 

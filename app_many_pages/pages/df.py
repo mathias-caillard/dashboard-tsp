@@ -16,7 +16,10 @@ dash.register_page(
 
 
 layout = html.Div(children=[
-    html.H1(children='Bienvenue sur la page concernant la Direction des formations'),
+    html.H1(
+        children='Bienvenue sur la page concernant la Direction des formations',
+        style={'text-align': 'justify'}
+    ),
 
     html.H2(id="message_date"),
 

@@ -8,7 +8,7 @@ dash.register_page(
     __name__,
     title = "INF",
     name = "INF",
-    order=13,
+    order=14,
     active= False
                    )
 

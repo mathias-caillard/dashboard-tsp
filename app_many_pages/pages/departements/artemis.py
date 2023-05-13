@@ -10,7 +10,7 @@ dash.register_page(
     __name__,
     title = "ARTEMIS",
     name = "ARTEMIS",
-    order=10,
+    order=11,
     active= False
                    )
 
