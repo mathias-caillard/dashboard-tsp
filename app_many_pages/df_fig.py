@@ -219,6 +219,26 @@ def fig_old_df_1():
 
     return fig
 
+def fig_old_df_1_tot():
+    donnee = []
+    for i, annee in enumerate(annees):
+        donnee.append(
+            go.Bar(
+                x=[str(annee)],
+                y=[sum(data_old[i])],
+                name=str(annee),
+            )
+        )
+
+    fig = go.Figure(data=donnee)
+
+    # Ajout d'un titre
+    fig.update_layout(title="Total général des indicateurs en heures équivalentes de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[0])
+
+    return fig
+
 def fig_old_df_2():
     fig = go.Figure()
     for i in range(len(annees)):

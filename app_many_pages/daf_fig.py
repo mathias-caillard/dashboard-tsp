@@ -314,6 +314,27 @@ def fig_old_daf_1():
 
     return fig
 
+def fig_old_daf_1_tot():
+    donnee = []
+    for i, annee in enumerate(annees):
+        donnee.append(
+            go.Bar(
+                x=[str(annee)],
+                y=[sum(data_old_1[i])],
+                name=str(annee),
+            )
+        )
+
+    fig = go.Figure(data=donnee)
+
+    # Ajout d'un titre
+    fig.update_layout(title="Dépenses de vacataires de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[0])
+    # barmode="group")
+
+    return fig
+
 def fig_old_daf_2():
     fig = go.Figure()
     for i in range(len(annees)):
@@ -348,6 +369,27 @@ def fig_old_daf_3():
 
     return fig
 
+def fig_old_daf_3_tot():
+    donnee = []
+    for i, annee in enumerate(annees):
+        donnee.append(
+            go.Bar(
+                x=[str(annee)],
+                y=[sum(data_old_2[i])],
+                name=str(annee),
+            )
+        )
+
+    fig = go.Figure(data=donnee)
+
+    # Ajout d'un titre
+    fig.update_layout(title="Ressources propres totales de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[1])
+    # barmode="group")
+
+    return fig
+
 def fig_old_daf_4():
     fig = go.Figure()
     for i in range(len(annees)):
@@ -376,6 +418,27 @@ def fig_old_daf_5():
 
     # Ajout d'un titre
     fig.update_layout(title="Total des dépenses hors permanents et vacataires de 2015 à 2019, graphique en bâton",
+                      xaxis_title="Années",
+                      yaxis_title=titre[2])
+    # barmode="group")
+
+    return fig
+
+def fig_old_daf_5_tot():
+    donnee = []
+    for i, annee in enumerate(annees):
+        donnee.append(
+            go.Bar(
+                x=[str(annee)],
+                y=[sum(data_old_3[i])],
+                name=str(annee),
+            )
+        )
+
+    fig = go.Figure(data=donnee)
+
+    # Ajout d'un titre
+    fig.update_layout(title="Total des dépenses hors permanents et vacataires de 2015 à 2019, total annuel",
                       xaxis_title="Années",
                       yaxis_title=titre[2])
     # barmode="group")

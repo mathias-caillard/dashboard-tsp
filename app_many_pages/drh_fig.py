@@ -147,6 +147,27 @@ def fig_old_drh_1():
 
     return fig
 
+def fig_old_drh_1_tot():
+    donnee = []
+    for i, annee in enumerate(annees):
+        donnee.append(
+            go.Bar(
+                x=[str(annee)],
+                y=[sum(data_old_1[i])],
+                name=str(annee),
+            )
+        )
+
+    fig = go.Figure(data=donnee)
+
+    # Ajout d'un titre
+    fig.update_layout(title="Permanents en ETPT de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[0])
+    # barmode="group")
+
+    return fig
+
 def fig_old_drh_2():
     fig = go.Figure()
     for i in range(len(annees)):
@@ -175,6 +196,27 @@ def fig_old_drh_3():
 
     # Ajout d'un titre
     fig.update_layout(title="Non-permanents en ETPT de 2015 à 2019, graphique en bâton",
+                      xaxis_title="Années",
+                      yaxis_title=titre[1])
+    # barmode="group")
+
+    return fig
+
+def fig_old_drh_3_tot():
+    donnee = []
+    for i, annee in enumerate(annees):
+        donnee.append(
+            go.Bar(
+                x=[str(annee)],
+                y=[sum(data_old_2[i])],
+                name=str(annee),
+            )
+        )
+
+    fig = go.Figure(data=donnee)
+
+    # Ajout d'un titre
+    fig.update_layout(title="Non-permanents en ETPT de 2015 à 2019, total annuel",
                       xaxis_title="Années",
                       yaxis_title=titre[1])
     # barmode="group")

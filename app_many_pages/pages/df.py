@@ -51,6 +51,16 @@ layout = html.Div(children=[
 
     html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
 
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
+        id='example-graph3_tot',
+        figure=fig_old_df_1_tot(),
+        config={'displaylogo': False}
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
     dcc.Graph(
         id='example-graph4',
         figure=fig_old_df_2(),

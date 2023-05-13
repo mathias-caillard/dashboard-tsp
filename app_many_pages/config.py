@@ -17,7 +17,8 @@ excel_path2 = os.path.join(chemin_absolu_rep_parent, 'assets\\Historique-Indicat
 
 
 #Couleurs pour les graphes
-colors_dept=['navy', 'olive', 'salmon', 'mediumvioletred', 'indigo', 'saddlebrown', 'red']
+colors_dept=['blue', 'lime', 'yellow', 'grey', 'purple', 'cyan', 'red']
+#colors_dept=['navy', 'olive', 'salmon', 'mediumvioletred', 'indigo', 'saddlebrown', 'red']
 colors_dir=['green', 'blue', 'purple', 'orange', 'black', 'maroon']
 
 

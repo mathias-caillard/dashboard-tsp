@@ -57,6 +57,14 @@ layout = html.Div(children=[
     html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
 
     dcc.Graph(
+        id='old-graph1_tot',
+        figure=fig_old_drfd_1_tot(),
+        config = {'displaylogo': False}
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
         id='old-graph2',
         figure=fig_old_drfd_2(),
         config = {'displaylogo': False}
@@ -67,6 +75,14 @@ layout = html.Div(children=[
     dcc.Graph(
         id='old-graph3',
         figure=fig_old_drfd_3(),
+        config = {'displaylogo': False}
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
+        id='old-graph3_tot',
+        figure=fig_old_drfd_3_tot(),
         config = {'displaylogo': False}
     ),
 
