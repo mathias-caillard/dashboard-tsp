@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import math
 import plotly.graph_objects as go
 import plotly.subplots as subplt
 from app_many_pages import config
@@ -9,6 +10,10 @@ from app_many_pages import effectifs
 
 #Transformer quadrimestre en trimestre
 def quadri_to_tri(tab):
+    for i in range(len(tab)):
+        if math.isnan(tab[i]):
+            tab[i]=0
+
     l = []
     l.append(0.75*tab[0])
     l.append(0.25*tab[0] + 0.5*tab[1])

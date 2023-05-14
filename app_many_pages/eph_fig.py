@@ -295,3 +295,141 @@ def fig_old_drh_eph_4():
                       xaxis_title="Années",
                       yaxis_title=titre[10])
     return fig
+
+
+
+list_old_fig_tot_eph=[]
+for k in range(len(list_line)):
+    donnee = []
+    for i, annee in enumerate(annees):
+        donnee.append(
+            go.Bar(
+                x=[str(annee)],
+                y=[sum(data_old[k][i])],
+                name=str(annee),
+            )
+        )
+    fig_tot = go.Figure(data=donnee)
+    list_old_fig_tot_eph.append(fig_tot)
+
+def fig_old_df_tot_eph_1():
+    fig = list_old_fig_tot_eph[0]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Total général des indicateurs en heures équivalentes à EPH de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[0])
+
+    return fig
+
+
+def fig_old_daf_tot_eph_1():
+
+    fig = list_old_fig_tot_eph[1]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Dépenses de vacataires à EPH de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[1])
+    # barmode="group")
+
+    return fig
+
+
+
+def fig_old_daf_tot_eph_3():
+    fig = list_old_fig_tot_eph[2]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Ressources propres totales à EPH de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[2])
+    # barmode="group")
+
+    return fig
+
+
+def fig_old_daf_tot_eph_5():
+    fig = list_old_fig_tot_eph[3]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Total des dépenses hors permanents et vacataires à EPH de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[3])
+    # barmode="group")
+
+    return fig
+
+
+def fig_old_dire_tot_eph_1():
+    fig = list_old_fig_tot_eph[4]
+
+    # Ajout d'un titre
+    fig.update_layout(title="CA sur contrats de recherche à EPH de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[4])
+    return fig
+
+
+def fig_old_dire_tot_eph_3():
+    fig = list_old_fig_tot_eph[5]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Brevets et logiciels déposés à EPH de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[5])
+    # barmode="group")
+
+    return fig
+
+def fig_old_dire_tot_eph_5():
+    fig = list_old_fig_tot_eph[6]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Contribution au financement de l\'école à EPH de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[6])
+    # barmode="group")
+
+    return fig
+
+
+def fig_old_drfd_tot_eph_1():
+    fig = list_old_fig_tot_eph[7]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Total des publications à EPH de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[7])
+
+    return fig
+
+def fig_old_drfd_tot_eph_3():
+    fig = list_old_fig_tot_eph[8]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Nombre de doctorants à EPH de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[8])
+    # barmode="group")
+
+    return fig
+
+def fig_old_drh_tot_eph_1():
+    fig = list_old_fig_tot_eph[9]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Permanents en ETPT à EPH de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[9])
+
+    return fig
+
+def fig_old_drh_tot_eph_3():
+    fig = list_old_fig_tot_eph[10]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Non-permanents en ETPT à EPH de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[10])
+    return fig

@@ -296,3 +296,140 @@ def fig_old_drh_rs2m_4():
                       xaxis_title="Années",
                       yaxis_title=titre[10])
     return fig
+
+
+list_old_fig_tot_rs2m=[]
+for k in range(len(list_line)):
+    donnee = []
+    for i, annee in enumerate(annees):
+        donnee.append(
+            go.Bar(
+                x=[str(annee)],
+                y=[sum(data_old[k][i])],
+                name=str(annee),
+            )
+        )
+    fig_tot = go.Figure(data=donnee)
+    list_old_fig_tot_rs2m.append(fig_tot)
+
+def fig_old_df_tot_rs2m_1():
+    fig = list_old_fig_tot_rs2m[0]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Total général des indicateurs en heures équivalentes à RS2M de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[0])
+
+    return fig
+
+
+def fig_old_daf_tot_rs2m_1():
+
+    fig = list_old_fig_tot_rs2m[1]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Dépenses de vacataires à RS2M de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[1])
+    # barmode="group")
+
+    return fig
+
+
+
+def fig_old_daf_tot_rs2m_3():
+    fig = list_old_fig_tot_rs2m[2]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Ressources propres totales à RS2M de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[2])
+    # barmode="group")
+
+    return fig
+
+
+def fig_old_daf_tot_rs2m_5():
+    fig = list_old_fig_tot_rs2m[3]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Total des dépenses hors permanents et vacataires à RS2M de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[3])
+    # barmode="group")
+
+    return fig
+
+
+def fig_old_dire_tot_rs2m_1():
+    fig = list_old_fig_tot_rs2m[4]
+
+    # Ajout d'un titre
+    fig.update_layout(title="CA sur contrats de recherche à RS2M de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[4])
+    return fig
+
+
+def fig_old_dire_tot_rs2m_3():
+    fig = list_old_fig_tot_rs2m[5]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Brevets et logiciels déposés à RS2M de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[5])
+    # barmode="group")
+
+    return fig
+
+def fig_old_dire_tot_rs2m_5():
+    fig = list_old_fig_tot_rs2m[6]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Contribution au financement de l\'école à RS2M de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[6])
+    # barmode="group")
+
+    return fig
+
+
+def fig_old_drfd_tot_rs2m_1():
+    fig = list_old_fig_tot_rs2m[7]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Total des publications à RS2M de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[7])
+
+    return fig
+
+def fig_old_drfd_tot_rs2m_3():
+    fig = list_old_fig_tot_rs2m[8]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Nombre de doctorants à RS2M de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[8])
+    # barmode="group")
+
+    return fig
+
+def fig_old_drh_tot_rs2m_1():
+    fig = list_old_fig_tot_rs2m[9]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Permanents en ETPT à RS2M de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[9])
+
+    return fig
+
+def fig_old_drh_tot_rs2m_3():
+    fig = list_old_fig_tot_rs2m[10]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Non-permanents en ETPT à RS2M de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[10])
+    return fig

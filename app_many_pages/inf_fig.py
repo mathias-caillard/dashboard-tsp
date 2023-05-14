@@ -295,3 +295,140 @@ def fig_old_drh_inf_4():
                       xaxis_title="Années",
                       yaxis_title=titre[10])
     return fig
+
+
+list_old_fig_tot_inf=[]
+for k in range(len(list_line)):
+    donnee = []
+    for i, annee in enumerate(annees):
+        donnee.append(
+            go.Bar(
+                x=[str(annee)],
+                y=[sum(data_old[k][i])],
+                name=str(annee),
+            )
+        )
+    fig_tot = go.Figure(data=donnee)
+    list_old_fig_tot_inf.append(fig_tot)
+
+def fig_old_df_tot_inf_1():
+    fig = list_old_fig_tot_inf[0]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Total général des indicateurs en heures équivalentes à INF de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[0])
+
+    return fig
+
+
+def fig_old_daf_tot_inf_1():
+
+    fig = list_old_fig_tot_inf[1]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Dépenses de vacataires à INF de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[1])
+    # barmode="group")
+
+    return fig
+
+
+
+def fig_old_daf_tot_inf_3():
+    fig = list_old_fig_tot_inf[2]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Ressources propres totales à INF de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[2])
+    # barmode="group")
+
+    return fig
+
+
+def fig_old_daf_tot_inf_5():
+    fig = list_old_fig_tot_inf[3]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Total des dépenses hors permanents et vacataires à INF de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[3])
+    # barmode="group")
+
+    return fig
+
+
+def fig_old_dire_tot_inf_1():
+    fig = list_old_fig_tot_inf[4]
+
+    # Ajout d'un titre
+    fig.update_layout(title="CA sur contrats de recherche à INF de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[4])
+    return fig
+
+
+def fig_old_dire_tot_inf_3():
+    fig = list_old_fig_tot_inf[5]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Brevets et logiciels déposés à INF de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[5])
+    # barmode="group")
+
+    return fig
+
+def fig_old_dire_tot_inf_5():
+    fig = list_old_fig_tot_inf[6]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Contribution au financement de l\'école à INF de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[6])
+    # barmode="group")
+
+    return fig
+
+
+def fig_old_drfd_tot_inf_1():
+    fig = list_old_fig_tot_inf[7]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Total des publications à INF de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[7])
+
+    return fig
+
+def fig_old_drfd_tot_inf_3():
+    fig = list_old_fig_tot_inf[8]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Nombre de doctorants à INF de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[8])
+    # barmode="group")
+
+    return fig
+
+def fig_old_drh_tot_inf_1():
+    fig = list_old_fig_tot_inf[9]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Permanents en ETPT à INF de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[9])
+
+    return fig
+
+def fig_old_drh_tot_inf_3():
+    fig = list_old_fig_tot_inf[10]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Non-permanents en ETPT à INF de 2015 à 2019, total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre[10])
+    return fig
