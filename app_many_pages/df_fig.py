@@ -19,6 +19,7 @@ excel_path = config.excel_path
 pd.set_option('display.max_columns', None)
 
 trimestre = ['T1', 'T2', 'T3', 'T4']
+couleurs_trimestres=config.couleurs_trimestres
 
 ligneDesTitres = 0  #Numérotation comme dans les liste, matrices...
 nombreLignesData = 4    #Nombre de lignes de données
@@ -204,8 +205,6 @@ def fig_old_df_1():
                 y=data_old[i],
                 name=str(annee),
                 width=0.8,
-                #marker=dict(color=data_old[i], colorscale = [[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']])
-                #marker=dict(color=data_old[i], colorscale = get_colorscale())
             )
         )
 
@@ -215,7 +214,27 @@ def fig_old_df_1():
     fig.update_layout(title="Total général des indicateurs en heures équivalentes de 2015 à 2019, graphique en bâton",
                       xaxis_title="Années",
                       yaxis_title=titre[0])
-                      #barmode="group")
+
+
+    return fig
+
+def fig_old_tri_df_1():
+    donnee = []
+    for i, annee in enumerate(annees):
+        donnee.append(
+            go.Bar(
+                x=[str(annee) + ' - ' + trimestre[j] for j in range(4)],
+                y=data_old[i],
+                name=str(annee),
+                marker=dict(color=couleurs_trimestres),
+                width=0.8,
+            )
+        )
+    fig = go.Figure(data=donnee)
+    # Ajout d'un titre
+    fig.update_layout(title="Total général des indicateurs en heures équivalentes de 2015 à 2019, vision trimestrielle",
+                      xaxis_title="Années",
+                      yaxis_title=titre[0])
 
     return fig
 

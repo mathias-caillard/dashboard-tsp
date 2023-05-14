@@ -22,6 +22,12 @@ colors_dept=['blue', 'lime', 'yellow', 'grey', 'purple', 'cyan', 'red']
 colors_dir=['green', 'blue', 'purple', 'orange', 'black', 'maroon']
 
 
+# Définir une palette de couleurs pour chaque trimestre
+couleurs_trimestres = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)', 'rgb(44, 160, 44)', 'rgb(214, 39, 40)']
+
+
+trimestre = ['T1', 'T2', 'T3', 'T4']
+
 def get_colorscale() :
     return 'Tealgrn'
 

@@ -45,6 +45,7 @@ for indicateur in df.Indicateur :
 
 
 trimestre = ['Trimestre 1', 'Trimestre 2', 'Trimestre 3', 'Trimestre 4']
+couleurs_trimestres=config.couleurs_trimestres
 
 df2 = pd.read_excel(excel_path,sheet_name = sheetName, header = ligneDesTitres, nrows = nombreLignesData + 1)
 

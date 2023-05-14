@@ -10,6 +10,7 @@ effectif = effectifs.effectif
 
 #Import des couleurs
 couleurs = config.colors_dept
+couleurs_trimestres=config.couleurs_trimestres
 
 departement = ['ARTEMIS', 'CITI', 'EPH', 'INF', 'RS2M', 'RST']
 trimestre = ['Trimestre 1', 'Trimestre 2', 'Trimestre 3', 'Trimestre 4']
@@ -314,6 +315,26 @@ def fig_old_daf_1():
 
     return fig
 
+def fig_old_daf_1_tri():
+    donnee = []
+    for i, annee in enumerate(annees):
+        donnee.append(
+            go.Bar(
+                x=[str(annee) + ' - ' + trimestre[j] for j in range(4)],
+                y=data_old_1[i],
+                name=str(annee),
+                marker=dict(color=couleurs_trimestres),
+                width=0.8,
+            )
+        )
+    fig = go.Figure(data=donnee)
+    # Ajout d'un titre
+    fig.update_layout(title="Dépenses de vacataires de 2015 à 2019, vision trimestrielle",
+                      xaxis_title="Années",
+                      yaxis_title=titre[0])
+
+    return fig
+
 def fig_old_daf_1_tot():
     donnee = []
     for i, annee in enumerate(annees):
@@ -366,6 +387,29 @@ def fig_old_daf_3():
                       xaxis_title="Années",
                       yaxis_title=titre[1])
     # barmode="group")
+
+    return fig
+
+def fig_old_daf_3_tri():
+    donnee = []
+    for i, annee in enumerate(annees):
+        donnee.append(
+            go.Bar(
+                x=[str(annee) + ' - ' + trimestre[j] for j in range(4)],
+                y=data_old_2[i],
+                name=str(annee),
+                marker=dict(color=couleurs_trimestres),
+                width=0.8,
+
+            )
+        )
+
+    fig = go.Figure(data=donnee)
+
+    # Ajout d'un titre
+    fig.update_layout(title="Ressources propres totales de 2015 à 2019, vision trimestrielle",
+                      xaxis_title="Années",
+                      yaxis_title=titre[1])
 
     return fig
 
@@ -423,6 +467,30 @@ def fig_old_daf_5():
     # barmode="group")
 
     return fig
+
+def fig_old_daf_5_tri():
+    donnee = []
+    for i, annee in enumerate(annees):
+        donnee.append(
+            go.Bar(
+                x=[str(annee) + ' - ' + trimestre[j] for j in range(4)],
+                y=data_old_3[i],
+                name=str(annee),
+                marker=dict(color=couleurs_trimestres),
+                width=0.8,
+
+            )
+        )
+
+    fig = go.Figure(data=donnee)
+
+    # Ajout d'un titre
+    fig.update_layout(title="Total des dépenses hors permanents et vacataires de 2015 à 2019, vision trimestrielle",
+                      xaxis_title="Années",
+                      yaxis_title=titre[2])
+
+    return fig
+
 
 def fig_old_daf_5_tot():
     donnee = []

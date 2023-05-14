@@ -64,6 +64,14 @@ layout = html.Div(children=[
     html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
 
     dcc.Graph(
+        id='old-graph1_tri',
+        figure=fig_old_dire_1_tri(),
+        config = {'displaylogo': False}
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
         id='old-graph1_tot',
         figure=fig_old_dire_1_tot(),
         config = {'displaylogo': False}
@@ -88,6 +96,14 @@ layout = html.Div(children=[
     html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
 
     dcc.Graph(
+        id='old-graph3_tri',
+        figure=fig_old_dire_3_tri(),
+        config = {'displaylogo': False}
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
         id='old-graph3_tot',
         figure=fig_old_dire_3_tot(),
         config = {'displaylogo': False}
@@ -106,6 +122,14 @@ layout = html.Div(children=[
     dcc.Graph(
         id='old-graph5',
         figure=fig_old_dire_5(),
+        config = {'displaylogo': False}
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
+        id='old-graph5_tri',
+        figure=fig_old_dire_5_tri(),
         config = {'displaylogo': False}
     ),
 

@@ -10,6 +10,8 @@ from drh_fig import trimestre, valeur_tri,y_axis_tri
 from dire_fig import valeur_trim1, valeur_trim3, y_axis as y_axis_dire
 from daf_fig import valeur_tri as valeur_daf, y_axis_tri as y_axis_daf
 
+couleurs_trimestres=config.couleurs_trimestres
+
 valeur_drh_citi=valeur_tri[1]
 valeur_dire1_citi = valeur_trim1[1]
 valeur_dire3_citi = valeur_trim3[1]
@@ -293,6 +295,7 @@ def fig_old_drh_citi_4():
                       yaxis_title=titre[10])
     return fig
 
+#Figure avec total annuel
 
 list_old_fig_tot_citi=[]
 for k in range(len(list_line)):
@@ -429,3 +432,144 @@ def fig_old_drh_tot_citi_3():
                       xaxis_title="Années",
                       yaxis_title=titre[10])
     return fig
+
+
+#Figure trimestrielle:
+
+list_old_fig_tri_citi=[]
+for k in range(len(list_line)):
+    donnee = []
+    for i, annee in enumerate(annees):
+        donnee.append(
+            go.Bar(
+                x=[str(annee) + ' - ' + trimestre[j] for j in range(4)],
+                y=data_old[k][i],
+                marker=dict(color=couleurs_trimestres),
+                name=str(annee),
+            )
+        )
+    fig_tri = go.Figure(data=donnee)
+    list_old_fig_tri_citi.append(fig_tri)
+
+def fig_old_df_citi_1_tri():
+    fig = list_old_fig_tri_citi[0]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Total général des indicateurs en heures équivalentes à CITI de 2015 à 2019, vision trimestrielle",
+                      xaxis_title="Années",
+                      yaxis_title=titre[0])
+
+    return fig
+
+
+def fig_old_daf_citi_1_tri():
+
+    fig = list_old_fig_tri_citi[1]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Dépenses de vacataires à CITI de 2015 à 2019, vision trimestrielle",
+                      xaxis_title="Années",
+                      yaxis_title=titre[1])
+    # barmode="group")
+
+    return fig
+
+
+
+def fig_old_daf_citi_3_tri():
+    fig = list_old_fig_tri_citi[2]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Ressources propres totales à CITI de 2015 à 2019, vision trimestrielle",
+                      xaxis_title="Années",
+                      yaxis_title=titre[2])
+    # barmode="group")
+
+    return fig
+
+
+def fig_old_daf_citi_5_tri():
+    fig = list_old_fig_tri_citi[3]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Total des dépenses hors permanents et vacataires à CITI de 2015 à 2019,vision trimestrielle",
+                      xaxis_title="Années",
+                      yaxis_title=titre[3])
+    # barmode="group")
+
+    return fig
+
+
+def fig_old_dire_citi_1_tri():
+    fig = list_old_fig_tri_citi[4]
+
+    # Ajout d'un titre
+    fig.update_layout(title="CA sur contrats de recherche à CITI de 2015 à 2019, vision trimestrielle",
+                      xaxis_title="Années",
+                      yaxis_title=titre[4])
+    return fig
+
+
+def fig_old_dire_citi_3_tri():
+    fig = list_old_fig_tri_citi[5]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Brevets et logiciels déposés à CITI de 2015 à 2019, vision trimestrielle",
+                      xaxis_title="Années",
+                      yaxis_title=titre[5])
+    # barmode="group")
+
+    return fig
+
+def fig_old_dire_citi_5_tri():
+    fig = list_old_fig_tri_citi[6]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Contribution au financement de l\'école à CITI de 2015 à 2019, vision trimestrielle",
+                      xaxis_title="Années",
+                      yaxis_title=titre[6])
+    # barmode="group")
+
+    return fig
+
+
+def fig_old_drfd_citi_1_tri():
+    fig = list_old_fig_tri_citi[7]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Total des publications à CITI de 2015 à 2019, vision trimestrielle",
+                      xaxis_title="Années",
+                      yaxis_title=titre[7])
+
+    return fig
+
+def fig_old_drfd_citi_3_tri():
+    fig = list_old_fig_tri_citi[8]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Nombre de doctorants à CITI de 2015 à 2019, vision trimestrielle",
+                      xaxis_title="Années",
+                      yaxis_title=titre[8])
+    # barmode="group")
+
+    return fig
+
+def fig_old_drh_citi_1_tri():
+    fig = list_old_fig_tri_citi[9]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Permanents en ETPT à CITI de 2015 à 2019, vision trimestrielle",
+                      xaxis_title="Années",
+                      yaxis_title=titre[9])
+
+    return fig
+
+def fig_old_drh_citi_3_tri():
+    fig = list_old_fig_tri_citi[10]
+
+    # Ajout d'un titre
+    fig.update_layout(title="Non-permanents en ETPT à CITI de 2015 à 2019, vision trimestrielle",
+                      xaxis_title="Années",
+                      yaxis_title=titre[10])
+    return fig
+

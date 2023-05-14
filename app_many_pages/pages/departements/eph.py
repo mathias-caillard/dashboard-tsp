@@ -98,6 +98,14 @@ layout = html.Div(children=[
     html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
 
     dcc.Graph(
+        id='old-graph1_tri',
+        figure=fig_old_df_eph_1_tri(),
+        config = {'displaylogo': False}
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
         id='old-graph1_tot',
         figure=fig_old_df_tot_eph_1(),
         config = {'displaylogo': False}
@@ -116,6 +124,14 @@ layout = html.Div(children=[
     dcc.Graph(
         id='old-graph3',
         figure=fig_old_daf_eph_1(),
+        config = {'displaylogo': False}
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
+        id='old-graph3_tri',
+        figure=fig_old_daf_eph_1_tri(),
         config = {'displaylogo': False}
     ),
 
@@ -146,6 +162,14 @@ layout = html.Div(children=[
     html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
 
     dcc.Graph(
+        id='old-graph5_tri',
+        figure=fig_old_daf_eph_3_tri(),
+        config = {'displaylogo': False}
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
         id='old-graph5_tot',
         figure=fig_old_daf_tot_eph_3(),
         config = {'displaylogo': False}
@@ -164,6 +188,14 @@ layout = html.Div(children=[
     dcc.Graph(
         id='old-graph7',
         figure=fig_old_daf_eph_5(),
+        config = {'displaylogo': False}
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
+        id='old-graph7_tri',
+        figure=fig_old_daf_eph_5_tri(),
         config = {'displaylogo': False}
     ),
 
@@ -194,6 +226,14 @@ layout = html.Div(children=[
     html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
 
     dcc.Graph(
+        id='old-graph9_tri',
+        figure=fig_old_dire_eph_1_tri(),
+        config={'displaylogo': False}
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
         id='old-graph9_tot',
         figure=fig_old_dire_tot_eph_1(),
         config={'displaylogo': False}
@@ -212,6 +252,14 @@ layout = html.Div(children=[
     dcc.Graph(
         id='old-graph11',
         figure=fig_old_dire_eph_3(),
+        config={'displaylogo': False}
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
+        id='old-graph11_tri',
+        figure=fig_old_dire_eph_3_tri(),
         config={'displaylogo': False}
     ),
 
@@ -242,6 +290,14 @@ layout = html.Div(children=[
     html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
 
     dcc.Graph(
+        id='old-graph13_tri',
+        figure=fig_old_dire_eph_5_tri(),
+        config={'displaylogo': False}
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
         id='old-graph13_tot',
         figure=fig_old_dire_tot_eph_5(),
         config={'displaylogo': False}
@@ -260,6 +316,14 @@ layout = html.Div(children=[
     dcc.Graph(
         id='old-graph15',
         figure=fig_old_drfd_eph_1(),
+        config={'displaylogo': False}
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
+        id='old-graph15_tri',
+        figure=fig_old_drfd_eph_1_tri(),
         config={'displaylogo': False}
     ),
 
@@ -290,6 +354,14 @@ layout = html.Div(children=[
     html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
 
     dcc.Graph(
+        id='old-graph17_tri',
+        figure=fig_old_drfd_eph_3_tri(),
+        config={'displaylogo': False}
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
         id='old-graph17_tot',
         figure=fig_old_drfd_tot_eph_3(),
         config={'displaylogo': False}
@@ -314,6 +386,14 @@ layout = html.Div(children=[
     html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
 
     dcc.Graph(
+        id='old-graph19_tri',
+        figure=fig_old_drh_eph_1_tri(),
+        config={'displaylogo': False}
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
         id='old-graph19_tot',
         figure=fig_old_drh_tot_eph_1(),
         config={'displaylogo': False}
@@ -332,6 +412,14 @@ layout = html.Div(children=[
     dcc.Graph(
         id='old-graph21',
         figure=fig_old_drh_eph_3(),
+        config={'displaylogo': False}
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
+        id='old-graph21_tri',
+        figure=fig_old_drh_eph_3_tri(),
         config={'displaylogo': False}
     ),
 

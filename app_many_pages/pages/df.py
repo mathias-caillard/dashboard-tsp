@@ -51,6 +51,12 @@ layout = html.Div(children=[
 
     html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
 
+    dcc.Graph(
+        id='example-graph3_tri',
+        figure=fig_old_tri_df_1(),
+        config = {'displaylogo': False}
+    ),
+
     html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
 
     dcc.Graph(

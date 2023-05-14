@@ -7,6 +7,7 @@ import data
 
 #Import des couleurs
 couleurs = config.colors_dept
+couleurs_trimestres=config.couleurs_trimestres
 
 #Chemin du fichier excel défini dans config.py
 excel_path = config.excel_path
@@ -161,8 +162,27 @@ def fig_old_drfd_1():
     fig.update_layout(title="Total des publications de 2015 à 2019, graphique en bâton",
                       xaxis_title="Années",
                       yaxis_title=titre[0])
-    # barmode="group")
+    return fig
 
+def fig_old_drfd_1_tri():
+    donnee = []
+    for i, annee in enumerate(annees):
+        donnee.append(
+            go.Bar(
+                x=[str(annee) + ' - ' + trimestre[j] for j in range(4)],
+                y=data_old_1[i],
+                name=str(annee),
+                width=0.8,
+                marker=dict(color=couleurs_trimestres),
+            )
+        )
+
+    fig = go.Figure(data=donnee)
+
+    # Ajout d'un titre
+    fig.update_layout(title="Total des publications de 2015 à 2019, vision trimestrielle",
+                      xaxis_title="Années",
+                      yaxis_title=titre[0])
     return fig
 
 def fig_old_drfd_1_tot():
@@ -216,7 +236,30 @@ def fig_old_drfd_3():
     fig.update_layout(title="Nombre de doctorants de 2015 à 2019, graphique en bâton",
                       xaxis_title="Années",
                       yaxis_title=titre[1])
-    # barmode="group")
+
+    return fig
+
+
+def fig_old_drfd_3_tri():
+    donnee = []
+    for i, annee in enumerate(annees):
+        donnee.append(
+            go.Bar(
+                x=[str(annee) + ' - ' + trimestre[j] for j in range(4)],
+                y=data_old_2[i],
+                name=str(annee),
+                width=0.8,
+                marker=dict(color=couleurs_trimestres),
+
+            )
+        )
+
+    fig = go.Figure(data=donnee)
+
+    # Ajout d'un titre
+    fig.update_layout(title="Nombre de doctorants de 2015 à 2019, vision trimestrielle",
+                      xaxis_title="Années",
+                      yaxis_title=titre[1])
 
     return fig
 
