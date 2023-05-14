@@ -34,10 +34,20 @@ layout = html.Div(children=[
 
 
     dcc.Graph(
-        id='graph2_df',
+        id='graph2_df_update',
         figure=fig_df_2_update(get_df_DF_annuel()),
         config = {'displaylogo': False}
     ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+
+    dcc.Graph(
+        id='graph2_df_',
+        figure=fig_df_2(),
+        config = {'displaylogo': False}
+    ),
+
 
 
     html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes

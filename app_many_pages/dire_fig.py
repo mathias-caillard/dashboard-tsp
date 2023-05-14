@@ -4,6 +4,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import plotly.subplots as subplt
 import data
+import effectifs
 
 #Import des couleurs
 couleurs = config.colors_dept
@@ -61,6 +62,7 @@ for j in indice_annuelle:
 
 departement = ['ARTEMIS', 'CITI', 'EPH', 'INF', 'RS2M', 'RST']
 trimestre = ['Trimestre 1', 'Trimestre 2', 'Trimestre 3', 'Trimestre 4']
+effectif = effectifs.effectif
 
 def fig_dire_1() : 
     #Création d'une figure avec 6 sous-figure pour y placer des histogrammes
@@ -70,11 +72,11 @@ def fig_dire_1() :
     for i in range(6):
         labels_i = labels_trim[i]
         valeur_i = valeur_trim1[i]
-        fig1.add_trace(go.Bar(x=labels_i, y=valeur_i, name=labels_i[0][:-3],
+        fig1.add_trace(go.Bar(x=labels_i, y=valeur_i/effectif[i], name=labels_i[0][:-3],
                               marker=dict(color = 4*[couleurs[i]])), row=1, col=i+1)
 
     # Personnaliser l'apparence du graphique
-    fig1.update_layout(title='Suivi des contrats de recherche')
+    fig1.update_layout(title='Suivi des contrats de recherche pondéré par les effectifs')
 
     return fig1
 
@@ -95,11 +97,11 @@ def fig_dire_2():
             valeur_i.append((valeur_trim1[j][i]))
 
     for i in range(6):
-        fig2.add_trace(go.Bar(x=trimestre, y=valeur_trim1[i], name= departement[i],
+        fig2.add_trace(go.Bar(x=trimestre, y=valeur_trim1[i]/effectif[i] , name= departement[i],
                               marker=dict(color = couleurs[i])))
 
     # Personnaliser l'apparence du graphique
-    fig2.update_layout(title='Suivi des contrats de recherche, vision trimestrielle')
+    fig2.update_layout(title='Suivi des contrats de recherche pondéré par les effectifs, vision trimestrielle')
 
     return fig2
 
@@ -124,12 +126,13 @@ def fig_dire_3():
 
 
 def fig_dire_4():
-    fig4 = go.Figure(data=[go.Pie(labels=labels_annuel, values=valeur_annuelle3,
+    value = [valeur_annuelle3[i]/effectif[i] for i in range(len(valeur_annuelle3))]
+    fig4 = go.Figure(data=[go.Pie(labels=labels_annuel, values=value,
                                   marker_colors=couleurs)],)
 
 
     # Personnaliser l'apparence du graphique
-    fig4.update_layout(title='Contribution au financement de l\'école')
+    fig4.update_layout(title='Contribution au financement de l\'école pondéré par les effectifs')
     return fig4
 
 

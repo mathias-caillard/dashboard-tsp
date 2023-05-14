@@ -71,12 +71,12 @@ def fig_drfd_1() :
     i=0
     for col_name in df.columns[débutColonneData: FinColonneData + 1]:
         taille = str(int(effectif[i]))
-        fig.add_trace(go.Bar(x=[col_name  + " (" + taille + ")"], y=[df[col_name].iloc[0]], name=col_name,
+        fig.add_trace(go.Bar(x=[col_name  + " (" + taille + ")"], y=[df[col_name].iloc[0]/effectif[i]], name=col_name,
                              marker=dict(color = [couleurs[i]])))  #effectif du département entre parenthèse
         i+=1
 
     #Ajout d'un titre
-    fig.update_layout(title = "Chiffres sur la recherche à Télécom Sudparis", xaxis_title='Départements', yaxis_title = y_axis[0])
+    fig.update_layout(title = "Chiffres sur la recherche à Télécom Sudparis pondérés par les effectifs", xaxis_title='Départements', yaxis_title = y_axis[0])
 
     return fig
 
@@ -90,12 +90,12 @@ def fig_drfd_2() :
     i=0
     for col_name in df.columns[débutColonneData: FinColonneData + 1]:
         taille = str(int(effectif[i]))
-        fig2.add_trace(go.Bar(x=[col_name  + " (" + taille + ")"], y=[df[col_name].iloc[1]], name=col_name,
+        fig2.add_trace(go.Bar(x=[col_name  + " (" + taille + ")"], y=[df[col_name].iloc[1]/effectif[i]], name=col_name,
                               marker=dict(color = [couleurs[i]])))    #effectif du département entre parenthèse
         i+=1
 
     #Ajout d'un titre
-    fig2.update_layout(title = "Nombre de doctorants à Télécom SudParis", xaxis_title='Départements', yaxis_title = y_axis[1])
+    fig2.update_layout(title = "Nombre de doctorants à Télécom SudParis pondéré par les effectifs", xaxis_title='Départements', yaxis_title = y_axis[1])
 
     return fig2
 

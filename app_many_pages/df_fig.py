@@ -188,6 +188,28 @@ def fig_df_2_update(df_arg):
 
         return fig
 
+def fig_df_2():
+
+    fig = go.Figure()
+
+
+    effectif = effectifs.effectif
+
+    # Ajouter chaque bâton à la figure
+    i = 0
+    for col_name in df2.columns[débutColonneData: finColonneData + 1]:
+        taille = str(int(effectif[i]))
+        fig.add_trace(go.Bar(x=[col_name + " (" + taille + ")"], y=[df2[col_name].iloc[0]/effectif[i]],
+                                name=col_name, marker=dict(color = [couleurs[i]])))  # effectif du département entre parenthèse
+        i += 1
+
+    # Ajout d'un titre
+    fig.update_layout(title="Nombre d\'UP produites par Télécom SudParis pondéré par les effectifs", xaxis_title='Départements',
+                    yaxis_title=y_axis_annuel[0])
+
+    return fig
+
+
 sheetName = data.sheet_names[0]
 line = data.df_ligne[0]
 titre = data.extract_titre(data.df_ligne)

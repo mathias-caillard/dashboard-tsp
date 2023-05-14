@@ -67,18 +67,18 @@ def fig_daf_1():
     # Ajouter chaque bâton à la figure
     i=0
     for col_name in df.columns[débutColonneData: FinColonneData + 1]:
-        fig.add_trace(go.Bar(x=[col_name], y=[df[col_name].iloc[0]], name=col_name + " (" + str(int(effectif[i])) + ")",
+        fig.add_trace(go.Bar(x=[col_name], y=[df[col_name].iloc[0]/effectif[i]], name=col_name + " (" + str(int(effectif[i])) + ")",
                              marker=dict(color = [couleurs[i]])))
         i+=1
-
+    """
     #Calcul de la moyenne
-    mean_value = df.mean(axis=1, numeric_only=True).iloc[0]
+    mean_value = df.mean(axis=1, numeric_only=True).iloc[0]/effectif[6]
 
     # Ajouter la ligne moyenne à la figure
     fig.add_trace(go.Scatter(x=df.columns[débutColonneData: FinColonneData + 1], y=[mean_value] * (FinColonneData + 1 - débutColonneData), mode='lines', name='Moyenne'))
-
+    """
     #Ajout d'un titre
-    fig.update_layout(title = "Chiffre d\'affaire de la recherche à Télécom Sudparis", xaxis_title='Départements', yaxis_title = y_axis[0])
+    fig.update_layout(title = "Chiffre d\'affaire de la recherche à Télécom Sudparis pondéré par les effectifs", xaxis_title='Départements', yaxis_title = y_axis[0])
 
     return fig
 
@@ -153,11 +153,11 @@ def fig_daf_2():
     for i in range(6):
         labels_i = labels_tri[i]
         valeur_i = valeur_tri[0][i]
-        fig2.add_trace(go.Bar(x=labels_i, y=valeur_i, name=labels_annuel[i].replace('Année', '') + " (" + str(int(effectif[i])) + ")"
+        fig2.add_trace(go.Bar(x=labels_i, y=valeur_i/effectif[i], name=labels_annuel[i].replace('Année', '') + " (" + str(int(effectif[i])) + ")"
                               , marker=dict(color = 4*[couleurs[i]])), row=1, col=i + 1)
 
     # Personnaliser l'apparence du graphique
-    fig2.update_layout(title='Dépenses de vacataires', yaxis_title = y_axis_tri[0])
+    fig2.update_layout(title='Dépenses de vacataires pondérées par les effectifs', yaxis_title = y_axis_tri[0])
 
     return fig2
 
@@ -169,11 +169,11 @@ def fig_daf_3():
     for i in range(6):
         #labels_i = labels_tri_dep[i]
         valeur_i = valeur_tri[0][i]
-        fig3.add_trace(go.Bar(x=trimestre, y=valeur_i, name=departement[i] + " (" + str(int(effectif[i])) + ")"
+        fig3.add_trace(go.Bar(x=trimestre, y=valeur_i/effectif[i], name=departement[i] + " (" + str(int(effectif[i])) + ")"
                               , marker=dict(color = couleurs[i])))
 
     # Personnaliser l'apparence du graphique
-    fig3.update_layout(title='Dépenses de vacataires, vision trimestrielle', yaxis_title=y_axis_tri[0])
+    fig3.update_layout(title='Dépenses de vacataires pondérées par les effectifs, vision trimestrielle', yaxis_title=y_axis_tri[0])
 
     return fig3
 
@@ -185,13 +185,13 @@ def fig_daf_4():
     for i in range(6):
         labels_i = labels_tri[i]
         valeur_i = valeur_tri[1][i]
-        fig.add_trace(go.Bar(x=labels_i, y=valeur_i,
+        fig.add_trace(go.Bar(x=labels_i, y=valeur_i/effectif[i],
                               name=labels_annuel[i].replace('Année', '') + " (" + str(int(effectif[i])) + ")"
                              ,marker=dict(color = 4*[couleurs[i]])), row=1,
                        col=i + 1)
 
     # Personnaliser l'apparence du graphique
-    fig.update_layout(title='Ressources propres', yaxis_title=y_axis_tri[1])
+    fig.update_layout(title='Ressources propres pondérées par les effectifs', yaxis_title=y_axis_tri[1])
 
     return fig
 
@@ -203,11 +203,11 @@ def fig_daf_5():
     for i in range(6):
         #labels_i = labels_tri_dep[i]
         valeur_i = valeur_tri[1][i]
-        fig.add_trace(go.Bar(x=trimestre, y=valeur_i, name=departement[i] + " (" + str(int(effectif[i])) + ")",
+        fig.add_trace(go.Bar(x=trimestre, y=valeur_i/effectif[i], name=departement[i] + " (" + str(int(effectif[i])) + ")",
                              marker=dict(color = couleurs[i])))
 
     # Personnaliser l'apparence du graphique
-    fig.update_layout(title='Ressources propres, vision trimestrielle', yaxis_title=y_axis_tri[1])
+    fig.update_layout(title='Ressources propres pondérées par les effectifs, vision trimestrielle', yaxis_title=y_axis_tri[1])
 
     return fig
 
@@ -219,13 +219,13 @@ def fig_daf_6():
     for i in range(6):
         labels_i = labels_tri[i]
         valeur_i = valeur_tri[2][i]
-        fig.add_trace(go.Bar(x=labels_i, y=valeur_i,
+        fig.add_trace(go.Bar(x=labels_i, y=valeur_i/effectif[i],
                               name=labels_annuel[i].replace('Année', '') + " (" + str(int(effectif[i])) + ")"
                              ,marker=dict(color = 4*[couleurs[i]])), row=1,
                        col=i + 1)
 
     # Personnaliser l'apparence du graphique
-    fig.update_layout(title='Ressources d\'état', yaxis_title=y_axis_tri[2])
+    fig.update_layout(title='Ressources d\'état pondérées par les effectifs', yaxis_title=y_axis_tri[2])
 
     return fig
 
@@ -237,12 +237,12 @@ def fig_daf_7():
     for i in range(6):
         #labels_i = labels_tri_dep[i]
         valeur_i = valeur_tri[2][i]
-        fig.add_trace(go.Bar(x=trimestre, y=valeur_i,
+        fig.add_trace(go.Bar(x=trimestre, y=valeur_i/effectif[i],
                              name=departement[i] + " (" + str(int(effectif[i])) + ")"
                              , marker=dict(color = couleurs[i])))
 
     # Personnaliser l'apparence du graphique
-    fig.update_layout(title='Ressources d\'état, vision trimestrielle', yaxis_title=y_axis_tri[2])
+    fig.update_layout(title='Ressources d\'état pondérées par les effectifs, vision trimestrielle', yaxis_title=y_axis_tri[2])
 
     return fig
 
@@ -255,13 +255,13 @@ def fig_daf_8():
     for i in range(6):
         labels_i = labels_tri[i]
         valeur_i = valeur_tri[3][i]
-        fig.add_trace(go.Bar(x=labels_i, y=valeur_i,
+        fig.add_trace(go.Bar(x=labels_i, y=valeur_i/effectif[i],
                               name=labels_annuel[i].replace('Année', '') + " (" + str(int(effectif[i])) + ")"
                              ,marker=dict(color = 4*[couleurs[i]])), row=1,
                        col=i + 1)
 
     # Personnaliser l'apparence du graphique
-    fig.update_layout(title='Total des dépenses hors permanents et vacataires', yaxis_title=y_axis_tri[3])
+    fig.update_layout(title='Total des dépenses hors permanents et vacataires pondéré par les effectifs', yaxis_title=y_axis_tri[3])
 
     return fig
 
@@ -273,12 +273,12 @@ def fig_daf_9():
     for i in range(6):
         #labels_i = labels_tri_dep[i]
         valeur_i = valeur_tri[3][i]
-        fig.add_trace(go.Bar(x=trimestre, y=valeur_i, name= departement[i] + " (" + str(int(effectif[i])) + ")"
+        fig.add_trace(go.Bar(x=trimestre, y=valeur_i/effectif[i], name= departement[i] + " (" + str(int(effectif[i])) + ")"
                              , marker=dict(color = couleurs[i])))
 
 
     # Personnaliser l'apparence du graphique
-    fig.update_layout(title='Total des dépenses hors permanents et vacataires, vision trimestrielle', yaxis_title=y_axis_tri[3])
+    fig.update_layout(title='Total des dépenses hors permanents et vacataires pondéré par les effectifs, vision trimestrielle', yaxis_title=y_axis_tri[3])
 
     return fig
 
