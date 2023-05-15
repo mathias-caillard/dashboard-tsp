@@ -76,4 +76,4 @@ def extract_titre(list_line):
         titles.append(df.iloc[i-2, 0])
     return titles
 
-
+titres = extract_titre(liste_lignes)

@@ -139,6 +139,7 @@ titre = data.extract_titre(data.drfd_ligne)
 annees = data.annees
 data_old_1 = data.extract_data(sheetName, lines[0])
 data_old_2 = data.extract_data(sheetName, lines[1])
+data_old = [data_old_1 , data_old_2]
 
 trimestre = ['T1', 'T2', 'T3', 'T4']
 

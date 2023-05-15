@@ -144,6 +144,7 @@ annees = data.annees
 data_old_1 = data.extract_data(sheetName, lines[0])
 data_old_2 = data.extract_data(sheetName, lines[1])
 data_old_3 = data.extract_data(sheetName, lines[2])
+data_old = [data_old_1 , data_old_2 , data_old_3]
 
 
 def fig_old_dire_1():
