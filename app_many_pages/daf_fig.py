@@ -309,7 +309,7 @@ def fig_old_daf_1():
     fig = go.Figure(data=donnee)
 
     # Ajout d'un titre
-    fig.update_layout(title="Dépenses de vacataires de 2015 à 2019, graphique en bâton",
+    fig.update_layout(title="Dépenses de vacataires de 2015 à 2019, vision annuelle",
                       xaxis_title="Années",
                       yaxis_title=titre[0])
     # barmode="group")
@@ -363,7 +363,7 @@ def fig_old_daf_2():
 
         fig.add_trace(go.Scatter(x=trimestre, y=data_old_1[i], name="Année " + str(annees[i])))
 
-    fig.update_layout(title="Dépenses de vacataires de 2015 à 2019",
+    fig.update_layout(title="Dépenses de vacataires de 2015 à 2019, comparaison annuelle par trimestre",
                       xaxis_title="Années",
                       yaxis_title=titre[0])
     return fig
@@ -384,7 +384,7 @@ def fig_old_daf_3():
     fig = go.Figure(data=donnee)
 
     # Ajout d'un titre
-    fig.update_layout(title="Ressources propres totales de 2015 à 2019, graphique en bâton",
+    fig.update_layout(title="Ressources propres totales de 2015 à 2019, vision annuelle",
                       xaxis_title="Années",
                       yaxis_title=titre[1])
     # barmode="group")
@@ -441,7 +441,7 @@ def fig_old_daf_4():
 
         fig.add_trace(go.Scatter(x=trimestre, y=data_old_2[i], name="Année " + str(annees[i])))
 
-    fig.update_layout(title="Ressources propres totales de 2015 à 2019",
+    fig.update_layout(title="Ressources propres totales de 2015 à 2019, comparaison anneulle par trimestre",
                       xaxis_title="Années",
                       yaxis_title=titre[1])
     return fig
@@ -462,7 +462,7 @@ def fig_old_daf_5():
     fig = go.Figure(data=donnee)
 
     # Ajout d'un titre
-    fig.update_layout(title="Total des dépenses hors permanents et vacataires de 2015 à 2019, graphique en bâton",
+    fig.update_layout(title="Total des dépenses hors permanents et vacataires de 2015 à 2019, vision annuelle",
                       xaxis_title="Années",
                       yaxis_title=titre[2])
     # barmode="group")
@@ -520,7 +520,7 @@ def fig_old_daf_6():
 
         fig.add_trace(go.Scatter(x=trimestre, y=data_old_3[i], name="Année " + str(annees[i])))
 
-    fig.update_layout(title="Total des dépenses hors permanents et vacataires de 2015 à 2019",
+    fig.update_layout(title="Total des dépenses hors permanents et vacataires de 2015 à 2019, comparaison annuelle par trimestre",
                       xaxis_title="Années",
                       yaxis_title=titre[2])
     return fig

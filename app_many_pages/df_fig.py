@@ -204,7 +204,7 @@ def fig_df_2():
         i += 1
 
     # Ajout d'un titre
-    fig.update_layout(title="Nombre d\'UP produites par Télécom SudParis pondéré par les effectifs", xaxis_title='Départements',
+    fig.update_layout(title="Nombre d\'UP produites par Télécom SudParis, pondéré par les effectifs", xaxis_title='Départements',
                     yaxis_title=y_axis_annuel[0])
 
     return fig
@@ -233,7 +233,7 @@ def fig_old_df_1():
     fig = go.Figure(data=donnee)
 
     # Ajout d'un titre
-    fig.update_layout(title="Total général des indicateurs en heures équivalentes de 2015 à 2019, graphique en bâton",
+    fig.update_layout(title="Total général des indicateurs en heures équivalentes de 2015 à 2019, vision annuelle",
                       xaxis_title="Années",
                       yaxis_title=titre[0])
 
@@ -286,7 +286,7 @@ def fig_old_df_2():
 
         fig.add_trace(go.Scatter(x=trimestre, y=data_old[i], name="Année " + str(annees[i])))
 
-    fig.update_layout(title="Total général des indicateurs en heures équivalentes de 2015 à 2019",
+    fig.update_layout(title="Total général des indicateurs en heures équivalentes de 2015 à 2019, comparaison annuelle par trimestre",
                       xaxis_title="Années",
                       yaxis_title=titre[0])
     return fig

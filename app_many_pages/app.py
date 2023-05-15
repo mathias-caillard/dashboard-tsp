@@ -62,22 +62,6 @@ offcanvas = html.Div(
 
                 html.Hr(style={'borderTop': '2px solid #000000'}),
 
-                dbc.Switch(
-                    id="percentile25-switch",
-                    label="25ème de percentile",
-                    value=False,
-                ),
-                dbc.Switch(
-                    id="médiane-switch",
-                    label="médiane",
-                    value=False,
-                ),
-                dbc.Switch(
-                    id="percentile75-switch",
-                    label="75ème de percentile",
-                    value=False,
-                ),
-                html.Hr(style={'borderTop': '2px solid #000000'}),
 
                 dbc.Switch(
                     id="tri-switch",
@@ -94,7 +78,7 @@ offcanvas = html.Div(
 
                 dbc.Switch(
                     id="école-switch",
-                    label="indicateur périmmètre école",
+                    label="indicateur périmètre école",
                     value=False,
                 ),
                 dbc.Switch(

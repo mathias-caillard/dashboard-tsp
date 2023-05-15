@@ -111,5 +111,5 @@ def fig_dri_4():
         valeur2_i=valeur2[4*i: 4*(i+1)]
         fig4.add_trace(go.Scatter(x=labels, y=valeur2_i, name= "Année 202" + str(3+i)))
 
-    fig4.update_layout(title="Evolution temporelle du nombre d'étudiants étrangers à Télécom Sudparis")
+    fig4.update_layout(title="Evolution temporelle du nombre d'étudiants étrangers à Télécom Sudparis, comparaison annuelle par trimestre")
     return fig4

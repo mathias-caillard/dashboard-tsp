@@ -163,7 +163,7 @@ def fig_old_dire_1():
     fig = go.Figure(data=donnee)
 
     # Ajout d'un titre
-    fig.update_layout(title="CA sur contrats de recherche de 2015 à 2019, graphique en bâton",
+    fig.update_layout(title="CA sur contrats de recherche de 2015 à 2019, vision annuelle",
                       xaxis_title="Années",
                       yaxis_title=titre[0])
     # barmode="group")
@@ -218,7 +218,7 @@ def fig_old_dire_2():
 
         fig.add_trace(go.Scatter(x=trimestre, y=data_old_1[i], name="Année " + str(annees[i])))
 
-    fig.update_layout(title="CA sur contrats de recherche de 2015 à 2019",
+    fig.update_layout(title="CA sur contrats de recherche de 2015 à 2019, comparaison annuelle par trimestre",
                       xaxis_title="Années",
                       yaxis_title=titre[0])
     return fig
@@ -239,7 +239,7 @@ def fig_old_dire_3():
     fig = go.Figure(data=donnee)
 
     # Ajout d'un titre
-    fig.update_layout(title="Brevets et logiciels déposés de 2015 à 2019, graphique en bâton",
+    fig.update_layout(title="Brevets et logiciels déposés de 2015 à 2019, vision annuelle",
                       xaxis_title="Années",
                       yaxis_title=titre[1])
 
@@ -296,7 +296,7 @@ def fig_old_dire_4():
 
         fig.add_trace(go.Scatter(x=trimestre, y=data_old_2[i], name="Année " + str(annees[i])))
 
-    fig.update_layout(title="Brevets et logiciels déposés de 2015 à 2019",
+    fig.update_layout(title="Brevets et logiciels déposés de 2015 à 2019, comparaison annuelle par trimestre",
                       xaxis_title="Années",
                       yaxis_title=titre[1])
     return fig
@@ -317,7 +317,7 @@ def fig_old_dire_5():
     fig = go.Figure(data=donnee)
 
     # Ajout d'un titre
-    fig.update_layout(title="Contribution au financement de l\'école de 2015 à 2019, graphique en bâton",
+    fig.update_layout(title="Contribution au financement de l\'école de 2015 à 2019, vision annuelle",
                       xaxis_title="Années",
                       yaxis_title=titre[2])
 
@@ -373,7 +373,7 @@ def fig_old_dire_6():
 
         fig.add_trace(go.Scatter(x=trimestre, y=data_old_3[i], name="Année " + str(annees[i])))
 
-    fig.update_layout(title="Contribution au financement de l\'école de 2015 à 2019",
+    fig.update_layout(title="Contribution au financement de l\'école de 2015 à 2019, comparaison annuelle par trimestre",
                       xaxis_title="Années",
                       yaxis_title=titre[2])
     return fig

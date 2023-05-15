@@ -33,18 +33,20 @@ selected_label = label
 
 def fig_test(donnes, annees, labels):
     donnee = []
-    print(annees)
+    #print(annees)
     print(donnes)
+    print(df_fig.data_old)
     for i, annee in enumerate(annees):
         print(i)
-        donnee.append(
-            go.Bar(
-                x=[annees[i]],
-                y=[donnes[i]],
-                name=str(annee),
-                width=0.8,
+        if (i < 4) : #A supprimer après avoir résolu le problème
+            donnee.append(
+                go.Bar(
+                    x=[annees[i]],
+                    y=[donnes[i]],
+                    name=str(annee),
+                    width=0.8,
+                )
             )
-        )
 
     fig = go.Figure(data=donnee)
 
