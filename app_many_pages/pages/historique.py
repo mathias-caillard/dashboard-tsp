@@ -16,7 +16,8 @@ dash.register_page(
 
 )
 
-annee = [x for x in range(2015, 2020)]   #A MODIFIER PLUS TARD
+
+annee = config.list_annee
 trimestre = config.trimestre
 titre = data.titres
 label = [[str(year) + " - " + tri for tri in trimestre] for year in annee]

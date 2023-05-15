@@ -1,4 +1,5 @@
 import os
+import pandas as pd
 
 
 
@@ -12,8 +13,17 @@ chemin_absolu_rep_parent = os.path.abspath(rep_parent)
 
 
 #Chemin absolu des fichiers excels
-excel_path = os.path.join(chemin_absolu_rep_parent, 'assets\\Saisie-2023-INDICATEUR-DE-SUIVI-Ti-2.xlsx')
-excel_path2 = os.path.join(chemin_absolu_rep_parent, 'assets\\Historique-Indicateurs-Quadri.xlsx')
+excel_path = os.path.join(chemin_absolu_rep_parent, 'assets\\Saisie-2023-INDICATEUR-DE-SUIVI-Ti-2.xlsx') #données pour l'année 2023
+excel_path2 = os.path.join(chemin_absolu_rep_parent, 'assets\\Historique-Indicateurs-Quadri.xlsx') #historique des données pour les années
+
+#Récupération des années des historiques
+df_annee = dataframe = pd.read_excel(excel_path2, sheet_name = "Global", header=None, nrows=1)
+df_annee_cleaned = df_annee.dropna(axis=1).drop(df_annee.columns[0], axis=1)
+
+list_annee = df_annee_cleaned.iloc[0].tolist()
+list_annee.reverse()
+
+
 
 
 #Couleurs pour les graphes
