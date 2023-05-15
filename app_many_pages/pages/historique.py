@@ -7,7 +7,6 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 
-
 dash.register_page(
     __name__,
     title = "Historique",
