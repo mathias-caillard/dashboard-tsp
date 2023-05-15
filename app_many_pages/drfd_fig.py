@@ -76,7 +76,7 @@ def fig_drfd_1() :
         i+=1
 
     #Ajout d'un titre
-    fig.update_layout(title = "Chiffres sur la recherche à Télécom Sudparis pondérés par les effectifs", xaxis_title='Départements', yaxis_title = y_axis[0])
+    fig.update_layout(title = "Chiffres sur la recherche à Télécom Sudparis, pondérés par les effectifs", xaxis_title='Départements', yaxis_title = y_axis[0])
 
     return fig
 
@@ -95,7 +95,7 @@ def fig_drfd_2() :
         i+=1
 
     #Ajout d'un titre
-    fig2.update_layout(title = "Nombre de doctorants à Télécom SudParis pondéré par les effectifs", xaxis_title='Départements', yaxis_title = y_axis[1])
+    fig2.update_layout(title = "Nombre de doctorants à Télécom SudParis, pondéré par les effectifs", xaxis_title='Départements', yaxis_title = y_axis[1])
 
     return fig2
 
@@ -107,7 +107,7 @@ def fig_drfd_3():
 
 
     #Ajout d'un titre
-    fig3.update_layout(title = "Evolution des publications dans le temps" ,xaxis_title='Années', yaxis_title = y_axis[0])
+    fig3.update_layout(title = "Evolution des publications par année" ,xaxis_title='Années', yaxis_title = y_axis[0])
 
     return fig3
 
@@ -126,7 +126,7 @@ def fig_drfd_4() :
 
 
     #Ajout d'un titre
-    fig4.update_layout(title = "Evolution du nombre de doctorants dans le temps", xaxis_title='Années', yaxis_title = y_axis[1])
+    fig4.update_layout(title = "Evolution du nombre de doctorants par année", xaxis_title='Années', yaxis_title = y_axis[1])
 
     return fig4
 
@@ -213,7 +213,7 @@ def fig_old_drfd_2():
 
         fig.add_trace(go.Scatter(x=trimestre, y=data_old_1[i], name="Année " + str(annees[i])))
 
-    fig.update_layout(title="Total des publications de 2015 à 2019",
+    fig.update_layout(title="Total des publications de 2015 à 2019, comparaison annuelle par trimestre",
                       xaxis_title="Années",
                       yaxis_title=titre[0])
     return fig
@@ -234,7 +234,7 @@ def fig_old_drfd_3():
     fig = go.Figure(data=donnee)
 
     # Ajout d'un titre
-    fig.update_layout(title="Nombre de doctorants de 2015 à 2019, graphique en bâton",
+    fig.update_layout(title="Nombre de doctorants de 2015 à 2019, vision annuelle",
                       xaxis_title="Années",
                       yaxis_title=titre[1])
 
@@ -292,7 +292,7 @@ def fig_old_drfd_4():
 
         fig.add_trace(go.Scatter(x=trimestre, y=data_old_2[i], name="Année " + str(annees[i])))
 
-    fig.update_layout(title="Nombre de doctorants de 2015 à 2019",
+    fig.update_layout(title="Nombre de doctorants de 2015 à 2019, comparaison annuelle par trimestre",
                       xaxis_title="Années",
                       yaxis_title=titre[1])
     return fig

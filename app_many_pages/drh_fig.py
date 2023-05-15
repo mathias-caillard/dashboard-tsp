@@ -111,7 +111,7 @@ def fig_drh_4():
                                  , marker=dict(color = 4*[couleurs_dept[i]])
                                  , line=dict(color = couleurs_dept[i])))
 
-    fig.update_layout(title='Evolution temporelle du nombre de non-permanents en ETPT', yaxis_title=y_axis_tri[0])
+    fig.update_layout(title='Evolution temporelle du nombre de non-permanents en ETPT, comparaison annuelle par trimestre', yaxis_title=y_axis_tri[0])
     return fig
 
 
@@ -142,7 +142,7 @@ def fig_old_drh_1():
     fig = go.Figure(data=donnee)
 
     # Ajout d'un titre
-    fig.update_layout(title="Permanents en ETPT de 2015 à 2019, graphique en bâton",
+    fig.update_layout(title="Permanents en ETPT de 2015 à 2019, vision annuelle",
                       xaxis_title="Années",
                       yaxis_title=titre[0])
     return fig
@@ -196,7 +196,7 @@ def fig_old_drh_2():
 
         fig.add_trace(go.Scatter(x=trimestre, y=data_old_1[i], name="Année " + str(annees[i])))
 
-    fig.update_layout(title="Permanents en ETPT de 2015 à 2019",
+    fig.update_layout(title="Permanents en ETPT de 2015 à 2019, comparaison annuelle par trimestre",
                       xaxis_title="Années",
                       yaxis_title=titre[0])
     return fig
@@ -217,7 +217,7 @@ def fig_old_drh_3():
     fig = go.Figure(data=donnee)
 
     # Ajout d'un titre
-    fig.update_layout(title="Non-permanents en ETPT de 2015 à 2019, graphique en bâton",
+    fig.update_layout(title="Non-permanents en ETPT de 2015 à 2019, vision annuelle",
                       xaxis_title="Années",
                       yaxis_title=titre[1])
     # barmode="group")
@@ -276,7 +276,7 @@ def fig_old_drh_4():
 
         fig.add_trace(go.Scatter(x=trimestre, y=data_old_2[i], name="Année " + str(annees[i])))
 
-    fig.update_layout(title="Non-permanents en ETPT de 2015 à 2019",
+    fig.update_layout(title="Non-permanents en ETPT de 2015 à 2019, comparaison annuelle par trimestre",
                       xaxis_title="Années",
                       yaxis_title=titre[1])
     return fig
