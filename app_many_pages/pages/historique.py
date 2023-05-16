@@ -21,7 +21,9 @@ annee = config.list_annee
 trimestre = config.trimestre
 couleurs_trimestres = config.couleurs_trimestres
 
-titres = data.titres
+titres_y = data.titres_y
+titres_graphe = data.titres_graphe
+effectif_dept = data.effectif_dept
 label = [[str(year) + " - " + tri for tri in trimestre] for year in annee]
 
 
@@ -37,7 +39,73 @@ selected_label = label
 #Catégories du menu déroulant
 categories = [
     # DF
-    {"label": "DF - Total des indicateurs en heures équivalentes - Graphe bâton", "value": "df_old_1"}
+    {"label": "DF - " + titres_graphe[0] + " ,vision annuelle", "value": "df_old_1_an"},
+    {"label": "DF - " + titres_graphe[0] + " ,vision trimestrielle", "value": "df_old_1_tri"},
+    {"label": "DF - " + titres_graphe[0] + " ,total annuel", "value": "df_old_1_tot"},
+    {"label": "DF - " + titres_graphe[0] + " ,comparaison annuelle par trimestre", "value": "df_old_1_comp"},
+
+    #DAF
+    {"label": "DAF - " + titres_graphe[1] + " ,vision annuelle", "value": "daf_old_1_an"},
+    {"label": "DAF - " + titres_graphe[1] + " ,vision trimestrielle", "value": "daf_old_1_tri"},
+    {"label": "DAF - " + titres_graphe[1] + " ,total annuel", "value": "daf_old_1_tot"},
+    {"label": "DAF - " + titres_graphe[1] + " ,comparaison annuelle par trimestre", "value": "daf_old_1_comp"},
+    {"label": "DAF - " + titres_graphe[2] + " ,vision annuelle", "value": "daf_old_2_an"},
+    {"label": "DAF - " + titres_graphe[2] + " ,vision trimestrielle", "value": "daf_old_2_tri"},
+    {"label": "DAF - " + titres_graphe[2] + " ,total annuel", "value": "daf_old_2_tot"},
+    {"label": "DAF - " + titres_graphe[2] + " ,comparaison annuelle par trimestre", "value": "daf_old_2_comp"},
+    {"label": "DAF - " + titres_graphe[3] + " ,vision annuelle", "value": "daf_old_3_an"},
+    {"label": "DAF - " + titres_graphe[3] + " ,vision trimestrielle", "value": "daf_old_3_tri"},
+    {"label": "DAF - " + titres_graphe[3] + " ,total annuel", "value": "daf_old_3_tot"},
+    {"label": "DAF - " + titres_graphe[3] + " ,comparaison annuelle par trimestre", "value": "daf_old_3_comp"},
+
+    #DIRE
+    {"label": "DIRE - " + titres_graphe[4] + " ,vision annuelle", "value": "dire_old_1_an"},
+    {"label": "DIRE - " + titres_graphe[4] + " ,vision trimestrielle", "value": "dire_old_1_tri"},
+    {"label": "DIRE - " + titres_graphe[4] + " ,total annuel", "value": "dire_old_1_tot"},
+    {"label": "DIRE - " + titres_graphe[4] + " ,comparaison annuelle par trimestre", "value": "dire_old_1_comp"},
+    {"label": "DIRE - " + titres_graphe[5] + " ,vision annuelle", "value": "dire_old_2_an"},
+    {"label": "DIRE - " + titres_graphe[5] + " ,vision trimestrielle", "value": "dire_old_2_tri"},
+    {"label": "DIRE - " + titres_graphe[5] + " ,total annuel", "value": "dire_old_2_tot"},
+    {"label": "DIRE - " + titres_graphe[5] + " ,comparaison annuelle par trimestre", "value": "dire_old_2_comp"},
+    {"label": "DIRE - " + titres_graphe[6] + " ,vision annuelle", "value": "dire_old_3_an"},
+    {"label": "DIRE - " + titres_graphe[6] + " ,vision trimestrielle", "value": "dire_old_3_tri"},
+    {"label": "DIRE - " + titres_graphe[6] + " ,total annuel", "value": "dire_old_3_tot"},
+    {"label": "DIRE - " + titres_graphe[6] + " ,comparaison annuelle par trimestre", "value": "dire_old_3_comp"},
+
+    #DRFD
+    {"label": "DRFD - " + titres_graphe[7] + " ,vision annuelle", "value": "drfd_old_1_an"},
+    {"label": "DRFD - " + titres_graphe[7] + " ,vision trimestrielle", "value": "drfd_old_1_tri"},
+    {"label": "DRFD - " + titres_graphe[7] + " ,total annuel", "value": "drfd_old_1_tot"},
+    {"label": "DRFD - " + titres_graphe[7] + " ,comparaison annuelle par trimestre", "value": "drfd_old_1_comp"},
+    {"label": "DRFD - " + titres_graphe[8] + " ,vision annuelle", "value": "drfd_old_2_an"},
+    {"label": "DRFD - " + titres_graphe[8] + " ,vision trimestrielle", "value": "drfd_old_2_tri"},
+    {"label": "DRFD - " + titres_graphe[8] + " ,total annuel", "value": "drfd_old_2_tot"},
+    {"label": "DRFD - " + titres_graphe[8] + " ,comparaison annuelle par trimestre", "value": "drfd_old_2_comp"},
+
+    #DRH
+    {"label": "DRH - " + titres_graphe[9] + " ,vision annuelle", "value": "drh_old_1_an"},
+    {"label": "DRH - " + titres_graphe[9] + " ,vision trimestrielle", "value": "drh_old_1_tri"},
+    {"label": "DRH - " + titres_graphe[9] + " ,total annuel", "value": "drh_old_1_tot"},
+    {"label": "DRH - " + titres_graphe[9] + " ,comparaison annuelle par trimestre", "value": "drh_old_1_comp"},
+    {"label": "DRH - " + titres_graphe[10] + " ,vision annuelle", "value": "drh_old_2_an"},
+    {"label": "DRH - " + titres_graphe[10] + " ,vision trimestrielle", "value": "drh_old_2_tri"},
+    {"label": "DRH - " + titres_graphe[10] + " ,total annuel", "value": "drh_old_2_tot"},
+    {"label": "DRH - " + titres_graphe[10] + " ,comparaison annuelle par trimestre", "value": "drh_old_2_comp"},
+
+
+    #ARTEMIS
+
+    #CITI
+
+    #EPH
+
+    #INF
+
+    #RS2M
+
+    #RST
+
+
 
 ]
 
@@ -56,7 +124,7 @@ def fig_old_annuelle_baton(donnees, years, labels, titre_graphe, titre_y):
     fig = go.Figure(data=Y)
 
     # Ajout d'un titre
-    fig.update_layout(title=titre_graphe + str(years[0]) + " à " + str(years[-1]) + ", graphique en bâton",
+    fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ", vision annuelle",
                       xaxis_title="Temps",
                       yaxis_title=titre_y)
 
@@ -79,7 +147,7 @@ def fig_old_trimestrielle(donnees, years, labels, titre_graphe, titre_y):
     fig = go.Figure(data=Y)
 
     # Ajout d'un titre
-    fig.update_layout(title=titre_graphe + str(years[0]) + " à " + str(years[-1]) + ", vision trimestrielle",
+    fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ", vision trimestrielle",
                       xaxis_title="Temps",
                       yaxis_title=titre_y)
 
@@ -99,7 +167,7 @@ def fig_old_total(donnees, years, titre_graphe, titre_y):
     fig = go.Figure(data=Y)
 
     # Ajout d'un titre
-    fig.update_layout(title=titre_graphe + str(years[0]) + " à " + str(years[-1]) + ", total annuel",
+    fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ", total annuel",
                       xaxis_title="Années",
                       yaxis_title=titre_y)
 
@@ -110,7 +178,7 @@ def fig_old_annuelle_courbe(donnees, years, titre_graphe, titre_y):
     for i in range(len(years)):
         fig.add_trace(go.Scatter(x=trimestre, y=donnees[i], name="Année " + str(years[i])))
 
-    fig.update_layout(title=titre_graphe + str(years[0]) + " à " + str(years[-1]) +", comparaison annuelle par trimestre",
+    fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) +", comparaison annuelle par trimestre",
                       xaxis_title="Trimestre",
                       yaxis_title=titre_y)
     return fig

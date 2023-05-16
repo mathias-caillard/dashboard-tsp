@@ -76,4 +76,47 @@ def extract_titre(list_line):
         titles.append(df.iloc[i-2, 0])
     return titles
 
-titres = extract_titre(liste_lignes)
+titres_y = extract_titre(liste_lignes)
+
+
+titres_graphe = [#DF
+                 "Total général des indicateurs en heures équivalentes",
+                 #DAF
+                 "Dépenses de vacataires",
+                 "Ressources propres totales",
+                 "Total des dépenses hors permanents et vacataires",
+                 #DIRE
+                 "CA sur contrats de recherche",
+                 "Brevets et logiciels déposés",
+                 "Contribution au financement de l\'école",
+                 #DRFD
+                 "Total des publications",
+                 "Nombre de doctorants",
+                 #DRH
+                 "Permanents en ETPT",
+                 "Non-permanents en ETPT"
+                ]
+
+def extract_effectif():
+    # Chemin du fichier excel défini dans config.py
+    excel_path = config.excel_path2
+    # afficher toutes les colonnes (dans le terminal) des dataframes issues des lectures des fichiers Excel
+    pd.set_option('display.max_columns', None)
+    ligneNumber = 22    #ligne des effectifs
+    TAB = []
+    for k in range(1,7):
+        df = pd.read_excel(excel_path, sheet_name=sheet_names[k])
+        ligne = df.iloc[ligneNumber - 2]  # ligneNumber est la ligne dans le fichier excel
+        nouveau_df = ligne.to_frame().T
+        tab = []
+        for i in range(colonneFinData, colonneDebutData, -4):
+            tab_i = []
+            for j in range(3):
+                tab_i.append(nouveau_df.iloc[0, i - j - 1])
+            tab_i = quadri_to_tri(tab_i)
+            tab.append(tab_i)
+        TAB.append(tab)
+    return TAB
+
+
+effectif_dept = extract_effectif()
