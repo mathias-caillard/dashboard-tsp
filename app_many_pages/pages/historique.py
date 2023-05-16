@@ -19,7 +19,9 @@ dash.register_page(
 
 annee = config.list_annee
 trimestre = config.trimestre
-titre = data.titres
+couleurs_trimestres = config.couleurs_trimestres
+
+titres = data.titres
 label = [[str(year) + " - " + tri for tri in trimestre] for year in annee]
 
 
@@ -39,7 +41,79 @@ categories = [
 
 ]
 
+def fig_old_annuelle_baton(donnees, years, labels, titre_graphe, titre_y):
+    Y=[]
+    for i, year in enumerate(years):
+        Y.append(
+            go.Bar(
+                x=labels[i],
+                y=donnees[i],
+                name=str(annee),
+                width=0.8,
+            )
+        )
 
+    fig = go.Figure(data=Y)
+
+    # Ajout d'un titre
+    fig.update_layout(title=titre_graphe + str(years[0]) + " à " + str(years[-1]) + ", graphique en bâton",
+                      xaxis_title="Temps",
+                      yaxis_title=titre_y)
+
+    return fig
+
+def fig_old_trimestrielle(donnees, years, labels, titre_graphe, titre_y):
+    Y = []
+    for i, annee in enumerate(years):
+        Y.append(
+            go.Bar(
+                x=labels[i],
+                y=donnees[i],
+                name=str(annee),
+                marker=dict(color=couleurs_trimestres),
+                width=0.8,
+
+            )
+        )
+
+    fig = go.Figure(data=Y)
+
+    # Ajout d'un titre
+    fig.update_layout(title=titre_graphe + str(years[0]) + " à " + str(years[-1]) + ", vision trimestrielle",
+                      xaxis_title="Temps",
+                      yaxis_title=titre_y)
+
+    return fig
+
+def fig_old_total(donnees, years, titre_graphe, titre_y):
+    Y = []
+    for i, annee in enumerate(years):
+        Y.append(
+            go.Bar(
+                x=[str(annee)],
+                y=[sum(donnees[i])],
+                name=str(annee),
+            )
+        )
+
+    fig = go.Figure(data=Y)
+
+    # Ajout d'un titre
+    fig.update_layout(title=titre_graphe + str(years[0]) + " à " + str(years[-1]) + ", total annuel",
+                      xaxis_title="Années",
+                      yaxis_title=titre_y)
+
+    return fig
+
+def fig_old_annuelle_courbe(donnees, years, titre_graphe, titre_y):
+    fig = go.Figure()
+    for i in range(len(years)):
+        fig.add_trace(go.Scatter(x=trimestre, y=donnees[i], name="Année " + str(years[i])))
+
+    fig.update_layout(title=titre_graphe + str(years[0]) + " à " + str(years[-1]) +", comparaison annuelle par trimestre",
+                      xaxis_title="Trimestre",
+                      yaxis_title=titre_y)
+    return fig
 
 def fig_test(donnes, annees, labels):
     donnee = []
@@ -59,7 +133,7 @@ def fig_test(donnes, annees, labels):
     # Ajout d'un titre
     fig.update_layout(title="Total général des indicateurs en heures équivalentes de " + str(annees[0]) + " à " + str(annees[-1]) + ", graphique en bâton",
                       xaxis_title="Années",
-                      yaxis_title=titre[0])
+                      yaxis_title=titres[0])
 
     return fig
 
