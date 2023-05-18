@@ -14,7 +14,7 @@ chemin_absolu_rep_parent = os.path.abspath(rep_parent)
 
 #Chemin absolu des fichiers excels
 excel_path = os.path.join(chemin_absolu_rep_parent, 'assets\\Saisie-2023-INDICATEUR-DE-SUIVI-Ti-2.xlsx') #données pour l'année 2023
-excel_path2 = os.path.join(chemin_absolu_rep_parent, 'assets\\Historique-Indicateurs-Quadri.xlsx') #historique des données pour les années
+excel_path2 = os.path.join(chemin_absolu_rep_parent, 'assets\\Historique-Indicateurs-Quadri-2.xlsx') #historique des données pour les années
 
 #Récupération des années des historiques
 df_annee = dataframe = pd.read_excel(excel_path2, sheet_name = "Global", header=None, nrows=1)

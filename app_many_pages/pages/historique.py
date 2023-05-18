@@ -6,7 +6,6 @@ from app_many_pages import config
 import plotly.express as px
 import plotly.graph_objects as go
 
-
 dash.register_page(
     __name__,
     title = "Historique",
@@ -15,7 +14,6 @@ dash.register_page(
     active= False
 
 )
-
 
 annee = config.list_annee
 trimestre = config.trimestre
@@ -28,7 +26,7 @@ label = [[str(year) + " - " + tri for tri in trimestre] for year in annee]
 
 
 #Récupération des données
-data_old_global = [df_fig.data_old + daf_fig.data_old + dire_fig.data_old + drfd_fig.data_old + drh_fig.data_old]
+data_old_global = df_fig.data_old + daf_fig.data_old + dire_fig.data_old + drfd_fig.data_old + drh_fig.data_old
 
 #Initialisation des paramètres
 selected_global = data_old_global
@@ -39,58 +37,58 @@ selected_label = label
 #Catégories du menu déroulant
 categories = [
     # DF
-    {"label": "DF - " + titres_graphe[0] + " ,vision annuelle", "value": "df_old_1_an"},
-    {"label": "DF - " + titres_graphe[0] + " ,vision trimestrielle", "value": "df_old_1_tri"},
-    {"label": "DF - " + titres_graphe[0] + " ,total annuel", "value": "df_old_1_tot"},
-    {"label": "DF - " + titres_graphe[0] + " ,comparaison annuelle par trimestre", "value": "df_old_1_comp"},
+    {"label": "DF - " + titres_graphe[0] + ", vision annuelle", "value": "df_old_1_an"},
+    {"label": "DF - " + titres_graphe[0] + ", vision trimestrielle", "value": "df_old_1_tri"},
+    {"label": "DF - " + titres_graphe[0] + ", total annuel", "value": "df_old_1_tot"},
+    {"label": "DF - " + titres_graphe[0] + ", comparaison annuelle par trimestre", "value": "df_old_1_comp"},
 
     #DAF
-    {"label": "DAF - " + titres_graphe[1] + " ,vision annuelle", "value": "daf_old_1_an"},
-    {"label": "DAF - " + titres_graphe[1] + " ,vision trimestrielle", "value": "daf_old_1_tri"},
-    {"label": "DAF - " + titres_graphe[1] + " ,total annuel", "value": "daf_old_1_tot"},
-    {"label": "DAF - " + titres_graphe[1] + " ,comparaison annuelle par trimestre", "value": "daf_old_1_comp"},
-    {"label": "DAF - " + titres_graphe[2] + " ,vision annuelle", "value": "daf_old_2_an"},
-    {"label": "DAF - " + titres_graphe[2] + " ,vision trimestrielle", "value": "daf_old_2_tri"},
-    {"label": "DAF - " + titres_graphe[2] + " ,total annuel", "value": "daf_old_2_tot"},
-    {"label": "DAF - " + titres_graphe[2] + " ,comparaison annuelle par trimestre", "value": "daf_old_2_comp"},
-    {"label": "DAF - " + titres_graphe[3] + " ,vision annuelle", "value": "daf_old_3_an"},
-    {"label": "DAF - " + titres_graphe[3] + " ,vision trimestrielle", "value": "daf_old_3_tri"},
-    {"label": "DAF - " + titres_graphe[3] + " ,total annuel", "value": "daf_old_3_tot"},
-    {"label": "DAF - " + titres_graphe[3] + " ,comparaison annuelle par trimestre", "value": "daf_old_3_comp"},
+    {"label": "DAF - " + titres_graphe[1] + ", vision annuelle", "value": "daf_old_1_an"},
+    {"label": "DAF - " + titres_graphe[1] + ", vision trimestrielle", "value": "daf_old_1_tri"},
+    {"label": "DAF - " + titres_graphe[1] + ", total annuel", "value": "daf_old_1_tot"},
+    {"label": "DAF - " + titres_graphe[1] + ", comparaison annuelle par trimestre", "value": "daf_old_1_comp"},
+    {"label": "DAF - " + titres_graphe[2] + ", vision annuelle", "value": "daf_old_2_an"},
+    {"label": "DAF - " + titres_graphe[2] + ", vision trimestrielle", "value": "daf_old_2_tri"},
+    {"label": "DAF - " + titres_graphe[2] + ", total annuel", "value": "daf_old_2_tot"},
+    {"label": "DAF - " + titres_graphe[2] + ", comparaison annuelle par trimestre", "value": "daf_old_2_comp"},
+    {"label": "DAF - " + titres_graphe[3] + ", vision annuelle", "value": "daf_old_3_an"},
+    {"label": "DAF - " + titres_graphe[3] + ", vision trimestrielle", "value": "daf_old_3_tri"},
+    {"label": "DAF - " + titres_graphe[3] + ", total annuel", "value": "daf_old_3_tot"},
+    {"label": "DAF - " + titres_graphe[3] + ", comparaison annuelle par trimestre", "value": "daf_old_3_comp"},
 
     #DIRE
-    {"label": "DIRE - " + titres_graphe[4] + " ,vision annuelle", "value": "dire_old_1_an"},
-    {"label": "DIRE - " + titres_graphe[4] + " ,vision trimestrielle", "value": "dire_old_1_tri"},
-    {"label": "DIRE - " + titres_graphe[4] + " ,total annuel", "value": "dire_old_1_tot"},
-    {"label": "DIRE - " + titres_graphe[4] + " ,comparaison annuelle par trimestre", "value": "dire_old_1_comp"},
-    {"label": "DIRE - " + titres_graphe[5] + " ,vision annuelle", "value": "dire_old_2_an"},
-    {"label": "DIRE - " + titres_graphe[5] + " ,vision trimestrielle", "value": "dire_old_2_tri"},
-    {"label": "DIRE - " + titres_graphe[5] + " ,total annuel", "value": "dire_old_2_tot"},
-    {"label": "DIRE - " + titres_graphe[5] + " ,comparaison annuelle par trimestre", "value": "dire_old_2_comp"},
-    {"label": "DIRE - " + titres_graphe[6] + " ,vision annuelle", "value": "dire_old_3_an"},
-    {"label": "DIRE - " + titres_graphe[6] + " ,vision trimestrielle", "value": "dire_old_3_tri"},
-    {"label": "DIRE - " + titres_graphe[6] + " ,total annuel", "value": "dire_old_3_tot"},
-    {"label": "DIRE - " + titres_graphe[6] + " ,comparaison annuelle par trimestre", "value": "dire_old_3_comp"},
+    {"label": "DIRE - " + titres_graphe[4] + ", vision annuelle", "value": "dire_old_1_an"},
+    {"label": "DIRE - " + titres_graphe[4] + ", vision trimestrielle", "value": "dire_old_1_tri"},
+    {"label": "DIRE - " + titres_graphe[4] + ", total annuel", "value": "dire_old_1_tot"},
+    {"label": "DIRE - " + titres_graphe[4] + ", comparaison annuelle par trimestre", "value": "dire_old_1_comp"},
+    {"label": "DIRE - " + titres_graphe[5] + ", vision annuelle", "value": "dire_old_2_an"},
+    {"label": "DIRE - " + titres_graphe[5] + ", vision trimestrielle", "value": "dire_old_2_tri"},
+    {"label": "DIRE - " + titres_graphe[5] + ", total annuel", "value": "dire_old_2_tot"},
+    {"label": "DIRE - " + titres_graphe[5] + ", comparaison annuelle par trimestre", "value": "dire_old_2_comp"},
+    {"label": "DIRE - " + titres_graphe[6] + ", vision annuelle", "value": "dire_old_3_an"},
+    {"label": "DIRE - " + titres_graphe[6] + ", vision trimestrielle", "value": "dire_old_3_tri"},
+    {"label": "DIRE - " + titres_graphe[6] + ", total annuel", "value": "dire_old_3_tot"},
+    {"label": "DIRE - " + titres_graphe[6] + ", comparaison annuelle par trimestre", "value": "dire_old_3_comp"},
 
     #DRFD
-    {"label": "DRFD - " + titres_graphe[7] + " ,vision annuelle", "value": "drfd_old_1_an"},
-    {"label": "DRFD - " + titres_graphe[7] + " ,vision trimestrielle", "value": "drfd_old_1_tri"},
-    {"label": "DRFD - " + titres_graphe[7] + " ,total annuel", "value": "drfd_old_1_tot"},
-    {"label": "DRFD - " + titres_graphe[7] + " ,comparaison annuelle par trimestre", "value": "drfd_old_1_comp"},
-    {"label": "DRFD - " + titres_graphe[8] + " ,vision annuelle", "value": "drfd_old_2_an"},
-    {"label": "DRFD - " + titres_graphe[8] + " ,vision trimestrielle", "value": "drfd_old_2_tri"},
-    {"label": "DRFD - " + titres_graphe[8] + " ,total annuel", "value": "drfd_old_2_tot"},
-    {"label": "DRFD - " + titres_graphe[8] + " ,comparaison annuelle par trimestre", "value": "drfd_old_2_comp"},
+    {"label": "DRFD - " + titres_graphe[7] + ", vision annuelle", "value": "drfd_old_1_an"},
+    {"label": "DRFD - " + titres_graphe[7] + ", vision trimestrielle", "value": "drfd_old_1_tri"},
+    {"label": "DRFD - " + titres_graphe[7] + ", total annuel", "value": "drfd_old_1_tot"},
+    {"label": "DRFD - " + titres_graphe[7] + ", comparaison annuelle par trimestre", "value": "drfd_old_1_comp"},
+    {"label": "DRFD - " + titres_graphe[8] + ", vision annuelle", "value": "drfd_old_2_an"},
+    {"label": "DRFD - " + titres_graphe[8] + ", vision trimestrielle", "value": "drfd_old_2_tri"},
+    {"label": "DRFD - " + titres_graphe[8] + ", total annuel", "value": "drfd_old_2_tot"},
+    {"label": "DRFD - " + titres_graphe[8] + ", comparaison annuelle par trimestre", "value": "drfd_old_2_comp"},
 
     #DRH
-    {"label": "DRH - " + titres_graphe[9] + " ,vision annuelle", "value": "drh_old_1_an"},
-    {"label": "DRH - " + titres_graphe[9] + " ,vision trimestrielle", "value": "drh_old_1_tri"},
-    {"label": "DRH - " + titres_graphe[9] + " ,total annuel", "value": "drh_old_1_tot"},
-    {"label": "DRH - " + titres_graphe[9] + " ,comparaison annuelle par trimestre", "value": "drh_old_1_comp"},
-    {"label": "DRH - " + titres_graphe[10] + " ,vision annuelle", "value": "drh_old_2_an"},
-    {"label": "DRH - " + titres_graphe[10] + " ,vision trimestrielle", "value": "drh_old_2_tri"},
-    {"label": "DRH - " + titres_graphe[10] + " ,total annuel", "value": "drh_old_2_tot"},
-    {"label": "DRH - " + titres_graphe[10] + " ,comparaison annuelle par trimestre", "value": "drh_old_2_comp"},
+    {"label": "DRH - " + titres_graphe[9] + ", vision annuelle", "value": "drh_old_1_an"},
+    {"label": "DRH - " + titres_graphe[9] + ", vision trimestrielle", "value": "drh_old_1_tri"},
+    {"label": "DRH - " + titres_graphe[9] + ", total annuel", "value": "drh_old_1_tot"},
+    {"label": "DRH - " + titres_graphe[9] + ", comparaison annuelle par trimestre", "value": "drh_old_1_comp"},
+    {"label": "DRH - " + titres_graphe[10] + ", vision annuelle", "value": "drh_old_2_an"},
+    {"label": "DRH - " + titres_graphe[10] + ", vision trimestrielle", "value": "drh_old_2_tri"},
+    {"label": "DRH - " + titres_graphe[10] + ", total annuel", "value": "drh_old_2_tot"},
+    {"label": "DRH - " + titres_graphe[10] + ", comparaison annuelle par trimestre", "value": "drh_old_2_comp"},
 
 
     #ARTEMIS
@@ -105,8 +103,6 @@ categories = [
 
     #RST
 
-
-
 ]
 
 def fig_old_annuelle_baton(donnees, years, labels, titre_graphe, titre_y):
@@ -116,61 +112,51 @@ def fig_old_annuelle_baton(donnees, years, labels, titre_graphe, titre_y):
             go.Bar(
                 x=labels[i],
                 y=donnees[i],
-                name=str(annee),
+                name=str(year),
                 width=0.8,
             )
         )
-
     fig = go.Figure(data=Y)
-
     # Ajout d'un titre
     fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ", vision annuelle",
                       xaxis_title="Temps",
                       yaxis_title=titre_y)
-
     return fig
 
 def fig_old_trimestrielle(donnees, years, labels, titre_graphe, titre_y):
     Y = []
-    for i, annee in enumerate(years):
+    for i, year in enumerate(years):
         Y.append(
             go.Bar(
                 x=labels[i],
                 y=donnees[i],
-                name=str(annee),
+                name=str(year),
                 marker=dict(color=couleurs_trimestres),
                 width=0.8,
-
             )
         )
-
     fig = go.Figure(data=Y)
-
     # Ajout d'un titre
     fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ", vision trimestrielle",
                       xaxis_title="Temps",
                       yaxis_title=titre_y)
-
     return fig
 
 def fig_old_total(donnees, years, titre_graphe, titre_y):
     Y = []
-    for i, annee in enumerate(years):
+    for i, year in enumerate(years):
         Y.append(
             go.Bar(
-                x=[str(annee)],
+                x=[str(year)],
                 y=[sum(donnees[i])],
-                name=str(annee),
+                name=str(year),
             )
         )
-
     fig = go.Figure(data=Y)
-
     # Ajout d'un titre
     fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ", total annuel",
                       xaxis_title="Années",
                       yaxis_title=titre_y)
-
     return fig
 
 def fig_old_annuelle_courbe(donnees, years, titre_graphe, titre_y):
@@ -182,30 +168,6 @@ def fig_old_annuelle_courbe(donnees, years, titre_graphe, titre_y):
                       xaxis_title="Trimestre",
                       yaxis_title=titre_y)
     return fig
-
-def fig_test(donnes, annees, labels):
-    donnee = []
-    for i, annee in enumerate(annees):
-
-        donnee.append(
-            go.Bar(
-                x=labels[i],
-                y=donnes[i],
-                name=str(annee),
-                width=0.8,
-            )
-        )
-
-    fig = go.Figure(data=donnee)
-
-    # Ajout d'un titre
-    fig.update_layout(title="Total général des indicateurs en heures équivalentes de " + str(annees[0]) + " à " + str(annees[-1]) + ", graphique en bâton",
-                      xaxis_title="Années",
-                      yaxis_title=titres[0])
-
-    return fig
-
-
 
 layout = dbc.Container(children=[
     html.H1(
@@ -222,7 +184,6 @@ layout = dbc.Container(children=[
         marks={str(year): str(year) for year in annee},
         step=1
     ),
-
 
     html.H2(children='Sélections des graphes à afficher:'),
 
@@ -241,12 +202,6 @@ layout = dbc.Container(children=[
         dbc.Container(id="graph-container-historique",
             children=[],
             fluid = True),
-
-
-
-
-
-
     ],
 fluid = True
 )
@@ -329,10 +284,74 @@ def generate_graphs(selected_years, value):
     selected_annee = [year for year in range(selected_years[0], selected_years[1] + 1)]
     selected_label = filtered_label
 
+
     # Liste des graphiques disponibles
     graphs = {
         # DF
-        "df_old_1": fig_test(selected_global[0], selected_annee, selected_label),
+        "df_old_1_an": fig_old_annuelle_baton(selected_global[0], selected_annee, selected_label, titres_graphe[0], titres_y[0]),
+        "df_old_1_tri": fig_old_trimestrielle(selected_global[0], selected_annee, selected_label, titres_graphe[0], titres_y[0]),
+        "df_old_1_tot": fig_old_total(selected_global[0], selected_annee, titres_graphe[0], titres_y[0]),
+        "df_old_1_comp": fig_old_annuelle_courbe(selected_global[0], selected_annee, titres_graphe[0], titres_y[0]),
+
+        #DAF
+        "daf_old_1_an": fig_old_annuelle_baton(selected_global[1], selected_annee, selected_label, titres_graphe[1],titres_y[1]),
+        "daf_old_1_tri": fig_old_trimestrielle(selected_global[1], selected_annee, selected_label, titres_graphe[1],titres_y[1]),
+        "daf_old_1_tot": fig_old_total(selected_global[1], selected_annee, titres_graphe[1], titres_y[1]),
+        "daf_old_1_comp": fig_old_annuelle_courbe(selected_global[1], selected_annee, titres_graphe[1], titres_y[1]),
+        "daf_old_2_an": fig_old_annuelle_baton(selected_global[2], selected_annee, selected_label, titres_graphe[2],titres_y[2]),
+        "daf_old_2_tri": fig_old_trimestrielle(selected_global[2], selected_annee, selected_label, titres_graphe[2],titres_y[2]),
+        "daf_old_2_tot": fig_old_total(selected_global[2], selected_annee, titres_graphe[2], titres_y[2]),
+        "daf_old_2_comp": fig_old_annuelle_courbe(selected_global[2], selected_annee, titres_graphe[2], titres_y[2]),
+        "daf_old_3_an": fig_old_annuelle_baton(selected_global[3], selected_annee, selected_label, titres_graphe[3], titres_y[3]),
+        "daf_old_3_tri": fig_old_trimestrielle(selected_global[3], selected_annee, selected_label, titres_graphe[3], titres_y[3]),
+        "daf_old_3_tot": fig_old_total(selected_global[3], selected_annee, titres_graphe[3], titres_y[3]),
+        "daf_old_3_comp": fig_old_annuelle_courbe(selected_global[3], selected_annee, titres_graphe[3], titres_y[3]),
+
+        #DIRE
+        "dire_old_1_an": fig_old_annuelle_baton(selected_global[4], selected_annee, selected_label, titres_graphe[4], titres_y[4]),
+        "dire_old_1_tri": fig_old_trimestrielle(selected_global[4], selected_annee, selected_label, titres_graphe[4], titres_y[4]),
+        "dire_old_1_tot": fig_old_total(selected_global[4], selected_annee, titres_graphe[4], titres_y[4]),
+        "dire_old_1_comp": fig_old_annuelle_courbe(selected_global[4], selected_annee, titres_graphe[4], titres_y[4]),
+        "dire_old_2_an": fig_old_annuelle_baton(selected_global[5], selected_annee, selected_label, titres_graphe[5], titres_y[5]),
+        "dire_old_2_tri": fig_old_trimestrielle(selected_global[5], selected_annee, selected_label, titres_graphe[5], titres_y[5]),
+        "dire_old_2_tot": fig_old_total(selected_global[5], selected_annee, titres_graphe[5], titres_y[5]),
+        "dire_old_2_comp": fig_old_annuelle_courbe(selected_global[5], selected_annee, titres_graphe[5], titres_y[5]),
+        "dire_old_3_an": fig_old_annuelle_baton(selected_global[6], selected_annee, selected_label, titres_graphe[6], titres_y[6]),
+        "dire_old_3_tri": fig_old_trimestrielle(selected_global[6], selected_annee, selected_label, titres_graphe[6], titres_y[6]),
+        "dire_old_3_tot": fig_old_total(selected_global[6], selected_annee, titres_graphe[6], titres_y[6]),
+        "dire_old_3_comp": fig_old_annuelle_courbe(selected_global[6], selected_annee, titres_graphe[6], titres_y[6]),
+
+        #DRFD
+        "drfd_old_1_an": fig_old_annuelle_baton(selected_global[7], selected_annee, selected_label, titres_graphe[7], titres_y[7]),
+        "drfd_old_1_tri": fig_old_trimestrielle(selected_global[7], selected_annee, selected_label, titres_graphe[7], titres_y[7]),
+        "drfd_old_1_tot": fig_old_total(selected_global[7], selected_annee, titres_graphe[7], titres_y[7]),
+        "drfd_old_1_comp": fig_old_annuelle_courbe(selected_global[7], selected_annee, titres_graphe[7], titres_y[7]),
+        "drfd_old_2_an": fig_old_annuelle_baton(selected_global[8], selected_annee, selected_label, titres_graphe[8], titres_y[8]),
+        "drfd_old_2_tri": fig_old_trimestrielle(selected_global[8], selected_annee, selected_label, titres_graphe[8], titres_y[8]),
+        "drfd_old_2_tot": fig_old_total(selected_global[8], selected_annee, titres_graphe[8], titres_y[8]),
+        "drfd_old_2_comp": fig_old_annuelle_courbe(selected_global[8], selected_annee, titres_graphe[8], titres_y[8]),
+
+        #DRH
+        "drh_old_1_an": fig_old_annuelle_baton(selected_global[9], selected_annee, selected_label, titres_graphe[9], titres_y[9]),
+        "drh_old_1_tri": fig_old_trimestrielle(selected_global[9], selected_annee, selected_label, titres_graphe[9], titres_y[9]),
+        "drh_old_1_tot": fig_old_total(selected_global[9], selected_annee, titres_graphe[9], titres_y[9]),
+        "drh_old_1_comp": fig_old_annuelle_courbe(selected_global[9], selected_annee, titres_graphe[9], titres_y[9]),
+        "drh_old_2_an": fig_old_annuelle_baton(selected_global[10], selected_annee, selected_label, titres_graphe[10], titres_y[10]),
+        "drh_old_2_tri": fig_old_trimestrielle(selected_global[10], selected_annee, selected_label, titres_graphe[10], titres_y[10]),
+        "drh_old_2_tot": fig_old_total(selected_global[10], selected_annee, titres_graphe[10], titres_y[10]),
+        "drh_old_2_comp": fig_old_annuelle_courbe(selected_global[10], selected_annee, titres_graphe[10], titres_y[10]),
+
+        # ARTEMIS
+
+        # CITI
+
+        # EPH
+
+        # INF
+
+        # RS2M
+
+        # RST
 
     }
     if value is None:

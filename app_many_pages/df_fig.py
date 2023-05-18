@@ -214,7 +214,8 @@ sheetName = data.sheet_names[0]
 line = data.df_ligne[0]
 titre = data.extract_titre(data.df_ligne)
 annees = data.annees
-data_old = data.extract_data(sheetName, line)
+data_old_1 = data.extract_data(sheetName, line)
+data_old = [data_old_1]
 
 def fig_old_df_1():
 
@@ -224,7 +225,7 @@ def fig_old_df_1():
         donnee.append(
             go.Bar(
                 x=[str(annee) + ' - ' + trimestre[j] for j in range(4)],
-                y=data_old[i],
+                y=data_old_1[i],
                 name=str(annee),
                 width=0.8,
             )
@@ -246,7 +247,7 @@ def fig_old_tri_df_1():
         donnee.append(
             go.Bar(
                 x=[str(annee) + ' - ' + trimestre[j] for j in range(4)],
-                y=data_old[i],
+                y=data_old_1[i],
                 name=str(annee),
                 marker=dict(color=couleurs_trimestres),
                 width=0.8,
@@ -266,7 +267,7 @@ def fig_old_df_1_tot():
         donnee.append(
             go.Bar(
                 x=[str(annee)],
-                y=[sum(data_old[i])],
+                y=[sum(data_old_1[i])],
                 name=str(annee),
             )
         )
@@ -284,7 +285,7 @@ def fig_old_df_2():
     fig = go.Figure()
     for i in range(len(annees)):
 
-        fig.add_trace(go.Scatter(x=trimestre, y=data_old[i], name="Année " + str(annees[i])))
+        fig.add_trace(go.Scatter(x=trimestre, y=data_old_1[i], name="Année " + str(annees[i])))
 
     fig.update_layout(title="Total général des indicateurs en heures équivalentes de 2015 à 2019, comparaison annuelle par trimestre",
                       xaxis_title="Années",

@@ -22,10 +22,10 @@ def quadri_to_tri(tab):
     #l.append(sum(l))
     return l
 
-sheet_names = ["Global", "artemis", "CITI", "EPH", "INF", "RST", "RS2M"]
+sheet_names = ["Global", "artemis", "CITI", "EPH", "INF", "RS2M", "RST"]
 annees = [2015, 2016, 2017, 2018, 2019]
 colonneDebutData = 3
-colonneFinData = 22
+colonneFinData = 30
 colonneTitre = 0
 df_ligne = [10]     #Calcul bizarre
 daf_ligne = [24, 25, 27]
