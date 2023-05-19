@@ -137,7 +137,7 @@ def fig_dire_4():
 
 
 
-sheetName = data.sheet_names[0]
+sheetName = data.sheet_names[6]
 lines = data.dire_ligne
 titre = data.extract_titre(data.dire_ligne)
 annees = data.annees

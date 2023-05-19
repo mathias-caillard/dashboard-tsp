@@ -133,7 +133,7 @@ def fig_drfd_4() :
 
 
 
-sheetName = data.sheet_names[0]
+sheetName = data.sheet_names[6]
 lines = data.drfd_ligne
 titre = data.extract_titre(data.drfd_ligne)
 annees = data.annees

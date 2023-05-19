@@ -37,6 +37,7 @@ data_old_rs2m = rs2m_fig.data_old
 data_old_rst = rst_fig.data_old
 
 
+
 #Initialisation des paramètres
 selected_global = data_old_global
 selected_artemis = data_old_artemis
@@ -400,7 +401,7 @@ def fig_old_annuelle_baton(donnees, years, labels, titre_graphe, titre_y):
         )
     fig = go.Figure(data=Y)
     # Ajout d'un titre
-    fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ", vision annuelle",
+    fig.update_layout(title=titre_graphe + "    de " + str(years[0]) + " à " + str(years[-1]) + ", vision annuelle",
                       xaxis_title="Temps",
                       yaxis_title=titre_y)
     return fig

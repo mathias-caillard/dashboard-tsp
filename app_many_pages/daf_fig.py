@@ -283,7 +283,7 @@ def fig_daf_9():
     return fig
 
 
-sheetName = data.sheet_names[0]
+sheetName = data.sheet_names[6]
 lines = data.daf_ligne
 titre = data.extract_titre(data.daf_ligne)
 annees = data.annees

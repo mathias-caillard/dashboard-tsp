@@ -115,7 +115,7 @@ def fig_drh_4():
     return fig
 
 
-sheetName = data.sheet_names[0]
+sheetName = data.sheet_names[6]
 lines = data.drh_ligne
 titre = data.extract_titre(data.drh_ligne)
 annees = data.annees

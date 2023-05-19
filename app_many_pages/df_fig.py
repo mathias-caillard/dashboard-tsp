@@ -156,7 +156,7 @@ for indicateur in df2.Indicateur :
     y_axis_annuel.append(indicateur)
 
 valeur_annuel = []
-for i in range(débutColonneData, finColonneData):
+for i in range(débutColonneData, finColonneData + 1):
     valeur_annuel.append(df2.iloc[0, i])
 
 df2['Date'] = pd.to_datetime("2022-01-01")
@@ -210,7 +210,7 @@ def fig_df_2():
     return fig
 
 
-sheetName = data.sheet_names[0]
+sheetName = data.sheet_names[6]
 line = data.df_ligne[0]
 titre = data.extract_titre(data.df_ligne)
 annees = data.annees

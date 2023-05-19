@@ -23,6 +23,17 @@ app._favicon = "favicon.ico"
 # Définir une variable active_page initialement à la page d'accueil
 active_page = "/"
 
+annee = config.liste_annee
+
+
+
+
+#Importation des DATA
+data_df = data.data_df
+data_daf = data.data_daf
+data_dire = data.data_dire
+data_drfd = data.data_drfd
+data_drh = data.data_drh
 
 
 offcanvas = html.Div(
@@ -46,6 +57,17 @@ offcanvas = html.Div(
                     style={"width": 330},
                     inputFormat = "DD/MM/YYYY",
         ),
+                html.Hr(style={'borderTop': '2px solid #000000'}),
+
+                html.H3(children='Sélection de l\'année',
+                        style={'font-size': '18px'}),
+
+                dcc.Dropdown(
+                    id = "choix-annee",
+                    options = annee,
+                    multi = False,
+                    value=annee[0]
+                ),
 
                 html.Hr(style={'borderTop': '2px solid #000000'}),
 
@@ -177,6 +199,8 @@ style={'marginTop': '60px'},    #Contenu des pages sous la barre de navigation (
 fluid = True,
 id = "output-container-"
 )
+
+
 
 
 @app.callback(
