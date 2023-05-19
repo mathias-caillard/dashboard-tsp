@@ -110,7 +110,6 @@ layout = html.Div(children=[
     Input('choix-annee', 'value')
 )
 def update_output(selected_year):
-    print("UPDATE")
     if selected_year == 2023:
         selected_data_df = data_df_pond[-1]
         return fig_baton_total(selected_data_df,selected_year , titres_graphe[0], titres_y[0])
