@@ -463,6 +463,13 @@ def fig_old_total(donnees, years, titre_graphe, titre_y):
     #fig = go.Figure(data=Y)
 
     fig = px.bar(x=x, y=y, color=y, color_continuous_scale="Tealgrn")
+
+
+    fig.update_traces(hovertemplate="<br>".join([
+        "Année : %{x}",
+        "Total : %{y}",
+                      ]))
+
     # Ajout d'un titre
     fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ", total annuel",
                       xaxis_title="Années",
