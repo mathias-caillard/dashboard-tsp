@@ -197,3 +197,23 @@ def fig_baton_total(donnees, year, titre_graphe, titre_y):
 
 
 
+def data_moy(data) :
+    res = []
+    moyT1 = 0
+    moyT2 = 0
+    moyT3 = 0
+    moyT4 = 0
+
+    for d in data :
+        moyT1 = moyT1 + d[0]
+        moyT2 = moyT2 + d[1]
+        moyT3 = moyT3 + d[2]
+        moyT4 = moyT4 + d[3]
+
+    res.append(moyT1/len(data))
+    res.append(moyT2/len(data))
+    res.append(moyT3/len(data))
+    res.append(moyT4/len(data))
+
+    return res
+

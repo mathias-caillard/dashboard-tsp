@@ -4,6 +4,10 @@ import plotly.express as px
 import plotly.graph_objects as go
 import random
 import data
+from sklearn.preprocessing import LabelEncoder
+from sklearn.linear_model import LinearRegression
+import numpy as np
+from app_many_pages.data import data_moy
 
 #Import des couleurs
 couleurs = config.colors_dept
@@ -288,11 +292,38 @@ def fig_old_drfd_3_tot():
 
 def fig_old_drfd_4():
     fig = go.Figure()
+
+    # encoder les trimestre : passer d'un String à une valeur int
+    label_encoder = LabelEncoder()
+    trimestre_encoded = label_encoder.fit_transform([i + 1 for i, _ in enumerate(trimestre)])
+
+
     for i in range(len(annees)):
 
-        fig.add_trace(go.Scatter(x=trimestre, y=data_old_2[i], name="Année " + str(annees[i])))
+        fig.add_trace(go.Scatter(x=trimestre_encoded, y=data_old_2[i], name="Année " + str(annees[i])))
 
-    fig.update_layout(title="Nombre de doctorants de 2015 à 2019, comparaison annuelle par trimestre",
+    # Générer les données moyennes
+    y = data_moy(data_old_1)
+
+    # Courbe pour fitter les points
+    degree = 3 
+    model = LinearRegression()
+    model.fit(np.vander(trimestre_encoded, degree + 1), y)
+
+    # Generation des valeurs préditent
+    x_pred = np.arange(min(trimestre_encoded), max(trimestre_encoded), 0.1) 
+    y_pred = model.predict(np.vander(x_pred, degree + 1))  
+
+    # Ajouter la régression polynomiale
+    fig.add_trace(go.Scatter(x=x_pred, y=y_pred, name="Régression", line=dict(dash='dash', color='black'), marker=dict(size=10), visible='legendonly'))
+
+
+
+    fig.update_layout(title="Nombre de doctorants de " + str(config.liste_annee[-1]) + " à " + str(config.liste_annee[0]) + ", comparaison annuelle par trimestre",
                       xaxis_title="Années",
-                      yaxis_title=titre[1])
+                      yaxis_title=titre[1],
+                    xaxis = dict(
+                    tickvals=[0, 1, 2, 3],
+                    ticktext=['T1', 'T2', 'T3', 'T4'])
+        )
     return fig

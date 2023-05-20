@@ -142,26 +142,5 @@ def update_bar_chart(value):
 
 
 
-# Define the callback to update the bar chart when the date range is changed
-@callback(
-    Output("graph2_df", "figure"),
-    Input("date-range-picker", "value"),
-)
-def update_bar_chart(value):
-    # Convert the start_date and end_date strings to pandas Timestamps
-    start_date = value[0]
-    end_date = value[1]
-
-    start_date = pd.to_datetime(start_date)
-    end_date = pd.to_datetime(end_date)
-    df = get_df_DF_annuel()
-
-    # Filter the dataframe to include only rows where the date is within the selected range
-    filtered_df = df.loc[(df["Date"] >= start_date) & (df["Date"] <= end_date)]
-    
-    # Create and return the bar chart
-    #print(filtered_df, flush=True)
-    fig = fig_df_2_update(filtered_df)
-    return fig
 
 

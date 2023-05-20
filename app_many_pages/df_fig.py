@@ -4,6 +4,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import effectifs
+from app_many_pages.data import data_moy
 import data
 import fonctions
 import datetime as dt
@@ -287,25 +288,7 @@ def fig_old_df_1_tot():
 
 
 
-def data_old_1_moy() :
-    res = []
-    moyT1 = 0
-    moyT2 = 0
-    moyT3 = 0
-    moyT4 = 0
 
-    for data in data_old_1 :
-        moyT1 = moyT1 + data[0]
-        moyT2 = moyT2 + data[1]
-        moyT3 = moyT3 + data[2]
-        moyT4 = moyT4 + data[3]
-
-    res.append(moyT1/len(data_old_1))
-    res.append(moyT2/len(data_old_1))
-    res.append(moyT3/len(data_old_1))
-    res.append(moyT4/len(data_old_1))
-
-    return res
 
 
 
@@ -315,17 +298,14 @@ def fig_old_df_2():
     # encoder les trimestre : passer d'un String à une valeur int
     label_encoder = LabelEncoder()
     trimestre_encoded = label_encoder.fit_transform([i + 1 for i, _ in enumerate(trimestre)])
-    print(trimestre_encoded)
 
     # Ajouter les traces des années
     for i in range(len(annees)):
 
         fig.add_trace(go.Scatter(x=trimestre_encoded, y=data_old_1[i], name="Année " + str(annees[i])))
     
-
-
     # Générer les données moyennes
-    y = data_old_1_moy()
+    y = data_moy(data_old_1)
 
     # Courbe pour fitter les points
     degree = 3 
@@ -336,12 +316,8 @@ def fig_old_df_2():
     x_pred = np.arange(min(trimestre_encoded), max(trimestre_encoded), 0.1) 
     y_pred = model.predict(np.vander(x_pred, degree + 1))  
 
-
     # Ajouter la régression polynomiale
-    fig.add_trace(go.Scatter(x=x_pred, y=y_pred, name="Régression", line=dict(dash='dash', color='black'), marker=dict(size=10)))
-
-  
-
+    fig.add_trace(go.Scatter(x=x_pred, y=y_pred, name="Régression", line=dict(dash='dash', color='black'), marker=dict(size=10), visible='legendonly'))
 
 
 
@@ -353,8 +329,6 @@ def fig_old_df_2():
             tickvals=[0, 1, 2, 3],
             ticktext=['T1', 'T2', 'T3', 'T4']
         )
-
     )
-
     return fig
 

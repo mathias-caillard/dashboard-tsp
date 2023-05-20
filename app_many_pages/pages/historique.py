@@ -5,6 +5,10 @@ from app_many_pages import data, daf_fig, df_fig, dire_fig, drfd_fig, drh_fig, d
 from app_many_pages import config
 import plotly.express as px
 import plotly.graph_objects as go
+from sklearn.preprocessing import LabelEncoder
+from sklearn.linear_model import LinearRegression
+import numpy as np
+
 
 dash.register_page(
     __name__,
@@ -444,8 +448,30 @@ def fig_old_total(donnees, years, titre_graphe, titre_y):
 
 def fig_old_annuelle_courbe(donnees, years, titre_graphe, titre_y):
     fig = go.Figure()
+
+
+    # encoder les trimestre : passer d'un String à une valeur int
+    label_encoder = LabelEncoder()
+    trimestre_encoded = label_encoder.fit_transform([i + 1 for i, _ in enumerate(trimestre)])
+
     for i in range(len(years)):
-        fig.add_trace(go.Scatter(x=trimestre, y=donnees[i], name="Année " + str(years[i])))
+        fig.add_trace(go.Scatter(x=trimestre_encoded, y=donnees[i], name="Année " + str(years[i])))
+
+ # Générer les données moyennes
+    y = data.data_moy(donnees)
+
+    # Courbe pour fitter les points
+    degree = 3 
+    model = LinearRegression()
+    model.fit(np.vander(trimestre_encoded, degree + 1), y)
+
+    # Generation des valeurs préditent
+    x_pred = np.arange(min(trimestre_encoded), max(trimestre_encoded), 0.1) 
+    y_pred = model.predict(np.vander(x_pred, degree + 1))  
+
+    # Ajouter la régression polynomiale
+    fig.add_trace(go.Scatter(x=x_pred, y=y_pred, name="Régression", line=dict(dash='dash', color='black'), marker=dict(size=10)))
+
 
     fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) +", comparaison annuelle par trimestre",
                       xaxis_title="Trimestre",
