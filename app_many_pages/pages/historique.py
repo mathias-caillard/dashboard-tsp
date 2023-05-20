@@ -403,7 +403,10 @@ def fig_old_annuelle_baton(donnees, years, labels, titre_graphe, titre_y):
                 width=0.8,
             )
         )
+
+
     fig = go.Figure(data=Y)
+
     # Ajout d'un titre
     fig.update_layout(title=titre_graphe + "    de " + str(years[0]) + " à " + str(years[-1]) + ", vision annuelle",
                       xaxis_title="Temps",
@@ -423,6 +426,8 @@ def fig_old_trimestrielle(donnees, years, labels, titre_graphe, titre_y):
             )
         )
     fig = go.Figure(data=Y)
+
+
     # Ajout d'un titre
     fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ", vision trimestrielle",
                       xaxis_title="Temps",
@@ -430,6 +435,8 @@ def fig_old_trimestrielle(donnees, years, labels, titre_graphe, titre_y):
     return fig
 
 def fig_old_total(donnees, years, titre_graphe, titre_y):
+
+    """
     Y = []
     for i, year in enumerate(years):
         Y.append(
@@ -439,7 +446,20 @@ def fig_old_total(donnees, years, titre_graphe, titre_y):
                 name=str(year),
             )
         )
-    fig = go.Figure(data=Y)
+        """
+
+
+    x = []
+    y = []
+    for i, year in enumerate(years):
+        x.append(str(year))
+        y.append(sum(donnees[i]))
+    
+
+    
+    #fig = go.Figure(data=Y)
+
+    fig = px.bar(x=x, y=y, color=y, color_continuous_scale="Tealgrn")
     # Ajout d'un titre
     fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ", total annuel",
                       xaxis_title="Années",
