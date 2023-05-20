@@ -8,6 +8,10 @@ import data
 import fonctions
 import datetime as dt
 from config import *
+import numpy as np
+from sklearn.preprocessing import LabelEncoder
+from sklearn.linear_model import LinearRegression
+
 
 #Import des couleurs
 couleurs = config.colors_dept
@@ -281,15 +285,76 @@ def fig_old_df_1_tot():
 
     return fig
 
+
+
+def data_old_1_moy() :
+    res = []
+    moyT1 = 0
+    moyT2 = 0
+    moyT3 = 0
+    moyT4 = 0
+
+    for data in data_old_1 :
+        moyT1 = moyT1 + data[0]
+        moyT2 = moyT2 + data[1]
+        moyT3 = moyT3 + data[2]
+        moyT4 = moyT4 + data[3]
+
+    res.append(moyT1/len(data_old_1))
+    res.append(moyT2/len(data_old_1))
+    res.append(moyT3/len(data_old_1))
+    res.append(moyT4/len(data_old_1))
+
+    return res
+
+
+
 def fig_old_df_2():
     fig = go.Figure()
+
+    # encoder les trimestre : passer d'un String à une valeur int
+    label_encoder = LabelEncoder()
+    trimestre_encoded = label_encoder.fit_transform([i + 1 for i, _ in enumerate(trimestre)])
+    print(trimestre_encoded)
+
+    # Ajouter les traces des années
     for i in range(len(annees)):
 
-        fig.add_trace(go.Scatter(x=trimestre, y=data_old_1[i], name="Année " + str(annees[i])))
+        fig.add_trace(go.Scatter(x=trimestre_encoded, y=data_old_1[i], name="Année " + str(annees[i])))
+    
 
-    fig.update_layout(title="Total général des indicateurs en heures équivalentes de 2015 à 2019, comparaison annuelle par trimestre",
-                      xaxis_title="Années",
-                      yaxis_title=titre[0])
+
+    # Générer les données moyennes
+    y = data_old_1_moy()
+
+    # Courbe pour fitter les points
+    degree = 3 
+    model = LinearRegression()
+    model.fit(np.vander(trimestre_encoded, degree + 1), y)
+
+    # Generation des valeurs préditent
+    x_pred = np.arange(min(trimestre_encoded), max(trimestre_encoded), 0.1) 
+    y_pred = model.predict(np.vander(x_pred, degree + 1))  
+
+
+    # Ajouter la régression polynomiale
+    fig.add_trace(go.Scatter(x=x_pred, y=y_pred, name="Régression", line=dict(dash='dash', color='black'), marker=dict(size=10)))
+
+  
+
+
+
+
+    fig.update_layout(
+        title="Total général des indicateurs en heures équivalentes de " + str(liste_annee[-1]) + " à " + str(liste_annee[0]) + ", comparaison annuelle par trimestre",
+        xaxis_title="Années",
+        yaxis_title=titre[0],
+        xaxis = dict(
+            tickvals=[0, 1, 2, 3],
+            ticktext=['T1', 'T2', 'T3', 'T4']
+        )
+
+    )
+
     return fig
-
 

@@ -26,7 +26,7 @@ def quadri_to_tri(tab):
 
 sheet_names = ["artemis", "CITI", "EPH", "INF", "RS2M", "RST", "Global"]
 sheet_i = [1, 2, 3, 4, 5, 6, 0]
-annees = [2015, 2016, 2017, 2018, 2019]
+annees = config.liste_annee
 colonneDebutData = 3
 colonneFinData = 30
 colonneTitre = 0

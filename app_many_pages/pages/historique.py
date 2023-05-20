@@ -15,7 +15,7 @@ dash.register_page(
 
 )
 
-annee = config.list_annee
+annee = config.liste_annee
 trimestre = config.trimestre
 couleurs_trimestres = config.couleurs_trimestres
 dept_maj = ["ARTEMIS", "CITI", "EPH", "INF", "RS2M", "RST"]

@@ -21,11 +21,11 @@ df_annee = dataframe = pd.read_excel(excel_path2, sheet_name = "Global", header=
 df_annee_cleaned = df_annee.dropna(axis=1).drop(df_annee.columns[0], axis=1)
 
 #Annee pour l'historique
-list_annee = df_annee_cleaned.iloc[0].tolist()
-list_annee.reverse()
+liste_annee = df_annee_cleaned.iloc[0].tolist()
+liste_annee.reverse()
 
-liste_annee = list_annee.copy()
-liste_annee.append(2023)
+liste_annee = liste_annee.copy()
+#liste_annee.append(2023)
 liste_annee.reverse()
 
 

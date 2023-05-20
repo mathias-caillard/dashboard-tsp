@@ -48,15 +48,6 @@ offcanvas = html.Div(
             style = {"marginTop" : "60px"},
             children = [
      
-                    dmc.DateRangePicker(
-                    id="date-range-picker",
-                    label="Plage temporelle",
-                    minDate=date(2010, 1, 1),
-                    maxDate = date(2025,1,1),
-                    value=[datetime.now().date() - timedelta(days=365*2), datetime.now().date()],
-                    style={"width": 330},
-                    inputFormat = "DD/MM/YYYY",
-        ),
                 html.Hr(style={'borderTop': '2px solid #000000'}),
 
                 html.H3(children='Sélection de l\'année',
