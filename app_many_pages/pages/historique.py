@@ -475,7 +475,11 @@ def fig_old_annuelle_courbe(donnees, years, titre_graphe, titre_y):
 
     fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) +", comparaison annuelle par trimestre",
                       xaxis_title="Trimestre",
-                      yaxis_title=titre_y)
+                      yaxis_title=titre_y,
+                    xaxis = dict(
+                    tickvals=[0, 1, 2, 3],
+                    ticktext=['T1', 'T2', 'T3', 'T4']
+        ))
     return fig
 
 layout = dbc.Container(children=[
