@@ -8,6 +8,7 @@ import plotly.graph_objects as go
 from sklearn.preprocessing import LabelEncoder
 from sklearn.linear_model import LinearRegression
 import numpy as np
+from flask import Flask, session
 
 
 dash.register_page(
@@ -545,7 +546,7 @@ layout = dbc.Container(children=[
         style={'text-align': 'justify'}
     ),
 
-    html.H2(children='Sélection de la plage temporelle:'),
+    html.H2(children='Sélection de la plage temporelle :'),
     dcc.RangeSlider(
         id='annee-selector',
         min=min(annee),
@@ -555,16 +556,17 @@ layout = dbc.Container(children=[
         step=1
     ),
 
-    html.H2(children='Sélection des graphes à afficher:'),
-
     #joue le rôle de variable globale
     dcc.Store(id='current-value', data=[]),
 
-    #Menu déouralnt/moteur de recherche
+    #Menu déourlant/moteur de recherche
     dcc.Dropdown(
         options=categories,
         id="checklist-input",
         multi=True,
+        placeholder="Veuillez selectionner des graphes à afficher.",
+        persistence = True
+
 
     ),
 

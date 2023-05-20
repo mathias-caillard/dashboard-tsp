@@ -158,7 +158,7 @@ app.layout = dbc.Container([
             ),
 	    
 
-            dbc.NavItem(dbc.NavLink("À propos", href="#")),
+            dbc.NavItem(dbc.NavLink("À propos", href="/apropos")),
 
             ], 
             className="navbar navbar-expand-lg navbar-light bg-light fixed-top",
