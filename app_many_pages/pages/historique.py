@@ -22,6 +22,7 @@ dash.register_page(
 annee = config.liste_annee
 trimestre = config.trimestre
 couleurs_trimestres = config.couleurs_trimestres
+couleurs_années = px.colors.qualitative.Plotly
 dept_maj = ["ARTEMIS", "CITI", "EPH", "INF", "RS2M", "RST"]
 dept_min = ["artemis", "citi", "eph", "inf", "rs2m", "rst"]
 
@@ -393,6 +394,7 @@ categories = [
 
 
 def fig_old_annuelle_baton(donnees, years, labels, titre_graphe, titre_y):
+    
     Y=[]
     for i, year in enumerate(years):
         Y.append(
@@ -401,6 +403,7 @@ def fig_old_annuelle_baton(donnees, years, labels, titre_graphe, titre_y):
                 y=donnees[i],
                 name=str(year),
                 width=0.8,
+                marker=dict(color=couleurs_années[i])
             )
         )
 
@@ -408,7 +411,7 @@ def fig_old_annuelle_baton(donnees, years, labels, titre_graphe, titre_y):
     fig = go.Figure(data=Y)
 
     # Ajout d'un titre
-    fig.update_layout(title=titre_graphe + "    de " + str(years[0]) + " à " + str(years[-1]) + ", vision annuelle",
+    fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ", vision annuelle",
                       xaxis_title="Temps",
                       yaxis_title=titre_y)
     return fig
@@ -463,7 +466,8 @@ def fig_old_total(donnees, years, titre_graphe, titre_y):
     # Ajout d'un titre
     fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ", total annuel",
                       xaxis_title="Années",
-                      yaxis_title=titre_y)
+                      yaxis_title=titre_y,
+                      legend_title = "")
     return fig
 
 def fig_old_annuelle_courbe(donnees, years, titre_graphe, titre_y):
@@ -475,7 +479,7 @@ def fig_old_annuelle_courbe(donnees, years, titre_graphe, titre_y):
     trimestre_encoded = label_encoder.fit_transform([i + 1 for i, _ in enumerate(trimestre)])
 
     for i in range(len(years)):
-        fig.add_trace(go.Scatter(x=trimestre_encoded, y=donnees[i], name="Année " + str(years[i])))
+        fig.add_trace(go.Scatter(x=trimestre_encoded, y=donnees[i], name="Année " + str(years[i]), line=dict(color=couleurs_années[i])))
 
  # Générer les données moyennes
     y = data.data_moy(donnees)
@@ -494,7 +498,7 @@ def fig_old_annuelle_courbe(donnees, years, titre_graphe, titre_y):
 
 
     fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) +", comparaison annuelle par trimestre",
-                      xaxis_title="Trimestre",
+                      xaxis_title="Trimestres",
                       yaxis_title=titre_y,
                     xaxis = dict(
                     tickvals=[0, 1, 2, 3],
