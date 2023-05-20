@@ -410,6 +410,12 @@ def fig_old_annuelle_baton(donnees, years, labels, titre_graphe, titre_y):
 
     fig = go.Figure(data=Y)
 
+    fig.update_traces(hovertemplate="<br>".join([
+        "Trimestre : %{x}",
+        "Total : <b>%{y:.0f}</b>",
+                      ])
+                    )
+
     # Ajout d'un titre
     fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ", vision annuelle",
                       xaxis_title="Temps",
@@ -430,11 +436,18 @@ def fig_old_trimestrielle(donnees, years, labels, titre_graphe, titre_y):
         )
     fig = go.Figure(data=Y)
 
+    fig.update_traces(hovertemplate="<br>".join([
+        "Trimestre : %{x}",
+        "Total : <b>%{y:.0f}</b>",
+                      ])
+                    )
 
     # Ajout d'un titre
     fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ", vision trimestrielle",
                       xaxis_title="Temps",
                       yaxis_title=titre_y)
+
+
     return fig
 
 def fig_old_total(donnees, years, titre_graphe, titre_y):
@@ -464,17 +477,20 @@ def fig_old_total(donnees, years, titre_graphe, titre_y):
 
     fig = px.bar(x=x, y=y, color=y, color_continuous_scale="Tealgrn")
 
-
+    
     fig.update_traces(hovertemplate="<br>".join([
         "Année : %{x}",
-        "Total : %{y}",
+        "Total : <b>%{y:.0f}</b>",
                       ]))
+    
 
     # Ajout d'un titre
     fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ", total annuel",
                       xaxis_title="Années",
                       yaxis_title=titre_y,
-                      legend_title = "")
+                      legend_title = "",
+                      hovermode = "y")
+
     return fig
 
 def fig_old_annuelle_courbe(donnees, years, titre_graphe, titre_y):
@@ -510,7 +526,17 @@ def fig_old_annuelle_courbe(donnees, years, titre_graphe, titre_y):
                     xaxis = dict(
                     tickvals=[0, 1, 2, 3],
                     ticktext=['T1', 'T2', 'T3', 'T4']
-        ))
+                    ),
+                    hovermode='x'
+                    )
+    
+
+    fig.update_traces(hovertemplate="<br>".join([
+        " Trimestre : %{x}",
+        "Total : <b>%{y:.0f}</b>",
+                      ])
+                    )
+    
     return fig
 
 layout = dbc.Container(children=[
