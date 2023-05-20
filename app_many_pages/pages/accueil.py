@@ -1,5 +1,9 @@
 import dash
-from dash import html, dcc
+from dash import html
+from app_many_pages import config
+import os
+from flask import send_file
+
 
 dash.register_page(
     __name__,
@@ -10,8 +14,10 @@ dash.register_page(
 layout = html.Div(children=[
     html.H1(children='Bienvenue sur la page d\'accueil'),
 
-    html.Div(children='''
-        Vous pouvez naviguer entre les pages en cliquant sur les liens ci-dessus
-    '''),
+    html.H2('Télécharger les jeux de données : '),
+    html.A('indicateurs années 2023', href="/download/" + config.fichier_2023),
+    html.Br(),
+    html.A('indicateurs historiques', href="/download/" + config.fichier_historique),
 
 ])
+

@@ -418,7 +418,7 @@ def fig_old_annuelle_baton(donnees, years, labels, titre_graphe, titre_y):
                     )
 
     # Ajout d'un titre
-    fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ", vision annuelle",
+    fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + "\n, vision annuelle",
                       xaxis_title="Temps",
                       yaxis_title=titre_y)
     return fig
@@ -528,7 +528,6 @@ def fig_old_annuelle_courbe(donnees, years, titre_graphe, titre_y):
                     tickvals=[0, 1, 2, 3],
                     ticktext=['T1', 'T2', 'T3', 'T4']
                     ),
-                    hovermode='x'
                     )
     
 

@@ -1,16 +1,15 @@
 from dash import Dash, html, dcc, Output, Input, State, ALL
 import dash
 import sys
-
 import dash_bootstrap_components as dbc
 from dash.exceptions import PreventUpdate
 from dash_bootstrap_templates import load_figure_template
 from config import chemin_absolu_rep_parent
-from datetime import datetime, timedelta, date
-import dash_mantine_components as dmc
 from app_many_pages.df_fig import *
+from flask import send_file
+from app_many_pages import config
 
-
+ 
 
 sys.path.append(chemin_absolu_rep_parent + '\\app_many_pages\\pages')   #pour pouvoir importer les variables entre fichiers dans /pages
 sys.path.append(chemin_absolu_rep_parent + '\\app_many_pages\\pages\\departements')   #pour pouvoir importer les variables entre fichiers dans /pages/departements
@@ -267,41 +266,22 @@ def toggle_offcanvas(n1, is_open):
     return is_open
 
 
+#Permet à un utilisateur de télécharger les fichiers Excels.
+server = app.server  # Get the underlying Flask server
+@app.server.route("/download/<filename>")
+def download_excel(filename):
+    if filename == config.fichier_2023 :
+        return send_file(config.excel_path, as_attachment=True)
+    elif filename == config.fichier_historique : 
+        return send_file(config.excel_path2, as_attachment=True)
 
 
-@app.callback(
-    Output("message_date", "children"),
-    Input("date-range-picker", "value"),
-)
-def test(dates) :
-    prefixe = "intervalle dates : "
-    # Input string in yyyy-mm-dd format
-    input_str1 = dates[0]
-
-    # Convert to datetime object
-    dt_obj = datetime.strptime(input_str1, '%Y-%m-%d')
-
-    # Convert back to string in dd/mm/yyyy format
-    output_str1 = dt_obj.strftime('%d/%m/%Y')
-
-        # Input string in yyyy-mm-dd format
-    input_str2 = dates[1]
-
-    # Convert to datetime object
-    dt_obj = datetime.strptime(input_str2, '%Y-%m-%d')
-
-    # Convert back to string in dd/mm/yyyy format
-    output_str2 = dt_obj.strftime('%d/%m/%Y')
-
-    datesModified = [output_str1, output_str2]
-
-
-    return prefixe + "   -   ".join(datesModified)
 
 
 
 if __name__ == '__main__':
 	app.run_server(debug=True)
+
 
 
 
