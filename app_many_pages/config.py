@@ -26,8 +26,7 @@ liste_annee.reverse()
 
 liste_annee = liste_annee.copy()
 #liste_annee.append(2023)
-liste_annee.reverse()
-
+#liste_annee.reverse()
 
 
 
@@ -44,7 +43,6 @@ couleurs_trimestres = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)', 'rgb(44, 160, 4
 trimestre = ['T1', 'T2', 'T3', 'T4']
 departements = ["ARTEMIS", "CITI", "EPH", "INF", "RS2M", "RST", "ECOLE"]
 
-def get_colorscale() :
-    return 'Tealgrn'
+
 
 
