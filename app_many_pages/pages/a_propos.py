@@ -5,12 +5,16 @@ dash.register_page(
     __name__,
     title = "A propos",
     name = "a-propos",
-    order=10,
+    order=17,
     active= False
                    )
 
 
 layout = html.Div([
     html.H1("À propos"),
-    html.P("Cette application a été développée dans le cadre d'un projet Cassiopée, à Télécom SudParis")
+    html.P("Cette application a été développée en 2023 Par JACQUET Marin et CAILLARD Mathias dans le cadre d'un 'projet Cassiopée' à Télécom SudParis."),
+    html.P("Contact : "),
+    html.A("marin.jacquet@telecom-sudparis.com", href="mailto:marin.jacquet@telecom-sudparis.eu"),
+    html.Br(),
+    html.A("mathias.caillard@telecom-sudparis.com", href="mailto:mathias.caillard@telecom-sudparis.eu"),
     ])
