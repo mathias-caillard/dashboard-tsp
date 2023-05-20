@@ -418,7 +418,7 @@ def fig_old_annuelle_baton(donnees, years, labels, titre_graphe, titre_y):
                     )
 
     # Ajout d'un titre
-    fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + "\n, vision annuelle",
+    fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ",<br>vision annuelle",
                       xaxis_title="Temps",
                       yaxis_title=titre_y)
     return fig
@@ -444,7 +444,7 @@ def fig_old_trimestrielle(donnees, years, labels, titre_graphe, titre_y):
                     )
 
     # Ajout d'un titre
-    fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ", vision trimestrielle",
+    fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ",<br>vision trimestrielle",
                       xaxis_title="Temps",
                       yaxis_title=titre_y)
 
@@ -486,7 +486,7 @@ def fig_old_total(donnees, years, titre_graphe, titre_y):
     
 
     # Ajout d'un titre
-    fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ", total annuel",
+    fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ",<br>total annuel",
                       xaxis_title="Années",
                       yaxis_title=titre_y,
                       legend_title = "",
@@ -521,7 +521,7 @@ def fig_old_annuelle_courbe(donnees, years, titre_graphe, titre_y):
     fig.add_trace(go.Scatter(x=x_pred, y=y_pred, name="Régression", line=dict(dash='dash', color='black'), marker=dict(size=10)))
 
 
-    fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) +", comparaison annuelle par trimestre",
+    fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) +",<br>comparaison annuelle par trimestre",
                       xaxis_title="Trimestres",
                       yaxis_title=titre_y,
                     xaxis = dict(

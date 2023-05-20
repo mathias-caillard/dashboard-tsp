@@ -12,7 +12,7 @@ dash.register_page(
     active= False)
 
 layout = html.Div(children=[
-    html.H1(children='Bienvenue sur la page d\'accueil'),
+    html.H1(children='Bienvenue sur l\'application de visualisation des indicateurs de Télécom SudParis'),
 
     html.H2('Télécharger les jeux de données : '),
     html.A('indicateurs années 2023', href="/download/" + config.fichier_2023),
