@@ -134,7 +134,7 @@ app.layout = dbc.Container([
                 )
 
             for page in dash.page_registry.values()
-            if not 'departements' in page['relative_path'] and not 'Accueil' in page['name']  # Filtrer les pages du dossier "pages" qui ne sont pas des departements, et la page accueil (qui est remplacé par le bouton tout à gauche)
+            if not 'departements' in page['relative_path'] and not 'Accueil' in page['name'] and not "a-propos" in page["relative_path"]  # Filtrer les pages du dossier "pages" qui ne sont pas des departements, et la page accueil (qui est remplacé par le bouton tout à gauche)
 	    
         ],
         className="d-flex me-auto justify-content-me-end"
@@ -158,7 +158,7 @@ app.layout = dbc.Container([
             ),
 	    
 
-            dbc.NavItem(dbc.NavLink("À propos", href="/apropos")),
+            dbc.NavItem(dbc.NavLink("À propos", href="/a-propos")),
 
             ], 
             className="navbar navbar-expand-lg navbar-light bg-light fixed-top",
@@ -201,7 +201,7 @@ id = "output-container-"
 )
 def render_page_content(pathname):
     for page in dash.page_registry.values():
-        if 'departements' not in page['relative_path'] and not 'Accueil' in page['name']:
+        if 'departements' not in page['relative_path'] and not 'Accueil' in page['name'] and "a-propos" not in page["relative_path"]:
             if page['relative_path'] == pathname:
                 page['active'] = True
             else:
@@ -211,7 +211,7 @@ def render_page_content(pathname):
 
     ]), [
                "me-1 btn-sm active" if page["active"] else "me-1 btn-sm"
-               for page in dash.page_registry.values() if not 'departements' in page['relative_path'] and not 'Accueil' in page['name']
+               for page in dash.page_registry.values() if not 'departements' in page['relative_path'] and not 'Accueil' in page['name'] and "a-propos" not in page["relative_path"]
            ]
 
 
@@ -222,7 +222,6 @@ def render_page_content(pathname):
 )
 # Fonction pour déterminer l'onglet actif en fonction du chemin relatif de la page
 def update_active_tab(value, input_id):
-    print("TEST")
 
     ctx = dash.callback_context
     if not ctx.triggered:
@@ -239,7 +238,6 @@ def update_active_tab(value, input_id):
                 page['active'] = False
         return active_path
 
-        return f'Output: {active_path}'
 
     raise PreventUpdate
 
