@@ -229,3 +229,4 @@ def update_graph(selected_year):
         return fig_baton_trimestre(selected_data_dire1,selected_year , titres_graphe_dire[0], titres_y_dire[0]), \
                fig_baton_total(selected_data_dire2_total,selected_year , titres_graphe_dire[1], titres_y_dire[1]), \
                fig_baton_departement(selected_data_dire3,selected_year , titres_graphe_dire[2], titres_y_dire[2])
+

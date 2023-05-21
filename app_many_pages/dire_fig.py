@@ -65,9 +65,9 @@ for j in indice_annuelle:
     valeur_trim3.append(valeur_trim3_j)
     labels_trim.append(label_trim_j)
 
-data_dire_2023_global1 = [sum([data_dept[i] for data_dept in valeur_trim1]) for i in range(4)]
-data_dire_2023_global2= [sum([data_dept[i] for data_dept in valeur_trim2]) for i in range(4)]
-data_dire_2023_global3 = [sum([data_dept[i] for data_dept in valeur_trim3]) for i in range(4)]
+data_dire_2023_global1 = [sum([valeur_trim1[j][i] * effectif[j] for j in range(6)]) / effectif[-1] for i in range(4)]
+data_dire_2023_global2 = [sum([valeur_trim2[j][i] * effectif[j] for j in range(6)]) / effectif[-1] for i in range(4)]
+data_dire_2023_global3 = [sum([valeur_trim3[j][i] * effectif[j] for j in range(6)]) / effectif[-1] for i in range(4)]
 valeur_trim1.append(data_dire_2023_global1)
 valeur_trim2.append(data_dire_2023_global2)
 valeur_trim3.append(data_dire_2023_global3)

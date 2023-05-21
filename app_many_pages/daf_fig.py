@@ -114,9 +114,35 @@ for i in range(4):
         for k in range(4):
             valeur_j_tri.append(df2.iloc[i, débutColonneData + 5*j +k])
         valeur_tri_indic.append((valeur_j_tri))
-        valeur_j_annuel.append(df2.iloc[i, débutColonneData + 5*j + 4])
+        valeur_annuel_indic.append(df2.iloc[i, débutColonneData + 5*j + 4])
         labels_annuel.append(x_axis_tri[5*j + 4])
+    valeur_annuel.append(valeur_annuel_indic)
     valeur_tri.append(valeur_tri_indic)
+
+
+
+data_daf_2023_1 = [valeur_tri[0][i] / effectif[i] for i in range(6)]
+data_daf_2023_2= [valeur_tri[1][i] / effectif[i] for i in range(6)]
+data_daf_2023_3 = [valeur_tri[3][i] / effectif[i] for i in range(6)]
+data_daf_2023_total1 = valeur_annuel[0]
+data_daf_2023_total2= valeur_annuel[1]
+data_daf_2023_total3 = valeur_annuel[3]
+
+data_daf_2023_global1 = [sum([valeur_tri[0][j][i] for j in range(6)]) / effectif[-1] for i in range(4)]
+data_daf_2023_global2= [sum([valeur_tri[1][j][i] for j in range(6)]) / effectif[-1] for i in range(4)]
+data_daf_2023_global3 = [sum([valeur_tri[3][j][i] for j in range(6)]) / effectif[-1] for i in range(4)]
+
+
+data_daf_2023_1.append(data_daf_2023_global1)
+data_daf_2023_2.append(data_daf_2023_global2)
+data_daf_2023_3.append(data_daf_2023_global3)
+
+data_daf_2023_total1.append(sum([data_daf_2023_total1[i] * effectif[i] for i in range(6)]) / effectif[-1])
+data_daf_2023_total2.append(sum([data_daf_2023_total2[i] * effectif[i] for i in range(6)]) / effectif[-1])
+data_daf_2023_total3.append(sum([data_daf_2023_total3[i] * effectif[i] for i in range(6)]) / effectif[-1])
+
+data_daf_2023 = [data_daf_2023_1, data_daf_2023_2, data_daf_2023_3]
+data_daf_2023_total = [data_daf_2023_total1, data_daf_2023_total2, data_daf_2023_total3]
 
 
 for j in range(6):
