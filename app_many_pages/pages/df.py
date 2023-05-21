@@ -17,15 +17,13 @@ dash.register_page(
     active= False
     )
 
-titres_y = data.titres_y
-titres_graphe = data.titres_graphe
-effectif_dept = data.effectif_dept
+
 data_df_pond = ponderation_total(data.data_df[0])
 data_df_pond.append([valeur_annuel[i]/effectif[i] for i in range(7)])
 
 selected_data_df = data_df_pond[-1]
-annee = config.liste_annee
-selected_annee = annee[0]
+annee = config.liste_annee_maj
+selected_annee = annee[-1]
 
 layout = html.Div(children=[
     html.H1(
@@ -114,7 +112,7 @@ def update_output(selected_year):
         selected_data_df = data_df_pond[-1]
         return fig_baton_total(selected_data_df,selected_year , titres_graphe[0], titres_y[0])
     else:
-        selected_data_df = data_df_pond[selected_year - annee[-1]]
+        selected_data_df = data_df_pond[selected_year - annee[0]]
         return fig_baton_total(selected_data_df,selected_year , titres_graphe[0], titres_y[0])
 
 

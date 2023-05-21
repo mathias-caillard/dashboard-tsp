@@ -47,6 +47,17 @@ for indicateur in df.Indicateur :
 
 effectif = effectifs.effectif
 
+#Extraction des données
+data_drfd_2023 = []
+for i in range(2):
+    data_indic = []
+    for j in range(débutColonneData, FinColonneData + 1):
+        data_indic.append(df.iloc[i, j]/effectif[j - débutColonneData])
+    data_drfd_2023.append(data_indic)
+
+
+
+
 
 #définition de l'axe des abscisses
 x_axis = df.columns.tolist()[débutColonneData: FinColonneData + 1]

@@ -20,13 +20,18 @@ excel_path2 = os.path.join(chemin_absolu_rep_parent, 'assets\\' + fichier_histor
 df_annee = dataframe = pd.read_excel(excel_path2, sheet_name = "Global", header=None, nrows=1)
 df_annee_cleaned = df_annee.dropna(axis=1).drop(df_annee.columns[0], axis=1)
 
-#Annee pour l'historique
+#Annees pour l'historique
 liste_annee = df_annee_cleaned.iloc[0].tolist()
 liste_annee.reverse()
 
-liste_annee = liste_annee.copy()
-#liste_annee.append(2023)
-#liste_annee.reverse()
+#Annees pour la sélection de l'année (le menu déroulant)
+liste_annee_selection = liste_annee.copy()
+liste_annee_selection.append(2023)
+liste_annee_selection.reverse()
+
+#Années pour la mise à jour des données
+liste_annee_maj = liste_annee_selection.copy()
+liste_annee_maj.reverse()
 
 
 

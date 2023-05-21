@@ -22,7 +22,7 @@ app._favicon = "favicon.ico"
 # Définir une variable active_page initialement à la page d'accueil
 active_page = "/"
 
-annee = config.liste_annee
+annee = config.liste_annee_selection
 
 
 
