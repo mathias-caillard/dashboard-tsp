@@ -50,7 +50,7 @@ layout = html.Div(children=[
 
     dcc.Graph(
         id='dire-graph1',
-        figure=fig_dire_1(),
+        figure=fig_baton_trimestre(selected_data_dire1,selected_annee , titres_graphe_dire[0], titres_y_dire[0]),
         config = {'displaylogo': False}
         ),
 
@@ -59,7 +59,7 @@ layout = html.Div(children=[
 
     dcc.Graph(
         id='dire-graph2',
-        figure=fig_dire_2(),
+        figure= fig_baton_total(selected_data_dire2_total,selected_annee , titres_graphe_dire[1], titres_y_dire[1]),
         config = {'displaylogo': False}
         ),
 
@@ -67,7 +67,7 @@ layout = html.Div(children=[
 
     dcc.Graph(
         id='dire-graph3',
-        figure=fig_dire_3(),
+        figure=fig_baton_departement(selected_data_dire3,selected_annee , titres_graphe_dire[2], titres_y_dire[2]),
         config = {'displaylogo': False}
     ),
 

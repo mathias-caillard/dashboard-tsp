@@ -50,7 +50,7 @@ layout = html.Div(children=[
 
     dcc.Graph(
         id='daf-graph1',
-        figure=fig_daf_1(),
+        figure=fig_baton_trimestre(selected_data_daf1, selected_annee, titres_graphe_daf[0], titres_y_daf[0]),
         config = {'displaylogo': False}
     ),
 
@@ -58,7 +58,7 @@ layout = html.Div(children=[
 
     dcc.Graph(
         id='daf-graph2',
-        figure=fig_daf_2(),
+        figure=fig_baton_total(selected_data_daf2_total, selected_annee, titres_graphe_daf[1], titres_y_daf[1]),
         config = {'displaylogo': False}
     ),
 
@@ -66,7 +66,7 @@ layout = html.Div(children=[
 
     dcc.Graph(
         id='daf-graph3',
-        figure=fig_daf_3(),
+        figure=fig_baton_departement(selected_data_daf3, selected_annee, titres_graphe_daf[2], titres_y_daf[2]),
         config = {'displaylogo': False}
     ),
 
