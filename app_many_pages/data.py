@@ -214,7 +214,24 @@ def fig_baton_trimestre(donnees, year, titre_graphe, titre_y):
                       yaxis_title=titre_y)
     return fig
 
-
+def fig_baton_departement(donnees, year, titre_graphe, titre_y):
+    Y = []
+    for i in range(len(donnees)):
+        Y.append(
+            go.Bar(
+                x=[departements[i] + " - " + tri for tri in trimestre],
+                y=donnees[i],
+                name=departements[i],
+                marker=dict(color=couleurs),
+                width=0.8,
+            )
+        )
+    fig = go.Figure(data=Y)
+    # Ajout d'un titre
+    fig.update_layout(title=titre_graphe + " en " + str(year) + ", pondéré par les effectifs",
+                      xaxis_title="Temps",
+                      yaxis_title=titre_y)
+    return fig
 
 
 def data_moy(data) :

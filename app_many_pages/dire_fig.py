@@ -10,6 +10,8 @@ import effectifs
 couleurs = config.colors_dept
 couleurs_trimestres=config.couleurs_trimestres
 
+effectif = effectifs.effectif
+
 #Chemin du fichier excel défini dans config.py
 excel_path = config.excel_path
 
@@ -44,20 +46,36 @@ for i in range(6):
 #Regroupement des titres et valeurs voulues pour tracer les figures
 labels_annuel, labels_trim = [], []
 valeur_annuelle1, valeur_annuelle3 =  [], []
-valeur_trim1, valeur_trim3 = [], []
+valeur_trim1, valeur_trim2, valeur_trim3 = [], [], []
 
+k=0
 for j in indice_annuelle:
     labels_annuel.append(x_axis[j])
     valeur_annuelle1.append(df.iloc[0,j])
     valeur_annuelle3.append((df.iloc[2,j]))
-    valeur_trim1_j, valeur_trim3_j, label_trim_j =[], [], []
+    valeur_trim1_j, valeur_trim2_j, valeur_trim3_j, label_trim_j =[], [], [], []
     for i in range(4):
         label_trim_j.append(x_axis[j+i-4])
-        valeur_trim1_j.append(df.iloc[0,j+i-4])
-        valeur_trim3_j.append(df.iloc[2, j + i - 4])
+        valeur_trim1_j.append(df.iloc[0,j+i-4] / effectif[k])
+        valeur_trim2_j.append(df.iloc[1, j + i - 4] / effectif[k])
+        valeur_trim3_j.append(df.iloc[2, j + i - 4] / effectif[k])
+    k+=1
     valeur_trim1.append(valeur_trim1_j)
+    valeur_trim2.append(valeur_trim2_j)
     valeur_trim3.append(valeur_trim3_j)
     labels_trim.append(label_trim_j)
+
+data_dire_2023_global1 = [sum([data_dept[i] for data_dept in valeur_trim1]) for i in range(4)]
+data_dire_2023_global2= [sum([data_dept[i] for data_dept in valeur_trim2]) for i in range(4)]
+data_dire_2023_global3 = [sum([data_dept[i] for data_dept in valeur_trim3]) for i in range(4)]
+valeur_trim1.append(data_dire_2023_global1)
+valeur_trim2.append(data_dire_2023_global2)
+valeur_trim3.append(data_dire_2023_global3)
+
+data_dire_2023 = [valeur_trim1, valeur_trim2, valeur_trim3]
+data_dire_2023_total = [[sum(data_dept) for data_dept in data_indicateur] for data_indicateur in data_dire_2023]
+
+
 
 
 departement = ['ARTEMIS', 'CITI', 'EPH', 'INF', 'RS2M', 'RST']
