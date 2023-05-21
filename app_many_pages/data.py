@@ -40,6 +40,7 @@ liste_lignes = df_ligne + daf_ligne + dire_ligne + drfd_ligne + drh_ligne
 
 couleurs = config.colors_dept
 departements = config.departements
+trimestre = config.trimestre
 
 def extract_data(sheetName, ligneNumber):
     # Chemin du fichier excel défini dans config.py
@@ -184,11 +185,30 @@ def ponderation_total(data_indic):
 
 def fig_baton_total(donnees, year, titre_graphe, titre_y):
     fig = go.Figure()
-    for i in range(7):
+    for i in range(len(donnees)):
         fig.add_trace(go.Bar(x=[departements[i]], y=[donnees[i]],
                              name=departements[i],
                              marker=dict(color=[couleurs[i]])))
     # Ajout d'un titre
+    fig.update_layout(title=titre_graphe + " en " + str(year) + ", pondéré par les effectifs",
+                      xaxis_title='Départements',
+                      yaxis_title=titre_y)
+    return fig
+
+def fig_baton_trimestre(donnees, year, titre_graphe, titre_y):
+    Y = []
+    for i in range(len(donnees)):
+        Y.append(
+            go.Bar(
+                x=[departements[i] + " - " + tri for tri in trimestre],
+                y=donnees[i],
+                name=departements[i],
+                width=0.8,
+                marker=dict(color=couleurs[i])
+            )
+        )
+
+    fig = go.Figure(data=Y)
     fig.update_layout(title=titre_graphe + " en " + str(year) + ", pondéré par les effectifs",
                       xaxis_title='Départements',
                       yaxis_title=titre_y)

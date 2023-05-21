@@ -35,6 +35,11 @@ y_axis = []
 for indicateur in df.Indicateur :
     y_axis.append(indicateur)
 
+data_drh_2023_1 = []
+for i in range(débutColonneData + 5, FinColonneData + 1):
+    data_drh_2023_1.append(df.iloc[1, i])
+data_drh_2023_1.append(sum(data_drh_2023_1))
+
 
 def fig_drh_1():
     # Créer une figure avec des sous-figures pour chaque bâton
@@ -80,6 +85,27 @@ x_axis_tri = df2.columns.tolist()[débutColonneData2: FinColonneData2 + 1]
 
 departement = ['ARTEMIS', 'CITI', 'EPH', 'INF', 'RS2M', 'RST', 'ECOLE']
 trimestre = ['Trimestre 1', 'Trimestre 2', 'Trimestre 3', 'Trimestre 4']
+
+data_drh_2023_2 = []
+for i in range(7):
+    data_dept = []
+    for j in range(4):
+        data_dept.append(df2.iloc[0, débutColonneData2 + 4 * i + j])
+    data_drh_2023_2.append(data_dept)
+
+
+"""
+data_drh_ecole = []
+for i in range(4):
+    T_i = 0
+    for j in range(7):
+        T_i += data_drh_2023_2[j][i]
+    data_drh_ecole.append(T_i)
+
+data_drh_2023_2.append(data_drh_ecole)
+"""
+
+data_drh_2023_2_total = [sum(data_dept) for data_dept in data_drh_2023_2]
 
 valeur_tri = []
 for i in range(7):

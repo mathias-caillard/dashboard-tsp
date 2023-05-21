@@ -156,6 +156,5 @@ def update_graph(selected_year):
     else:
         selected_data_drfd1 = data_drfd_pond1[selected_year - annee[0]]
         selected_data_drfd2 = data_drfd_pond2[selected_year - annee[0]]
-        print(selected_data_drfd1)
         return fig_baton_total(selected_data_drfd1,selected_year , titres_graphe_drfd[0], titres_y_drfd[0]), \
                fig_baton_total(selected_data_drfd2,selected_year , titres_graphe_drfd[1], titres_y_drfd[1])
