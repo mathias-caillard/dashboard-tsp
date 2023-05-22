@@ -5,11 +5,16 @@ import plotly.express as px
 import plotly.graph_objects as go
 from app_many_pages import config
 import random as rd
-from dri_fig import *
+from app_many_pages.dri_fig import *
+from app_many_pages.data import *
 
 annee = range(2020, 2024)
 valeur_evolution = valeur2
 label_evolution = labels2
+
+selected_data = data_dri_2023
+label_dri = labels
+y_axis_dri = y_axis2
 
 
 dash.register_page(
@@ -38,14 +43,40 @@ layout = html.Div(children=[
     #html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
     #graphe redondant
 
+    html.H3(id='message',
+            children=""),
+
     dcc.Graph(
-        id='example-graph3',
+        id='dri-graph1',
         figure=fig_dri_3(),
+        style={'display': 'block'},
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+    #html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
 
+
+
+])
+
+# Définir la fonction de rappel pour filtrer les données
+@callback(
+    [Output('message', 'children'),Output('dri-graph1', 'style')],
+    Input('choix-annee', 'value')
+)
+def update_output(selected_year):
+    if selected_year == 2023:
+        message = ""
+        graph_style = {'display': 'block'}
+        return message, graph_style
+    else:
+        message = "Pas de graphiques disponibles pour l'année sélectionnée"
+        graph_style = {'display': 'none'}
+        figure = None
+        return message, graph_style
+
+
+"""
     html.H3("Sélectionnez une plage d'années :"),
     dcc.RangeSlider(
         id='annee-selector',
@@ -69,14 +100,10 @@ layout = html.Div(children=[
         figure=fig_dri_4(),
         config = {'displaylogo': False}
     ),
+    """
 
-    html.Div(children='''
-        
-    '''),
 
-])
-
-# Définir la fonction de rappel pour filtrer les données
+"""
 @callback(
     Output('example-graph2', 'figure'),
     [Input('annee-selector', 'value')])
@@ -89,3 +116,5 @@ def update_graph(selected_years):
     # Ajout d'un titre
     fig2.update_layout(title="Evolution temporelle du nombre d'étudiants étrangers à Télécom Sudparis")
     return fig2
+
+"""

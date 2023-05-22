@@ -63,6 +63,8 @@ y_axis2 = []
 for indicateur in df2.Indicateur :
     y_axis2.append(indicateur)
 
+data_dri_2023 = valeur
+
 def fig_dri_1():
     #création de la figure
     fig = px.bar(df, x = "trimestre", y = y_axis)
