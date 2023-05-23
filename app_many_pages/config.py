@@ -2,7 +2,11 @@ import os
 import pandas as pd
 
 fichier_2023 = "Saisie-2023-INDICATEUR-DE-SUIVI-Ti-2.xlsx"
-fichier_historique = "Historique-Indicateurs-Quadri-2.xlsx"
+fichier_2024 = "Saisie-2024-INDICATEUR-DE-SUIVI-Ti-2.xlsx"
+
+liste_fichier = [fichier_2023, fichier_2024]
+
+fichier_historique = "Historique-Indicateurs-Quadri.xlsx"
 
 #Chemin absolu du répertoire de travail (chemin vers app_many_pages)
 root_directory = os.path.abspath(os.path.dirname(__file__))

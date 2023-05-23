@@ -28,7 +28,7 @@ sheet_names = ["artemis", "CITI", "EPH", "INF", "RS2M", "RST", "Global"]
 sheet_i = [1, 2, 3, 4, 5, 6, 0]
 annees = config.liste_annee
 colonneDebutData = 3
-colonneFinData = 30
+colonneFinData = 34
 colonneTitre = 0
 df_ligne = [10]     #Calcul bizarre
 daf_ligne = [24, 25, 27]
@@ -169,7 +169,10 @@ def ponderation(data_indic):    #Un seul indicateur en entrée
         for j in range(7):      #Départements
             tab_j=[]
             for k in range(4):      #Trimestres
-                tab_j.append(data_indic[i][j][k]/effectif_dept[j][i][k])
+                if effectif_dept[j][i][k] !=0:
+                    tab_j.append(data_indic[i][j][k]/effectif_dept[j][i][k])
+                else:
+                    tab_j.append(0)
             tab_i.append(tab_j)
         TAB.append(tab_i)
     return TAB
@@ -179,7 +182,10 @@ def ponderation_total(data_indic):
     for i in range(len(data_indic)):  # Années
         tab_i = []
         for j in range(7):  # Départements
-            tab_i.append(sum(data_indic[i][j]) / (sum(effectif_dept[j][i])/4))
+            if sum(effectif_dept[j][i]) != 0:
+                tab_i.append(sum(data_indic[i][j]) / (sum(effectif_dept[j][i])/4))
+            else:
+                tab_i.append(0)
         TAB.append(tab_i)
     return TAB
 

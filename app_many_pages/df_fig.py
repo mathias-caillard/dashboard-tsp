@@ -1,6 +1,7 @@
 
 from app_many_pages import config
 import pandas as pd
+import openpyxl
 import plotly.express as px
 import plotly.graph_objects as go
 import effectifs
@@ -13,6 +14,7 @@ import numpy as np
 from sklearn.preprocessing import LabelEncoder
 from sklearn.linear_model import LinearRegression
 
+liste_fichier = config.liste_fichier
 
 #Import des couleurs
 couleurs = config.colors_dept
@@ -28,7 +30,22 @@ couleurs_trimestres=config.couleurs_trimestres
 
 ligneDesTitres = 0  #Numérotation comme dans les liste, matrices...
 nombreLignesData = 4    #Nombre de lignes de données
+debutColonneData = 4
+finColonneData = 7
 sheetName = '2023-DF-Tri'   #Nom de la feuille
+
+
+data_df=[]
+for nom_fichier in liste_fichier:
+    data_df_annee = {}
+    fichier_excel = openpyxl.load_workbook(nom_fichier)
+    feuilles = fichier_excel.sheetnames
+    #for sheet in feuilles:
+
+
+
+
+
 
 df_raw_df = pd.read_excel(excel_path,sheet_name = sheetName, header = ligneDesTitres, nrows = nombreLignesData)
 
