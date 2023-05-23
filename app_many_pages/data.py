@@ -6,9 +6,18 @@ import plotly.subplots as subplt
 from app_many_pages import config
 from app_many_pages import effectifs
 
-
-
-
+#Permet d'ajouter les données et labels d'un dataframe (feuille d'un fichier excel)
+def add_to_dict(df, debut, fin, nombre_ligne, dict_data, dict_label):
+    x_axis = df.columns.tolist()[debut: fin + 1]
+    for i in range(nombre_ligne):
+        data_indic = []
+        for j in range(debut, fin + 1):
+            if math.isnan(df.iloc[i, j]):
+                data_indic.append(0)
+            else:
+                data_indic.append(df.iloc[i, j])
+        dict_data[df["REF"][i]] = data_indic
+        dict_label[df["REF"][i]] = x_axis
 
 #Transformer quadrimestre en trimestre
 def quadri_to_tri(tab):
