@@ -4,6 +4,9 @@ import plotly.express as px
 import plotly.graph_objects as go
 import plotly.subplots as subplt
 import data
+from app_many_pages.data import add_to_dict
+from config import *
+import openpyxl
 import effectifs
 
 #Import des couleurs
@@ -17,6 +20,39 @@ excel_path = config.excel_path
 
 #afficher toutes les colonnes (dans le terminal) des dataframes issues des lectures des fichiers Excel
 pd.set_option('display.max_columns', None)
+
+
+
+data_dire=[]
+labels_dire={}
+titre_dire = {}
+for nom_fichier in liste_fichier:
+    data_dire_annee = {}
+    chemin_fichier = generate_path(nom_fichier)
+    fichier_excel = openpyxl.load_workbook(chemin_fichier)
+    feuilles = fichier_excel.sheetnames
+    for sheet in feuilles:
+        if "DIRE" in sheet:
+            ligneDesTitres = 0  # Numérotation comme dans les liste, matrices...
+            nombreLignesData = 3  # Nombre de lignes de données
+            debutColonneData = 4
+            finColonneData = 33
+            df = pd.read_excel(chemin_fichier,sheet_name = sheet, header = ligneDesTitres, nrows = nombreLignesData)
+            add_to_dict(df, debutColonneData, finColonneData, nombreLignesData, data_dire_annee, titre_dire, labels_dire)
+    data_dire.append(data_dire_annee)
+
+
+for data_ in data_dire:
+    print(data_)
+
+for cle, valeur in titre_dire.items():
+    print(cle, valeur)
+
+for cle, valeur in labels_dire.items():
+    print(cle, valeur)
+
+
+
 
 #Pour construire le plot de df, j'ai essayé d'écrire du code le plus générique possible en utilisant le moins possible de "hardcoded values". Cela permettra de facilier la réutilisation du code
 ligneDesTitres = 0  #Numérotation comme dans les liste, matrices...

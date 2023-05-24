@@ -3,6 +3,9 @@ import pandas as pd
 import plotly.graph_objects as go
 from app_many_pages import config
 import data
+from app_many_pages.data import add_to_dict
+import openpyxl
+from config import *
 
 
 #Import des couleurs
@@ -16,6 +19,44 @@ excel_path = config.excel_path
 
 #afficher toutes les colonnes (dans le terminal) des dataframes issues des lectures des fichiers Excel
 pd.set_option('display.max_columns', None)
+
+data_drh=[]
+labels_drh={}
+titre_drh = {}
+for nom_fichier in liste_fichier:
+    data_drh_annee = {}
+    chemin_fichier = generate_path(nom_fichier)
+    fichier_excel = openpyxl.load_workbook(chemin_fichier)
+    feuilles = fichier_excel.sheetnames
+    for sheet in feuilles:
+        if "DRH" in sheet:
+            if "Tri" in sheet:
+                ligneDesTitres = 0  # Numérotation comme dans les liste, matrices...
+                nombreLignesData = 1  # Nombre de lignes de données
+                debutColonneData = 4
+                finColonneData = 31
+                df = pd.read_excel(chemin_fichier,sheet_name = sheet, header = ligneDesTitres, nrows = nombreLignesData)
+                add_to_dict(df, debutColonneData, finColonneData, nombreLignesData, data_drh_annee, titre_drh, labels_drh)
+
+            else:   #"Annuel" in sheet
+                ligneDesTitres = 0  # Numérotation comme dans les liste, matrices...
+                nombreLignesData = 5  # Nombre de lignes de données
+                debutColonneData = 4
+                finColonneData = 15
+                df = pd.read_excel(chemin_fichier, sheet_name=sheet, header=ligneDesTitres, nrows=nombreLignesData)
+                add_to_dict(df, debutColonneData, finColonneData, nombreLignesData, data_drh_annee, titre_drh, labels_drh)
+
+    data_drh.append(data_drh_annee)
+
+for data_ in data_drh:
+    print(data_)
+
+for cle, valeur in titre_drh.items():
+    print(cle, valeur)
+
+for cle, valeur in labels_drh.items():
+    print(cle, valeur)
+
 
 #Pour construire le plot de df, j'ai essayé d'écrire du code le plus générique possible en utilisant le moins possible de "hardcoded values". Cela permettra de facilier la réutilisation du code
 ligneDesTitres = 0  #Numérotation comme dans les liste, matrices...

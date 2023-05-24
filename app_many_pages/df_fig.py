@@ -26,18 +26,15 @@ excel_path = config.excel_path
 #afficher toutes les colonnes (dans le terminal) des dataframes issues des lectures des fichiers Excel
 pd.set_option('display.max_columns', None)
 
+
 trimestre = ['T1', 'T2', 'T3', 'T4']
 couleurs_trimestres=config.couleurs_trimestres
 
-ligneDesTitres = 0  #Numérotation comme dans les liste, matrices...
-nombreLignesData = 4    #Nombre de lignes de données
-debutColonneData = 4
-finColonneData = 7
-sheetName = '2023-DF-Tri'   #Nom de la feuille
 
 
 data_df=[]
 labels_df={}
+titre_df = {}
 for nom_fichier in liste_fichier:
     data_df_annee = {}
     chemin_fichier = generate_path(nom_fichier)
@@ -51,7 +48,7 @@ for nom_fichier in liste_fichier:
                 debutColonneData = 4
                 finColonneData = 7
                 df = pd.read_excel(chemin_fichier,sheet_name = sheet, header = ligneDesTitres, nrows = nombreLignesData)
-                add_to_dict(df, debutColonneData, finColonneData, nombreLignesData, data_df_annee, labels_df)
+                add_to_dict(df, debutColonneData, finColonneData, nombreLignesData, data_df_annee, titre_df, labels_df)
                 """
                 x_axis = df.columns.tolist()[debutColonneData: finColonneData + 1]
                 for i in range(nombreLignesData):
@@ -67,7 +64,7 @@ for nom_fichier in liste_fichier:
                 debutColonneData = 4
                 finColonneData = 10
                 df = pd.read_excel(chemin_fichier, sheet_name=sheet, header=ligneDesTitres, nrows=nombreLignesData)
-                add_to_dict(df, debutColonneData, finColonneData, nombreLignesData, data_df_annee, labels_df)
+                add_to_dict(df, debutColonneData, finColonneData, nombreLignesData, data_df_annee, titre_df, labels_df)
                 """
                 x_axis = df.columns.tolist()[debutColonneData: finColonneData + 1]
                 for i in range(nombreLignesData):
@@ -83,8 +80,20 @@ for nom_fichier in liste_fichier:
 for data_ in data_df:
     print(data_)
 
+for cle, valeur in titre_df.items():
+    print(cle, valeur)
+
 for cle, valeur in labels_df.items():
     print(cle, valeur)
+
+ligneDesTitres = 0  #Numérotation comme dans les liste, matrices...
+nombreLignesData = 4    #Nombre de lignes de données
+debutColonneData = 4
+finColonneData = 7
+sheetName = '2023-DF-Tri'   #Nom de la feuille
+
+
+
 
 
 

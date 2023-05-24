@@ -21,8 +21,9 @@ df5 = pd.read_excel(excel_path,sheet_name = sheetName, header = ligneDesTitres, 
 #Récupération des effectifs des departements
 effectif = []
 for i in range(10,16):
-    effectif.append(df5.iloc[1,i])
+    effectif.append(df5.iloc[0,i])
 
 effectif.append(sum(effectif))
+
 
 
