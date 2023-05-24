@@ -14,8 +14,11 @@ debutColonneData = 1
 finColonneData = 3
 df = pd.read_excel(chemin_fichier,sheet_name = sheet, header = ligneDesTitres, nrows = nombreLignesData)
 
-equivalence = {}
+equivalence_titre = {}
+equivalence_ligne = {}
 for i in range(nombreLignesData):
-    equivalence[df["Nouveaux indicateurs"][i]] = df["Anciens indicateurs"][i]
+    equivalence_titre[df["Nouveaux indicateurs"][i]] = df["Anciens indicateurs"][i]
+    equivalence_ligne[df["Nouveaux indicateurs"][i]] = i
+
 
 
