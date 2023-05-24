@@ -5,20 +5,38 @@ import plotly.graph_objects as go
 import plotly.subplots as subplt
 from app_many_pages import config
 from app_many_pages import effectifs
+from df_data import data_df
+from daf_data import data_daf
+from dire_data import data_dire
+from drfd_data import data_drfd
+from drh_data import data_drh
+from dri_data import data_dri
 
-#Permet d'ajouter les données et labels d'un dataframe (feuille d'un fichier excel)
-def add_to_dict(df, debut, fin, nombre_ligne, dict_data, dict_titre, dict_label):
-    x_axis = df.columns.tolist()[debut: fin + 1]
-    for i in range(nombre_ligne):
-        data_indic = []
-        for j in range(debut, fin + 1):
-            if not isinstance(df.iloc[i, j], (int, float)) or math.isnan(df.iloc[i, j]):
-                data_indic.append(0)
-            else:
-                data_indic.append(df.iloc[i, j])
-        dict_data[df["REF"][i]] = data_indic
-        dict_titre[df["REF"][i]] = df["Indicateur"][i]
-        dict_label[df["REF"][i]] = x_axis
+
+
+
+#Permet du fusionner les dictionnaires
+def fusion_dict(liste_dict):
+    new_dict = {}
+    for dict in liste_dict:
+        new_dict.update(dict)
+    return new_dict
+
+def fusion_data(liste_data):      #Input: liste(services) de listes(annees) de dictionnaires (indicateurs)
+    new_list = []
+    for i in range(len(liste_data[0])):     #Parcours des années
+        liste_dict = []
+        for j in range(len(liste_data)):        #Parcours des services
+            liste_dict.append(liste_data[j][i])
+        new_list.append(fusion_dict(liste_dict))
+    #Return une liste de dictionnaires ou chaque dictionnaire correspond à une année
+    return new_list
+
+donnee = [data_df, data_daf, data_drfd, data_dire, data_drh,data_dri]
+new_donnee = fusion_data(donnee)
+print(new_donnee)
+
+
 
 #Transformer quadrimestre en trimestre
 def quadri_to_tri(tab):

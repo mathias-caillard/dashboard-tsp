@@ -7,7 +7,7 @@ from app_many_pages import effectifs
 import data
 from config import *
 import openpyxl
-from app_many_pages.data import add_to_dict
+
 
 effectif = effectifs.effectif
 
@@ -25,42 +25,7 @@ excel_path = config.excel_path
 pd.set_option('display.max_columns', None)
 
 
-data_daf=[]
-labels_daf={}
-titre_daf = {}
-for nom_fichier in liste_fichier:
-    data_daf_annee = {}
-    chemin_fichier = generate_path(nom_fichier)
-    fichier_excel = openpyxl.load_workbook(chemin_fichier)
-    feuilles = fichier_excel.sheetnames
-    for sheet in feuilles:
-        if "DAF" in sheet:
-            if "Tri" in sheet:
-                ligneDesTitres = 0  # Numérotation comme dans les liste, matrices...
-                nombreLignesData = 5  # Nombre de lignes de données
-                debutColonneData = 4
-                finColonneData = 33
-                df = pd.read_excel(chemin_fichier,sheet_name = sheet, header = ligneDesTitres, nrows = nombreLignesData)
-                add_to_dict(df, debutColonneData, finColonneData, nombreLignesData, data_daf_annee, titre_daf, labels_daf)
 
-            else:   #"Annuel" in sheet
-                ligneDesTitres = 0  # Numérotation comme dans les liste, matrices...
-                nombreLignesData = 1  # Nombre de lignes de données
-                debutColonneData = 4
-                finColonneData = 9
-                df = pd.read_excel(chemin_fichier, sheet_name=sheet, header=ligneDesTitres, nrows=nombreLignesData)
-                add_to_dict(df, debutColonneData, finColonneData, nombreLignesData, data_daf_annee, titre_daf, labels_daf)
-
-    data_daf.append(data_daf_annee)
-
-for data_ in data_daf:
-    print(data_)
-
-for cle, valeur in titre_daf.items():
-    print(cle, valeur)
-
-for cle, valeur in labels_daf.items():
-    print(cle, valeur)
 
 
 

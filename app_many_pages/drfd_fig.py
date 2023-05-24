@@ -3,7 +3,6 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import random
-from app_many_pages.data import add_to_dict
 import data
 from sklearn.preprocessing import LabelEncoder
 from sklearn.linear_model import LinearRegression
@@ -23,33 +22,6 @@ excel_path = config.excel_path
 pd.set_option('display.max_columns', None)
 
 
-data_drfd=[]
-labels_drfd={}
-titre_drfd = {}
-for nom_fichier in liste_fichier:
-    data_drfd_annee = {}
-    chemin_fichier = generate_path(nom_fichier)
-    fichier_excel = openpyxl.load_workbook(chemin_fichier)
-    feuilles = fichier_excel.sheetnames
-    for sheet in feuilles:
-        if "DRFD" in sheet:
-            ligneDesTitres = 0  # Numérotation comme dans les liste, matrices...
-            nombreLignesData = 3  # Nombre de lignes de données
-            debutColonneData = 4
-            finColonneData = 10
-            df = pd.read_excel(chemin_fichier,sheet_name = sheet, header = ligneDesTitres, nrows = nombreLignesData)
-            add_to_dict(df, debutColonneData, finColonneData, nombreLignesData, data_drfd_annee, titre_drfd, labels_drfd)
-    data_drfd.append(data_drfd_annee)
-
-
-for data_ in data_drfd:
-    print(data_)
-
-for cle, valeur in titre_drfd.items():
-    print(cle, valeur)
-
-for cle, valeur in labels_drfd.items():
-    print(cle, valeur)
 
 
 #Pour construire le plot de df, j'ai essayé d'écrire du code le plus générique possible en utilisant le moins possible de "hardcoded values". Cela permettra de facilier la réutilisation du code
