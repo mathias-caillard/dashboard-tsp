@@ -1,8 +1,6 @@
 import dash
 from dash import html
 from app_many_pages import config
-import os
-from flask import send_file
 
 
 dash.register_page(
