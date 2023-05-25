@@ -9,6 +9,7 @@ from app_many_pages.df_fig import *
 from flask import send_file
 from app_many_pages import config
 
+
  
 
 sys.path.append(chemin_absolu_rep_parent + '\\app_many_pages\\pages')   #pour pouvoir importer les variables entre fichiers dans /pages
@@ -47,7 +48,6 @@ offcanvas = html.Div(
             style = {"marginTop" : "60px"},
             children = [
      
-                html.Hr(style={'borderTop': '2px solid #000000'}),
 
                 html.H3(children='Sélection de l\'année',
                         style={'font-size': '18px'}),
@@ -98,6 +98,11 @@ offcanvas = html.Div(
                     label="indicateur périmètre départemental",
                     value=False,
                 ),
+                    html.Hr(style={'borderTop': '2px solid #000000'}),
+                    html.P('Télécharger les jeux de données : '),
+                    html.A('indicateurs années 2023', href="/download/" + config.fichier_2023),
+                    html.Br(),
+                    html.A('indicateurs historiques', href="/download/" + config.fichier_historique),
                 
 
             ],
