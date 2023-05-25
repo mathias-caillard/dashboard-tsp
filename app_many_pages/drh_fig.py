@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.graph_objects as go
 from app_many_pages import config
 import data
-from app_many_pages.data import add_to_dict
+from app_many_pages.fonction_data import add_to_dict
 import openpyxl
 from config import *
 

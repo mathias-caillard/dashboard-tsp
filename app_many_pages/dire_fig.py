@@ -4,7 +4,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import plotly.subplots as subplt
 import data
-from app_many_pages.data import add_to_dict
+from app_many_pages.fonction_data import add_to_dict
 from config import *
 import openpyxl
 import effectifs
