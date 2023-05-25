@@ -62,7 +62,7 @@ data_old = [{} for i in range(len(annees))]
 #Transformer quadrimestre en trimestre
 def quadri_to_tri(tab):
     for i in range(len(tab)):
-        print(tab[i])
+        #print(tab[i])
         if math.isnan(tab[i]):
             tab[i]=0
 
@@ -148,16 +148,45 @@ def adapt_old_data(code_indic, liste_data):
             liste_data[i][code_indic] = donnee_correspondante[i]
     else:   #Pas de correspondance
         longueur = len(new_donnee[0][code_indic])
-        donnee_correspondante = [0 for j in range(longueur)]
+        if longueur==28 or longueur==30:
+            donnee_correspondante = [[0, 0, 0, 0] for j in range(7)]
+        else:
+            donnee_correspondante = [0 for j in range(longueur)]
+        print(longueur)
         # Parcours des années
         for i in range(len(liste_data)):
-            liste_data[i][code_indic] = donnee_correspondante[i]
-
-adapt_old_data("DAF-01", data_old)
-print(data_old)
+            liste_data[i][code_indic] = donnee_correspondante
 
 
+def adapt_new_data(code_indic, liste_data):
+    longueur = len(liste_data[0][code_indic])
 
+    if longueur==28:
+        for i in range(len(liste_data)):
+            adapted_data = []
+            data_indic = liste_data[i][code_indic]
+            for j in range(7):
+                tab = []
+                for k in range(4):
+                    tab.append(data_indic[4*j + k])
+                adapted_data.append(tab)
+            liste_data[i][code_indic] = adapted_data
+    if longueur==30:
+        for i in range(len(liste_data)):
+            adapted_data = []
+            data_indic = liste_data[i][code_indic]
+            for j in range(6):
+                tab = []
+                for k in range(4):
+                    tab.append(data_indic[5*j + k])
+                adapted_data.append(tab)
+            adapted_data.append([sum([adapted_data[i][j] for i in range(6)]) for j in range(4)])
+            liste_data[i][code_indic] = adapted_data
+
+print(new_donnee[0]["DRH-03"])
+print()
+adapt_new_data("DRH-03", new_donnee)
+print(new_donnee[0]["DRH-03"])
 
 
 #Data pour la sélection d'une année(indicateurs, puis année, puis dept)

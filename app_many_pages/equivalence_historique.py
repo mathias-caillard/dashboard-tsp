@@ -24,12 +24,10 @@ df2 = pd.read_excel(chemin_fichier_historique, sheet_name="Global")
 equivalence_titre = {}
 equivalence_ligne = {}
 for i in range(nombreLignesData):
-    print(df["Nouveaux indicateurs"][i])
     if isinstance(df["Nouveaux indicateurs"][i], str):
         equivalence_titre[df["Nouveaux indicateurs"][i]] = df["Anciens indicateurs"][i]
         ancien_indic = df["Anciens indicateurs"][i]
         for j in range(debutligne, finligne):
-            print(df2.iloc[j, 0])
             if not pd.isna(df2.iloc[j, 0]) and df2.iloc[j, 0] == ancien_indic:
                 k=j+2
                 equivalence_ligne[df["Nouveaux indicateurs"][i]] = k
@@ -42,4 +40,4 @@ def correspondance_equivalence(code_indicateur):
     return False
 
 
-print(equivalence_ligne)
+
