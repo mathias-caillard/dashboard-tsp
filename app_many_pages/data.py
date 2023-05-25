@@ -5,12 +5,12 @@ import plotly.graph_objects as go
 import plotly.subplots as subplt
 from app_many_pages import config
 from app_many_pages import effectifs
-from df_data import data_df
-from daf_data import data_daf
-from dire_data import data_dire
-from drfd_data import data_drfd
-from drh_data import data_drh
-from dri_data import data_dri
+from df_data import data_df, titre_df
+from daf_data import data_daf, titre_daf
+from dire_data import data_dire, titre_dire
+from drfd_data import data_drfd, titre_drfd
+from drh_data import data_drh, titre_drh
+from dri_data import data_dri, titre_dri
 from equivalence_historique import equivalence_ligne, equivalence_titre, correspondance_equivalence
 
 
@@ -35,6 +35,8 @@ def fusion_data(liste_data):      #Input: liste(services) de listes(annees) de d
 
 donnee = [data_df, data_daf, data_drfd, data_dire, data_drh,data_dri]
 new_donnee = fusion_data(donnee)
+titre = [titre_df, titre_daf, titre_drfd, titre_dire, titre_drh,titre_dri]
+new_titre = fusion_dict(titre)
 
 
 sheet_names = ["artemis", "CITI", "EPH", "INF", "RS2M", "RST", "Global"]
@@ -139,54 +141,85 @@ def extract_indic_all_sheet(lineNumber):
 
 
 #Met des 0 si pas de correspondance, met les vrais données sinon
-def adapt_old_data(code_indic, liste_data):
+def adapt_old_data(code_indic, liste_old_data):
     TAB = []
     if correspondance_equivalence(code_indic):
-        donnee_correspondante = extract_indic_all_sheet(equivalence_ligne[code_indic])
-        #Parcours des années
-        for i in range(len(liste_data)):
-            liste_data[i][code_indic] = donnee_correspondante[i]
+        #Cas particulier pour DRH-01 (données tri à mettre en annuelle)
+        if code_indic == "DRH-01":
+            donnee_correspondante = extract_indic_all_sheet(equivalence_ligne[code_indic])
+
+            # Parcours des années
+            for i in range(len(liste_old_data)):
+                donnee_correspondante_annuellle = [sum(x) / 3 for x in donnee_correspondante[i]]
+                liste_old_data[i][code_indic] = donnee_correspondante_annuellle
+        else:
+            donnee_correspondante = extract_indic_all_sheet(equivalence_ligne[code_indic])
+            #Parcours des années
+            for i in range(len(liste_old_data)):
+                liste_old_data[i][code_indic] = donnee_correspondante[i]
     else:   #Pas de correspondance
         longueur = len(new_donnee[0][code_indic])
+        #Distinction données trimestrielles et annuelles
         if longueur==28 or longueur==30:
             donnee_correspondante = [[0, 0, 0, 0] for j in range(7)]
         else:
             donnee_correspondante = [0 for j in range(longueur)]
-        print(longueur)
         # Parcours des années
-        for i in range(len(liste_data)):
-            liste_data[i][code_indic] = donnee_correspondante
+        for i in range(len(liste_old_data)):
+            liste_old_data[i][code_indic] = donnee_correspondante
 
 
-def adapt_new_data(code_indic, liste_data):
-    longueur = len(liste_data[0][code_indic])
 
+
+def adapt_all_old_data(liste_old_data):
+    #Parcours des indicateurs
+    for code_indic in new_titre:
+        adapt_old_data(code_indic, liste_old_data)
+
+
+def adapt_new_data(code_indic, liste_new_data):
+    longueur = len(liste_new_data[0][code_indic])
+    # Distinction données trimestrielles et annuelles (rien à faire si données annuelles)
     if longueur==28:
-        for i in range(len(liste_data)):
+        for i in range(len(liste_new_data)):
             adapted_data = []
-            data_indic = liste_data[i][code_indic]
+            data_indic = liste_new_data[i][code_indic]
             for j in range(7):
                 tab = []
                 for k in range(4):
                     tab.append(data_indic[4*j + k])
                 adapted_data.append(tab)
-            liste_data[i][code_indic] = adapted_data
+            liste_new_data[i][code_indic] = adapted_data
     if longueur==30:
-        for i in range(len(liste_data)):
+        for i in range(len(liste_new_data)):
             adapted_data = []
-            data_indic = liste_data[i][code_indic]
+            data_indic = liste_new_data[i][code_indic]
             for j in range(6):
                 tab = []
                 for k in range(4):
                     tab.append(data_indic[5*j + k])
                 adapted_data.append(tab)
             adapted_data.append([sum([adapted_data[i][j] for i in range(6)]) for j in range(4)])
-            liste_data[i][code_indic] = adapted_data
+            liste_new_data[i][code_indic] = adapted_data
 
-print(new_donnee[0]["DRH-03"])
-print()
-adapt_new_data("DRH-03", new_donnee)
-print(new_donnee[0]["DRH-03"])
+
+def adapt_all_new_data(liste_new_data):
+    for code_indic in liste_new_data[0]:
+        adapt_new_data(code_indic, liste_new_data)
+
+def fusion_old_new_data(new_data):
+    old_data = [{} for i in range(len(annees))]
+    adapt_all_old_data(old_data)
+    adapt_all_new_data(new_data)
+    for data_annee in new_data:
+        old_data.append(data_annee)
+    return old_data
+
+data_complete = fusion_old_new_data(new_donnee)
+for data_annee in data_complete:
+    print(data_annee)
+
+
 
 
 #Data pour la sélection d'une année(indicateurs, puis année, puis dept)
