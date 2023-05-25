@@ -6,7 +6,7 @@ from app_many_pages import config
 import random as rd
 from config import *
 import openpyxl
-from app_many_pages.data import add_to_dict
+from app_many_pages.fonction_data import add_to_dict
 
 
 #Chemin du fichier excel défini dans config.py
