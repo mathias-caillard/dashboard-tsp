@@ -55,7 +55,7 @@ for indicateur in df.Indicateur :
 '''
 
 effectif = effectifs.effectif
-print(effectif)
+#print(effectif)
 
 #Extraction des données
 data_drfd_2023 = []

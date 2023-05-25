@@ -44,6 +44,7 @@ for nom_fichier in liste_fichier:
 
     data_dri.append(data_dri_annee)
 
+"""
 for data_ in data_dri:
     print(data_)
 
@@ -52,6 +53,8 @@ for cle, valeur in titre_dri.items():
 
 for cle, valeur in labels_dri.items():
     print(cle, valeur)
+
+"""
 
 
 

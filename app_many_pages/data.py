@@ -1,10 +1,8 @@
-import os
+
 import pandas as pd
 import math
 import plotly.graph_objects as go
-import plotly.subplots as subplt
 from app_many_pages import config
-from app_many_pages import effectifs
 from df_data import data_df, titre_df
 from daf_data import data_daf, titre_daf
 from dire_data import data_dire, titre_dire
@@ -120,6 +118,8 @@ def convert_data_annuel(data_old):
             tab.append(data_old[j][i])
         converted_data.append(tab)
     return converted_data
+
+
 def extract_data_all_sheet(list_line):  #Utile pour la sélection de l'année
     TAB = []
     for line in list_line:  #Parcours des indicateurs
@@ -216,8 +216,8 @@ def fusion_old_new_data(new_data):
     return old_data
 
 data_complete = fusion_old_new_data(new_donnee)
-for data_annee in data_complete:
-    print(data_annee)
+#for data_annee in data_complete:
+#    print(data_annee)
 
 
 
@@ -229,7 +229,7 @@ data_dire = extract_data_all_sheet(dire_ligne)
 data_drfd = extract_data_all_sheet(drfd_ligne)
 data_drh = extract_data_all_sheet(drh_ligne)
 
-
+print(data_df)
 
 def extract_titre(list_line):
     # Chemin du fichier excel défini dans config.py
@@ -368,6 +368,8 @@ def fig_baton_departement(donnees, year, titre_graphe, titre_y):
     return fig
 
 
+
+#Utilisée pour la régression polynomiale dans les graphes "comparaison annuelle par trimestre"
 def data_moy(data) :
     res = []
     moyT1 = 0

@@ -1,11 +1,13 @@
-from config import *
+import config
+from config import generate_path
 import openpyxl
+import pandas as pd
 from app_many_pages.fonction_data import add_to_dict
 
 data_drh=[]
 labels_drh={}
 titre_drh = {}
-for nom_fichier in liste_fichier:
+for nom_fichier in config.liste_fichier:
     data_drh_annee = {}
     chemin_fichier = generate_path(nom_fichier)
     fichier_excel = openpyxl.load_workbook(chemin_fichier)
@@ -29,5 +31,6 @@ for nom_fichier in liste_fichier:
                 add_to_dict(df, debutColonneData, finColonneData, nombreLignesData, data_drh_annee, titre_drh, labels_drh)
 
     data_drh.append(data_drh_annee)
+
 
 
