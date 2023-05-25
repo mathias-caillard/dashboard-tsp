@@ -528,6 +528,7 @@ def fig_old_annuelle_courbe(donnees, years, titre_graphe, titre_y):
                     tickvals=[0, 1, 2, 3],
                     ticktext=['T1', 'T2', 'T3', 'T4']
                     ),
+                    hovermode = "x"
                     )
     
 
@@ -544,6 +545,8 @@ layout = dbc.Container(children=[
         children='Dans cette page, vous pouvez afficher les graphes de votre choix sur les années précédentes',
         style={'text-align': 'justify'}
     ),
+
+    dcc.Loading(id = "loading", color = "black", type = "circle"),
 
     html.H2(children='Sélection de la plage temporelle :'),
     dcc.RangeSlider(
@@ -570,9 +573,16 @@ layout = dbc.Container(children=[
     ),
 
     # Boucle pour générer les graphiques
-        dbc.Container(id="graph-container-historique",
-            children=[],
-            fluid = True),
+
+            
+            dbc.Container(id="graph-container-historique",
+                children=[],
+                fluid = True),
+            
+
+
+            
+
     ],
 fluid = True
 )
@@ -638,7 +648,8 @@ for i, cat in enumerate(categories):
         return not is_open
 
 @callback(
-    Output("graph-container-historique", "children"),
+    [Output("graph-container-historique", "children"),
+     Output("loading", "parent-style")], #Permet d'afficher un Spinner de Char
     [Input("annee-selector", "value"),
      Input("checklist-input", "value")]
 )
@@ -1050,7 +1061,7 @@ def generate_graphs(selected_years, value):
                 html.Hr(style={'borderTop': '2px solid #000000'}))  # Ligne horizontale pour mieux séparer les graphes)
         i += 1
 
-    return new_graph_output
+    return new_graph_output, {'display' : 'none'}
 
 
 
