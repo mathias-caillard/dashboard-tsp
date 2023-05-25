@@ -11,6 +11,7 @@ from dire_data import data_dire
 from drfd_data import data_drfd
 from drh_data import data_drh
 from dri_data import data_dri
+from equivalence_historique import equivalence_ligne, equivalence_titre, correspondance_equivalence
 
 
 
@@ -34,23 +35,7 @@ def fusion_data(liste_data):      #Input: liste(services) de listes(annees) de d
 
 donnee = [data_df, data_daf, data_drfd, data_dire, data_drh,data_dri]
 new_donnee = fusion_data(donnee)
-print(new_donnee)
 
-
-
-#Transformer quadrimestre en trimestre
-def quadri_to_tri(tab):
-    for i in range(len(tab)):
-        if math.isnan(tab[i]):
-            tab[i]=0
-
-    l = []
-    l.append(0.75*tab[0])
-    l.append(0.25*tab[0] + 0.5*tab[1])
-    l.append(0.5*tab[1] + 0.25*tab[2])
-    l.append(0.75*tab[2])
-    #l.append(sum(l))
-    return l
 
 sheet_names = ["artemis", "CITI", "EPH", "INF", "RS2M", "RST", "Global"]
 sheet_i = [1, 2, 3, 4, 5, 6, 0]
@@ -69,6 +54,27 @@ liste_lignes = df_ligne + daf_ligne + dire_ligne + drfd_ligne + drh_ligne
 couleurs = config.colors_dept
 departements = config.departements
 trimestre = config.trimestre
+
+
+data_old = [{} for i in range(len(annees))]
+
+
+#Transformer quadrimestre en trimestre
+def quadri_to_tri(tab):
+    for i in range(len(tab)):
+        print(tab[i])
+        if math.isnan(tab[i]):
+            tab[i]=0
+
+    l = []
+    l.append(0.75*tab[0])
+    l.append(0.25*tab[0] + 0.5*tab[1])
+    l.append(0.5*tab[1] + 0.25*tab[2])
+    l.append(0.75*tab[2])
+    #l.append(sum(l))
+    return l
+
+
 
 def extract_data(sheetName, ligneNumber):
     # Chemin du fichier excel défini dans config.py
@@ -121,6 +127,38 @@ def extract_data_all_sheet(list_line):  #Utile pour la sélection de l'année
             tab.append(tab_sheet)
         TAB.append(convert_data_annuel(tab))
     return TAB
+
+
+#Meme chose que extract_data_all_sheet mais pour un seul indicateur
+def extract_indic_all_sheet(lineNumber):
+    tab = []
+    for i in range(7):  # Parcours des feuilles
+        tab_sheet = extract_data(sheet_names[i], lineNumber)
+        tab.append(tab_sheet)
+    return convert_data_annuel(tab)
+
+
+#Met des 0 si pas de correspondance, met les vrais données sinon
+def adapt_old_data(code_indic, liste_data):
+    TAB = []
+    if correspondance_equivalence(code_indic):
+        donnee_correspondante = extract_indic_all_sheet(equivalence_ligne[code_indic])
+        #Parcours des années
+        for i in range(len(liste_data)):
+            liste_data[i][code_indic] = donnee_correspondante[i]
+    else:   #Pas de correspondance
+        longueur = len(new_donnee[0][code_indic])
+        donnee_correspondante = [0 for j in range(longueur)]
+        # Parcours des années
+        for i in range(len(liste_data)):
+            liste_data[i][code_indic] = donnee_correspondante[i]
+
+adapt_old_data("DAF-01", data_old)
+print(data_old)
+
+
+
+
 
 #Data pour la sélection d'une année(indicateurs, puis année, puis dept)
 data_df = extract_data_all_sheet(df_ligne)

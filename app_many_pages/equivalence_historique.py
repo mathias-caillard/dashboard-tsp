@@ -14,11 +14,20 @@ debutColonneData = 1
 finColonneData = 3
 df = pd.read_excel(chemin_fichier,sheet_name = sheet, header = ligneDesTitres, nrows = nombreLignesData)
 
+
+chemin_fichier_historique = generate_path(fichier_historique)
+df2 = pd.read_excel(excel_path, sheet_name="Global")
+
 equivalence_titre = {}
 equivalence_ligne = {}
 for i in range(nombreLignesData):
     equivalence_titre[df["Nouveaux indicateurs"][i]] = df["Anciens indicateurs"][i]
     equivalence_ligne[df["Nouveaux indicateurs"][i]] = i
 
+def correspondance_equivalence(code_indicateur):
+    if code_indicateur in equivalence_ligne:
+        return True
+    return False
 
 
+print(equivalence_ligne)
