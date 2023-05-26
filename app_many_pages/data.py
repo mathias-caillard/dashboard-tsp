@@ -230,15 +230,6 @@ def adapt_new_label(dict_label):
                 adapted_label.append(label_dept)
             dict_label[code_indic] = adapted_label
 
-"""
-for cle, valeur in new_labels.items():
-    print(cle, valeur)
-
-adapt_new_label(new_labels)
-print()
-for cle, valeur in new_labels.items():
-    print(cle, valeur)
-"""
 def fusion_old_new_data(new_data):
     old_data = [{} for i in range(len(annees))]
     adapt_all_old_data(old_data)
@@ -248,6 +239,7 @@ def fusion_old_new_data(new_data):
     return old_data
 
 data_complete = fusion_old_new_data(new_donnee)
+adapt_new_label(new_labels)
 #for data_annee in data_complete:
 #    print(data_annee)
 
