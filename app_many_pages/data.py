@@ -14,6 +14,7 @@ from equivalence_historique import equivalence_ligne, equivalence_titre, corresp
 
 
 
+
 #Permet du fusionner les dictionnaires
 def fusion_dict(liste_dict):
     new_dict = {}
@@ -353,6 +354,8 @@ def fig_baton_total(donnees, year, titre_graphe, titre_y):
                       yaxis_title=titre_y)
     return fig
 
+
+#Même couleur pour un département
 def fig_baton_trimestre(donnees, year, titre_graphe, titre_y):
     Y = []
     for i in range(len(donnees)):
@@ -372,6 +375,7 @@ def fig_baton_trimestre(donnees, year, titre_graphe, titre_y):
                       yaxis_title=titre_y)
     return fig
 
+#Même couleur pour un trimestre (même données que fig_baton_trimestre
 def fig_baton_departement(donnees, year, titre_graphe, titre_y):
     Y = []
     for i in range(len(donnees)):
@@ -391,8 +395,6 @@ def fig_baton_departement(donnees, year, titre_graphe, titre_y):
                       yaxis_title=titre_y)
     return fig
 
-
-
 #Utilisée pour la régression polynomiale dans les graphes "comparaison annuelle par trimestre"
 def data_moy(data) :
     res = []
@@ -400,17 +402,47 @@ def data_moy(data) :
     moyT2 = 0
     moyT3 = 0
     moyT4 = 0
-
     for d in data :
         moyT1 = moyT1 + d[0]
         moyT2 = moyT2 + d[1]
         moyT3 = moyT3 + d[2]
         moyT4 = moyT4 + d[3]
-
     res.append(moyT1/len(data))
     res.append(moyT2/len(data))
     res.append(moyT3/len(data))
     res.append(moyT4/len(data))
-
     return res
 
+dict_titres = {
+    'DF-01': "Nombre d\'UP",
+    'DF-02': "Nombre d\'étudiants FISE",
+    'DF-03': "Nombre d\'étudiants FIPA",
+    'DF-04': "Nombre d\'étudiants DNM",
+    'DF-05': "Nombre d\'étudiants FTLV",
+    'DF-06': "Nombre total d\'étudiants",
+    'DRFD-01': "Publications sur Scopus",
+    'DRFD-02': "Nombre de doctorants",
+    'DRFD-03': "H-index médian",
+    'DIRE-01': "Suivi des contrats de recherche",
+    'DIRE-02': "Brevets et logiciels déposés",
+    'DIRE-03': "Contribution au financement de l\'école",
+    'DAF-01': "Dépenses de vacataires",
+    'DAF-02': "Ressources propres",
+    'DAF-03': "Ressources d\'état",
+    'DAF-04': "Total des dépenses hors permanents et vacataires",
+    'DAF-05': "Dotation de l\'institut hors permanents et vacataires",
+    'DAF-06': "Chiffre d\'affaire annuel de la recherche",
+    'DRH-01': "Nombre de permanents en ETPT",
+    'DRH-02': "Nombre de non-permanents hors recherche en ETPT",
+    'DRH-03': "Nombre de non-permanents recherche en ETPT",
+    'DRH-04': "Nombre de post-docs",
+    'DRH-05': "Nombre d\'ETP permanent ayant une nationalité étrangère",
+    'DRH-06': "Nombre de nationalités étrangères différentes",
+    'DRI-01': "Nombre d\'étudiants de TSP partant en stage à l\'étranger",
+    'DRI-02': "Nombre d\'étudiants de TSP partant à l\'étranger (académique)",
+    'DRI-03': "Nombre d\'étudiants étrangers en échange (stock)",
+    'DRI-04': "Nombre  d\'étudiants étrangers, au total, administrativement gérés par TSP – dont DNM comptabilisable par la DF",
+    'DRI-05': "Nombre d\'étudiants TSP en double diplôme (entrants et sortants)",
+    'DRI-06': "Nombre d\'étudiants étrangers – détail par formation",
+
+}

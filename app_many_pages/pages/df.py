@@ -2,6 +2,7 @@ import dash
 from dash import html, dcc, dash_table, Output, Input, callback
 
 from app_many_pages.df_fig import *
+from app_many_pages.data import new_donnee, new_titre, new_labels
 from app_many_pages.data import *
 
 
