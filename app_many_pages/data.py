@@ -3,12 +3,12 @@ import pandas as pd
 import math
 import plotly.graph_objects as go
 from app_many_pages import config
-from df_data import data_df, titre_df
-from daf_data import data_daf, titre_daf
-from dire_data import data_dire, titre_dire
-from drfd_data import data_drfd, titre_drfd
-from drh_data import data_drh, titre_drh
-from dri_data import data_dri, titre_dri
+from df_data import data_df, titre_df, labels_df
+from daf_data import data_daf, titre_daf, labels_daf
+from dire_data import data_dire, titre_dire, labels_dire
+from drfd_data import data_drfd, titre_drfd, labels_drfd
+from drh_data import data_drh, titre_drh, labels_drh
+from dri_data import data_dri, titre_dri, labels_dri
 from equivalence_historique import equivalence_ligne, equivalence_titre, correspondance_equivalence
 
 
@@ -33,6 +33,8 @@ def fusion_data(liste_data):      #Input: liste(services) de listes(annees) de d
 
 donnee = [data_df, data_daf, data_drfd, data_dire, data_drh,data_dri]
 new_donnee = fusion_data(donnee)
+labels = [labels_df, labels_daf, labels_drfd, labels_dire, labels_drh, labels_dri]
+new_labels = fusion_dict(labels)
 titre = [titre_df, titre_daf, titre_drfd, titre_dire, titre_drh,titre_dri]
 new_titre = fusion_dict(titre)
 
@@ -207,6 +209,36 @@ def adapt_all_new_data(liste_new_data):
     for code_indic in liste_new_data[0]:
         adapt_new_data(code_indic, liste_new_data)
 
+
+def adapt_new_label(dict_label):
+    for code_indic, label in dict_label.items():
+        longueur = len(label)
+        if longueur==28:
+            adapted_label = []
+            for i in range(7):
+                label_dept = []
+                for j in range(4):
+                    label_dept.append(dict_label[code_indic][4*i + j])
+                adapted_label.append(label_dept)
+            dict_label[code_indic] = adapted_label
+        elif longueur==30:
+            adapted_label = []
+            for i in range(6):
+                label_dept = []
+                for j in range(4):
+                    label_dept.append(dict_label[code_indic][5 * i + j])
+                adapted_label.append(label_dept)
+            dict_label[code_indic] = adapted_label
+
+"""
+for cle, valeur in new_labels.items():
+    print(cle, valeur)
+
+adapt_new_label(new_labels)
+print()
+for cle, valeur in new_labels.items():
+    print(cle, valeur)
+"""
 def fusion_old_new_data(new_data):
     old_data = [{} for i in range(len(annees))]
     adapt_all_old_data(old_data)
@@ -229,7 +261,7 @@ data_dire = extract_data_all_sheet(dire_ligne)
 data_drfd = extract_data_all_sheet(drfd_ligne)
 data_drh = extract_data_all_sheet(drh_ligne)
 
-print(data_df)
+#print(data_df)
 
 def extract_titre(list_line):
     # Chemin du fichier excel défini dans config.py
