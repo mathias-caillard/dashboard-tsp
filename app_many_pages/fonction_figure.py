@@ -9,7 +9,7 @@ def fig_annuelle_baton(donnees, xlabel, year, titre_graphe, titre_y, titre_x, co
     fig = go.Figure()
     for i in range(len(donnees)):
         fig.add_trace(go.Bar(x=[xlabel[i]], y=[donnees[i]],
-                             name=xlabel[i],
+                             name=xlabel[i].split(" ")[0],
                              marker=dict(color=[couleurs[i]])))
     # Ajout d'un titre
     fig.update_layout(title=titre_graphe + " en " + str(year),
@@ -20,13 +20,17 @@ def fig_annuelle_baton(donnees, xlabel, year, titre_graphe, titre_y, titre_x, co
 def fig_trim_baton(donnees, xlabel, year, titre_graphe, titre_y, titre_x, couleurs):
     Y = []
     for i in range(len(donnees)):
+        if couleurs is not None:
+            marker = dict(color=couleurs[i])
+        else:
+            marker = None
         Y.append(
             go.Bar(
                 x=xlabel[i],
                 y=donnees[i],
                 name=xlabel[i][0].split(" ")[0],
                 width=0.8,
-                marker=dict(color=couleurs[i])
+                marker=marker
             )
         )
 

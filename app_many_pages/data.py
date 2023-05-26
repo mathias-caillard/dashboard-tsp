@@ -153,8 +153,12 @@ def adapt_old_data(code_indic, liste_old_data):
 
             # Parcours des années
             for i in range(len(liste_old_data)):
+                #Services DF, DRFD, DIRE, DRI , DCOM
+                liste = [0, 0, 0, 0, 0]
                 donnee_correspondante_annuellle = [sum(x) / 3 for x in donnee_correspondante[i]]
-                liste_old_data[i][code_indic] = donnee_correspondante_annuellle
+                effectif_ecole = donnee_correspondante_annuellle.pop(-1)
+                liste.insert(0, effectif_ecole)
+                liste_old_data[i][code_indic] = liste + donnee_correspondante_annuellle
         else:
             donnee_correspondante = extract_indic_all_sheet(equivalence_ligne[code_indic])
             #Parcours des années
@@ -241,8 +245,14 @@ def fusion_old_new_data(new_data):
 
 data_complete = fusion_old_new_data(new_donnee)
 adapt_new_label(new_labels)
-#for data_annee in data_complete:
-#    print(data_annee)
+
+effectifs = [data_complete[i]["DRH-01"][6:12] + [data_complete[i]["DRH-01"][0]] for i in range(len(data_complete))]
+
+#Détermine les indicateurs qui nécessite une pondération par les effectifs (où les départements sont comparés)
+indic_ponderation = ["DF-01",
+                     "DRFD-01", "DRFD-02", "DRFD-03",
+                     "DIRE-01", "DIRE-02", "DIRE-03",
+                     "DAF-01", "DAF-02", "DAF-03", "DAF-04", "DAF-05", "DAF-06"]
 
 
 
@@ -341,6 +351,8 @@ def ponderation_total(data_indic):
                 tab_i.append(0)
         TAB.append(tab_i)
     return TAB
+
+
 
 def fig_baton_total(donnees, year, titre_graphe, titre_y):
     fig = go.Figure()

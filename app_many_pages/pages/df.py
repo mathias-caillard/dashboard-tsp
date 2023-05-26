@@ -2,8 +2,11 @@ import dash
 from dash import html, dcc, dash_table, Output, Input, callback
 
 from app_many_pages.df_fig import *
-from app_many_pages.data import new_donnee, new_titre, new_labels
+
+from app_many_pages.data import new_donnee, new_titre, new_labels, dict_titres
 from app_many_pages.data import *
+from app_many_pages.fonction_figure import fig_annuelle_baton, fig_trim_baton, couleurs
+
 
 
 
@@ -18,12 +21,14 @@ dash.register_page(
     active= False
     )
 
+donnee_annee = data_complete[-1]
 
 data_df_pond = ponderation_total(data.data_df[0])
 data_df_pond.append([valeur_annuel[i]/effectif[i] for i in range(7)])
 
 selected_data_df = data_df_pond[-1]
 annee = config.liste_annee_maj
+
 selected_annee = annee[-1]
 
 layout = html.Div(children=[
@@ -33,6 +38,24 @@ layout = html.Div(children=[
     ),
 
     html.H2(id="message_date"),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
+        id='df1_bat',
+        figure=fig_annuelle_baton(donnee_annee["DF-01"], new_labels["DF-01"], selected_annee, dict_titres["DF-01"], new_titre["DF-01"], "Départements", couleurs),
+        config = {'displaylogo': False}
+
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
+        id='df2_bat',
+        figure=fig_annuelle_baton(donnee_annee["DF-01"], new_labels["DF-01"], selected_annee, dict_titres["DF-01"], new_titre["DF-01"], "Départements", couleurs),
+        config = {'displaylogo': False}
+
+    ),
 
     dcc.Graph(
         id='df_update_year',
@@ -105,6 +128,17 @@ layout = html.Div(children=[
 
 
 @callback(
+    Output('df1_bat', 'figure'),
+    Input('choix-annee', 'value')
+)
+def update_graphes(selected_year):
+    donnee_annee = data_complete[selected_year - annee[0]]
+    return fig_annuelle_baton(donnee_annee["DF-01"], new_labels["DF-01"], selected_year, dict_titres["DF-01"], new_titre["DF-01"], "Départements", couleurs)
+
+
+
+"""
+@callback(
     Output('df_update_year', 'figure'),
     Input('choix-annee', 'value')
 )
@@ -116,7 +150,7 @@ def update_output(selected_year):
         selected_data_df = data_df_pond[selected_year - annee[0]]
         return fig_baton_total(selected_data_df,selected_year , titres_graphe[0], titres_y[0])
 
-
+"""
 
 
 
