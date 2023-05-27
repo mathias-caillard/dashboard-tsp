@@ -3,7 +3,7 @@ from dash import html, dcc, dash_table, Output, Input, callback
 
 from app_many_pages.df_fig import *
 
-from app_many_pages.data import new_donnee, new_titre, new_labels, dict_titres
+from app_many_pages.data import new_donnee, new_titre_y, new_labels, dict_titres
 from app_many_pages.data import *
 from app_many_pages.fonction_figure import fig_annuelle_baton, fig_trim_baton, couleurs
 
@@ -43,7 +43,7 @@ layout = html.Div(children=[
 
     dcc.Graph(
         id='df1_bat',
-        figure=fig_annuelle_baton(donnee_annee["DF-01"], new_labels["DF-01"], selected_annee, dict_titres["DF-01"], new_titre["DF-01"], "Départements", couleurs),
+        figure=fig_annuelle_baton(donnee_annee["DF-01"], new_labels["DF-01"], selected_annee, dict_titres["DF-01"], new_titre_y["DF-01"], "Départements", couleurs),
         config = {'displaylogo': False}
 
     ),
@@ -52,7 +52,7 @@ layout = html.Div(children=[
 
     dcc.Graph(
         id='df2_bat',
-        figure=fig_annuelle_baton(donnee_annee["DF-01"], new_labels["DF-01"], selected_annee, dict_titres["DF-01"], new_titre["DF-01"], "Départements", couleurs),
+        figure=fig_annuelle_baton(donnee_annee["DF-01"], new_labels["DF-01"], selected_annee, dict_titres["DF-01"], new_titre_y["DF-01"], "Départements", couleurs),
         config = {'displaylogo': False}
 
     ),
@@ -133,7 +133,7 @@ layout = html.Div(children=[
 )
 def update_graphes(selected_year):
     donnee_annee = data_complete[selected_year - annee[0]]
-    return fig_annuelle_baton(donnee_annee["DF-01"], new_labels["DF-01"], selected_year, dict_titres["DF-01"], new_titre["DF-01"], "Départements", couleurs)
+    return fig_annuelle_baton(donnee_annee["DF-01"], new_labels["DF-01"], selected_year, dict_titres["DF-01"], new_titre_y["DF-01"], "Départements", couleurs)
 
 
 

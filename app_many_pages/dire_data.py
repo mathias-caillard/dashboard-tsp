@@ -21,4 +21,3 @@ for nom_fichier in liste_fichier:
             add_to_dict(df, debutColonneData, finColonneData, nombreLignesData, data_dire_annee, titre_dire, labels_dire)
     data_dire.append(data_dire_annee)
 
-

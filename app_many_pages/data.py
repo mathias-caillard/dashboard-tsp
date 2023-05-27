@@ -36,8 +36,8 @@ donnee = [data_df, data_daf, data_drfd, data_dire, data_drh,data_dri]
 new_donnee = fusion_data(donnee)
 labels = [labels_df, labels_daf, labels_drfd, labels_dire, labels_drh, labels_dri]
 new_labels = fusion_dict(labels)
-titre = [titre_df, titre_daf, titre_drfd, titre_dire, titre_drh,titre_dri]
-new_titre = fusion_dict(titre)
+titre_y = [titre_df, titre_daf, titre_drfd, titre_dire, titre_drh, titre_dri]
+new_titre_y = fusion_dict(titre_y)
 
 
 sheet_names = ["artemis", "CITI", "EPH", "INF", "RS2M", "RST", "Global"]
@@ -187,7 +187,7 @@ def adapt_old_data(code_indic, liste_old_data):
 
 def adapt_all_old_data(liste_old_data):
     #Parcours des indicateurs
-    for code_indic in new_titre:
+    for code_indic in new_titre_y:
         adapt_old_data(code_indic, liste_old_data)
 
 
@@ -240,6 +240,7 @@ def adapt_new_label(dict_label):
                 for j in range(4):
                     label_dept.append(dict_label[code_indic][5 * i + j])
                 adapted_label.append(label_dept)
+            adapted_label.append(["ECOLE T1", "ECOLE T2", "ECOLE T3", "ECOLE T4"])
             dict_label[code_indic] = adapted_label
 
 def fusion_old_new_data(new_data):
@@ -262,7 +263,7 @@ indic_ponderation = ["DF-01",
                      "DIRE-01", "DIRE-02", "DIRE-03",
                      "DAF-01", "DAF-02", "DAF-03", "DAF-04", "DAF-05", "DAF-06"]
 
-
+#Pondère les données dont le code est présent dans liste_code_indic
 def ponderation_data(liste_data, liste_code_indic, liste_effectif):
     # Parcours des indicateurs
     for code_indic in liste_code_indic:
@@ -278,6 +279,8 @@ def ponderation_data(liste_data, liste_code_indic, liste_effectif):
                         liste_data[i][code_indic][j] = liste_data[i][code_indic][j] / liste_effectif[i][j]
 
 
+ponderation_data(data_complete, indic_ponderation, effectifs)
+
 
 
 
@@ -289,7 +292,6 @@ data_dire = extract_data_all_sheet(dire_ligne)
 data_drfd = extract_data_all_sheet(drfd_ligne)
 data_drh = extract_data_all_sheet(drh_ligne)
 
-#print(data_df)
 
 def extract_titre(list_line):
     # Chemin du fichier excel défini dans config.py
@@ -450,6 +452,7 @@ def data_moy(data) :
     res.append(moyT4/len(data))
     return res
 
+#Titres des graphes
 dict_titres = {
     'DF-01': "Nombre d\'UP",
     'DF-02': "Nombre d\'étudiants FISE",
