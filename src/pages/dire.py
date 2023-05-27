@@ -8,6 +8,8 @@ from src import config
 import dash_bootstrap_components as dbc
 from src.fig.dire_fig import *
 from src.data.data import *
+from src.functions.fonction_figure import fig_annuelle_baton, fig_camembert, fig_trim_baton, couleurs
+from src.functions.fonctions_historique import *
 
 
 dash.register_page(
@@ -42,19 +44,16 @@ selected_data_dire1_total = data_dire_pond1_total[-1]
 selected_data_dire2_total = data_dire_pond2_total[-1]
 selected_data_dire3_total = data_dire_pond3_total[-1]
 
-annee = config.liste_annee_maj
-selected_annee = annee[-1]
 
-layout = html.Div(children=[
-    html.H1(children='Bienvenue sur la page concernant la DIRE'),
-
-    dcc.Graph(
+def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_annee) :
+    return [
+   dcc.Graph(
         id='dire-graph1',
         figure=fig_baton_trimestre(selected_data_dire1,selected_annee , titres_graphe_dire[0], titres_y_dire[0]),
         config = {'displaylogo': False}
         ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
 
 
     dcc.Graph(
@@ -63,7 +62,7 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
         ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
 
     dcc.Graph(
         id='dire-graph3',
@@ -77,7 +76,7 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
         ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
 
 
     dcc.Graph(
@@ -86,7 +85,7 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
         ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
 
     dcc.Graph(
         id='example-graph3',
@@ -94,7 +93,7 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
 
     dcc.Graph(
         id='example-graph4',
@@ -102,7 +101,7 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
 
     dcc.Graph(
         id='old-graph1',
@@ -110,7 +109,7 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
 
     dcc.Graph(
         id='old-graph1_tri',
@@ -118,7 +117,7 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
 
     dcc.Graph(
         id='old-graph1_tot',
@@ -126,7 +125,7 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
 
     dcc.Graph(
         id='old-graph2',
@@ -134,7 +133,7 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
 
     dcc.Graph(
         id='old-graph3',
@@ -142,7 +141,7 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
 
     dcc.Graph(
         id='old-graph3_tri',
@@ -150,7 +149,7 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
 
     dcc.Graph(
         id='old-graph3_tot',
@@ -158,7 +157,7 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
 
     dcc.Graph(
         id='old-graph4',
@@ -166,7 +165,6 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
 
     dcc.Graph(
         id='old-graph5',
@@ -174,15 +172,13 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
-
     dcc.Graph(
         id='old-graph5_tri',
         figure=fig_old_dire_5_tri(),
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
 
     dcc.Graph(
         id='old-graph5_tot',
@@ -190,43 +186,104 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
 
     dcc.Graph(
         id='old-graph6',
         figure=fig_old_dire_6(),
         config = {'displaylogo': False}
     ),
-])
+
+]
+
+
+
+layout = dbc.Container(children=[
+    dcc.Loading(id = "loading-dire", color = "black", type = "circle"),
+    html.H2(children='Sélection de l\'année :'),
+                    dcc.Dropdown(
+                    id = "annee-selector-dire",
+                    options = annee,
+                    multi = False,
+                    value=annee[0]
+                ),
+    #joue le rôle de variable globale
+    dcc.Store(id='current-value-dire', data=[]),
+    #Menu déourlant/moteur de recherche
+    dcc.Dropdown(
+        options=categories,
+        id="checklist-input-dire",
+        multi=True,
+        placeholder="Veuillez selectionner des graphes à afficher.",
+        persistence = True,
+        value = [
+            "dire_old_1_tri",
+            "dire_old_1_tot",
+            "dire_old_1_comp",
+            "dire_old_2_tri",
+            "dire_old_2_tot",
+            "dire_old_2_comp",
+            "dire_old_3_tri",
+            "dire_old_3_tot",
+            "dire_old_3_comp",
+        ],
+        disabled = True,
+        style={"display": "none"}
+    ),
+    # Boucle pour générer les graphiques       
+            dbc.Container(id="graph-container-historique-dire",
+                children=[],
+                fluid = True),
+    ],
+fluid = True
+)
+
+
+
+
+
+
+
+
+
+
+#Mettre à jour les données du menu déroulant sélectionnées
+@callback(
+    Output("current-value-dire", "data"),
+    [Input("checklist-input-dire", "value")],
+    [State("current-value-dire", "data")],
+    prevent_initial_call=True
+)
+def update_old_value(value, old_value):
+    return update_old_value_(value, old_value) #dans fonctions_historique.py
+
+
+# Boucle pour générer les callbacks pour chaque département
+for i, cat in enumerate(categories):
+    cat_id = cat["value"]
+
+
+    @callback(
+        Output(f"current_collapse-dire{i + 1}", "is_open"),
+        [Input("checklist-input-dire", "value")],
+        [State(f"collapse-dire{i + 1}", "is_open"), State("current-value-dire", "data")],
+        prevent_initial_call=True
+    )
+    def toggle_collapse(value, is_open, data, cat_id=cat_id):
+        return toggle_collapse_(value, is_open, data, cat_id=cat_id)
 
 @callback(
-    [Output('dire-graph1', 'figure'), Output('dire-graph2', 'figure'), Output('dire-graph3', 'figure')],
-    Input('choix-annee', 'value')
+    [Output("graph-container-historique-dire", "children"),
+     Output("loading-dire", "parent-style")], #Permet d'afficher un Spinner de Char
+    [Input("annee-selector-dire", "value"),
+     Input("checklist-input-dire", "value"),
+     ]
 )
-def update_graph(selected_year):
-    if selected_year == 2023:
-        selected_data_dire1 = data_dire_pond1[-1]
-        selected_data_dire2 = data_dire_pond2[-1]
-        selected_data_dire3 = data_dire_pond3[-1]
-        selected_data_dire1_total = data_dire_pond1_total[-1]
-        selected_data_dire2_total = data_dire_pond2_total[-1]
-        selected_data_dire3_total = data_dire_pond3_total[-1]
+
+def generate_graphs(selected_year, value):
+    return generate_graphs_(selected_year, value, baseline_graph = liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_year))
 
 
 
-        return fig_baton_trimestre(selected_data_dire1,selected_year , titres_graphe_dire[0], titres_y_dire[0]), \
-               fig_baton_total(selected_data_dire2_total,selected_year , titres_graphe_dire[1], titres_y_dire[1]), \
-               fig_baton_departement(selected_data_dire3,selected_year , titres_graphe_dire[2], titres_y_dire[2])
 
-
-    else:
-        selected_data_dire1 = data_dire_pond1[selected_year - annee[0]]
-        selected_data_dire2 = data_dire_pond2[selected_year - annee[0]]
-        selected_data_dire3 = data_dire_pond3[selected_year - annee[0]]
-        selected_data_dire1_total = data_dire_pond1_total[selected_year - annee[0]]
-        selected_data_dire2_total = data_dire_pond2_total[selected_year - annee[0]]
-        selected_data_dire3_total = data_dire_pond3_total[selected_year - annee[0]]
-        return fig_baton_trimestre(selected_data_dire1,selected_year , titres_graphe_dire[0], titres_y_dire[0]), \
-               fig_baton_total(selected_data_dire2_total,selected_year , titres_graphe_dire[1], titres_y_dire[1]), \
-               fig_baton_departement(selected_data_dire3,selected_year , titres_graphe_dire[2], titres_y_dire[2])
 
