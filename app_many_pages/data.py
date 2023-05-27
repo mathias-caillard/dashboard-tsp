@@ -2,6 +2,7 @@
 import pandas as pd
 import math
 import plotly.graph_objects as go
+import copy
 from app_many_pages import config
 from df_data import data_df, titre_df, labels_df
 from daf_data import data_daf, titre_daf, labels_daf
@@ -38,6 +39,7 @@ labels = [labels_df, labels_daf, labels_drfd, labels_dire, labels_drh, labels_dr
 new_labels = fusion_dict(labels)
 titre_y = [titre_df, titre_daf, titre_drfd, titre_dire, titre_drh, titre_dri]
 new_titre_y = fusion_dict(titre_y)
+
 
 
 sheet_names = ["artemis", "CITI", "EPH", "INF", "RS2M", "RST", "Global"]
@@ -204,7 +206,7 @@ def adapt_new_data(code_indic, liste_new_data):
                     tab.append(data_indic[4*j + k])
                 adapted_data.append(tab)
             liste_new_data[i][code_indic] = adapted_data
-    if longueur==30:
+    elif longueur==30:
         for i in range(len(liste_new_data)):
             adapted_data = []
             data_indic = liste_new_data[i][code_indic]
@@ -215,6 +217,13 @@ def adapt_new_data(code_indic, liste_new_data):
                 adapted_data.append(tab)
             adapted_data.append([sum([adapted_data[i][j] for i in range(6)]) for j in range(4)])
             liste_new_data[i][code_indic] = adapted_data
+    """
+    elif longueur == 4:
+        for i in range(len(liste_new_data)):
+            adapted_data = [[x for x in liste_new_data[i][code_indic]]]
+            liste_new_data[i][code_indic] = adapted_data
+    """
+
 
 
 def adapt_all_new_data(liste_new_data):
@@ -240,7 +249,7 @@ def adapt_new_label(dict_label):
                 for j in range(4):
                     label_dept.append(dict_label[code_indic][5 * i + j])
                 adapted_label.append(label_dept)
-            adapted_label.append(["ECOLE T1", "ECOLE T2", "ECOLE T3", "ECOLE T4"])
+            adapted_label.append(["Ecole T1", "Ecole T2", "Ecole T3", "Ecole T4"])
             dict_label[code_indic] = adapted_label
 
 def fusion_old_new_data(new_data):
@@ -265,6 +274,7 @@ indic_ponderation = ["DF-01",
 
 #Pondère les données dont le code est présent dans liste_code_indic
 def ponderation_data(liste_data, liste_code_indic, liste_effectif):
+    new_liste_data = copy.deepcopy(liste_data)
     # Parcours des indicateurs
     for code_indic in liste_code_indic:
         # Parcours des années
@@ -272,14 +282,18 @@ def ponderation_data(liste_data, liste_code_indic, liste_effectif):
             for j in range(len(liste_data[i][code_indic])):
                 if liste_effectif[i][j] != 0:
                     #Si données trimestrielles
-                    if isinstance(liste_data[i][code_indic][j], list):
-                        liste_data[i][code_indic][j] = [liste_data[i][code_indic][j][k] / liste_effectif[i][j]  for k in range(len(liste_data[i][code_indic][j]))]
+                    if isinstance(new_liste_data[i][code_indic][j], list):
+                        new_liste_data[i][code_indic][j] = [liste_data[i][code_indic][j][k] / liste_effectif[i][j]  for k in range(len(new_liste_data[i][code_indic][j]))]
                     #Si données annuelles
                     else:
-                        liste_data[i][code_indic][j] = liste_data[i][code_indic][j] / liste_effectif[i][j]
+                        new_liste_data[i][code_indic][j] = liste_data[i][code_indic][j] / liste_effectif[i][j]
+    return new_liste_data
 
 
-ponderation_data(data_complete, indic_ponderation, effectifs)
+
+data_complete_pondere = ponderation_data(data_complete, indic_ponderation, effectifs)
+
+
 
 
 

@@ -5,7 +5,7 @@ from app_many_pages.df_fig import *
 
 from app_many_pages.data import new_donnee, new_titre_y, new_labels, dict_titres
 from app_many_pages.data import *
-from app_many_pages.fonction_figure import fig_annuelle_baton, fig_trim_baton, couleurs
+from app_many_pages.fonction_figure import fig_annuelle_baton, fig_camembert, fig_trim_baton, couleurs
 
 
 
@@ -21,7 +21,7 @@ dash.register_page(
     active= False
     )
 
-donnee_annee = data_complete[-1]
+donnee_annee = data_complete_pondere[-1]
 
 data_df_pond = ponderation_total(data.data_df[0])
 data_df_pond.append([valeur_annuel[i]/effectif[i] for i in range(7)])
@@ -43,7 +43,16 @@ layout = html.Div(children=[
 
     dcc.Graph(
         id='df1_bat',
-        figure=fig_annuelle_baton(donnee_annee["DF-01"], new_labels["DF-01"], selected_annee, dict_titres["DF-01"], new_titre_y["DF-01"], "Départements", couleurs),
+        figure=fig_annuelle_baton("DF-01", selected_annee, "Départements", couleurs),
+        config = {'displaylogo': False}
+
+    ),
+
+    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+    dcc.Graph(
+        id='df1_cam',
+        figure=fig_camembert("DF-01", selected_annee, couleurs),
         config = {'displaylogo': False}
 
     ),
@@ -52,7 +61,7 @@ layout = html.Div(children=[
 
     dcc.Graph(
         id='df2_bat',
-        figure=fig_annuelle_baton(donnee_annee["DF-01"], new_labels["DF-01"], selected_annee, dict_titres["DF-01"], new_titre_y["DF-01"], "Départements", couleurs),
+        figure=fig_trim_baton("DF-02", selected_annee, "Temps", None),
         config = {'displaylogo': False}
 
     ),
@@ -132,8 +141,8 @@ layout = html.Div(children=[
     Input('choix-annee', 'value')
 )
 def update_graphes(selected_year):
-    donnee_annee = data_complete[selected_year - annee[0]]
-    return fig_annuelle_baton(donnee_annee["DF-01"], new_labels["DF-01"], selected_year, dict_titres["DF-01"], new_titre_y["DF-01"], "Départements", couleurs)
+    donnee_annee = data_complete_pondere[selected_year - annee[0]]
+    return fig_annuelle_baton("DF-01", selected_year, "Départements", couleurs)
 
 
 
