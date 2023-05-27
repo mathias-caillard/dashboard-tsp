@@ -4,13 +4,13 @@ import math
 import plotly.graph_objects as go
 import copy
 from src import config
-from data.df_data import data_df, titre_df, labels_df
-from data.daf_data import data_daf, titre_daf, labels_daf
-from data.dire_data import data_dire, titre_dire, labels_dire
-from data.drfd_data import data_drfd, titre_drfd, labels_drfd
-from data.drh_data import data_drh, titre_drh, labels_drh
-from data.dri_data import data_dri, titre_dri, labels_dri
-from equivalence_historique import equivalence_ligne, equivalence_titre, correspondance_equivalence
+from src.data.df_data import data_df, titre_df, labels_df
+from src.data.daf_data import data_daf, titre_daf, labels_daf
+from src.data.dire_data import data_dire, titre_dire, labels_dire
+from src.data.drfd_data import data_drfd, titre_drfd, labels_drfd
+from src.data.drh_data import data_drh, titre_drh, labels_drh
+from src.data.dri_data import data_dri, titre_dri, labels_dri
+from src.equivalence_historique import equivalence_ligne, equivalence_titre, correspondance_equivalence
 
 
 
@@ -149,8 +149,8 @@ def extract_indic_all_sheet(lineNumber):
 def adapt_old_data(code_indic, liste_old_data):
     TAB = []
     if correspondance_equivalence(code_indic):
-        # Cas particulier pour DF-01 (données tri à mettre en annuelle)
-        if code_indic == "DF-01":
+        # Cas particulier pour DF-01, DFRD-01, DRFD-02 (données tri à mettre en annuelle)
+        if code_indic in  ["DF-01", "DRFD-01", "DRFD-02"]:
             donnee_correspondante = extract_indic_all_sheet(equivalence_ligne[code_indic])
             # Parcours des années
             for i in range(len(liste_old_data)):

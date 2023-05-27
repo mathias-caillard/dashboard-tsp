@@ -13,6 +13,7 @@ def fig_annuelle_baton(code_indic, year, titre_x, couleurs):
     titre_graphe = dict_titres[code_indic]
     titre_y = new_titre_y[code_indic]
     fig = go.Figure()
+    #print(code_indic, donnees)
     for i in range(len(donnees)):
         if couleurs is not None:
             marker = dict(color=couleurs[i])
@@ -54,7 +55,7 @@ def fig_camembert(code_indic, year, couleurs):
     # Personnalisation du camembert
     fig.update_traces(hoverinfo="label+percent+value", textinfo="label+percent")
     # Ajout d'un titre
-    fig.update_layout(title=titre_graphe)
+    fig.update_layout(title=titre_graphe + " en " + str(year))
     return fig
 
 #Indicateur trimestriel
