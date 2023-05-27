@@ -262,6 +262,7 @@ indic_ponderation = ["DF-01",
                      "DIRE-01", "DIRE-02", "DIRE-03",
                      "DAF-01", "DAF-02", "DAF-03", "DAF-04", "DAF-05", "DAF-06"]
 
+
 def ponderation_data(liste_data, liste_code_indic, liste_effectif):
     # Parcours des indicateurs
     for code_indic in liste_code_indic:
