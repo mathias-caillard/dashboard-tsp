@@ -3,6 +3,30 @@ from dash import html, dcc, Input, Output, State, callback
 from src.fig.drfd_fig import *
 from src.data.data import *
 from src.functions.fonction_figure import fig_annuelle_baton, fig_camembert, fig_trim_baton
+import dash
+from dash import html, dcc, Output, Input, State, callback
+import dash_bootstrap_components as dbc
+from src.fig import daf_fig, df_fig, dire_fig, drfd_fig, drh_fig, dri_fig, artemis_fig, citi_fig, eph_fig, inf_fig, rs2m_fig, rst_fig
+from src import config
+import data
+import plotly.express as px
+import plotly.graph_objects as go
+from sklearn.preprocessing import LabelEncoder
+from sklearn.linear_model import LinearRegression
+import numpy as np
+from flask import Flask, session
+from src.functions.fonctions_historique import *
+from src.functions.fonction_figure import *
+
+from src.data.data import *
+import dash
+from dash import html, dcc, dash_table, Output, Input, callback
+
+from src.fig.df_fig import *
+
+from src.data.data import new_donnee, new_titre_y, new_labels, dict_titres
+from src.data.data import *
+from src.functions.fonction_figure import fig_annuelle_baton, fig_camembert, fig_trim_baton, couleurs
 
 
 dash.register_page(
@@ -12,33 +36,15 @@ dash.register_page(
     order=3,
     active= False
                    )
-
-"""
-titres_graphe_drfd = titres_graphe[7:9]
-titres_y_drfd = titres_y[7:9]
-
-data_drfd_pond1 = ponderation_total(data.data_drfd[0])
-data_drfd_pond2 = ponderation_total(data.data_drfd[1])
-data_drfd_pond1.append(data_drfd_2023[0])
-data_drfd_pond2.append(data_drfd_2023[1])
-
-selected_data_drfd1 = data_drfd_pond1[-1]
-selected_data_drfd2 = data_drfd_pond2[-1]
-"""
-
-annee = config.liste_annee_maj
-selected_annee = annee[-1]
-
-layout = html.Div(children=[
-    html.H1(children='Bienvenue sur la page concernant la DRFD'),
-
-    dcc.Graph(
+def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_annee) :
+    return [
+dcc.Graph(
         id='drfd1_bat',
         figure=fig_annuelle_baton("DRFD-01", selected_annee, "Départements", couleurs),
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
 
     dcc.Graph(
         id='drfd1_cam',
@@ -46,7 +52,7 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
 
     dcc.Graph(
         id='drfd2_bat',
@@ -54,7 +60,6 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
 
     dcc.Graph(
         id='drfd2_cam',
@@ -62,7 +67,7 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
 
     dcc.Graph(
         id='drfd3_bat',
@@ -70,129 +75,94 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
+]
 
 
-])
+
+layout = dbc.Container(children=[
+    dcc.Loading(id = "loading-drfd", color = "black", type = "circle"),
+    html.H2(children='Sélection de l\'année :'),
+                    dcc.Dropdown(
+                    id = "annee-selector-drfd",
+                    options = annee,
+                    multi = False,
+                    value=annee[0]
+                ),
+    #joue le rôle de variable globale
+    dcc.Store(id='current-value-drfd', data=[]),
+    #Menu déourlant/moteur de recherche
+    dcc.Dropdown(
+        options=categories,
+        id="checklist-input-drfd",
+        multi=True,
+        placeholder="Veuillez selectionner des graphes à afficher.",
+        persistence = True,
+        value = [
+            "drfd_old_1_comp",
+            "drfd_old_1_tri",
+            "drfd_old_1_tot",
+            "drfd_old_2_comp",
+            "drfd_old_2_tri",
+            "drfd_old_2_tot"
+        ],
+        disabled = True,
+        style={"display": "none"}
+    ),
+    # Boucle pour générer les graphiques       
+            dbc.Container(id="graph-container-historique-drfd",
+                children=[],
+                fluid = True),
+    ],
+fluid = True
+)
+
+
+
+
+
+
+
+
+
+
+#Mettre à jour les données du menu déroulant sélectionnées
+@callback(
+    Output("current-value-drfd", "data"),
+    [Input("checklist-input-drfd", "value")],
+    [State("current-value-drfd", "data")],
+    prevent_initial_call=True
+)
+def update_old_value(value, old_value):
+    return update_old_value_(value, old_value) #dans fonctions_historique.py
+
+
+# Boucle pour générer les callbacks pour chaque département
+for i, cat in enumerate(categories):
+    cat_id = cat["value"]
+
+
+    @callback(
+        Output(f"current_collapse-drfd{i + 1}", "is_open"),
+        [Input("checklist-input-drfd", "value")],
+        [State(f"collapse-drfd{i + 1}", "is_open"), State("current-value-drfd", "data")],
+        prevent_initial_call=True
+    )
+    def toggle_collapse(value, is_open, data, cat_id=cat_id):
+        return toggle_collapse_(value, is_open, data, cat_id=cat_id)
 
 @callback(
-    [Output('drfd1_bat', 'figure'), Output('drfd1_cam', 'figure'),
-     Output('drfd2_bat', 'figure'), Output('drfd2_cam', 'figure'),
-     Output('drfd3_bat', 'figure')
-     ],
-    Input('choix-annee', 'value')
+    [Output("graph-container-historique-drfd", "children"),
+     Output("loading-drfd", "parent-style")], #Permet d'afficher un Spinner de Char
+    [Input("annee-selector-drfd", "value"),
+     Input("checklist-input-drfd", "value"),
+     ]
 )
-def update_graphes(selected_year):
-    list_fig = []
-    list_fig.append(fig_annuelle_baton("DRFD-01", selected_year, "Départements", couleurs))
-    list_fig.append(fig_camembert("DRFD-01", selected_year, couleurs))
-    list_fig.append(fig_annuelle_baton("DRFD-02", selected_year, "Départements", couleurs))
-    list_fig.append(fig_camembert("DRFD-02", selected_year, couleurs))
-    list_fig.append(fig_annuelle_baton("DRFD-03", selected_year, "Départements", couleurs))
 
-    return list_fig
+def generate_graphs(selected_year, value):
+    return generate_graphs_(selected_year, value, baseline_graph = liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_year))
 
 
-"""
-dcc.Graph(
-        id='drfd-graph2',
-        figure=fig_baton_total(selected_data_drfd2,selected_annee , titres_graphe_drfd[1], titres_y_drfd[1]),
-        config = {'displaylogo': False}
-    ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
 
-    dcc.Graph(
-        id='example-graph1',
-        figure=fig_drfd_1(),
-        config = {'displaylogo': False}
-    ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
-
-    dcc.Graph(
-        id='example-graph2',
-        figure=fig_drfd_2(),
-        config = {'displaylogo': False}
-    ),
-
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
-
-    dcc.Graph(
-        id='example-graph3',
-        figure=fig_drfd_3(),
-        config = {'displaylogo': False}
-    ),
-
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
-
-    dcc.Graph(
-        id='example-graph4',
-        figure=fig_drfd_4(),
-        config = {'displaylogo': False}
-    ),
-
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
-
-    dcc.Graph(
-        id='old-graph1',
-        figure=fig_old_drfd_1(),
-        config = {'displaylogo': False}
-    ),
-
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
-
-    dcc.Graph(
-        id='old-graph1_tri',
-        figure=fig_old_drfd_1_tri(),
-        config = {'displaylogo': False}
-    ),
-
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
-
-    dcc.Graph(
-        id='old-graph1_tot',
-        figure=fig_old_drfd_1_tot(),
-        config = {'displaylogo': False}
-    ),
-
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
-
-    dcc.Graph(
-        id='old-graph2',
-        figure=fig_old_drfd_2(),
-        config = {'displaylogo': False}
-    ),
-
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
-
-    dcc.Graph(
-        id='old-graph3',
-        figure=fig_old_drfd_3(),
-        config = {'displaylogo': False}
-    ),
-
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
-
-    dcc.Graph(
-        id='old-graph3_tri',
-        figure=fig_old_drfd_3_tri(),
-        config = {'displaylogo': False}
-    ),
-
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
-
-    dcc.Graph(
-        id='old-graph3_tot',
-        figure=fig_old_drfd_3_tot(),
-        config = {'displaylogo': False}
-    ),
-
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
-
-    dcc.Graph(
-        id='old-graph4',
-        figure=fig_old_drfd_4(),
-        config = {'displaylogo': False}
-    ),
-"""
