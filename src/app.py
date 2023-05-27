@@ -48,19 +48,6 @@ offcanvas = html.Div(
             close_button=False,
             style = {"marginTop" : "60px"},
             children = [
-     
-
-                html.H3(children='Sélection de l\'année',
-                        style={'font-size': '18px'}),
-
-                dcc.Dropdown(
-                    id = "choix-annee",
-                    options = annee,
-                    multi = False,
-                    value=annee[0]
-                ), 
-
-                html.Hr(style={'borderTop': '2px solid #000000'}),
 
                 dbc.Switch(
                     id="COP-switch",

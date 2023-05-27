@@ -1,6 +1,11 @@
 import dash
 from dash import html, dcc
 from src.fig.departement_fig import *
+import dash
+from dash import html, dcc, Output, Input, State, callback
+import dash_bootstrap_components as dbc
+from src.functions.fonction_figure import fig_annuelle_baton, fig_camembert, fig_trim_baton, couleurs
+from src.functions.fonctions_historique import *
 
 dash.register_page(
     __name__,
@@ -11,21 +16,15 @@ dash.register_page(
                    )
 
 
-layout = html.Div(
-    style={},
-    children=[
-    html.H1(
-        children='Bienvenue sur la page concernant les départements de Télécom SudParis',
-        style={'text-align': 'justify'}
-    ),
-
+def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_annee) :
+    return [
     dcc.Graph(
         id='example-graph',
         figure=fig_dept_1(),
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  #Ligne horizontale pour mieux séparer les graphes
+
 
     dcc.Graph(
         id='example-graph2',
@@ -33,7 +32,7 @@ layout = html.Div(
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  #Ligne horizontale pour mieux séparer les graphes
+   
 
     dcc.Graph(
         id='example-graph3',
@@ -41,7 +40,7 @@ layout = html.Div(
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  #Ligne horizontale pour mieux séparer les graphes
+
 
     dcc.Graph(
         id='example-graph4',
@@ -49,7 +48,7 @@ layout = html.Div(
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  #Ligne horizontale pour mieux séparer les graphes
+   
 
     dcc.Graph(
         id='example-graph5',
@@ -57,7 +56,7 @@ layout = html.Div(
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  #Ligne horizontale pour mieux séparer les graphes
+
 
     dcc.Graph(
         id='example-graph6',
@@ -65,7 +64,7 @@ layout = html.Div(
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  #Ligne horizontale pour mieux séparer les graphes
+   
 
     dcc.Graph(
         id='example-graph7',
@@ -73,7 +72,7 @@ layout = html.Div(
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
 
     dcc.Graph(
         id='example-graph8',
@@ -82,8 +81,83 @@ layout = html.Div(
     ),
 
 
-    html.Div(children='''
+]
 
-    '''),
 
-])
+
+layout = dbc.Container(children=[
+    dcc.Loading(id = "loading-dept", color = "black", type = "circle"),
+    html.H2(children='Sélection de l\'année :'),
+                    dcc.Dropdown(
+                    id = "annee-selector-dept",
+                    options = annee,
+                    multi = False,
+                    value=annee[0]
+                ),
+    #joue le rôle de variable globale
+    dcc.Store(id='current-value-dept', data=[]),
+    #Menu déourlant/moteur de recherche
+    dcc.Dropdown(
+        options=categories,
+        id="checklist-input-dept",
+        multi=True,
+        placeholder="Veuillez selectionner des graphes à afficher.",
+        persistence = True,
+        value = [
+            #A completer une fois historique full
+        ],
+        disabled = True,
+        style={"display": "none"}
+    ),
+    # Boucle pour générer les graphiques       
+            dbc.Container(id="graph-container-historique-dept",
+                children=[],
+                fluid = True),
+    ],
+fluid = True
+)
+
+
+
+
+
+
+
+
+
+
+#Mettre à jour les données du menu déroulant sélectionnées
+@callback(
+    Output("current-value-dept", "data"),
+    [Input("checklist-input-dept", "value")],
+    [State("current-value-dept", "data")],
+    prevent_initial_call=True
+)
+def update_old_value(value, old_value):
+    return update_old_value_(value, old_value) #dans fonctions_historique.py
+
+
+# Boucle pour générer les callbacks pour chaque département
+for i, cat in enumerate(categories):
+    cat_id = cat["value"]
+
+
+    @callback(
+        Output(f"current_collapse-dept{i + 1}", "is_open"),
+        [Input("checklist-input-dept", "value")],
+        [State(f"collapse-dept{i + 1}", "is_open"), State("current-value-dept", "data")],
+        prevent_initial_call=True
+    )
+    def toggle_collapse(value, is_open, data, cat_id=cat_id):
+        return toggle_collapse_(value, is_open, data, cat_id=cat_id)
+
+@callback(
+    [Output("graph-container-historique-dept", "children"),
+     Output("loading-dept", "parent-style")], #Permet d'afficher un Spinner de Char
+    [Input("annee-selector-dept", "value"),
+     Input("checklist-input-dept", "value"),
+     ]
+)
+
+def generate_graphs(selected_year, value):
+    return generate_graphs_(selected_year, value, baseline_graph = liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_year))

@@ -6,6 +6,8 @@ import plotly.graph_objects as go
 from src import config
 from src.fig.daf_fig import *
 from src.data.data import *
+from src.functions.fonction_figure import fig_annuelle_baton, fig_camembert, fig_trim_baton, couleurs
+from src.functions.fonctions_historique import *
 
 
 dash.register_page(
@@ -40,21 +42,14 @@ selected_data_daf1_total = data_daf_pond1_total[-1]
 selected_data_daf2_total = data_daf_pond2_total[-1]
 selected_data_daf3_total = data_daf_pond3_total[-1]
 
-annee = config.liste_annee_maj
-selected_annee = annee[-1]
 
-
-
-layout = html.Div(children=[
-    html.H1(children='Bienvenue sur la page concernant la DAF'),
-
-    dcc.Graph(
+def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_annee) :
+     return [
+     dcc.Graph(
         id='daf-graph1',
         figure=fig_baton_trimestre(selected_data_daf1, selected_annee, titres_graphe_daf[0], titres_y_daf[0]),
         config = {'displaylogo': False}
     ),
-
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
 
     dcc.Graph(
         id='daf-graph2',
@@ -62,8 +57,7 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
-
+  
     dcc.Graph(
         id='daf-graph3',
         figure=fig_baton_departement(selected_data_daf3, selected_annee, titres_graphe_daf[2], titres_y_daf[2]),
@@ -76,7 +70,6 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
 
     dcc.Graph(
         id='example-graph2',
@@ -84,7 +77,7 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+   
 
     dcc.Graph(
         id='example-graph3',
@@ -92,7 +85,7 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
 
     dcc.Graph(
         id='example-graph4',
@@ -100,8 +93,7 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
-
+  
     dcc.Graph(
         id='example-graph5',
         figure=fig_daf_5(),
@@ -109,7 +101,7 @@ layout = html.Div(children=[
     ),
 
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
 
     dcc.Graph(
         id='example-graph6',
@@ -117,7 +109,7 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
 
     dcc.Graph(
         id='example-graph7',
@@ -125,7 +117,6 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
 
     dcc.Graph(
         id='example-graph8',
@@ -133,15 +124,14 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
-
+  
     dcc.Graph(
         id='example-graph9',
         figure=fig_daf_9(),
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
 
     dcc.Graph(
         id='old-graph1',
@@ -149,15 +139,14 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
-
+    
     dcc.Graph(
         id='old-graph1_tri',
         figure=fig_old_daf_1_tri(),
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
 
     dcc.Graph(
         id='old-graph1_tot',
@@ -165,7 +154,7 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+   
 
     dcc.Graph(
         id='old-graph2',
@@ -173,7 +162,7 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
 
     dcc.Graph(
         id='old-graph3',
@@ -181,15 +170,14 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
-
+    
     dcc.Graph(
         id='old-graph3_tri',
         figure=fig_old_daf_3_tri(),
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+  
 
     dcc.Graph(
         id='old-graph3_tot',
@@ -197,15 +185,14 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
-
+   
     dcc.Graph(
         id='old-graph4',
         figure=fig_old_daf_4(),
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+  
 
     dcc.Graph(
         id='old-graph5',
@@ -213,7 +200,7 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+   
 
     dcc.Graph(
         id='old-graph5_tri',
@@ -221,7 +208,7 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
 
     dcc.Graph(
         id='old-graph5_tot',
@@ -229,41 +216,102 @@ layout = html.Div(children=[
         config = {'displaylogo': False}
     ),
 
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
+
 
     dcc.Graph(
         id='old-graph6',
         figure=fig_old_daf_6(),
         config = {'displaylogo': False}
     ),
-])
+    ]
 
+
+
+layout = dbc.Container(children=[
+    dcc.Loading(id = "loading-daf", color = "black", type = "circle"),
+    html.H2(children='Sélection de l\'année :'),
+                    dcc.Dropdown(
+                    id = "annee-selector-daf",
+                    options = annee,
+                    multi = False,
+                    value=annee[0]
+                ),
+    #joue le rôle de variable globale
+    dcc.Store(id='current-value-daf', data=[]),
+    #Menu déourlant/moteur de recherche
+    dcc.Dropdown(
+        options=categories,
+        id="checklist-input-daf",
+        multi=True,
+        placeholder="Veuillez selectionner des graphes à afficher.",
+        persistence = True,
+        value = [
+                "daf_old_1_tri",
+                "daf_old_1_comp",
+                "daf_old_1_tot",
+                "daf_old_2_tri",
+                "daf_old_2_comp",
+                "daf_old_2_tot",
+                "daf_old_3_tri",
+                "daf_old_3_comp",
+                "daf_old_3_tot",
+
+        ],
+        disabled = True,
+        style={"display": "none"}
+    ),
+    # Boucle pour générer les graphiques       
+            dbc.Container(id="graph-container-historique-daf",
+                children=[],
+                fluid = True),
+    ],
+fluid = True
+)
+
+
+
+
+
+
+
+
+
+
+#Mettre à jour les données du menu déroulant sélectionnées
+@callback(
+    Output("current-value-daf", "data"),
+    [Input("checklist-input-daf", "value")],
+    [State("current-value-daf", "data")],
+    prevent_initial_call=True
+)
+def update_old_value(value, old_value):
+    return update_old_value_(value, old_value) #dans fonctions_historique.py
+
+
+# Boucle pour générer les callbacks pour chaque département
+for i, cat in enumerate(categories):
+    cat_id = cat["value"]
+
+
+    @callback(
+        Output(f"current_collapse-daf{i + 1}", "is_open"),
+        [Input("checklist-input-daf", "value")],
+        [State(f"collapse-daf{i + 1}", "is_open"), State("current-value-daf", "data")],
+        prevent_initial_call=True
+    )
+    def toggle_collapse(value, is_open, data, cat_id=cat_id):
+        return toggle_collapse_(value, is_open, data, cat_id=cat_id)
 
 @callback(
-    [Output('daf-graph1', 'figure'), Output('daf-graph2', 'figure'), Output('daf-graph3', 'figure')],
-    Input('choix-annee', 'value')
+    [Output("graph-container-historique-daf", "children"),
+     Output("loading-daf", "parent-style")], #Permet d'afficher un Spinner de Char
+    [Input("annee-selector-daf", "value"),
+     Input("checklist-input-daf", "value"),
+     ]
 )
-def update_graph(selected_year):
-    if selected_year == 2023:
-        selected_data_daf1 = data_daf_pond1[-1]
-        selected_data_daf2 = data_daf_pond2[-1]
-        selected_data_daf3 = data_daf_pond3[-1]
-        selected_data_daf1_total = data_daf_pond1_total[-1]
-        selected_data_daf2_total = data_daf_pond2_total[-1]
-        selected_data_daf3_total = data_daf_pond3_total[-1]
 
-        return fig_baton_trimestre(selected_data_daf1, selected_year, titres_graphe_daf[0], titres_y_daf[0]), \
-               fig_baton_total(selected_data_daf2_total, selected_year, titres_graphe_daf[1], titres_y_daf[1]), \
-               fig_baton_departement(selected_data_daf3, selected_year, titres_graphe_daf[2], titres_y_daf[2])
+def generate_graphs(selected_year, value):
+    return generate_graphs_(selected_year, value, baseline_graph = liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_year))
 
 
-    else:
-        selected_data_daf1 = data_daf_pond1[selected_year - annee[0]]
-        selected_data_daf2 = data_daf_pond2[selected_year - annee[0]]
-        selected_data_daf3 = data_daf_pond3[selected_year - annee[0]]
-        selected_data_daf1_total = data_daf_pond1_total[selected_year - annee[0]]
-        selected_data_daf2_total = data_daf_pond2_total[selected_year - annee[0]]
-        selected_data_daf3_total = data_daf_pond3_total[selected_year - annee[0]]
-        return fig_baton_trimestre(selected_data_daf1, selected_year, titres_graphe_daf[0], titres_y_daf[0]), \
-               fig_baton_total(selected_data_daf2_total, selected_year, titres_graphe_daf[1], titres_y_daf[1]), \
-               fig_baton_departement(selected_data_daf3, selected_year, titres_graphe_daf[2], titres_y_daf[2])
+
