@@ -23,6 +23,7 @@ app._favicon = "favicon.ico"
 # Définir une variable active_page initialement à la page d'accueil
 active_page = "/"
 
+
 annee = config.liste_annee_selection
 
 
@@ -35,7 +36,7 @@ data_dire = data.data_dire
 data_drfd = data.data_drfd
 data_drh = data.data_drh
 
-
+#Sidebar
 offcanvas = html.Div(
     [
         dbc.Offcanvas(
@@ -115,18 +116,11 @@ offcanvas = html.Div(
 
 
 app.layout = dbc.Container([
-     
 
-	
         dbc.NavbarSimple(
             children=[
-     
-
+                #Bouton pour afficher ou cacher la sidebar
              dbc.Button("Options", id="open-offcanvas", n_clicks=0, color = "secondary", style = {"margin-right" : "4rem"}),
-	
-
-
-
 
         html.Div(
         [
@@ -146,7 +140,6 @@ app.layout = dbc.Container([
 
 
             #Menu déroulant pour les departements
-
             dbc.DropdownMenu(
                 children=[
                     dbc.DropdownMenuItem(page['name'], href=page['relative_path'])
@@ -161,7 +154,7 @@ app.layout = dbc.Container([
 
             ),
 	    
-
+            #Boutons à propos
             dbc.NavItem(dbc.NavLink("À propos", href="/a-propos")),
 
             ], 
@@ -180,8 +173,9 @@ app.layout = dbc.Container([
 
     dcc.Location(id='url', refresh=False),
     dbc.Container(id="page-content", className="pt-4"),
-
 	dash.page_container,
+
+    #Bouton permettant de remonter la page
 	html.Div([
         dcc.Link('Remonter la page', href='#top')
     ], style={'position': 'fixed', 'bottom': '20px', 'right': '20px'}),
@@ -203,6 +197,8 @@ id = "output-container-"
     Output({'type': 'tab-button', 'index': ALL}, 'className'),
     Input('url', 'pathname')
 )
+
+#Permet d'afficher la page désirée
 def render_page_content(pathname):
     for page in dash.page_registry.values():
         if 'departements' not in page['relative_path'] and not 'Accueil' in page['name'] and "a-propos" not in page["relative_path"]:
@@ -254,6 +250,7 @@ def update_active_tab(value, input_id):
     Input('open-offcanvas', 'n_clicks'),
     [State("offcanvas", "is_open")],
 )
+#Pour afficher ou cacher la sidebar
 def update_margin(n1, is_open):
     if not is_open and n1 != 0: 
         return {'margin-left': "25rem", 'marginTop': '60px'}
@@ -265,6 +262,7 @@ def update_margin(n1, is_open):
     Input("open-offcanvas", "n_clicks"),
     [State("offcanvas", "is_open")],
 )
+#Pour afficher ou cacher la sidebar
 def toggle_offcanvas(n1, is_open):
     if n1:
         return not is_open
@@ -285,7 +283,7 @@ def download_excel(filename):
 
 
 if __name__ == '__main__':
-	app.run_server(debug=True)
+	app.run_server(debug=True) #debug=True pour la version en production
 
 
 
