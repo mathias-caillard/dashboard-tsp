@@ -58,7 +58,7 @@ offcanvas = html.Div(
                     options = annee,
                     multi = False,
                     value=annee[0]
-                ),
+                ), 
 
                 html.Hr(style={'borderTop': '2px solid #000000'}),
 
