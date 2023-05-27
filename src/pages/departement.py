@@ -1,6 +1,6 @@
 import dash
 from dash import html, dcc
-from src.departement_fig import *
+from src.fig.departement_fig import *
 
 dash.register_page(
     __name__,

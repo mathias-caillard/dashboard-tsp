@@ -4,8 +4,8 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from src import config
-from src.daf_fig import *
-from src.data import *
+from src.fig.daf_fig import *
+from src.data.data import *
 
 
 dash.register_page(
@@ -19,12 +19,12 @@ dash.register_page(
 titres_graphe_daf = titres_graphe[1:4]
 titres_y_daf = titres_y[1:4]
 
-data_daf_pond1 = ponderation(data.data_daf[0])
-data_daf_pond2 = ponderation(data.data_daf[1])
-data_daf_pond3 = ponderation(data.data_daf[2])
-data_daf_pond1_total = ponderation_total(data.data_daf[0])
-data_daf_pond2_total = ponderation_total(data.data_daf[1])
-data_daf_pond3_total = ponderation_total(data.data_daf[2])
+data_daf_pond1 = ponderation(data.data.data_daf[0])
+data_daf_pond2 = ponderation(data.data.data_daf[1])
+data_daf_pond3 = ponderation(data.data.data_daf[2])
+data_daf_pond1_total = ponderation_total(data.data.data_daf[0])
+data_daf_pond2_total = ponderation_total(data.data.data_daf[1])
+data_daf_pond3_total = ponderation_total(data.data.data_daf[2])
 
 data_daf_pond1.append(data_daf_2023[0])
 data_daf_pond2.append(data_daf_2023[1])

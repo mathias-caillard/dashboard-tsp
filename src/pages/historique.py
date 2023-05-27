@@ -1,8 +1,9 @@
 import dash
 from dash import html, dcc, Output, Input, State, callback
 import dash_bootstrap_components as dbc
-from src import data, daf_fig, df_fig, dire_fig, drfd_fig, drh_fig, dri_fig, artemis_fig, citi_fig, eph_fig, inf_fig, rs2m_fig, rst_fig
+from src.fig import daf_fig, df_fig, dire_fig, drfd_fig, drh_fig, dri_fig, artemis_fig, citi_fig, eph_fig, inf_fig, rs2m_fig, rst_fig
 from src import config
+import data
 import plotly.express as px
 import plotly.graph_objects as go
 from sklearn.preprocessing import LabelEncoder
@@ -27,9 +28,9 @@ couleurs_années = px.colors.qualitative.Plotly
 dept_maj = ["ARTEMIS", "CITI", "EPH", "INF", "RS2M", "RST"]
 dept_min = ["artemis", "citi", "eph", "inf", "rs2m", "rst"]
 
-titres_y = data.titres_y
-titres_graphe = data.titres_graphe
-effectif_dept = data.effectif_dept
+titres_y = data.data.titres_y
+titres_graphe = data.data.titres_graphe
+effectif_dept = data.data.effectif_dept
 label = [[str(year) + " - " + tri for tri in trimestre] for year in annee]
 
 

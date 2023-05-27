@@ -5,8 +5,8 @@ import plotly.express as px
 import plotly.graph_objects as go
 from src import config
 import random as rd
-from src.dri_fig import *
-from src.data import *
+from src.fig.dri_fig import *
+from src.data.data import *
 
 annee = range(2020, 2024)
 valeur_evolution = valeur2

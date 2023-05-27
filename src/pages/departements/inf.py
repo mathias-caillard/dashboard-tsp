@@ -1,7 +1,7 @@
 import dash
 from dash import html, dcc
-from src.departement_fig import *
-from inf_fig import *
+from src.fig.departement_fig import *
+from fig.inf_fig import *
 
 
 dash.register_page(

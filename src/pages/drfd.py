@@ -1,7 +1,7 @@
 import dash
 from dash import html, dcc, Input, Output, State, callback
-from src.drfd_fig import *
-from src.data import *
+from src.fig.drfd_fig import *
+from src.data.data import *
 
 
 dash.register_page(
@@ -16,8 +16,8 @@ titres_graphe_drfd = titres_graphe[7:9]
 titres_y_drfd = titres_y[7:9]
 
 
-data_drfd_pond1 = ponderation_total(data.data_drfd[0])
-data_drfd_pond2 = ponderation_total(data.data_drfd[1])
+data_drfd_pond1 = ponderation_total(data.data.data_drfd[0])
+data_drfd_pond2 = ponderation_total(data.data.data_drfd[1])
 data_drfd_pond1.append(data_drfd_2023[0])
 data_drfd_pond2.append(data_drfd_2023[1])
 

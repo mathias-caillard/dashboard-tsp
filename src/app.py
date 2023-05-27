@@ -5,7 +5,7 @@ import dash_bootstrap_components as dbc
 from dash.exceptions import PreventUpdate
 from dash_bootstrap_templates import load_figure_template
 from config import chemin_absolu_rep_parent
-from src.df_fig import *
+from src.fig.df_fig import *
 from flask import send_file
 from src import config
 
@@ -30,11 +30,11 @@ annee = config.liste_annee_selection
 
 
 #Importation des DATA
-data_df = data.data_df
-data_daf = data.data_daf
-data_dire = data.data_dire
-data_drfd = data.data_drfd
-data_drh = data.data_drh
+data_df = data.data.data_df
+data_daf = data.data.data_daf
+data_dire = data.data.data_dire
+data_drfd = data.data.data_drfd
+data_drh = data.data.data_drh
 
 #Sidebar
 offcanvas = html.Div(

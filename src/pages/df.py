@@ -1,11 +1,11 @@
 import dash
 from dash import html, dcc, dash_table, Output, Input, callback
 
-from src.df_fig import *
+from src.fig.df_fig import *
 
-from src.data import new_donnee, new_titre_y, new_labels, dict_titres
-from src.data import *
-from src.fonction_figure import fig_annuelle_baton, fig_camembert, fig_trim_baton, couleurs
+from src.data.data import new_donnee, new_titre_y, new_labels, dict_titres
+from src.data.data import *
+from src.functions.fonction_figure import fig_annuelle_baton, fig_camembert, fig_trim_baton, couleurs
 
 
 
@@ -23,7 +23,7 @@ dash.register_page(
 
 donnee_annee = data_complete_pondere[-1]
 
-data_df_pond = ponderation_total(data.data_df[0])
+data_df_pond = ponderation_total(data.data.data_df[0])
 data_df_pond.append([valeur_annuel[i]/effectif[i] for i in range(7)])
 
 selected_data_df = data_df_pond[-1]

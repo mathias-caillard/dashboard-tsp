@@ -3,19 +3,19 @@
 import dash
 from dash import html, dcc, Output, Input, State, callback
 import dash_bootstrap_components as dbc
-from src.df_fig import *
-from src.dire_fig import *
-from src.daf_fig import *
-from src.drfd_fig import *
-from src.drh_fig import *
-from src.dri_fig import *
-from src.departement_fig import *
-from src.artemis_fig import *
-from src.citi_fig import *
-from src.eph_fig import *
-from src.inf_fig import *
-from src.rs2m_fig import *
-from src.rst_fig import *
+from src.fig.df_fig import *
+from src.fig.dire_fig import *
+from src.fig.daf_fig import *
+from src.fig.drfd_fig import *
+from src.fig.drh_fig import *
+from src.fig.dri_fig import *
+from src.fig.departement_fig import *
+from src.fig.artemis_fig import *
+from src.fig.citi_fig import *
+from src.fig.eph_fig import *
+from src.fig.inf_fig import *
+from src.fig.rs2m_fig import *
+from src.fig.rst_fig import *
 
 
 

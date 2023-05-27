@@ -1,8 +1,5 @@
-import dash
-from dash import html, dcc
+
 import pandas as pd
-import plotly.express as px
-import plotly.graph_objects as go
 from src import config
 
 

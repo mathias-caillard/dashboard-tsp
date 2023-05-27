@@ -1,7 +1,7 @@
 import dash
 from dash import html, dcc
-from src.departement_fig import *
-from artemis_fig import *
+from src.fig.departement_fig import *
+from fig.artemis_fig import *
 
 
 

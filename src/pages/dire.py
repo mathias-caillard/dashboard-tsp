@@ -6,8 +6,8 @@ import plotly.graph_objects as go
 import plotly.subplots as subplt
 from src import config
 import dash_bootstrap_components as dbc
-from src.dire_fig import *
-from src.data import *
+from src.fig.dire_fig import *
+from src.data.data import *
 
 
 dash.register_page(
@@ -21,12 +21,12 @@ dash.register_page(
 titres_graphe_dire = titres_graphe[4:7]
 titres_y_dire = titres_y[4:7]
 
-data_dire_pond1 = ponderation(data.data_dire[0])
-data_dire_pond2 = ponderation(data.data_dire[1])
-data_dire_pond3 = ponderation(data.data_dire[2])
-data_dire_pond1_total = ponderation_total(data.data_dire[0])
-data_dire_pond2_total = ponderation_total(data.data_dire[1])
-data_dire_pond3_total = ponderation_total(data.data_dire[2])
+data_dire_pond1 = ponderation(data.data.data_dire[0])
+data_dire_pond2 = ponderation(data.data.data_dire[1])
+data_dire_pond3 = ponderation(data.data.data_dire[2])
+data_dire_pond1_total = ponderation_total(data.data.data_dire[0])
+data_dire_pond2_total = ponderation_total(data.data.data_dire[1])
+data_dire_pond3_total = ponderation_total(data.data.data_dire[2])
 
 data_dire_pond1.append(data_dire_2023[0])
 data_dire_pond2.append(data_dire_2023[1])

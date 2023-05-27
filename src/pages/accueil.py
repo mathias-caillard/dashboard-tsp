@@ -1,6 +1,5 @@
 import dash
 from dash import html
-from src import config
 
 
 dash.register_page(
