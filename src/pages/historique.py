@@ -5,7 +5,7 @@ from src.functions.fonctions_historique import *
 dash.register_page(
     __name__,
     title = "Historique",
-    name = "Historique",
+    name = "Choix libre",
     order=91,
     active= False
 
@@ -123,4 +123,4 @@ for i, cat in enumerate(categories):
      Input("checklist-input", "value")]
 )
 def generate_graphs(selected_years, value):
-    return generate_graphs(selected_years, value, [])
+    return generate_graphs_(selected_years, value, [])

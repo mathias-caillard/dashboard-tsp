@@ -117,7 +117,9 @@ layout = dbc.Container(children=[
         value = [
                  "df_old_1_tri",
                  "df_old_1_tot",
-                 "df_old_1_comp"
+                 "df_old_1_comp",
+                 "df_1",
+                 "df_2"
         ],
         disabled = True,
         style={"display": "none"}
