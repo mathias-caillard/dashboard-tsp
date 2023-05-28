@@ -591,18 +591,6 @@ def fig_old_trimestrielle(donnees, years, labels, titre_graphe, titre_y):
 
 def fig_old_total(donnees, years, titre_graphe, titre_y):
 
-    """
-    Y = []
-    for i, year in enumerate(years):
-        Y.append(
-            go.Bar(
-                x=[str(year)],
-                y=[sum(donnees[i])],
-                name=str(year),
-            )
-        )
-        """
-
 
     x = []
     y = []
@@ -611,24 +599,25 @@ def fig_old_total(donnees, years, titre_graphe, titre_y):
         y.append(sum(donnees[i]))
     
 
-    
-    #fig = go.Figure(data=Y)
-
-    fig = px.bar(x=x, y=y, color=y, color_continuous_scale="Tealgrn")
-
-    
-    fig.update_traces(hovertemplate="<br>".join([
-        "Année : %{x}",
-        "Total : <b>%{y:.0f}</b>",
-                      ]))
-    
-
-    # Ajout d'un titre
 
     if years[0] != years[-1] :
         titre_fig = titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ",<br>total annuel"
+        fig = px.bar(x=x, y=y, color=y, color_continuous_scale="Tealgrn")
+        fig.update_traces(hovertemplate="<br>".join([
+            "Année : %{x}",
+            "Total : <b>%{y:.0f}</b>",
+                        ]))
     else : 
+        fig = go.Figure(go.Indicator(
+        mode = "number",
+        value = y[0]))
+
+        
         titre_fig = titre_graphe + " en " + str(years[0]) + ",<br>total annuel"
+
+    # Ajout d'un titre
+
+
     fig.update_layout(title=titre_fig,
                       xaxis_title="Années",
                       yaxis_title=titre_y,
@@ -661,14 +650,17 @@ def fig_old_annuelle_courbe(donnees, years, titre_graphe, titre_y):
     y_pred = model.predict(np.vander(x_pred, degree + 1))  
 
     # Ajouter la régression polynomiale
-    fig.add_trace(go.Scatter(x=x_pred, y=y_pred, name="Régression", line=dict(dash='dash', color='black'), marker=dict(size=10)))
+    visible_bool = False
+    if years[0] != years[-1] : 
+        visible_bool = True
+    fig.add_trace(go.Scatter(x=x_pred, y=y_pred, name="Régression", line=dict(dash='dash', color='black'), marker=dict(size=10), visible = visible_bool))
 
     if years[0] != years[-1] :
         titre_fig = titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ",<br>comparaison annuelle par trimestre"
     else : 
         titre_fig = titre_graphe + " en " + str(years[0]) + ",<br>comparaison annuelle par trimestre"
 
-    fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) +",<br>comparaison annuelle par trimestre",
+    fig.update_layout(title=titre_fig,
                       xaxis_title="Trimestres",
                       yaxis_title=titre_y,
                     xaxis = dict(
