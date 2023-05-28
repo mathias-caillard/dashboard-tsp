@@ -545,7 +545,13 @@ def fig_old_annuelle_baton(donnees, years, labels, titre_graphe, titre_y):
                     )
 
     # Ajout d'un titre
-    fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ",<br>colorisé par année",
+    if years[0] != years[-1] :
+        titre_fig = titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ",<br>colorisé par année"
+    else : 
+        titre_fig = titre_graphe + " en " + str(years[0]) + ",<br>colorisé par année"
+
+
+    fig.update_layout(title=titre_fig,
                       xaxis_title="Temps",
                       yaxis_title=titre_y)
     return fig
@@ -571,7 +577,12 @@ def fig_old_trimestrielle(donnees, years, labels, titre_graphe, titre_y):
                     )
 
     # Ajout d'un titre
-    fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ",<br>colorisé par trimestre",
+    if years[0] != years[-1] :
+        titre_fig = titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ",<br>colorisé par trimestre"
+    else : 
+        titre_fig = titre_graphe + " en " + str(years[0]) + ",<br>colorisé par trimestre"
+
+    fig.update_layout(title=titre_fig,
                       xaxis_title="Temps",
                       yaxis_title=titre_y)
 
@@ -613,7 +624,12 @@ def fig_old_total(donnees, years, titre_graphe, titre_y):
     
 
     # Ajout d'un titre
-    fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ",<br>total annuel",
+
+    if years[0] != years[-1] :
+        titre_fig = titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ",<br>total annuel"
+    else : 
+        titre_fig = titre_graphe + " en " + str(years[0]) + ",<br>total annuel"
+    fig.update_layout(title=titre_fig,
                       xaxis_title="Années",
                       yaxis_title=titre_y,
                       legend_title = "",
@@ -647,6 +663,10 @@ def fig_old_annuelle_courbe(donnees, years, titre_graphe, titre_y):
     # Ajouter la régression polynomiale
     fig.add_trace(go.Scatter(x=x_pred, y=y_pred, name="Régression", line=dict(dash='dash', color='black'), marker=dict(size=10)))
 
+    if years[0] != years[-1] :
+        titre_fig = titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ",<br>comparaison annuelle par trimestre"
+    else : 
+        titre_fig = titre_graphe + " en " + str(years[0]) + ",<br>comparaison annuelle par trimestre"
 
     fig.update_layout(title=titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) +",<br>comparaison annuelle par trimestre",
                       xaxis_title="Trimestres",
