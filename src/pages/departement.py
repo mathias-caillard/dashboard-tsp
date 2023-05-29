@@ -86,6 +86,10 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
 
 
 layout = dbc.Container(children=[
+    html.H1(
+        children='Bienvenue sur la page proposant une comparaison entre départements',
+        style={'text-align': 'justify'}
+    ),
     dcc.Loading(id = "loading-dept", color = "black", type = "circle"),
     html.H2(children='Sélection de l\'année :'),
                     dcc.Dropdown(

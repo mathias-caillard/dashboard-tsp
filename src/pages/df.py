@@ -97,14 +97,14 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
 
 
 layout = dbc.Container(children=[
+    html.H1(
+        children='Bienvenue sur la page concernant la Direction des Formations',
+        style={'text-align': 'justify'}
+    ),
     dcc.Loading(id = "loading-df", color = "black", type = "circle"),
-    html.H2(children='Sélection de l\'année :'),
-                    dcc.Dropdown(
-                    id = "annee-selector-df",
-                    options = annee,
-                    multi = False,
-                    value=annee[0]
-                ),
+
+    
+
     #joue le rôle de variable globale
     dcc.Store(id='current-value-df', data=[]),
     #Menu déourlant/moteur de recherche
@@ -115,11 +115,7 @@ layout = dbc.Container(children=[
         placeholder="Veuillez selectionner des graphes à afficher.",
         persistence = True,
         value = [
-                 "df_old_1_tri",
-                 "df_old_1_tot",
-                 "df_old_1_comp",
-                 "df_1",
-                 "df_2"
+
         ],
         disabled = True,
         style={"display": "none"}
@@ -169,7 +165,7 @@ for i, cat in enumerate(categories):
 @callback(
     [Output("graph-container-historique-df", "children"),
      Output("loading-df", "parent-style")], #Permet d'afficher un Spinner de Char
-    [Input("annee-selector-df", "value"),
+    [Input("choix-annee", "value"),
      Input("checklist-input-df", "value"),
      ]
 )
@@ -181,3 +177,10 @@ def generate_graphs(selected_year, value):
 
 
 
+"""
+"df_old_1_tri",
+                 "df_old_1_tot",
+                 "df_old_1_comp",
+                 "df_1",
+                 "df_2"
+"""

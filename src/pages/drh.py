@@ -40,9 +40,7 @@ selected_data_drh2 = data_drh_2[-1]
 
 
 def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_annee) :
-    for x in data_complete_pondere:
-        print(x["DRH-01"])
-    print(new_labels["DRH-01"])
+
     return [
         dcc.Graph(
             id='drh1_bat',
@@ -127,14 +125,13 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
 
 
 layout = dbc.Container(children=[
+    html.H1(
+        children='Bienvenue sur la page concernant la Direction des Ressources Humaines',
+        style={'text-align': 'justify'}
+    ),
     dcc.Loading(id = "loading-drh", color = "black", type = "circle"),
-    html.H2(children='Sélection de l\'année :'),
-                    dcc.Dropdown(
-                    id = "annee-selector-drh",
-                    options = annee,
-                    multi = False,
-                    value=annee[0]
-                ),
+
+
     #joue le rôle de variable globale
     dcc.Store(id='current-value-drh', data=[]),
     #Menu déourlant/moteur de recherche
@@ -196,7 +193,7 @@ for i, cat in enumerate(categories):
 @callback(
     [Output("graph-container-historique-drh", "children"),
      Output("loading-drh", "parent-style")], #Permet d'afficher un Spinner de Char
-    [Input("annee-selector-drh", "value"),
+    [Input("choix-annee", "value"),
      Input("checklist-input-drh", "value"),
      ]
 )

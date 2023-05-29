@@ -709,12 +709,14 @@ def generate_graphs_(selected_years, value, baseline_graph):
 
     # Liste des graphiques disponibles
     graphs = {
+        """
         # DF
         "df_old_1_an": fig_old_annuelle_baton(selected_global[0], selected_annee, selected_label, titres_graphe[0], titres_y[0]),
         "df_old_1_tri": fig_old_trimestrielle(selected_global[0], selected_annee, selected_label, titres_graphe[0], titres_y[0]),
         "df_old_1_tot": fig_old_total(selected_global[0], selected_annee, titres_graphe[0], titres_y[0]),
         "df_old_1_comp": fig_old_annuelle_courbe(selected_global[0], selected_annee, titres_graphe[0], titres_y[0]),
-
+        """
+        """
         #DAF
         "daf_old_1_an": fig_old_annuelle_baton(selected_global[1], selected_annee, selected_label, titres_graphe[1],titres_y[1]),
         "daf_old_1_tri": fig_old_trimestrielle(selected_global[1], selected_annee, selected_label, titres_graphe[1],titres_y[1]),
@@ -728,7 +730,8 @@ def generate_graphs_(selected_years, value, baseline_graph):
         "daf_old_3_tri": fig_old_trimestrielle(selected_global[3], selected_annee, selected_label, titres_graphe[3], titres_y[3]),
         "daf_old_3_tot": fig_old_total(selected_global[3], selected_annee, titres_graphe[3], titres_y[3]),
         "daf_old_3_comp": fig_old_annuelle_courbe(selected_global[3], selected_annee, titres_graphe[3], titres_y[3]),
-
+        """
+        """
         #DIRE
         "dire_old_1_an": fig_old_annuelle_baton(selected_global[4], selected_annee, selected_label, titres_graphe[4], titres_y[4]),
         "dire_old_1_tri": fig_old_trimestrielle(selected_global[4], selected_annee, selected_label, titres_graphe[4], titres_y[4]),
@@ -1038,7 +1041,7 @@ def generate_graphs_(selected_years, value, baseline_graph):
         "rst_old_10_tri": fig_old_trimestrielle(selected_rst[10], selected_annee, selected_label, titres_graphe[10] + " à RST ", titres_y[10]),
         "rst_old_10_tot": fig_old_total(selected_rst[10], selected_annee, titres_graphe[10] + " à RST ", titres_y[10]),
         "rst_old_10_comp": fig_old_annuelle_courbe(selected_rst[10], selected_annee, titres_graphe[10] + " à RST ", titres_y[10]),
-
+    """
 
     #fusion avec graph de "Choix libre" (ci dessus) : 
 

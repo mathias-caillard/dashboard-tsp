@@ -1,7 +1,7 @@
 import dash
 from dash import html, dcc
 from src.fig.departement_fig import *
-from fig.artemis_fig import *
+from src.fig.artemis_fig import *
 from dash import html, dcc, Output, Input, State, callback
 from src.functions.fonctions_historique import *
 
@@ -19,7 +19,91 @@ dash.register_page(
 
 def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_annee) :
     return [
-   dcc.Graph(
+
+]
+
+
+
+layout = dbc.Container(children=[
+    html.H1(
+        children='Bienvenue sur la page concernant le département ARTEMIS',
+        style={'text-align': 'justify'}
+    ),
+    dcc.Loading(id = "loading-artemis", color = "black", type = "circle"),
+
+    #joue le rôle de variable globale
+    dcc.Store(id='current-value-artemis', data=[]),
+    #Menu déourlant/moteur de recherche
+    dcc.Dropdown(
+        options=categories,
+        id="checklist-input-artemis",
+        multi=True,
+        placeholder="Veuillez selectionner des graphes à afficher.",
+        persistence = True,
+        value = [
+
+#a completer quand historique full
+        ],
+        disabled = True,
+        style={"display": "none"}
+    ),
+    # Boucle pour générer les graphiques       
+            dbc.Container(id="graph-container-historique-artemis",
+                children=[],
+                fluid = True),
+    ],
+fluid = True
+)
+
+
+
+
+
+
+
+
+
+
+#Mettre à jour les données du menu déroulant sélectionnées
+@callback(
+    Output("current-value-artemis", "data"),
+    [Input("checklist-input-artemis", "value")],
+    [State("current-value-artemis", "data")],
+    prevent_initial_call=True
+)
+def update_old_value(value, old_value):
+    return update_old_value_(value, old_value) #dans fonctions_historique.py
+
+
+# Boucle pour générer les callbacks pour chaque département
+for i, cat in enumerate(categories):
+    cat_id = cat["value"]
+
+
+    @callback(
+        Output(f"current_collapse-artemis{i + 1}", "is_open"),
+        [Input("checklist-input-artemis", "value")],
+        [State(f"collapse-artemis{i + 1}", "is_open"), State("current-value-artemis", "data")],
+        prevent_initial_call=True
+    )
+    def toggle_collapse(value, is_open, data, cat_id=cat_id):
+        return toggle_collapse_(value, is_open, data, cat_id=cat_id)
+
+@callback(
+    [Output("graph-container-historique-artemis", "children"),
+     Output("loading-artemis", "parent-style")], #Permet d'afficher un Spinner de Char
+    [Input("choix-annee", "value"),
+     Input("checklist-input-artemis", "value"),
+     ]
+)
+
+def generate_graphs(selected_year, value):
+    return generate_graphs_(selected_year, value, baseline_graph = liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_year))
+
+
+
+"""
+dcc.Graph(
         id='example-graph',
         figure=fig_dept_1(),
         config = {'displaylogo': False}
@@ -425,89 +509,5 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
         figure=fig_old_drh_artemis_4(),
         config={'displaylogo': False}
     )
-]
-
-
-
-layout = dbc.Container(children=[
-    dcc.Loading(id = "loading-artemis", color = "black", type = "circle"),
-    html.H2(children='Sélection de l\'année :'),
-                    dcc.Dropdown(
-                    id = "annee-selector-artemis",
-                    options = annee,
-                    multi = False,
-                    value=annee[0]
-                ),
-    #joue le rôle de variable globale
-    dcc.Store(id='current-value-artemis', data=[]),
-    #Menu déourlant/moteur de recherche
-    dcc.Dropdown(
-        options=categories,
-        id="checklist-input-artemis",
-        multi=True,
-        placeholder="Veuillez selectionner des graphes à afficher.",
-        persistence = True,
-        value = [
-
-#a completer quand historique full
-        ],
-        disabled = True,
-        style={"display": "none"}
-    ),
-    # Boucle pour générer les graphiques       
-            dbc.Container(id="graph-container-historique-artemis",
-                children=[],
-                fluid = True),
-    ],
-fluid = True
-)
-
-
-
-
-
-
-
-
-
-
-#Mettre à jour les données du menu déroulant sélectionnées
-@callback(
-    Output("current-value-artemis", "data"),
-    [Input("checklist-input-artemis", "value")],
-    [State("current-value-artemis", "data")],
-    prevent_initial_call=True
-)
-def update_old_value(value, old_value):
-    return update_old_value_(value, old_value) #dans fonctions_historique.py
-
-
-# Boucle pour générer les callbacks pour chaque département
-for i, cat in enumerate(categories):
-    cat_id = cat["value"]
-
-
-    @callback(
-        Output(f"current_collapse-artemis{i + 1}", "is_open"),
-        [Input("checklist-input-artemis", "value")],
-        [State(f"collapse-artemis{i + 1}", "is_open"), State("current-value-artemis", "data")],
-        prevent_initial_call=True
-    )
-    def toggle_collapse(value, is_open, data, cat_id=cat_id):
-        return toggle_collapse_(value, is_open, data, cat_id=cat_id)
-
-@callback(
-    [Output("graph-container-historique-artemis", "children"),
-     Output("loading-artemis", "parent-style")], #Permet d'afficher un Spinner de Char
-    [Input("annee-selector-artemis", "value"),
-     Input("checklist-input-artemis", "value"),
-     ]
-)
-
-def generate_graphs(selected_year, value):
-    return generate_graphs_(selected_year, value, baseline_graph = liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_year))
-
-
-
-
+"""
 

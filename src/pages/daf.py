@@ -145,14 +145,13 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
 
 
 layout = dbc.Container(children=[
+    html.H1(
+        children='Bienvenue sur la page concernant la DAF',
+        style={'text-align': 'justify'}
+    ),
     dcc.Loading(id = "loading-daf", color = "black", type = "circle"),
-    html.H2(children='Sélection de l\'année :'),
-                    dcc.Dropdown(
-                    id = "annee-selector-daf",
-                    options = annee,
-                    multi = False,
-                    value=annee[0]
-                ),
+
+
     #joue le rôle de variable globale
     dcc.Store(id='current-value-daf', data=[]),
     #Menu déourlant/moteur de recherche
@@ -214,7 +213,7 @@ for i, cat in enumerate(categories):
 @callback(
     [Output("graph-container-historique-daf", "children"),
      Output("loading-daf", "parent-style")], #Permet d'afficher un Spinner de Char
-    [Input("annee-selector-daf", "value"),
+    [Input("choix-annee", "value"),
      Input("checklist-input-daf", "value"),
      ]
 )
