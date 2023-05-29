@@ -4,7 +4,7 @@ from src.fig.departement_fig import *
 import dash
 from dash import html, dcc, Output, Input, State, callback
 import dash_bootstrap_components as dbc
-from src.functions.fonction_figure import fig_annuelle_baton, fig_camembert, fig_trim_baton, couleurs
+from src.functions.fonction_figure import fig_annuelle_baton, fig_camembert, fig_trim_baton, fig_radar, couleurs
 from src.functions.fonctions_historique import *
 
 dash.register_page(
@@ -18,6 +18,12 @@ dash.register_page(
 
 def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_annee) :
     return [
+        dcc.Graph(
+            id='radar_artemis',
+            figure=fig_radar(selected_annee, 0),
+            config={'displaylogo': False}
+        ),
+
     dcc.Graph(
         id='example-graph',
         figure=fig_dept_1(),
@@ -91,13 +97,8 @@ layout = dbc.Container(children=[
         style={'text-align': 'justify'}
     ),
     dcc.Loading(id = "loading-dept", color = "black", type = "circle"),
-    html.H2(children='Sélection de l\'année :'),
-                    dcc.Dropdown(
-                    id = "annee-selector-dept",
-                    options = annee,
-                    multi = False,
-                    value=annee[0]
-                ),
+
+
     #joue le rôle de variable globale
     dcc.Store(id='current-value-dept', data=[]),
     #Menu déourlant/moteur de recherche
@@ -158,7 +159,7 @@ for i, cat in enumerate(categories):
 @callback(
     [Output("graph-container-historique-dept", "children"),
      Output("loading-dept", "parent-style")], #Permet d'afficher un Spinner de Char
-    [Input("annee-selector-dept", "value"),
+    [Input("choix-annee", "value"),
      Input("checklist-input-dept", "value"),
      ]
 )

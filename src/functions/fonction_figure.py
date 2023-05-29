@@ -3,7 +3,7 @@ import math
 from sklearn.preprocessing import LabelEncoder
 import plotly.graph_objects as go
 from src.config import *
-from src.data.data import data_complete, data_complete_pondere, new_titre_y, new_labels, dict_titres
+from src.data.data import data_complete, data_complete_pondere, data_radar, label_radar, new_titre_y, new_labels, dict_titres
 
 couleurs = colors_dept
 couleurs_all = colors_all
@@ -178,6 +178,35 @@ def fig_dept_trim_baton(code_indic, year, indice_dept):
                       )
     return fig
 
+
+
+
+#Graphe radar avec un seul profil (pas de superposition)
+def fig_radar(year, indic_dept):
+    print(liste_annee_maj[0])
+    print(len(data_radar))
+    print(len(data_radar[0]))
+    donnees = data_radar[year - liste_annee_maj[0]][indic_dept]
+    print(donnees)
+    name_dept = departements[indic_dept]
+
+    fig = go.Figure()
+    fig.add_trace(go.Scatterpolar(
+        r=donnees,
+        theta=label_radar,
+        fill='toself',
+        name=name_dept + " " + str(year)
+    ))
+    if indic_dept != 6:
+        title = adapt_title("Graphe radar du département " + name_dept + " en " + str(year))
+    else:
+        title = adapt_title("Graphe radar de Télécom SudParis en " + str(year))
+    fig.update_layout(
+        title=title,
+        polar=dict(radialaxis=dict(range=[0, max(donnees)]))
+    )
+
+    return fig
 
 
 
