@@ -41,7 +41,6 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
         id='df1_bat',
         figure=fig_annuelle_baton("DF-01", selected_annee, "Départements", couleurs),
         config = {'displaylogo': False}
-
     ),
 
 
@@ -49,7 +48,6 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
         id='df1_cam',
         figure=fig_camembert("DF-01", selected_annee, couleurs),
         config = {'displaylogo': False}
-
     ),
 
 
@@ -57,7 +55,6 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
         id='df2_bat',
         figure=fig_trim_baton("DF-02", selected_annee, "Temps", None),
         config = {'displaylogo': False}
-
     ),
 
 
@@ -65,7 +62,6 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
         id='df3_bat',
         figure=fig_trim_baton("DF-03", selected_annee, "Temps", None),
         config = {'displaylogo': False}
-
     ),
 
 
@@ -73,7 +69,6 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
         id='df4_bat',
         figure=fig_trim_baton("DF-04", selected_annee, "Temps", None),
         config={'displaylogo': False}
-
     ),
 
 
@@ -81,7 +76,6 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
         id='df5_bat',
         figure=fig_trim_baton("DF-05", selected_annee, "Temps", None),
         config={'displaylogo': False}
-
     ),
 
 
@@ -89,7 +83,6 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
         id='df6_bat',
         figure=fig_trim_baton("DF-06", selected_annee, "Temps", None),
         config={'displaylogo': False}
-
     )
 ]
 

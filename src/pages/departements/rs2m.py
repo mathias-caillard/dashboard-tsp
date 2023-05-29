@@ -4,6 +4,7 @@ from src.fig.departement_fig import *
 from src.fig.rs2m_fig import *
 from dash import html, dcc, Output, Input, State, callback
 from src.functions.fonctions_historique import *
+from src.functions.fonction_figure import fig_dept_trim_baton
 
 dash.register_page(
     __name__,
@@ -15,7 +16,59 @@ dash.register_page(
 def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_annee) :
     return [
 
+        dcc.Graph(
+            id='dire1_bat_rs2m',
+            figure=fig_dept_trim_baton("DIRE-01", selected_annee, 4),
+            config={'displaylogo': False}
+        ),
 
+        dcc.Graph(
+            id='dire2_bat_rs2m',
+            figure=fig_dept_trim_baton("DIRE-02", selected_annee, 4),
+            config={'displaylogo': False}
+        ),
+
+        dcc.Graph(
+            id='dire3_bat_rs2m',
+            figure=fig_dept_trim_baton("DIRE-03", selected_annee, 4),
+            config={'displaylogo': False}
+        ),
+
+        dcc.Graph(
+            id='daf1_bat_rs2m',
+            figure=fig_dept_trim_baton("DAF-01", selected_annee, 4),
+            config={'displaylogo': False}
+        ),
+
+        dcc.Graph(
+            id='daf2_bat_rs2m',
+            figure=fig_dept_trim_baton("DAF-02", selected_annee, 4),
+            config={'displaylogo': False}
+        ),
+
+        dcc.Graph(
+            id='daf3_bat_rs2m',
+            figure=fig_dept_trim_baton("DAF-03", selected_annee, 4),
+            config={'displaylogo': False}
+        ),
+
+        dcc.Graph(
+            id='daf4_bat_rs2m',
+            figure=fig_dept_trim_baton("DAF-04", selected_annee, 4),
+            config={'displaylogo': False}
+        ),
+
+        dcc.Graph(
+            id='daf5_bat_rs2m',
+            figure=fig_dept_trim_baton("DAF-05", selected_annee, 4),
+            config={'displaylogo': False}
+        ),
+
+        dcc.Graph(
+            id='drh3_bat_rs2m',
+            figure=fig_dept_trim_baton("DRH-03", selected_annee, 4),
+            config={'displaylogo': False}
+        ),
 
 ]
 
