@@ -8,6 +8,25 @@ from src.data.data import data_complete, data_complete_pondere, new_titre_y, new
 couleurs = colors_dept
 couleurs_all = colors_all
 
+def adapt_title(title):
+    if len(title) > 68:
+        i = 68
+        while i > 0 and title[i] != " ":
+            i -= 1
+        if i > 0:
+            title = title[:i] + "<br>" + adapt_title(title[i + 1:])
+    return title
+
+def adapt_title_y(title_y):
+    if len(title_y) > 50:
+        i = 50
+        while i > 0 and title_y[i] != " ":
+            i -= 1
+        if i > 0:
+            title_y = title_y[:i] + "<br>" + adapt_title_y(title_y[i + 1:])
+    return title_y
+
+
 #Indicateur annuel ou trimestriel avec uniquement 4 trimestre (pas de départements)
 def fig_annuelle_baton(code_indic, year, titre_x, couleurs):
     donnees = data_complete_pondere[year - liste_annee_maj[0]][code_indic]
@@ -25,9 +44,10 @@ def fig_annuelle_baton(code_indic, year, titre_x, couleurs):
                              name=xlabel[i].split(" ")[0],
                              marker=marker))
     # Ajout d'un titre
-    fig.update_layout(title=titre_graphe + " en " + str(year),
+    title = adapt_title(titre_graphe + " en " + str(year))
+    fig.update_layout(title=title,
                       xaxis_title= titre_x,
-                      yaxis_title= titre_y)
+                      yaxis_title= adapt_title_y(titre_y))
     return fig
 
 #Uniquement pour les indicateurs ou il y a comparaison entre départements
@@ -57,7 +77,8 @@ def fig_camembert(code_indic, year, couleurs):
     # Personnalisation du camembert
     fig.update_traces(hoverinfo="label+percent+value", textinfo="label+percent")
     # Ajout d'un titre
-    fig.update_layout(title=titre_graphe + " en " + str(year))
+    title = adapt_title(titre_graphe + " en " + str(year))
+    fig.update_layout(title=title)
     return fig
 
 #Indicateur trimestriel
@@ -90,9 +111,10 @@ def fig_trim_baton(code_indic, year, titre_x, couleurs):
         )
 
     fig = go.Figure(data=Y)
-    fig.update_layout(title=titre_graphe + " en " + str(year),
+    title = adapt_title(titre_graphe + " en " + str(year))
+    fig.update_layout(title=title,
                       xaxis_title=titre_x,
-                      yaxis_title=titre_y)
+                      yaxis_title=adapt_title_y(titre_y))
     return fig
 
 def fig_trim_courbe(code_indic, year, couleurs):
@@ -110,10 +132,10 @@ def fig_trim_courbe(code_indic, year, couleurs):
         else:
             marker = dict(color="blue")
         fig.add_trace(go.Scatter(x=trimestre, y=donnees[i], name= xlabel[i][0].split(" ")[0], line=marker)),
-
-    fig.update_layout(title=titre_graphe + " en " + str(year) + ",<br>comparaison annuelle par trimestre",
+    title = adapt_title(titre_graphe + " en " + str(year) + ", comparaison annuelle par trimestre")
+    fig.update_layout(title=title,
                       xaxis_title="Trimestres",
-                      yaxis_title=titre_y,
+                      yaxis_title=adapt_title_y(titre_y),
                       xaxis=dict(
                           tickvals=[0, 1, 2, 3],
                           ticktext=['T1', 'T2', 'T3', 'T4']
@@ -145,14 +167,15 @@ def fig_dept_trim_baton(code_indic, year, indice_dept):
     fig = go.Figure(data=Y)
     #Département
     if indice_dept<=5:
-        fig.update_layout(title=titre_graphe + " à " + name_dept + " en " + str(year),
-                      xaxis_title="Trimestres",
-                      yaxis_title=titre_y)
+        title = titre_graphe + " à " + name_dept + " en " + str(year)
     #Ecole
     else:
-        fig.update_layout(title=titre_graphe + " en " + str(year),
+        title = titre_graphe + " en " + str(year)
+    title = adapt_title(title)
+    fig.update_layout(title=title,
                       xaxis_title="Trimestres",
-                      yaxis_title=titre_y)
+                      yaxis_title=adapt_title_y(titre_y),
+                      )
     return fig
 
 
@@ -166,9 +189,10 @@ def fig_baton_total(donnees, year, titre_graphe, titre_y):
                              name=departements[i],
                              marker=dict(color=[couleurs[i]])))
     # Ajout d'un titre
-    fig.update_layout(title=titre_graphe + " en " + str(year) + ", pondéré par les effectifs",
+    title = adapt_title(titre_graphe + " en " + str(year) + ", pondéré par les effectifs")
+    fig.update_layout(title=title,
                       xaxis_title='Départements',
-                      yaxis_title=titre_y)
+                      yaxis_title=adapt_title_y(titre_y))
     return fig
 
 
