@@ -157,7 +157,7 @@ def adapt_old_data(code_indic, liste_old_data):
                 donnee_correspondante_annuellle = [sum(x)  for x in donnee_correspondante[i]]
                 liste_old_data[i][code_indic] = donnee_correspondante_annuellle
         #Cas particulier pour DRH-01 (données tri à mettre en annuelle)
-        elif code_indic == "DRH-01":
+        elif "DRH" in code_indic  and code_indic != "DRH-03":
             donnee_correspondante = extract_indic_all_sheet(equivalence_ligne[code_indic])
 
             # Parcours des années
@@ -165,8 +165,8 @@ def adapt_old_data(code_indic, liste_old_data):
                 #Services DF, DRFD, DIRE, DRI , DCOM
                 liste = [0., 0., 0., 0., 0.]
                 donnee_correspondante_annuellle = [sum(x) / 3 for x in donnee_correspondante[i]]
-                effectif_ecole = donnee_correspondante_annuellle.pop(-1)
-                liste.insert(0, effectif_ecole)
+                #effectif_ecole = donnee_correspondante_annuellle.pop(-1)
+                #liste.insert(0, effectif_ecole)
                 liste_old_data[i][code_indic] = liste + donnee_correspondante_annuellle
         else:
             donnee_correspondante = extract_indic_all_sheet(equivalence_ligne[code_indic])
@@ -217,6 +217,15 @@ def adapt_new_data(code_indic, liste_new_data):
                 adapted_data.append(tab)
             adapted_data.append([sum([adapted_data[i][j] for i in range(6)]) for j in range(4)])
             liste_new_data[i][code_indic] = adapted_data
+    elif "DRH" in code_indic  and code_indic != "DRH-03":
+        for i in range(len(liste_new_data)):
+            adapted_data = []
+            data_indic = liste_new_data[i][code_indic]
+            for j in range(len(data_indic)):
+                adapted_data.append(data_indic[j])
+            adapted_data.append(adapted_data.pop(0))
+            liste_new_data[i][code_indic] = adapted_data
+
     """
     elif longueur == 4:
         for i in range(len(liste_new_data)):
@@ -251,6 +260,14 @@ def adapt_new_label(dict_label):
                 adapted_label.append(label_dept)
             adapted_label.append(["Ecole T1", "Ecole T2", "Ecole T3", "Ecole T4"])
             dict_label[code_indic] = adapted_label
+
+        elif "DRH" in code_indic and code_indic != "DRH-03" :
+            adapted_label=[]
+            for i in range(len(dict_label[code_indic])):
+                adapted_label.append(dict_label[code_indic][i])
+            adapted_label.append(adapted_label.pop(0))
+            dict_label[code_indic] = adapted_label
+
 
 def fusion_old_new_data(new_data):
     old_data = [{} for i in range(len(annees))]

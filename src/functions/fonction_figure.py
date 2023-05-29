@@ -6,6 +6,7 @@ from src.config import *
 from src.data.data import data_complete_pondere, new_titre_y, new_labels, dict_titres
 
 couleurs = colors_dept
+couleurs_all = colors_all
 
 #Indicateur annuel ou trimestriel avec uniquement 4 trimestre (pas de départements)
 def fig_annuelle_baton(code_indic, year, titre_x, couleurs):
@@ -35,7 +36,7 @@ def fig_camembert(code_indic, year, couleurs):
     # Indicateur annuel (premier élément est un chiffre et nom une liste de 4 chiffres)
     if not isinstance(data_complete_pondere[year - liste_annee_maj[0]][code_indic][0], list):
         # Total présent dans les données
-        if "Ecole" in new_labels[code_indic][-1]:
+        if "Ecole" or "ECOLE" in new_labels[code_indic][-1]:
             donnees = data_complete_pondere[year - liste_annee_maj[0]][code_indic][:-1]
             xlabel = new_labels[code_indic][:-1]
         else:
@@ -44,7 +45,7 @@ def fig_camembert(code_indic, year, couleurs):
     #Indicateur trimestriel
     else:
         #Total présent dans les données
-        if "Ecole" in new_labels[code_indic][-1][0]:
+        if "Ecole" or "ECOLE" in new_labels[code_indic][-1][0]:
             donnees = [sum(data_complete_pondere[year - liste_annee_maj[0]][code_indic][i]) for i in range(longueur - 1)]
             xlabel = [new_labels[code_indic][i][0].split(" ")[0] for i in range(longueur-1)]
         else:
@@ -108,7 +109,7 @@ def fig_trim_courbe(code_indic, year, couleurs):
             marker = dict(color=couleurs[i])
         else:
             marker = dict(color="blue")
-        fig.add_trace(go.Scatter(x=trimestre_encoded, y=donnees[i], name= xlabel[i][0].split(" ")[0], line=marker)),
+        fig.add_trace(go.Scatter(x=trimestre, y=donnees[i], name= xlabel[i][0].split(" ")[0], line=marker)),
 
     fig.update_layout(title=titre_graphe + " en " + str(year) + ",<br>comparaison annuelle par trimestre",
                       xaxis_title="Trimestres",

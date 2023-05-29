@@ -6,7 +6,7 @@ import plotly.graph_objects as go
 from src import config
 from src.fig.daf_fig import *
 from src.data.data import *
-from src.functions.fonction_figure import fig_annuelle_baton, fig_camembert, fig_trim_baton, couleurs
+from src.functions.fonction_figure import fig_annuelle_baton, fig_camembert, fig_trim_baton,fig_trim_courbe, couleurs
 from src.functions.fonctions_historique import *
 
 
@@ -45,7 +45,187 @@ selected_data_daf3_total = data_daf_pond3_total[-1]
 
 def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_annee) :
      return [
-     dcc.Graph(
+         dcc.Graph(
+             id='daf1_bat',
+             figure=fig_trim_baton("DAF-01", selected_annee, "Départements", couleurs),
+             config={'displaylogo': False}
+         ),
+
+         dcc.Graph(
+             id='daf1_cou',
+             figure=fig_trim_courbe("DAF-01", selected_annee, couleurs),
+             config={'displaylogo': False}
+         ),
+
+         dcc.Graph(
+             id='daf1_cam',
+             figure=fig_camembert("DAF-01", selected_annee, couleurs),
+             config={'displaylogo': False}
+         ),
+
+         dcc.Graph(
+             id='daf2_bat',
+             figure=fig_trim_baton("DAF-02", selected_annee, "Départements", couleurs),
+             config={'displaylogo': False}
+         ),
+
+         dcc.Graph(
+             id='daf2_cou',
+             figure=fig_trim_courbe("DAF-02", selected_annee, couleurs),
+             config={'displaylogo': False}
+         ),
+
+         dcc.Graph(
+             id='daf2_cam',
+             figure=fig_camembert("DAF-02", selected_annee, couleurs),
+             config={'displaylogo': False}
+         ),
+
+         dcc.Graph(
+             id='daf3_bat',
+             figure=fig_trim_baton("DAF-03", selected_annee, "Départements", couleurs),
+             config={'displaylogo': False}
+         ),
+
+         dcc.Graph(
+             id='daf3_cou',
+             figure=fig_trim_courbe("DAF-03", selected_annee, couleurs),
+             config={'displaylogo': False}
+         ),
+
+         dcc.Graph(
+             id='daf3_cam',
+             figure=fig_camembert("DAF-03", selected_annee, couleurs),
+             config={'displaylogo': False}
+         ),
+
+         dcc.Graph(
+             id='daf4_bat',
+             figure=fig_trim_baton("DAF-04", selected_annee, "Départements", couleurs),
+             config={'displaylogo': False}
+         ),
+
+         dcc.Graph(
+             id='daf4_cou',
+             figure=fig_trim_courbe("DAF-04", selected_annee, couleurs),
+             config={'displaylogo': False}
+         ),
+
+         dcc.Graph(
+             id='daf4_cam',
+             figure=fig_camembert("DAF-04", selected_annee, couleurs),
+             config={'displaylogo': False}
+         ),
+
+         dcc.Graph(
+             id='daf5_bat',
+             figure=fig_trim_baton("DAF-05", selected_annee, "Départements", couleurs),
+             config={'displaylogo': False}
+         ),
+
+         dcc.Graph(
+             id='daf5_cou',
+             figure=fig_trim_courbe("DAF-05", selected_annee, couleurs),
+             config={'displaylogo': False}
+         ),
+
+         dcc.Graph(
+             id='daf6_bat',
+             figure=fig_annuelle_baton("DAF-06", selected_annee, "Départements", couleurs),
+             config={'displaylogo': False}
+         ),
+
+         dcc.Graph(
+             id='daf6_cam',
+             figure=fig_camembert("DAF-06", selected_annee, couleurs),
+             config={'displaylogo': False}
+         )
+    ]
+
+
+
+layout = dbc.Container(children=[
+    dcc.Loading(id = "loading-daf", color = "black", type = "circle"),
+    html.H2(children='Sélection de l\'année :'),
+                    dcc.Dropdown(
+                    id = "annee-selector-daf",
+                    options = annee,
+                    multi = False,
+                    value=annee[0]
+                ),
+    #joue le rôle de variable globale
+    dcc.Store(id='current-value-daf', data=[]),
+    #Menu déourlant/moteur de recherche
+    dcc.Dropdown(
+        options=categories,
+        id="checklist-input-daf",
+        multi=True,
+        placeholder="Veuillez selectionner des graphes à afficher.",
+        persistence = True,
+        value = [
+
+
+        ],
+        disabled = True,
+        style={"display": "none"}
+    ),
+    # Boucle pour générer les graphiques       
+            dbc.Container(id="graph-container-historique-daf",
+                children=[],
+                fluid = True),
+    ],
+fluid = True
+)
+
+
+
+
+
+
+
+
+
+
+#Mettre à jour les données du menu déroulant sélectionnées
+@callback(
+    Output("current-value-daf", "data"),
+    [Input("checklist-input-daf", "value")],
+    [State("current-value-daf", "data")],
+    prevent_initial_call=True
+)
+def update_old_value(value, old_value):
+    return update_old_value_(value, old_value) #dans fonctions_historique.py
+
+
+# Boucle pour générer les callbacks pour chaque département
+for i, cat in enumerate(categories):
+    cat_id = cat["value"]
+
+
+    @callback(
+        Output(f"current_collapse-daf{i + 1}", "is_open"),
+        [Input("checklist-input-daf", "value")],
+        [State(f"collapse-daf{i + 1}", "is_open"), State("current-value-daf", "data")],
+        prevent_initial_call=True
+    )
+    def toggle_collapse(value, is_open, data, cat_id=cat_id):
+        return toggle_collapse_(value, is_open, data, cat_id=cat_id)
+
+@callback(
+    [Output("graph-container-historique-daf", "children"),
+     Output("loading-daf", "parent-style")], #Permet d'afficher un Spinner de Char
+    [Input("annee-selector-daf", "value"),
+     Input("checklist-input-daf", "value"),
+     ]
+)
+
+def generate_graphs(selected_year, value):
+    return generate_graphs_(selected_year, value, baseline_graph = liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_year))
+
+
+
+"""
+dcc.Graph(
         id='daf-graph1',
         figure=fig_baton_trimestre(selected_data_daf1, selected_annee, titres_graphe_daf[0], titres_y_daf[0]),
         config = {'displaylogo': False}
@@ -223,30 +403,10 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
         figure=fig_old_daf_6(),
         config = {'displaylogo': False}
     ),
-    ]
+"""
 
-
-
-layout = dbc.Container(children=[
-    dcc.Loading(id = "loading-daf", color = "black", type = "circle"),
-    html.H2(children='Sélection de l\'année :'),
-                    dcc.Dropdown(
-                    id = "annee-selector-daf",
-                    options = annee,
-                    multi = False,
-                    value=annee[0]
-                ),
-    #joue le rôle de variable globale
-    dcc.Store(id='current-value-daf', data=[]),
-    #Menu déourlant/moteur de recherche
-    dcc.Dropdown(
-        options=categories,
-        id="checklist-input-daf",
-        multi=True,
-        placeholder="Veuillez selectionner des graphes à afficher.",
-        persistence = True,
-        value = [
-                "daf_old_1_tri",
+"""
+"daf_old_1_tri",
                 "daf_old_1_comp",
                 "daf_old_1_tot",
                 "daf_old_2_tri",
@@ -255,63 +415,4 @@ layout = dbc.Container(children=[
                 "daf_old_3_tri",
                 "daf_old_3_comp",
                 "daf_old_3_tot",
-
-        ],
-        disabled = True,
-        style={"display": "none"}
-    ),
-    # Boucle pour générer les graphiques       
-            dbc.Container(id="graph-container-historique-daf",
-                children=[],
-                fluid = True),
-    ],
-fluid = True
-)
-
-
-
-
-
-
-
-
-
-
-#Mettre à jour les données du menu déroulant sélectionnées
-@callback(
-    Output("current-value-daf", "data"),
-    [Input("checklist-input-daf", "value")],
-    [State("current-value-daf", "data")],
-    prevent_initial_call=True
-)
-def update_old_value(value, old_value):
-    return update_old_value_(value, old_value) #dans fonctions_historique.py
-
-
-# Boucle pour générer les callbacks pour chaque département
-for i, cat in enumerate(categories):
-    cat_id = cat["value"]
-
-
-    @callback(
-        Output(f"current_collapse-daf{i + 1}", "is_open"),
-        [Input("checklist-input-daf", "value")],
-        [State(f"collapse-daf{i + 1}", "is_open"), State("current-value-daf", "data")],
-        prevent_initial_call=True
-    )
-    def toggle_collapse(value, is_open, data, cat_id=cat_id):
-        return toggle_collapse_(value, is_open, data, cat_id=cat_id)
-
-@callback(
-    [Output("graph-container-historique-daf", "children"),
-     Output("loading-daf", "parent-style")], #Permet d'afficher un Spinner de Char
-    [Input("annee-selector-daf", "value"),
-     Input("checklist-input-daf", "value"),
-     ]
-)
-
-def generate_graphs(selected_year, value):
-    return generate_graphs_(selected_year, value, baseline_graph = liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_year))
-
-
-
+"""

@@ -45,7 +45,9 @@ liste_annee_maj.reverse()
 #Couleurs pour les graphes
 colors_dept=['blue', 'lime', 'yellow', 'grey', 'purple', 'cyan', 'red']
 #colors_dept=['navy', 'olive', 'salmon', 'mediumvioletred', 'indigo', 'saddlebrown', 'red']
-colors_dir=['green', 'blue', 'purple', 'orange', 'black', 'maroon']
+colors_dir=['green', 'orange', 'black', 'salmon', 'maroon']
+
+colors_all = colors_dir + colors_dept
 
 
 # Définir une palette de couleurs pour chaque trimestre
