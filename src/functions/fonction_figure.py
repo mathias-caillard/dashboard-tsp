@@ -3,7 +3,7 @@ import math
 from sklearn.preprocessing import LabelEncoder
 import plotly.graph_objects as go
 from src.config import *
-from src.data.data import data_complete_pondere, new_titre_y, new_labels, dict_titres
+from src.data.data import data_complete, data_complete_pondere, new_titre_y, new_labels, dict_titres
 
 couleurs = colors_dept
 couleurs_all = colors_all
@@ -125,6 +125,37 @@ def fig_trim_courbe(code_indic, year, couleurs):
         "Total : <b>%{y:.0f}</b>",
     ]))
     return fig
+
+
+#Indicateur trimestriel pour un département (indice 0 correspond à ARTEMIS, 1 à CITI,..., 6 à Ecole
+def fig_dept_trim_baton(code_indic, year, indice_dept):
+    xlabel = new_labels[code_indic][indice_dept]
+    donnees = data_complete[year - liste_annee_maj[0]][code_indic][indice_dept]
+    titre_graphe = dict_titres[code_indic]
+    titre_y = new_titre_y[code_indic]
+    name_dept = xlabel[0].split(" ")[0]
+    marker = dict(color="blue")
+    Y = go.Bar(
+                x=xlabel,
+                y=donnees,
+                name=name_dept,
+                width=0.8,
+                marker=marker
+            )
+    fig = go.Figure(data=Y)
+    #Département
+    if indice_dept<=5:
+        fig.update_layout(title=titre_graphe + " à " + name_dept + " en " + str(year),
+                      xaxis_title="Trimestres",
+                      yaxis_title=titre_y)
+    #Ecole
+    else:
+        fig.update_layout(title=titre_graphe + " en " + str(year),
+                      xaxis_title="Trimestres",
+                      yaxis_title=titre_y)
+    return fig
+
+
 
 
 

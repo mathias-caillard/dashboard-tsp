@@ -3,7 +3,6 @@ from dash import html, dcc, Output, Input, State, callback
 import dash_bootstrap_components as dbc
 from src.fig import daf_fig, df_fig, dire_fig, drfd_fig, drh_fig, dri_fig, artemis_fig, citi_fig, eph_fig, inf_fig, rs2m_fig, rst_fig
 from src import config
-import data
 import plotly.express as px
 import plotly.graph_objects as go
 from sklearn.preprocessing import LabelEncoder
@@ -103,7 +102,7 @@ layout = dbc.Container(children=[
     ),
     dcc.Loading(id = "loading-df", color = "black", type = "circle"),
 
-    
+
 
     #joue le rôle de variable globale
     dcc.Store(id='current-value-df', data=[]),
