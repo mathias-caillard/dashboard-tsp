@@ -38,7 +38,9 @@ layout = dbc.Container(children=[
         id="checklist-input",
         multi=True,
         placeholder="Veuillez selectionner des graphes à afficher.",
-        persistence = True
+        persistence = True,
+        searchable=True,
+        clearable=True
 
 
     ),

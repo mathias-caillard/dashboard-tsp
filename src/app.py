@@ -55,7 +55,8 @@ offcanvas = html.Div(
                     id = "choix-annee",
                     options = annee,
                     multi = False,
-                    value=annee[0]
+                    value=annee[0],
+                    persistence = True,
                 ),
 
 

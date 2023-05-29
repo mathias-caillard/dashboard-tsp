@@ -1,5 +1,5 @@
 import dash
-from dash import html, dcc, Input, Output, callback
+from dash import html, dcc, Input, Output, callback, State
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
@@ -7,6 +7,8 @@ from src import config
 import random as rd
 from src.fig.dri_fig import *
 from src.data.data import *
+from src.functions.fonction_figure import fig_annuelle_baton, fig_camembert, fig_trim_baton, fig_trim_courbe, couleurs, couleurs_all
+from src.functions.fonctions_historique import *
 
 annee = range(2020, 2024)
 valeur_evolution = valeur2
@@ -26,95 +28,113 @@ dash.register_page(
                    )
 
 
+def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_annee) :
+    return [
+        dcc.Graph(
+            id='dr1_bat',
+            figure=fig_trim_baton("DRI-01", selected_annee, "Trimestres", None),
+            config={'displaylogo': False}
+        ),
 
+        dcc.Graph(
+            id='dr2_bat',
+            figure=fig_trim_baton("DRI-02", selected_annee, "Trimestres", None),
+            config={'displaylogo': False}
+        ),
 
-layout = html.Div(children=[
+        dcc.Graph(
+            id='dr3_bat',
+            figure=fig_trim_baton("DRI-03", selected_annee, "Trimestres", None),
+            config={'displaylogo': False}
+        ),
+
+        dcc.Graph(
+            id='dr4_bat',
+            figure=fig_trim_baton("DRI-04", selected_annee, "Trimestres", None),
+            config={'displaylogo': False}
+        ),
+
+        dcc.Graph(
+            id='dr5_bat',
+            figure=fig_trim_baton("DRI-05", selected_annee, "Trimestres", None),
+            config={'displaylogo': False}
+        ),
+
+        dcc.Graph(
+            id='dr6_bat',
+            figure=fig_annuelle_baton("DRI-06", selected_annee, "Trimestres", None),
+            config={'displaylogo': False}
+        ),
+
+    ]
+
+layout = dbc.Container(children=[
     html.H1(
-        children='Bienvenue sur la page concernant la Direction des relations internationales',
+        children='Bienvenue sur la page concernant la Direction des Relations Internationales',
         style={'text-align': 'justify'}
     ),
+    dcc.Loading(id = "loading-dri", color = "black", type = "circle"),
 
-    #dcc.Graph(
-    #    id='example-graph',
-    #    figure=fig_dri_1(),
-    #    config = {'displaylogo': False}
-    #),
 
-    #html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
-    #graphe redondant
 
-    html.H3(id='message',
-            children=""),
+    #joue le rôle de variable globale
+    dcc.Store(id='current-value-dri', data=[]),
+    #Menu déourlant/moteur de recherche
+    dcc.Dropdown(
+        options=categories,
+        id="checklist-input-dri",
+        multi=True,
+        placeholder="Veuillez selectionner des graphes à afficher.",
+        persistence = True,
+        value = [
 
-    dcc.Graph(
-        id='dri-graph1',
-        figure=fig_dri_3(),
-        style={'display': 'block'},
-        config = {'displaylogo': False}
+        ],
+        disabled = True,
+        style={"display": "none"}
     ),
-
-    #html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
-
-
-
-])
-
-# Définir la fonction de rappel pour filtrer les données
-@callback(
-    [Output('message', 'children'),Output('dri-graph1', 'style')],
-    Input('choix-annee', 'value')
+    # Boucle pour générer les graphiques
+            dbc.Container(id="graph-container-historique-dri",
+                children=[],
+                fluid = True),
+    ],
+fluid = True
 )
-def update_output(selected_year):
-    if selected_year == 2023:
-        message = ""
-        graph_style = {'display': 'block'}
-        return message, graph_style
-    else:
-        message = "Pas de graphiques disponibles pour l'année sélectionnée"
-        graph_style = {'display': 'none'}
-        figure = None
-        return message, graph_style
 
 
-"""
-    html.H3("Sélectionnez une plage d'années :"),
-    dcc.RangeSlider(
-        id='annee-selector',
-        min=min(annee),
-        max=max(annee),
-        value=[min(annee), max(annee)],
-        marks={str(year): str(year) for year in annee},
-        step=1
-    ),
-
-    dcc.Graph(
-        id='example-graph2',
-        figure=fig_dri_2(),
-        config = {'displaylogo': False}
-    ),
-
-    html.Hr(style={'borderTop': '2px solid #000000'}),  # Ligne horizontale pour mieux séparer les graphes
-
-    dcc.Graph(
-        id='example-graph4',
-        figure=fig_dri_4(),
-        config = {'displaylogo': False}
-    ),
-    """
 
 
-"""
+#Mettre à jour les données du menu déroulant sélectionnées
 @callback(
-    Output('example-graph2', 'figure'),
-    [Input('annee-selector', 'value')])
-def update_graph(selected_years):
-    filtered_data = valeur_evolution[4*(selected_years[0] - min(annee)) : 4*(selected_years[1] - min(annee) + 1)]
-    filtered_label = label_evolution[4*(selected_years[0] - min(annee)) : 4*(selected_years[1] - min(annee) + 1)]
-    # Utiliser les données filtrées pour mettre à jour le graphe en bâton
-    fig2 = px.bar(x=filtered_label, y=filtered_data, color=filtered_data)
+    Output("current-value-dri", "data"),
+    [Input("checklist-input-dri", "value")],
+    [State("current-value-dri", "data")],
+    prevent_initial_call=True
+)
+def update_old_value(value, old_value):
+    return update_old_value_(value, old_value) #dans fonctions_historique.py
 
-    # Ajout d'un titre
-    fig2.update_layout(title="Evolution temporelle du nombre d'étudiants étrangers à Télécom Sudparis")
-    return fig2
 
-"""
+# Boucle pour générer les callbacks pour chaque département
+for i, cat in enumerate(categories):
+    cat_id = cat["value"]
+
+
+    @callback(
+        Output(f"current_collapse-dri{i + 1}", "is_open"),
+        [Input("checklist-input-dri", "value")],
+        [State(f"collapse-dri{i + 1}", "is_open"), State("current-value-dri", "data")],
+        prevent_initial_call=True
+    )
+    def toggle_collapse(value, is_open, data, cat_id=cat_id):
+        return toggle_collapse_(value, is_open, data, cat_id=cat_id)
+
+@callback(
+    [Output("graph-container-historique-dri", "children"),
+     Output("loading-dri", "parent-style")], #Permet d'afficher un Spinner de Char
+    [Input("choix-annee", "value"),
+     Input("checklist-input-dri", "value"),
+     ]
+)
+
+def generate_graphs(selected_year, value):
+    return generate_graphs_(selected_year, value, baseline_graph = liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_year))
