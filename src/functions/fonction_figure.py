@@ -1,5 +1,6 @@
 import pandas as pd
 import math
+from sklearn.preprocessing import LabelEncoder
 import plotly.graph_objects as go
 from src.config import *
 from src.data.data import data_complete_pondere, new_titre_y, new_labels, dict_titres
@@ -98,16 +99,16 @@ def fig_trim_courbe(code_indic, year, couleurs):
     xlabel = new_labels[code_indic]
     titre_graphe = dict_titres[code_indic]
     titre_y = new_titre_y[code_indic]
+    # encoder les trimestre : passer d'un String à une valeur int
+    label_encoder = LabelEncoder()
+    trimestre_encoded = label_encoder.fit_transform([i + 1 for i, _ in enumerate(trimestre)])
     fig = go.Figure()
     for i in range(len(donnees)):
         if couleurs is not None:
             marker = dict(color=couleurs[i])
         else:
-            marker = None
-        fig.add_trace(go.Scatter(x=trimestre,
-                                 y=donnees[i],
-                                 name= xlabel[i][0].split(" ")[0],
-                                 line=marker),
+            marker = dict(color="blue")
+        fig.add_trace(go.Scatter(x=trimestre_encoded, y=donnees[i], name= xlabel[i][0].split(" ")[0], line=marker)),
 
     fig.update_layout(title=titre_graphe + " en " + str(year) + ",<br>comparaison annuelle par trimestre",
                       xaxis_title="Trimestres",
@@ -117,7 +118,7 @@ def fig_trim_courbe(code_indic, year, couleurs):
                           ticktext=['T1', 'T2', 'T3', 'T4']
                       ),
                       hovermode="x"
-                      ))
+                      )
     fig.update_traces(hovertemplate="<br>".join([
         " Trimestre : %{x}",
         "Total : <b>%{y:.0f}</b>",

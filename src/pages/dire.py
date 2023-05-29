@@ -71,71 +71,71 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
             config={'displaylogo': False}
         ),
 
-        dcc.Graph(
-            id='dire2_cou',
-            figure=fig_trim_courbe("DIRE-02", selected_annee, couleurs),
-            config={'displaylogo': False}
-        ),
+            dcc.Graph(
+                id='dire2_cou',
+                figure=fig_trim_courbe("DIRE-02", selected_annee, couleurs),
+                config={'displaylogo': False}
+            ),
 
-        dcc.Graph(
-            id='dire2_cam',
-            figure=fig_camembert("DIRE-02", selected_annee, couleurs),
-            config={'displaylogo': False}
-        ),
+            dcc.Graph(
+                id='dire2_cam',
+                figure=fig_camembert("DIRE-02", selected_annee, couleurs),
+                config={'displaylogo': False}
+            ),
 
-        dcc.Graph(
-            id='dire3_bat',
-            figure=fig_trim_baton("DIRE-03", selected_annee, "Départements", couleurs),
-            config={'displaylogo': False}
-        ),
+            dcc.Graph(
+                id='dire3_bat',
+                figure=fig_trim_baton("DIRE-03", selected_annee, "Départements", couleurs),
+                config={'displaylogo': False}
+            ),
 
-        dcc.Graph(
-            id='dire3_cou',
-            figure=fig_trim_courbe("DIRE-03", selected_annee, couleurs),
-            config={'displaylogo': False}
-        ),
+                dcc.Graph(
+                    id='dire3_cou',
+                    figure=fig_trim_courbe("DIRE-03", selected_annee, couleurs),
+                    config={'displaylogo': False}
+                ),
 
-        dcc.Graph(
-            id='dire3_cam',
-            figure=fig_camembert("DIRE-03", selected_annee, couleurs),
-            config={'displaylogo': False}
-        )
+                dcc.Graph(
+                    id='dire3_cam',
+                    figure=fig_camembert("DIRE-03", selected_annee, couleurs),
+                    config={'displaylogo': False}
+                )
 
-]
+        ]
 
 
 
 layout = dbc.Container(children=[
-    dcc.Loading(id = "loading-dire", color = "black", type = "circle"),
-    html.H2(children='Sélection de l\'année :'),
-                    dcc.Dropdown(
-                    id = "annee-selector-dire",
-                    options = annee,
-                    multi = False,
-                    value=annee[0]
-                ),
-    #joue le rôle de variable globale
-    dcc.Store(id='current-value-dire', data=[]),
-    #Menu déourlant/moteur de recherche
-    dcc.Dropdown(
-        options=categories,
-        id="checklist-input-dire",
-        multi=True,
-        placeholder="Veuillez selectionner des graphes à afficher.",
-        persistence = True,
-        value = [
+            dcc.Loading(id = "loading-dire", color = "black", type = "circle"),
+            html.H2(children='Sélection de l\'année :'),
+                            dcc.Dropdown(
+                            id = "annee-selector-dire",
+                            options = annee,
+                            multi = False,
+                            value=annee[0]
+                        ),
+            #joue le rôle de variable globale
+            dcc.Store(id='current-value-dire', data=[]),
+            #Menu déourlant/moteur de recherche
+            dcc.Dropdown(
+                options=categories,
+                id="checklist-input-dire",
+                multi=True,
+                placeholder="Veuillez selectionner des graphes à afficher.",
+                persistence = True,
+                value = [
 
-        ],
-        disabled = True,
-        style={"display": "none"}
-    ),
-    # Boucle pour générer les graphiques       
-            dbc.Container(id="graph-container-historique-dire",
-                children=[],
-                fluid = True),
-    ],
-fluid = True
-)
+                ],
+                disabled = True,
+                style={"display": "none"}
+            ),
+            # Boucle pour générer les graphiques
+                    dbc.Container(id="graph-container-historique-dire",
+                        children=[],
+                        fluid = True),
+            ],
+        fluid = True
+        )
 
 
 
@@ -148,13 +148,13 @@ fluid = True
 
 #Mettre à jour les données du menu déroulant sélectionnées
 @callback(
-    Output("current-value-dire", "data"),
-    [Input("checklist-input-dire", "value")],
-    [State("current-value-dire", "data")],
-    prevent_initial_call=True
-)
+            Output("current-value-dire", "data"),
+            [Input("checklist-input-dire", "value")],
+            [State("current-value-dire", "data")],
+            prevent_initial_call=True
+        )
 def update_old_value(value, old_value):
-    return update_old_value_(value, old_value) #dans fonctions_historique.py
+            return update_old_value_(value, old_value) #dans fonctions_historique.py
 
 
 # Boucle pour générer les callbacks pour chaque département
@@ -163,21 +163,21 @@ for i, cat in enumerate(categories):
 
 
     @callback(
-        Output(f"current_collapse-dire{i + 1}", "is_open"),
-        [Input("checklist-input-dire", "value")],
-        [State(f"collapse-dire{i + 1}", "is_open"), State("current-value-dire", "data")],
-        prevent_initial_call=True
-    )
+                Output(f"current_collapse-dire{i + 1}", "is_open"),
+                [Input("checklist-input-dire", "value")],
+                [State(f"collapse-dire{i + 1}", "is_open"), State("current-value-dire", "data")],
+                prevent_initial_call=True
+            )
     def toggle_collapse(value, is_open, data, cat_id=cat_id):
         return toggle_collapse_(value, is_open, data, cat_id=cat_id)
 
 @callback(
-    [Output("graph-container-historique-dire", "children"),
-     Output("loading-dire", "parent-style")], #Permet d'afficher un Spinner de Char
-    [Input("annee-selector-dire", "value"),
-     Input("checklist-input-dire", "value"),
-     ]
-)
+            [Output("graph-container-historique-dire", "children"),
+             Output("loading-dire", "parent-style")], #Permet d'afficher un Spinner de Char
+            [Input("annee-selector-dire", "value"),
+             Input("checklist-input-dire", "value"),
+             ]
+        )
 
 def generate_graphs(selected_year, value):
     return generate_graphs_(selected_year, value, baseline_graph = liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_year))
