@@ -4,7 +4,7 @@ from src.fig.departement_fig import *
 from src.fig.rst_fig import *
 from dash import html, dcc, Output, Input, State, callback
 from src.functions.fonctions_historique import *
-from src.functions.fonction_figure import fig_dept_trim_baton
+from src.functions.fonction_figure import fig_dept_trim_baton, fig_radar
 
 
 
@@ -19,6 +19,12 @@ dash.register_page(
 
 def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_annee) :
     return [
+        dcc.Graph(
+            id='radar_rst',
+            figure=fig_radar(selected_annee, 5),
+            config={'displaylogo': False}
+        ),
+
         dcc.Graph(
             id='dire1_bat_rst',
             figure=fig_dept_trim_baton("DIRE-01", selected_annee, 5),

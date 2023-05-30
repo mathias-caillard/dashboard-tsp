@@ -183,11 +183,7 @@ def fig_dept_trim_baton(code_indic, year, indice_dept):
 
 #Graphe radar avec un seul profil (pas de superposition)
 def fig_radar(year, indic_dept):
-    print(liste_annee_maj[0])
-    print(len(data_radar))
-    print(len(data_radar[0]))
     donnees = data_radar[year - liste_annee_maj[0]][indic_dept]
-    print(donnees)
     name_dept = departements[indic_dept]
 
     fig = go.Figure()
@@ -195,7 +191,8 @@ def fig_radar(year, indic_dept):
         r=donnees,
         theta=label_radar,
         fill='toself',
-        name=name_dept + " " + str(year)
+        name=name_dept + " " + str(year),
+        line_color = couleurs[indic_dept]
     ))
     if indic_dept != 6:
         title = adapt_title("Graphe radar du département " + name_dept + " en " + str(year))
@@ -203,9 +200,32 @@ def fig_radar(year, indic_dept):
         title = adapt_title("Graphe radar de Télécom SudParis en " + str(year))
     fig.update_layout(
         title=title,
-        polar=dict(radialaxis=dict(range=[0, max(donnees)]))
+        polar=dict(radialaxis=dict(visible=True, range=[0, max(donnees)])),
+        plot_bgcolor='red'
     )
 
+    return fig
+
+def fig_radar_all_dept(year):
+    fig = go.Figure()
+    list_max = []
+    for i in range(7):
+        donnees = data_radar[year - liste_annee_maj[0]][i]
+        list_max.append(max(donnees))
+        name_dept = departements[i]
+        fig.add_trace(go.Scatterpolar(
+            r=donnees,
+            theta=label_radar,
+            fill='toself',
+            name=name_dept + " " + str(year),
+            line_color=couleurs[i]
+        ))
+    title = "Graphe radar des départements en " + str(year)
+    fig.update_layout(
+        title=adapt_title(title),
+        polar=dict(radialaxis=dict(visible=True, range=[0, max(list_max)])),
+        plot_bgcolor='red'
+    )
     return fig
 
 

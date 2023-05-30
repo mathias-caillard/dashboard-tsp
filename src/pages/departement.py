@@ -4,7 +4,7 @@ from src.fig.departement_fig import *
 import dash
 from dash import html, dcc, Output, Input, State, callback
 import dash_bootstrap_components as dbc
-from src.functions.fonction_figure import fig_annuelle_baton, fig_camembert, fig_trim_baton, fig_radar, couleurs
+from src.functions.fonction_figure import fig_annuelle_baton, fig_camembert, fig_trim_baton, fig_radar, fig_radar_all_dept, couleurs
 from src.functions.fonctions_historique import *
 
 dash.register_page(
@@ -19,72 +19,52 @@ dash.register_page(
 def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_annee) :
     return [
         dcc.Graph(
+            id='radar_all_dept',
+            figure=fig_radar_all_dept(selected_annee),
+            config={'displaylogo': False}
+        ),
+
+        dcc.Graph(
             id='radar_artemis',
             figure=fig_radar(selected_annee, 0),
             config={'displaylogo': False}
         ),
 
-    dcc.Graph(
-        id='example-graph',
-        figure=fig_dept_1(),
-        config = {'displaylogo': False}
-    ),
+        dcc.Graph(
+            id='radar_citi',
+            figure=fig_radar(selected_annee, 1),
+            config={'displaylogo': False}
+        ),
 
+        dcc.Graph(
+            id='radar_eph',
+            figure=fig_radar(selected_annee, 2),
+            config={'displaylogo': False}
+        ),
 
+        dcc.Graph(
+            id='radar_inf',
+            figure=fig_radar(selected_annee, 3),
+            config={'displaylogo': False}
+        ),
 
-    dcc.Graph(
-        id='example-graph2',
-        figure=fig_dept_2(),
-        config = {'displaylogo': False}
-    ),
+        dcc.Graph(
+            id='radar_rs2m',
+            figure=fig_radar(selected_annee, 4),
+            config={'displaylogo': False}
+        ),
 
-   
+        dcc.Graph(
+            id='radar_rst',
+            figure=fig_radar(selected_annee, 5),
+            config={'displaylogo': False}
+        ),
 
-    dcc.Graph(
-        id='example-graph3',
-        figure=fig_dept_3(),
-        config = {'displaylogo': False}
-    ),
-
-
-
-    dcc.Graph(
-        id='example-graph4',
-        figure=fig_dept_4(),
-        config = {'displaylogo': False}
-    ),
-
-   
-
-    dcc.Graph(
-        id='example-graph5',
-        figure=fig_dept_5(),
-        config = {'displaylogo': False}
-    ),
-
-
-
-    dcc.Graph(
-        id='example-graph6',
-        figure=fig_dept_6(),
-        config = {'displaylogo': False}
-    ),
-
-   
-
-    dcc.Graph(
-        id='example-graph7',
-        figure=fig_dept_7(),
-        config = {'displaylogo': False}
-    ),
-
-
-
-    dcc.Graph(
-        id='example-graph8',
-        figure=fig_dept_8(),
-        config = {'displaylogo': False}
-    ),
+        dcc.Graph(
+            id='radar_tsp',
+            figure=fig_radar(selected_annee, 6),
+            config={'displaylogo': False}
+        ),
 
 
 ]
@@ -166,3 +146,70 @@ for i, cat in enumerate(categories):
 
 def generate_graphs(selected_year, value):
     return generate_graphs_(selected_year, value, baseline_graph = liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_year))
+
+
+
+
+"""
+dcc.Graph(
+        id='example-graph',
+        figure=fig_dept_1(),
+        config = {'displaylogo': False}
+    ),
+
+
+
+    dcc.Graph(
+        id='example-graph2',
+        figure=fig_dept_2(),
+        config = {'displaylogo': False}
+    ),
+
+   
+
+    dcc.Graph(
+        id='example-graph3',
+        figure=fig_dept_3(),
+        config = {'displaylogo': False}
+    ),
+
+
+
+    dcc.Graph(
+        id='example-graph4',
+        figure=fig_dept_4(),
+        config = {'displaylogo': False}
+    ),
+
+   
+
+    dcc.Graph(
+        id='example-graph5',
+        figure=fig_dept_5(),
+        config = {'displaylogo': False}
+    ),
+
+
+
+    dcc.Graph(
+        id='example-graph6',
+        figure=fig_dept_6(),
+        config = {'displaylogo': False}
+    ),
+
+   
+
+    dcc.Graph(
+        id='example-graph7',
+        figure=fig_dept_7(),
+        config = {'displaylogo': False}
+    ),
+
+
+
+    dcc.Graph(
+        id='example-graph8',
+        figure=fig_dept_8(),
+        config = {'displaylogo': False}
+    ),
+"""

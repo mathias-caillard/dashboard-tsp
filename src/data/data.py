@@ -319,17 +319,17 @@ def extract_data_radar():
         for j in range(len(departements)):
             data_radar_annee_dept = []
             data_radar_annee_dept.append(data_complete_pondere[i]["DF-01"][j] / 100)
-            data_radar_annee_dept.append(sum(data_complete_pondere[i]["DIRE-01"][j]) / 100000)
+            data_radar_annee_dept.append(sum(data_complete_pondere[i]["DIRE-01"][j]) / 10000)
             data_radar_annee_dept.append(data_complete_pondere[i]["DRFD-01"][j])
-            data_radar_annee_dept.append(data_complete_pondere[i]["DRH-01"][j+5] / 10)
+            data_radar_annee_dept.append(sum(data_complete_pondere[i]["DAF-02"][j]) / 10000)
             data_radar_annee_dept.append(data_complete_pondere[i]["DRFD-02"][j])
             data_radar_annee.append(data_radar_annee_dept)
         data_radar.append(data_radar_annee)
     label_radar = [
-        "UP (par 100)",
-        "Suivi contrats de recherche (par 100K)",
+        "UP <br>(par 100)",
+        "Suivi contrats de recherche<br> (par 10K)",
         "Publications",
-        "Permanents en ETPT (par 10)",
+        "Ressources propres<br> (par 100K) ",
         "Doctorants"
     ]
     return data_radar, label_radar
