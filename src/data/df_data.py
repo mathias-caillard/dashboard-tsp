@@ -1,4 +1,4 @@
-from config import *
+from src.config import *
 import openpyxl
 from src.functions.fonction_data import add_to_dict
 

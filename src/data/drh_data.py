@@ -1,6 +1,7 @@
-import config
-from config import generate_path
+import src.config
+from src.config import generate_path
 import openpyxl
+import src.config as config
 import pandas as pd
 from src.functions.fonction_data import add_to_dict
 

@@ -1,8 +1,9 @@
 import src.data.data
-from config import *
-from equivalence_historique import equivalence_titre, equivalence_ligne
-import config
+from src.config import *
+from src.equivalence_historique import equivalence_titre, equivalence_ligne
+import src.config
 import math
+import pandas as pd
 
 
 
@@ -14,7 +15,7 @@ def correspondance_equivalence(code_indicateur):
 sheet_names = ["artemis", "CITI", "EPH", "INF", "RS2M", "RST", "Global"]
 colonneDebutData = 3
 colonneFinData = 34
-annees = config.liste_annee
+annees = src.config.liste_annee
 
 
 
@@ -46,7 +47,7 @@ def convert_data_annuel(data_old):
 
 def extract_data(sheetName, ligneNumber):
     # Chemin du fichier excel défini dans config.py
-    excel_path = config.excel_path2
+    excel_path = src.config.excel_path2
 
     # afficher toutes les colonnes (dans le terminal) des dataframes issues des lectures des fichiers Excel
     pd.set_option('display.max_columns', None)

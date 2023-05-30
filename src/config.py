@@ -7,6 +7,8 @@ fichier_2024 = "Saisie-2024-INDICATEUR-DE-SUIVI-Ti-2.xlsx"
 liste_fichier = [fichier_2023]
 
 fichier_historique = "Historique-Indicateurs-Quadri.xlsx"
+fichier_historique_df = "HistoriqueCTI_BJ.xlsx"
+fichier_historique_dri = "HistoriqueDRI.xlsx"
 
 #Chemin absolu du répertoire de travail (chemin vers src)
 root_directory = os.path.abspath(os.path.dirname(__file__))
@@ -35,6 +37,8 @@ liste_annee.reverse()
 liste_annee_selection = liste_annee.copy()
 liste_annee_selection.append(2023)
 liste_annee_selection.reverse()
+
+annee_min = min(liste_annee_selection)
 
 #Années pour la mise à jour des données
 liste_annee_maj = liste_annee_selection.copy()

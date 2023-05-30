@@ -3,7 +3,8 @@ import pandas as pd
 import math
 import plotly.graph_objects as go
 import copy
-from src import config
+import src.config as config
+from src.config import *
 from src.data.df_data import data_df, titre_df, labels_df
 from src.data.daf_data import data_daf, titre_daf, labels_daf
 from src.data.dire_data import data_dire, titre_dire, labels_dire
@@ -277,8 +278,44 @@ def fusion_old_new_data(new_data):
         old_data.append(data_annee)
     return old_data
 
+
+def add_old_data_df(liste_data):
+    chemin_fichier = generate_path(fichier_historique_df)
+    nombre_lignes = 6
+    df = pd.read_excel(chemin_fichier, sheet_name="Feuil1", header=0, nrows=nombre_lignes)
+    colonne_debut = 1
+    colonne_fin = 5
+    for i in range(colonne_debut, colonne_fin + 1):
+        annee = int(df.iloc[0, i])
+        indice_annee = annee - annee_min
+        liste_data[indice_annee]["DF-02"] = 4 *[df.iloc[1, i]]
+        liste_data[indice_annee]["DF-03"] = 4 *[df.iloc[2, i]]
+        liste_data[indice_annee]["DF-04"] = 4 *[df.iloc[3, i]]
+        liste_data[indice_annee]["DF-05"] = 4 *[df.iloc[4, i]]
+        liste_data[indice_annee]["DF-06"] = 4 *[df.iloc[5, i]]
+
+
+
+def add_old_data_dri(liste_data):
+    chemin_fichier = generate_path(fichier_historique_dri)
+
+
+
+
+
+
 data_complete = fusion_old_new_data(new_donnee)
 adapt_new_label(new_labels)
+add_old_data_df(data_complete)
+
+
+
+
+
+
+
+
+
 
 effectifs = [data_complete[i]["DRH-01"][6:12] + [sum(data_complete[i]["DRH-01"][6:12])] for i in range(len(data_complete))]
 
