@@ -84,7 +84,12 @@ def fig_camembert(code_indic, year, couleurs):
 #Indicateur trimestriel
 def fig_trim_baton(code_indic, year, titre_x, couleurs):
     longueur = len(data_complete_pondere[year - liste_annee_maj[0]][code_indic])
-    if longueur != 4:
+    if "DRI" in code_indic and year<2023 :
+        donnees = data_complete_pondere[year - liste_annee_maj[0]][code_indic]
+        xlabel = [["ECOLE"]]
+        titre_x = ""
+
+    elif longueur != 4:
         donnees = data_complete_pondere[year - liste_annee_maj[0]][code_indic]
         xlabel = new_labels[code_indic]
     else:

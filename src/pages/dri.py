@@ -31,38 +31,38 @@ dash.register_page(
 def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_annee) :
     return [
         dcc.Graph(
-            id='dr1_bat',
-            figure=fig_trim_baton("DRI-01", selected_annee, "Trimestres", None),
+            id='dri1_bat',
+            figure=fig_trim_baton("DRI-01", selected_annee, "Temps", None),
             config={'displaylogo': False}
         ),
 
         dcc.Graph(
-            id='dr2_bat',
-            figure=fig_trim_baton("DRI-02", selected_annee, "Trimestres", None),
+            id='dri2_bat',
+            figure=fig_trim_baton("DRI-02", selected_annee, "Temps", None),
             config={'displaylogo': False}
         ),
 
         dcc.Graph(
-            id='dr3_bat',
-            figure=fig_trim_baton("DRI-03", selected_annee, "Trimestres", None),
+            id='dri3_bat',
+            figure=fig_trim_baton("DRI-03", selected_annee, "Temps", None),
             config={'displaylogo': False}
         ),
 
         dcc.Graph(
-            id='dr4_bat',
-            figure=fig_trim_baton("DRI-04", selected_annee, "Trimestres", None),
+            id='dri4_bat',
+            figure=fig_trim_baton("DRI-04", selected_annee, "Temps", None),
             config={'displaylogo': False}
         ),
 
         dcc.Graph(
-            id='dr5_bat',
-            figure=fig_trim_baton("DRI-05", selected_annee, "Trimestres", None),
+            id='dri5_bat',
+            figure=fig_trim_baton("DRI-05", selected_annee, "Temps", None),
             config={'displaylogo': False}
         ),
 
         dcc.Graph(
-            id='dr6_bat',
-            figure=fig_annuelle_baton("DRI-06", selected_annee, "Trimestres", None),
+            id='dri6_bat',
+            figure=fig_annuelle_baton("DRI-06", selected_annee, "", None),
             config={'displaylogo': False}
         ),
 

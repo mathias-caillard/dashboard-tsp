@@ -298,20 +298,43 @@ def add_old_data_df(liste_data):
 
 def add_old_data_dri(liste_data):
     chemin_fichier = generate_path(fichier_historique_dri)
-
-
-
-
+    nombre_lignes = 18
+    df = pd.read_excel(chemin_fichier, sheet_name="Feuil1", nrows=nombre_lignes)
+    colonne_debut = 1
+    colonne_fin = 6
+    for i in range(colonne_debut, colonne_fin + 1):
+        annee = int(str(df.columns[i]).split("-")[0])
+        indice_annee = annee - annee_min
+        if not math.isnan(df.iloc[1, i]):
+            liste_data[indice_annee]["DRI-01"] = [[df.iloc[1, i]]]
+        else:
+            liste_data[indice_annee]["DRI-01"] = [[0.]]
+        if not math.isnan(df.iloc[2, i]):
+            liste_data[indice_annee]["DRI-02"] = [[df.iloc[2, i]]]
+        else:
+            liste_data[indice_annee]["DRI-02"] = [[0.]]
+        if not math.isnan(df.iloc[5, i]):
+            liste_data[indice_annee]["DRI-03"] = [[df.iloc[5, i]]]
+        else:
+            liste_data[indice_annee]["DRI-03"] = [[0.]]
+        if not math.isnan(df.iloc[15, i]):
+            liste_data[indice_annee]["DRI-04"] = [[df.iloc[15, i]]]
+        else:
+            liste_data[indice_annee]["DRI-04"] = [[0.]]
+        if not math.isnan(df.iloc[3, i]):
+            liste_data[indice_annee]["DRI-05"] = [[df.iloc[3, i]]]
+        else:
+            liste_data[indice_annee]["DRI-05"] = [[0.]]
+        if not math.isnan(df.iloc[7, i]):
+            liste_data[indice_annee]["DRI-06"] = [[df.iloc[7, i]]]
+        else:
+            liste_data[indice_annee]["DRI-06"] = [[0.]]
 
 
 data_complete = fusion_old_new_data(new_donnee)
 adapt_new_label(new_labels)
 add_old_data_df(data_complete)
-
-
-
-
-
+add_old_data_dri(data_complete)
 
 
 
