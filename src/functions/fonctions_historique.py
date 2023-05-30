@@ -397,10 +397,11 @@ categories = [
     {"label": "RST - " + titres_graphe[10] + ", colorisé par année", "value": "rst_old_10_an"},
     {"label": "RST - " + titres_graphe[10] + ", colorisé par trimestre", "value": "rst_old_10_tri"},
     {"label": "RST - " + titres_graphe[10] + ", total annuel", "value": "rst_old_10_tot"},
-    {"label": "RST - " + titres_graphe[10] + ", comparaison annuelle par trimestre", "value": "rst_old_10_comp"},
+    {"label": "RST - " + titres_graphe[10] + ", comparaison annuelle par trimestre", "value": "rst_old_10_comp"}
+]
 
 
-
+categories_libre = [
     #Fusion avec "categories" de "Choix libre"
     # DF
     {"label": "DF - Nombre d\'étudiants", "value": "df_1"},
@@ -513,9 +514,9 @@ categories = [
     {"label": "RST - Ressources d\'états", "value": "rst_6"},
     {"label": "RST - Total des dépenses", "value": "rst_7"},
 
-    {"label": "Graphes radar des départements", "value": "dept_8"},
+    {"label": "Graphes radar des départements", "value": "dept_8"}
 
-]
+    ]
 
 
 
@@ -1041,11 +1042,91 @@ def generate_graphs_(selected_years, value, baseline_graph):
         "rst_old_10_tri": fig_old_trimestrielle(selected_rst[10], selected_annee, selected_label, titres_graphe[10] + " à RST ", titres_y[10]),
         "rst_old_10_tot": fig_old_total(selected_rst[10], selected_annee, titres_graphe[10] + " à RST ", titres_y[10]),
         "rst_old_10_comp": fig_old_annuelle_courbe(selected_rst[10], selected_annee, titres_graphe[10] + " à RST ", titres_y[10]),
-    """
+    """}
 
-    #fusion avec graph de "Choix libre" (ci dessus) : 
+    if value is None:
+        value = []
+    # Création de la liste des IDs de collapse ouverts
+    open_collapse_ids = ["collapse-df{}".format(val) for val in value]
 
-        #DF
+    # Génération des graphiques et des collapses
+    graph_output = baseline_graph
+    for val in value:
+        graph_output.append(
+            dbc.Collapse(
+                dcc.Graph(
+                    figure=graphs[val],
+                    config={'displaylogo': False}
+                ),
+                id="collapse-df{}".format(val),
+                is_open=("collapse-df{}".format(val) in open_collapse_ids),
+
+            )
+        )
+
+    new_graph_output = []
+
+    i = 0
+    while 2 * i < len(graph_output):
+        if (2 * i + 1 < len(graph_output)):
+
+            graph1 = graph_output[2 * i]
+            graph2 = graph_output[2 * i + 1]
+
+            new_graph_output.append(
+                dbc.Row(children=[
+                    dbc.Col(graph1, width=6),
+                    dbc.Col(graph2, width=6)
+                ])
+            )
+            new_graph_output.append(
+                html.Hr(style={'borderTop': '2px solid #000000'}))  # Ligne horizontale pour mieux séparer les graphes)
+
+        else:
+            graph = graph_output[2 * i]
+            new_graph_output.append(
+                dbc.Row(children=[
+                    dbc.Col(graph)
+                ])
+            )
+            new_graph_output.append(
+                html.Hr(style={'borderTop': '2px solid #000000'}))  # Ligne horizontale pour mieux séparer les graphes)
+        i += 1
+
+    return new_graph_output, {'display' : 'none'}
+
+
+
+def generate_graphs_libre(selected_years, value, baseline_graph):
+    #update_data([selected_annee[0], selected_annee[-1]])
+
+    if not isinstance(selected_years, list):
+        selected_years = [selected_years, selected_years]
+
+
+    selected_global = [data_old[selected_years[0] - min(annee): selected_years[1] - min(annee) + 1] for data_old in
+                       data_old_global]
+    selected_artemis = [data_old[selected_years[0] - min(annee): selected_years[1] - min(annee) + 1] for data_old in
+                       data_old_artemis]
+    selected_citi = [data_old[selected_years[0] - min(annee): selected_years[1] - min(annee) + 1] for data_old in
+                       data_old_citi]
+    selected_eph = [data_old[selected_years[0] - min(annee): selected_years[1] - min(annee) + 1] for data_old in
+                       data_old_eph]
+    selected_inf = [data_old[selected_years[0] - min(annee): selected_years[1] - min(annee) + 1] for data_old in
+                       data_old_inf]
+    selected_rs2m = [data_old[selected_years[0] - min(annee): selected_years[1] - min(annee) + 1] for data_old in
+                       data_old_rs2m]
+    selected_rst = [data_old[selected_years[0] - min(annee): selected_years[1] - min(annee) + 1] for data_old in
+                       data_old_rst]
+    selected_annee = [year for year in range(selected_years[0], selected_years[1] + 1)]
+    selected_label = label[selected_years[0] - min(annee): selected_years[1] - min(annee) + 1]
+
+
+    # Liste des graphiques disponibles
+    
+    graphs_libre = {
+
+            #DF
         "df_1": fig_df_1(),
         "df_2": fig_df_2_update(get_df_DF_annuel()),
 
@@ -1154,7 +1235,10 @@ def generate_graphs_(selected_years, value, baseline_graph):
         "rst_7": fig_rst_7(),
 
         "dept_8": fig_dept_8(),
+
     }
+ 
+
 
 
     if value is None:
@@ -1168,7 +1252,7 @@ def generate_graphs_(selected_years, value, baseline_graph):
         graph_output.append(
             dbc.Collapse(
                 dcc.Graph(
-                    figure=graphs[val],
+                    figure=graphs_libre[val],
                     config={'displaylogo': False}
                 ),
                 id="collapse-df{}".format(val),

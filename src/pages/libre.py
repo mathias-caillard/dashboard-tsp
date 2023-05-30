@@ -5,37 +5,28 @@ from src.functions.fonctions_historique import *
 dash.register_page(
     __name__,
     title = "Historique",
-    name = "Historique",
-    order=91,
+    name = "Choix libre",
+    order=92,
     active= False
 
 )
 
 layout = dbc.Container(children=[
     html.H1(
-        children='Dans cette page, vous pouvez afficher les graphes de votre choix sur les années précédentes',
+        children='Dans cette page, vous pouvez afficher les graphes de votre choix.',
         style={'text-align': 'justify'}
     ),
 
-    dcc.Loading(id = "loading", color = "black", type = "circle"),
+    dcc.Loading(id = "loading-libre", color = "black", type = "circle"),
 
-    html.H2(children='Sélection de la plage temporelle :'),
-    dcc.RangeSlider(
-        id='annee-selector',
-        min=min(annee),
-        max=max(annee),
-        value=[min(annee), max(annee)],
-        marks={str(year): str(year) for year in annee},
-        step=1
-    ),
 
     #joue le rôle de variable globale
-    dcc.Store(id='current-value', data=[]),
+    dcc.Store(id='current-value-libre', data=[]),
 
     #Menu déourlant/moteur de recherche
     dcc.Dropdown(
-        options=categories,
-        id="checklist-input",
+        options=categories_libre,
+        id="checklist-input-libre",
         multi=True,
         placeholder="Veuillez selectionner des graphes à afficher.",
         persistence = True,
@@ -48,7 +39,7 @@ layout = dbc.Container(children=[
     # Boucle pour générer les graphiques
 
             
-            dbc.Container(id="graph-container-historique",
+            dbc.Container(id="graph-container-libre",
                 children=[],
                 fluid = True),
             
@@ -95,9 +86,9 @@ def update_data(selected_years):
 
 #Mettre à jour les données du menu déroulant sélectionnées
 @callback(
-    Output("current-value", "data"),
-    [Input("checklist-input", "value")],
-    [State("current-value", "data")],
+    Output("current-value-libre", "data"),
+    [Input("checklist-input-libre", "value")],
+    [State("current-value-libre", "data")],
     prevent_initial_call=True
 )
 def update_old_value(value, old_value):
@@ -105,27 +96,27 @@ def update_old_value(value, old_value):
 
 
 # Boucle pour générer les callbacks pour chaque département
-for i, cat in enumerate(categories):
+for i, cat in enumerate(categories_libre):
     cat_id = cat["value"]
 
 
     @callback(
-        Output(f"current_collapse{i + 1}", "is_open"),
-        [Input("checklist-input", "value")],
-        [State(f"collapse{i + 1}", "is_open"), State("current-value", "data")],
+        Output(f"current_collapse-libre{i + 1}", "is_open"),
+        [Input("checklist-input-libre", "value")],
+        [State(f"collapse-libre{i + 1}", "is_open"), State("current-value-libre", "data")],
         prevent_initial_call=True
     )
     def toggle_collapse(value, is_open, data, cat_id=cat_id):
         return toggle_collapse_(value, is_open, data, cat_id=cat_id)
 
 @callback(
-    [Output("graph-container-historique", "children"),
-     Output("loading", "parent-style")], #Permet d'afficher un Spinner de Char
-    [Input("annee-selector", "value"),
-     Input("checklist-input", "value")]
+    [Output("graph-container-libre", "children"),
+     Output("loading-libre", "parent-style")], #Permet d'afficher un Spinner de Char
+    [Input("choix-annee", "value"),
+     Input("checklist-input-libre", "value")]
 )
 def generate_graphs(selected_years, value):
-    return generate_graphs_(selected_years, value, [])
+    return generate_graphs_libre(selected_years, value, [])
 
 
 

@@ -130,7 +130,7 @@ app.layout = dbc.Container([
                 )
 
             for page in dash.page_registry.values()
-            if not 'departements' in page['relative_path'] and not 'Accueil' in page['name'] and not "a-propos" in page["relative_path"] and not "libre" in page["relative_path"]  # Filtrer les pages du dossier "pages" qui ne sont pas des departements, et la page accueil (qui est remplacé par le bouton tout à gauche)
+            if not 'departements' in page['relative_path'] and not 'Accueil' in page['name'] and not "a-propos" in page["relative_path"]  # Filtrer les pages du dossier "pages" qui ne sont pas des departements, et la page accueil (qui est remplacé par le bouton tout à gauche)
 	    
         ],
         className="d-flex me-auto justify-content-me-end"
