@@ -38,7 +38,7 @@ dash.register_page(
 def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_annee) :
     return [
 dcc.Graph(
-        id='drfd1_bat',
+        id='drfd1_tot',
         figure=fig_annuelle_baton("DRFD-01", selected_annee, "Départements", couleurs),
         config = {'displaylogo': False}
     ),
@@ -54,7 +54,7 @@ dcc.Graph(
 
 
     dcc.Graph(
-        id='drfd2_bat',
+        id='drfd2_tot',
         figure=fig_annuelle_baton("DRFD-02", selected_annee, "Départements", couleurs),
         config = {'displaylogo': False}
     ),
@@ -69,7 +69,7 @@ dcc.Graph(
 
 
     dcc.Graph(
-        id='drfd3_bat',
+        id='drfd3_tot',
         figure=fig_annuelle_baton("DRFD-03", selected_annee, "Départements", couleurs),
         config = {'displaylogo': False}
     ),

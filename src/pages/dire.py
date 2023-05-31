@@ -60,6 +60,12 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
         ),
 
         dcc.Graph(
+            id='dire1_tot',
+            figure=fig_annuelle_baton("DIRE-01", selected_annee, "Départements", couleurs),
+            config={'displaylogo': False}
+        ),
+
+        dcc.Graph(
             id='dire1_cam',
             figure=fig_camembert("DIRE-01", selected_annee, couleurs),
             config={'displaylogo': False}
@@ -68,6 +74,12 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
         dcc.Graph(
             id='dire2_bat',
             figure=fig_trim_baton("DIRE-02", selected_annee, "Départements", couleurs),
+            config={'displaylogo': False}
+        ),
+
+        dcc.Graph(
+            id='dire2_tot',
+            figure=fig_annuelle_baton("DIRE-02", selected_annee, "Départements", couleurs),
             config={'displaylogo': False}
         ),
 
@@ -88,6 +100,12 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
                 figure=fig_trim_baton("DIRE-03", selected_annee, "Départements", couleurs),
                 config={'displaylogo': False}
             ),
+
+        dcc.Graph(
+            id='dire3_tot',
+            figure=fig_annuelle_baton("DIRE-03", selected_annee, "Départements", couleurs),
+            config={'displaylogo': False}
+        ),
 
                 dcc.Graph(
                     id='dire3_cou',

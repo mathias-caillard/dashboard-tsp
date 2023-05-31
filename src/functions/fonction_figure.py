@@ -27,10 +27,17 @@ def adapt_title_y(title_y):
     return title_y
 
 
-#Indicateur annuel ou trimestriel avec uniquement 4 trimestre (pas de départements)
+#Indicateur annuel ou trimestriel (avec des départements)
 def fig_annuelle_baton(code_indic, year, titre_x, couleurs):
-    donnees = data_complete_pondere[year - liste_annee_maj[0]][code_indic]
-    xlabel = new_labels[code_indic]
+    longueur = len(data_complete_pondere[year - liste_annee_maj[0]][code_indic])
+    # Indicateur annuel (premier élément est un chiffre et nom une liste de 4 chiffres)
+    if not isinstance(data_complete_pondere[year - liste_annee_maj[0]][code_indic][0], list):
+        donnees = data_complete_pondere[year - liste_annee_maj[0]][code_indic]
+        xlabel = new_labels[code_indic]
+    #Indicateur trimestriel (comparasion entre départements)
+    else:
+        donnees = [sum(data_complete_pondere[year - liste_annee_maj[0]][code_indic][i]) for i in range(longueur)]
+        xlabel = [new_labels[code_indic][i][0].split(" ")[0] for i in range(longueur)]
     titre_graphe = dict_titres[code_indic]
     titre_y = new_titre_y[code_indic]
     fig = go.Figure()
@@ -44,7 +51,7 @@ def fig_annuelle_baton(code_indic, year, titre_x, couleurs):
                              name=xlabel[i].split(" ")[0],
                              marker=marker))
     # Ajout d'un titre
-    title = adapt_title(titre_graphe + " en " + str(year))
+    title = adapt_title(titre_graphe + " en " + str(year) + ", total annuel")
     fig.update_layout(title=title,
                       xaxis_title= titre_x,
                       yaxis_title= adapt_title_y(titre_y))
@@ -77,7 +84,7 @@ def fig_camembert(code_indic, year, couleurs):
     # Personnalisation du camembert
     fig.update_traces(hoverinfo="label+percent+value", textinfo="label+percent")
     # Ajout d'un titre
-    title = adapt_title(titre_graphe + " en " + str(year))
+    title = adapt_title(titre_graphe + " en " + str(year) + ", graphique en camembert")
     fig.update_layout(title=title)
     return fig
 
@@ -116,7 +123,7 @@ def fig_trim_baton(code_indic, year, titre_x, couleurs):
         )
 
     fig = go.Figure(data=Y)
-    title = adapt_title(titre_graphe + " en " + str(year))
+    title = adapt_title(titre_graphe + " en " + str(year) + ", graphique en bâton")
     fig.update_layout(title=title,
                       xaxis_title=titre_x,
                       yaxis_title=adapt_title_y(titre_y))
@@ -137,7 +144,7 @@ def fig_trim_courbe(code_indic, year, couleurs):
         else:
             marker = dict(color="blue")
         fig.add_trace(go.Scatter(x=trimestre, y=donnees[i], name= xlabel[i][0].split(" ")[0], line=marker)),
-    title = adapt_title(titre_graphe + " en " + str(year) + ", comparaison annuelle par trimestre")
+    title = adapt_title(titre_graphe + " en " + str(year) + ", comparaison entre départements")
     fig.update_layout(title=title,
                       xaxis_title="Trimestres",
                       yaxis_title=adapt_title_y(titre_y),
@@ -176,7 +183,7 @@ def fig_dept_trim_baton(code_indic, year, indice_dept):
     #Ecole
     else:
         title = titre_graphe + " en " + str(year)
-    title = adapt_title(title)
+    title = adapt_title(title + ", graphique en bâton")
     fig.update_layout(title=title,
                       xaxis_title="Trimestres",
                       yaxis_title=adapt_title_y(titre_y),

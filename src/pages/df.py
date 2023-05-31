@@ -38,7 +38,7 @@ dash.register_page(
 def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_annee) :
     return [
     dcc.Graph(
-        id='df1_bat',
+        id='df1_tot',
         figure=fig_annuelle_baton("DF-01", selected_annee, "Départements", couleurs),
         config = {'displaylogo': False}
     ),

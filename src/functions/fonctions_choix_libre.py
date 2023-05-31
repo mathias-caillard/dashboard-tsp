@@ -15,118 +15,104 @@ from src.fig.inf_fig import *
 from src.fig.rs2m_fig import *
 from src.fig.rst_fig import *
 
+couleurs = colors_dept
+couleurs_all = colors_all
+
 
 categories_libre = [
     # Fusion avec "categories" de "Choix libre"
     # DF
-    {"label": "DF - Nombre d\'étudiants", "value": "df_1"},
-    {"label": "DF - Nombre d\'UP", "value": "df_2"},
+    {"label": "DF-01: Nombre d\'UP - Total annuel", "value": "df1_tot"},
+    {"label": "DF-01: Nombre d\'UP - Graphique en camembert", "value": "df1_cam"},
+    {"label": "DF-02: Nombre d\'étudiants FISE", "value": "df2_bat"},
+    {"label": "DF-03: Nombre d\'étudiants FIPA", "value": "df3_bat"},
+    {"label": "DF-04: Nombre d\'étudiants DNM", "value": "df4_bat"},
+    {"label": "DF-05: Nombre d\'étudiants FTLV", "value": "df5_bat"},
+    {"label": "DF-06: Nombre total d\'étudiants", "value": "df6_bat"},
+
+    #DRFD
+    {"label": "DRFD-01: Publications sur Scopus - Total annuel", "value": "drfd1_tot"},
+    {"label": "DRFD-01: Publications sur Scopus - Graphique en camembert", "value": "drfd1_cam"},
+    {"label": "DRFD-02: Nombre de doctorants - Total annuel", "value": "drfd2_tot"},
+    {"label": "DRFD-02: Nombre de doctorants - Graphique en camembert", "value": "drfd2_cam"},
+    {"label": "DRFD-03: H-index médian - Total annuel", "value": "drfd3_tot"},
+
+    #DIRE
+    {"label": "DIRE-01: Suivi des contrats de recherche - Graphique en bâton", "value": "dire1_bat"},
+    {"label": "DIRE-01: Suivi des contrats de recherche - Comparaison entre départements", "value": "dire1_cou"},
+    {"label": "DIRE-01: Suivi des contrats de recherche - Total annuel", "value": "dire1_tot"},
+    {"label": "DIRE-01: Suivi des contrats de recherche - Graphique en camembert", "value": "dire1_cam"},
+    {"label": "DIRE-02: Brevets et logiciels déposés - Graphique en bâton", "value": "dire2_bat"},
+    {"label": "DIRE-02: Brevets et logiciels déposés - Comparaison entre départements", "value": "dire2_cou"},
+    {"label": "DIRE-02: Brevets et logiciels déposés - Total annuel", "value": "dire2_tot"},
+    {"label": "DIRE-02: Brevets et logiciels déposés - Graphique en camembert", "value": "dire2_cam"},
+    {"label": "DIRE-03: Contribution au financement de l\'école - Graphique en bâton", "value": "dire3_bat"},
+    {"label": "DIRE-03: Contribution au financement de l\'école - Comparaison entre départements", "value": "dire3_cou"},
+    {"label": "DIRE-03: Contribution au financement de l\'école - Total annuel", "value": "dire3_tot"},
+    {"label": "DIRE-03: Contribution au financement de l\'école - Graphique en camembert", "value": "dire3_cam"},
+
+    #DAF
+    {"label": "DAF-01: Dépenses de vacataires - Graphique en bâton", "value": "daf1_bat"},
+    {"label": "DAF-01: Dépenses de vacataires - Comparaison entre départements", "value": "daf1_cou"},
+    {"label": "DAF-01: Dépenses de vacataires - Total annuel", "value": "daf1_tot"},
+    {"label": "DAF-01: Dépenses de vacataires - Graphique en camembert", "value": "daf1_cam"},
+    {"label": "DAF-02: Ressources propres - Graphique en bâton", "value": "daf2_bat"},
+    {"label": "DAF-02: Ressources propres - Comparaison entre départements", "value": "daf2_cou"},
+    {"label": "DAF-02: Ressources propres - Total annuel", "value": "daf2_tot"},
+    {"label": "DAF-02: Ressources propres - Graphique en camembert", "value": "daf2_cam"},
+    {"label": "DAF-03: Ressources d\'état - Graphique en bâton", "value": "daf3_bat"},
+    {"label": "DAF-03: Ressources d\'état - Comparaison entre départements", "value": "daf3_cou"},
+    {"label": "DAF-03: Ressources d\'état - Total annuel", "value": "daf3_tot"},
+    {"label": "DAF-03: Ressources d\'état - Graphique en camembert", "value": "daf3_cam"},
+    {"label": "DAF-04: Total des dépenses hors permanents et vacataires - Graphique en bâton", "value": "daf4_bat"},
+    {"label": "DAF-04: Total des dépenses hors permanents et vacataires - Comparaison entre départements", "value": "daf4_cou"},
+    {"label": "DAF-04: Total des dépenses hors permanents et vacataires - Total annuel", "value": "daf4_tot"},
+    {"label": "DAF-04: Total des dépenses hors permanents et vacataires - Graphique en camembert", "value": "daf4_cam"},
+    {"label": "DAF-05: Dotation de l\'institut hors permanents et vacataires - Graphique en bâton", "value": "daf5_bat"},
+    {"label": "DAF-05: Dotation de l\'institut hors permanents et vacataires - Comparaison entre départements", "value": "daf5_cou"},
+    {"label": "DAF-05: Dotation de l\'institut hors permanents et vacataires - Total annuel", "value": "daf5_tot"},
+    {"label": "DAF-06: Chiffre d\'affaire annuel de la recherche - Graphique en bâton", "value": "daf6_bat"},
+    {"label": "DAF-06: Chiffre d\'affaire annuel de la recherche - Graphique en camembert", "value": "daf6_cam"},
+
+    #DRH
+    {"label": "DRH-01: Nombre de permanents en ETPT - Total annuel", "value": "drh1_tot"},
+    {"label": "DRH-01: Nombre de permanents en ETPT - Graphique en camembert", "value": "drh1_cam"},
+    {"label": "DRH-02: Nombre de non-permanents hors recherche en ETPT - Total annuel", "value": "drh2_tot"},
+    {"label": "DRH-02: Nombre de non-permanents hors recherche en ETPT - Graphique en camembert", "value": "drh2_cam"},
+    {"label": "DRH-03: Nombre de non-permanents recherche en ETPT - Graphique en bâton", "value": "drh3_bat"},
+    {"label": "DRH-03: Nombre de non-permanents recherche en ETPT - Comparaison entre départements", "value": "drh3_cou"},
+    {"label": "DRH-03: Nombre de non-permanents recherche en ETPT - Total annuel", "value": "drh3_tot"},
+    {"label": "DRH-03: Nombre de non-permanents recherche en ETPT - Graphique en camembert", "value": "drh3_cam"},
+    {"label": "DRH-04: Nombre de post-docs - Total annuel", "value": "drh4_tot"},
+    {"label": "DRH-04: Nombre de post-docs - Graphique en camembert", "value": "drh4_cam"},
+    {"label": "DRH-05: Nombre d\'ETP permanent ayant une nationalité étrangère - Total annuel", "value": "drh5_tot"},
+    {"label": "DRH-05: Nombre d\'ETP permanent ayant une nationalité étrangère - Graphique en camembert", "value": "drh5_cam"},
+    {"label": "DRH-06: Nombre de nationalités étrangères différentes - Total annuel", "value": "drh6_tot"},
+    {"label": "DRH-06: Nombre de nationalités étrangères différentes - Graphique en camembert", "value": "drh6_cam"},
 
 
 
 
-    # DRFD
-    {"label": "DRFD - Publications", "value": "drfd_1"},
-    {"label": "DRFD - Nombre de doctorants", "value": "drfd_2"},
-    {"label": "DRFD - Evolutions des publications", "value": "drfd_3"},
-    {"label": "DRFD - Evolution du nombre de doctorants", "value": "drfd_4"},
+    #DRI
 
-    # DIRE
-    {"label": "DIRE - Suivi des contrats de recherches", "value": "dire_1"},
-    {"label": "DIRE - Suivi des contrats de recherches, vision trimestrielle", "value": "dire_2"},
-    {"label": "DIRE - Suivi des contrats de recherches, total école", "value": "dire_3"},
-    {"label": "DIRE - Contribution au financement de l'école, graphe camembert", "value": "dire_4"},
+    #ARTEMIS
 
+    #CITI
 
-    # DAF
-    {"label": "DAF - Chiffre d\'affaire de la recherche", "value": "daf_1"},
-    {"label": "DAF - Dépenses de vacataires", "value": "diaf_2"},
-    {"label": "DAF - Dépenses de vacataires, vision trimestrielle", "value": "daf_3"},
-    {"label": "DAF - Ressource propres", "value": "daf_4"},
-    {"label": "DAF - Ressource propres, vision trimestrielle", "value": "daf_5"},
-    {"label": "DAF - Ressource d\'état", "value": "daf_6"},
-    {"label": "DAF - Ressource d\'état, vision trimestrielle", "value": "daf_7"},
-    {"label": "DAF - Total des dépenses", "value": "daf_8"},
-    {"label": "DAF - Total des dépenses, vision trimestrielle", "value": "daf_9"},
+    #EPH
 
-    # DRH
-    {"label": "DRH - Nombre de permanents", "value": "drh_1"},
-    {"label": "DRH - Répartition des permanents, vision trimestrielle", "value": "drh_2"},
-    {"label": "DRH - Nombre de non-permanents", "value": "drh_3"},
-    {"label": "DRH - Evolution du nombre de non-permanents", "value": "drh_4"},
+    #INF
 
+    #RS2M
 
-    # DRI
-    {"label": "DRI - Chiffres sur l'international", "value": "dri_2"},
-    {"label": "DRI - Evolution du nombre d\'étudiants étrangers, bâtons", "value": "dri_3"},
-    {"label": "DRI - Evolution du nombre d\'étudiants étrangers, courbe", "value": "dri_4"},
+    #RST
 
-    # ARTEMIS
-    {"label": "ARTEMIS - Graphe radar année 2023", "value": "dept_2"},
-    {"label": "ARTEMIS - Graphe radar année 2023-2024", "value": "dept_1"},
-    {"label": "ARTEMIS - Ressources humaines", "value": "artemis_1"},
-    {"label": "ARTEMIS - Contrats de recherche", "value": "artemis_2"},
-    {"label": "ARTEMIS - Contribution au financement de l\'école", "value": "artemis_3"},
-    {"label": "ARTEMIS - Dépense de vacataires", "value": "artemis_4"},
-    {"label": "ARTEMIS - Ressources propres", "value": "artemis_5"},
-    {"label": "ARTEMIS - Ressources d\'états", "value": "artemis_6"},
-    {"label": "ARTEMIS - Total des dépenses", "value": "artemis_7"},
-
-    # CITI
-    {"label": "CITI - Graphe radar année 2023", "value": "dept_3"},
-    {"label": "CITI - Ressources humaines", "value": "citi_1"},
-    {"label": "CITI - Contrats de recherche", "value": "citi_2"},
-    {"label": "CITI - Contribution au financement de l\'école", "value": "citi_3"},
-    {"label": "CITI - Dépense de vacataires", "value": "citi_4"},
-    {"label": "CITI - Ressources propres", "value": "citi_5"},
-    {"label": "CITI - Ressources d\'états", "value": "citi_6"},
-    {"label": "CITI - Total des dépenses", "value": "citi_7"},
-
-    # EPH
-    {"label": "EPH - Graphe radar année 2023", "value": "dept_4"},
-    {"label": "EPH - Ressources humaines", "value": "eph_1"},
-    {"label": "EPH - Contrats de recherche", "value": "eph_2"},
-    {"label": "EPH - Contribution au financement de l\'école", "value": "eph_3"},
-    {"label": "EPH - Dépense de vacataires", "value": "eph_4"},
-    {"label": "EPH - Ressources propres", "value": "eph_5"},
-    {"label": "EPH - Ressources d\'états", "value": "eph_6"},
-
-    # INF
-    {"label": "INF - Graphe radar année 2023", "value": "dept_5"},
-    {"label": "INF - Ressources humaines", "value": "inf_1"},
-    {"label": "INF - Contrats de recherche", "value": "inf_2"},
-    {"label": "INF - Contribution au financement de l\'école", "value": "inf_3"},
-    {"label": "INF - Dépense de vacataires", "value": "inf_4"},
-    {"label": "INF - Ressources propres", "value": "inf_5"},
-    {"label": "INF - Ressources d\'états", "value": "inf_6"},
-    {"label": "INF - Total des dépenses", "value": "inf_7"},
-
-    # RS2M
-    {"label": "RS2M - Graphe radar année 2023", "value": "dept_6"},
-    {"label": "RS2M - Ressources humaines", "value": "rs2m_1"},
-    {"label": "RS2M - Contrats de recherche", "value": "rs2m_2"},
-    {"label": "RS2M - Contribution au financement de l\'école", "value": "rs2m_3"},
-    {"label": "RS2M - Dépense de vacataires", "value": "rs2m_4"},
-    {"label": "RS2M - Ressources propres", "value": "rs2m_5"},
-    {"label": "RS2M - Ressources d\'états", "value": "rs2m_6"},
-    {"label": "RS2M - Total des dépenses", "value": "rs2m_7"},
-
-    # RST
-    {"label": "RST - Graphe radar année 2023", "value": "dept_7"},
-    {"label": "RST - Ressources humaines", "value": "rst_1"},
-    {"label": "RST - Contrats de recherche", "value": "rst_2"},
-    {"label": "RST - Contribution au financement de l\'école", "value": "rst_3"},
-    {"label": "RST - Dépense de vacataires", "value": "rst_4"},
-    {"label": "RST - Ressources propres", "value": "rst_5"},
-    {"label": "RST - Ressources d\'états", "value": "rst_6"},
-    {"label": "RST - Total des dépenses", "value": "rst_7"},
-
-    {"label": "Graphes radar des départements", "value": "dept_8"}
+    #Autres
 
 ]
 
 
-def generate_graphs_libre(selected_years, value, baseline_graph):
+def generate_graphs_libre(selected_annee, value, baseline_graph):
 
 
     # Liste des graphiques disponibles
@@ -134,105 +120,90 @@ def generate_graphs_libre(selected_years, value, baseline_graph):
     graphs_libre = {
 
         # DF
-        "df_1": fig_df_1(),
-        "df_2": fig_df_2_update(get_df_DF_annuel()),
+        "df1_tot": fig_annuelle_baton("DF-01", selected_annee, "Départements", couleurs),
+        "df1_cam": fig_camembert("DF-01", selected_annee, couleurs),
+        "df2_bat": fig_trim_baton("DF-02", selected_annee, "Temps", None),
+        "df3_bat": fig_trim_baton("DF-03", selected_annee, "Temps", None),
+        "df4_bat": fig_trim_baton("DF-04", selected_annee, "Temps", None),
+        "df5_bat": fig_trim_baton("DF-05", selected_annee, "Temps", None),
+        "df6_bat": fig_trim_baton("DF-06", selected_annee, "Temps", None),
 
         # DRFD
-        "drfd_1": fig_drfd_1(),
-        "drfd_2": fig_drfd_2(),
-        "drfd_3": fig_drfd_3(),
-        "drfd_4": fig_drfd_4(),
+        "drfd1_tot": fig_annuelle_baton("DRFD-01", selected_annee, "Départements", couleurs),
+        "drfd1_cam": fig_camembert("DRFD-01", selected_annee, couleurs),
+        "drfd2_tot": fig_annuelle_baton("DRFD-02", selected_annee, "Départements", couleurs),
+        "drfd2_cam": fig_camembert("DRFD-02", selected_annee, couleurs),
+        "drfd3_tot": fig_annuelle_baton("DRFD-03", selected_annee, "Départements", couleurs),
 
         # DIRE
-        "dire_1": fig_dire_1(),
-        "dire_2": fig_dire_2(),
-        "dire_3": fig_dire_3(),
-        "dire_4": fig_dire_4(),
+        "dire1_bat": fig_trim_baton("DIRE-01", selected_annee, "Départements", couleurs),
+        "dire1_cou": fig_trim_courbe("DIRE-01", selected_annee, couleurs),
+        "dire1_tot": fig_annuelle_baton("DIRE-01", selected_annee, "Départements", couleurs),
+        "dire1_cam": fig_camembert("DIRE-01", selected_annee, couleurs),
+        "dire2_bat": fig_trim_baton("DIRE-02", selected_annee, "Départements", couleurs),
+        "dire2_cou": fig_trim_courbe("DIRE-02", selected_annee, couleurs),
+        "dire2_tot": fig_annuelle_baton("DIRE-02", selected_annee, "Départements", couleurs),
+        "dire2_cam": fig_camembert("DIRE-02", selected_annee, couleurs),
+        "dire3_bat": fig_trim_baton("DIRE-03", selected_annee, "Départements", couleurs),
+        "dire3_cou": fig_trim_courbe("DIRE-03", selected_annee, couleurs),
+        "dire3_tot": fig_annuelle_baton("DIRE-03", selected_annee, "Départements", couleurs),
+        "dire3_cam": fig_camembert("DIRE-03", selected_annee, couleurs),
 
         # DAF
-        "daf_1": fig_daf_1(),
-        "daf_2": fig_daf_2(),
-        "daf_3": fig_daf_3(),
-        "daf_4": fig_daf_4(),
-        "daf_5": fig_daf_5(),
-        "daf_6": fig_daf_6(),
-        "daf_7": fig_daf_7(),
-        "daf_8": fig_daf_8(),
-        "daf_9": fig_daf_9(),
+        "daf1_bat": fig_trim_baton("DAF-01", selected_annee, "Départements", couleurs),
+        "daf1_cou": fig_trim_courbe("DAF-01", selected_annee, couleurs),
+        "daf1_tot": fig_annuelle_baton("DAF-01", selected_annee, "Départements", couleurs),
+        "daf1_cam": fig_camembert("DAF-01", selected_annee, couleurs),
+        "daf2_bat": fig_trim_baton("DAF-02", selected_annee, "Départements", couleurs),
+        "daf2_cou": fig_trim_courbe("DAF-02", selected_annee, couleurs),
+        "daf2_tot": fig_annuelle_baton("DAF-02", selected_annee, "Départements", couleurs),
+        "daf2_cam": fig_camembert("DAF-02", selected_annee, couleurs),
+        "daf3_bat": fig_trim_baton("DAF-03", selected_annee, "Départements", couleurs),
+        "daf3_cou": fig_trim_courbe("DAF-03", selected_annee, couleurs),
+        "daf3_tot": fig_annuelle_baton("DAF-03", selected_annee, "Départements", couleurs),
+        "daf3_cam": fig_camembert("DAF-03", selected_annee, couleurs),
+        "daf4_bat": fig_trim_baton("DAF-04", selected_annee, "Départements", couleurs),
+        "daf4_cou": fig_trim_courbe("DAF-04", selected_annee, couleurs),
+        "daf4_tot": fig_annuelle_baton("DAF-04", selected_annee, "Départements", couleurs),
+        "daf4_cam": fig_camembert("DAF-04", selected_annee, couleurs),
+        "daf5_bat": fig_trim_baton("DAF-05", selected_annee, "Départements", couleurs),
+        "daf5_cou": fig_trim_courbe("DAF-05", selected_annee, couleurs),
+        "daf5_tot": fig_annuelle_baton("DAF-05", selected_annee, "Départements", couleurs),
+        "daf6_bat": fig_annuelle_baton("DAF-06", selected_annee, "Départements", couleurs),
+        "daf6_cam": fig_camembert("DAF-06", selected_annee, couleurs),
 
         # DRH
-        "drh_1": fig_drh_1(),
-        "drh_2": fig_drh_2(),
-        "drh_3": fig_drh_3(),
-        "drh_4": fig_drh_4(),
+        "drh1_tot": fig_annuelle_baton("DRH-01", selected_annee, "Services/Départements", couleurs_all),
+        "drh1_cam": fig_camembert("DRH-01", selected_annee, couleurs_all),
+        "drh2_tot": fig_annuelle_baton("DRH-02", selected_annee, "Services/Départements", couleurs_all),
+        "drh2_cam": fig_camembert("DRH-02", selected_annee, couleurs_all),
+        "drh3_bat": fig_trim_baton("DRH-03", selected_annee, "Départements", couleurs),
+        "drh3_cou": fig_trim_courbe("DRH-03", selected_annee, couleurs),
+        "drh3_tot": fig_annuelle_baton("DRH-03", selected_annee, "Départements", couleurs),
+        "drh3_cam": fig_camembert("DRH-03", selected_annee, couleurs),
+        "drh4_tot": fig_annuelle_baton("DRH-04", selected_annee, "Services/Départements", couleurs_all),
+        "drh4_cam": fig_camembert("DRH-04", selected_annee, couleurs_all),
+        "drh5_tot": fig_annuelle_baton("DRH-05", selected_annee, "Services/Départements", couleurs_all),
+        "drh5_cam": fig_camembert("DRH-05", selected_annee, couleurs_all),
+        "drh6_tot": fig_annuelle_baton("DRH-06", selected_annee, "Services/Départements", couleurs_all),
+        "drh6_cam": fig_camembert("DRH-06", selected_annee, couleurs_all),
 
         # DRI
-        "dri_2": fig_dri_2(),
-        "dri_3": fig_dri_3(),
-        "dri_4": fig_dri_4(),
 
         # ARTEMIS
-        "dept_2": fig_dept_2(),
-        "dept_1": fig_dept_1(),
-        "artemis_1": fig_artemis_1(),
-        "artemis_2": fig_artemis_2(),
-        "artemis_3": fig_artemis_3(),
-        "artemis_4": fig_artemis_4(),
-        "artemis_5": fig_artemis_5(),
-        "artemis_6": fig_artemis_6(),
-        "artemis_7": fig_artemis_7(),
 
         # CITI
-        "dept_3": fig_dept_3(),
-        "citi_1": fig_citi_1(),
-        "citi_2": fig_citi_2(),
-        "citi_3": fig_citi_3(),
-        "citi_4": fig_citi_4(),
-        "citi_5": fig_citi_5(),
-        "citi_6": fig_citi_6(),
-        "citi_7": fig_citi_7(),
 
         # EPH
-        "dept_4": fig_dept_4(),
-        "eph_1": fig_eph_1(),
-        "eph_2": fig_eph_2(),
-        "eph_3": fig_eph_3(),
-        "eph_4": fig_eph_4(),
-        "eph_5": fig_eph_5(),
-        "eph_6": fig_eph_6(),
-        "eph_7": fig_eph_7(),
 
         # INF
-        "dept_5": fig_dept_5(),
-        "inf_1": fig_inf_1(),
-        "inf_2": fig_inf_2(),
-        "inf_3": fig_inf_3(),
-        "inf_4": fig_inf_4(),
-        "inf_5": fig_inf_5(),
-        "inf_6": fig_inf_6(),
-        "inf_7": fig_inf_7(),
 
         # RS2M
-        "dept_6": fig_dept_6(),
-        "rs2m_1": fig_rs2m_1(),
-        "rs2m_2": fig_rs2m_2(),
-        "rs2m_3": fig_rs2m_3(),
-        "rs2m_4": fig_rs2m_4(),
-        "rs2m_5": fig_rs2m_5(),
-        "rs2m_6": fig_rs2m_6(),
-        "rs2m_7": fig_rs2m_7(),
 
         # RST
-        "dept_7": fig_dept_7(),
-        "rst_1": fig_rst_1(),
-        "rst_2": fig_rst_2(),
-        "rst_3": fig_rst_3(),
-        "rst_4": fig_rst_4(),
-        "rst_5": fig_rst_5(),
-        "rst_6": fig_rst_6(),
-        "rst_7": fig_rst_7(),
 
-        "dept_8": fig_dept_8(),
+        # Autres
+
 
     }
 

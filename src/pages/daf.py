@@ -58,6 +58,12 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
          ),
 
          dcc.Graph(
+             id='daf1_tot',
+             figure=fig_annuelle_baton("DAF-01", selected_annee, "Départements", couleurs),
+             config={'displaylogo': False}
+         ),
+
+         dcc.Graph(
              id='daf1_cam',
              figure=fig_camembert("DAF-01", selected_annee, couleurs),
              config={'displaylogo': False}
@@ -72,6 +78,12 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
          dcc.Graph(
              id='daf2_cou',
              figure=fig_trim_courbe("DAF-02", selected_annee, couleurs),
+             config={'displaylogo': False}
+         ),
+
+         dcc.Graph(
+             id='daf2_tot',
+             figure=fig_annuelle_baton("DAF-02", selected_annee, "Départements", couleurs),
              config={'displaylogo': False}
          ),
 
@@ -94,6 +106,12 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
          ),
 
          dcc.Graph(
+             id='daf3_tot',
+             figure=fig_annuelle_baton("DAF-03", selected_annee, "Départements", couleurs),
+             config={'displaylogo': False}
+         ),
+
+         dcc.Graph(
              id='daf3_cam',
              figure=fig_camembert("DAF-03", selected_annee, couleurs),
              config={'displaylogo': False}
@@ -108,6 +126,12 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
          dcc.Graph(
              id='daf4_cou',
              figure=fig_trim_courbe("DAF-04", selected_annee, couleurs),
+             config={'displaylogo': False}
+         ),
+
+         dcc.Graph(
+             id='daf4_tot',
+             figure=fig_annuelle_baton("DAF-04", selected_annee, "Départements", couleurs),
              config={'displaylogo': False}
          ),
 
@@ -130,7 +154,14 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
          ),
 
          dcc.Graph(
-             id='daf6_bat',
+             id='daf5_tot',
+             figure=fig_annuelle_baton("DAF-05", selected_annee, "Départements", couleurs),
+             config={'displaylogo': False}
+         ),
+
+
+         dcc.Graph(
+             id='daf6_tot',
              figure=fig_annuelle_baton("DAF-06", selected_annee, "Départements", couleurs),
              config={'displaylogo': False}
          ),

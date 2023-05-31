@@ -61,7 +61,7 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
         ),
 
         dcc.Graph(
-            id='dri6_bat',
+            id='dri6_tot',
             figure=fig_annuelle_baton("DRI-06", selected_annee, "", None),
             config={'displaylogo': False}
         ),

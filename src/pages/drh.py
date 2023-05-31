@@ -43,7 +43,7 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
 
     return [
         dcc.Graph(
-            id='drh1_bat',
+            id='drh1_tot',
             figure=fig_annuelle_baton("DRH-01", selected_annee, "Services/Départements", couleurs_all),
             config={'displaylogo': False}
         ),
@@ -55,7 +55,7 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
         ),
 
         dcc.Graph(
-            id='drh2_bat',
+            id='drh2_tot',
             figure=fig_annuelle_baton("DRH-02", selected_annee, "Services/Départements", couleurs_all),
             config={'displaylogo': False}
         ),
@@ -68,7 +68,7 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
 
         dcc.Graph(
             id='drh3_bat',
-            figure=fig_trim_baton("DRH-03", selected_annee, "Services/Départements", couleurs),
+            figure=fig_trim_baton("DRH-03", selected_annee, "Départements", couleurs),
             config={'displaylogo': False}
         ),
 
@@ -79,13 +79,19 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
         ),
 
         dcc.Graph(
+            id='drh3_tot',
+            figure=fig_annuelle_baton("DRH-03", selected_annee, "Départements", couleurs),
+            config={'displaylogo': False}
+        ),
+
+        dcc.Graph(
             id='drh3_cam',
             figure=fig_camembert("DRH-03", selected_annee, couleurs),
             config={'displaylogo': False}
         ),
 
         dcc.Graph(
-            id='drh4_bat',
+            id='drh4_tot',
             figure=fig_annuelle_baton("DRH-04", selected_annee, "Services/Départements", couleurs_all),
             config={'displaylogo': False}
         ),
@@ -97,7 +103,7 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
         ),
 
         dcc.Graph(
-            id='drh5_bat',
+            id='drh5_tot',
             figure=fig_annuelle_baton("DRH-05", selected_annee, "Services/Départements", couleurs_all),
             config={'displaylogo': False}
         ),
@@ -109,7 +115,7 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
         ),
 
         dcc.Graph(
-            id='drh6_bat',
+            id='drh6_tot',
             figure=fig_annuelle_baton("DRH-06", selected_annee, "Services/Départements", couleurs_all),
             config={'displaylogo': False}
         ),
