@@ -1,14 +1,13 @@
 
-from src.functions.fonctions_historique import *
+from src.functions.fonctions_choix_libre import *
 
 
 dash.register_page(
     __name__,
-    title = "Historique",
+    title = "Choix libre",
     name = "Choix libre",
     order=92,
     active= False
-
 )
 
 layout = dbc.Container(children=[
@@ -18,7 +17,6 @@ layout = dbc.Container(children=[
     ),
 
     dcc.Loading(id = "loading-libre", color = "black", type = "circle"),
-
 
     #joue le rôle de variable globale
     dcc.Store(id='current-value-libre', data=[]),
@@ -32,57 +30,14 @@ layout = dbc.Container(children=[
         persistence = True,
         searchable=True,
         clearable=True
-
-
     ),
-
     # Boucle pour générer les graphiques
-
-            
             dbc.Container(id="graph-container-libre",
                 children=[],
                 fluid = True),
-            
-
-
-            
-
     ],
 fluid = True
 )
-
-"""
-#Mettre à jour les données des graphes
-@callback(
-    Output('graph_test', 'figure'),
-    [Input('annee-selector', 'value')])
-
-def update_data(selected_years):
-
-    global selected_global, selected_annee, selected_label
-
-    filtered_data = [data_old[selected_years[0] - min(annee) : selected_years[1] - min(annee) + 1] for data_old in data_old_global]
-    filtered_label = label[selected_years[0] - min(annee) : selected_years[1] - min(annee) + 1]
-
-    selected_global = filtered_data
-    selected_annee = [year for year in range(selected_years[0], selected_years[1] + 1)]
-    selected_label = filtered_label
-
-    #print(selected_annee)
-    #print(selected_label)
-    #print(selected_global)
-    update_fig = fig_test(selected_global[0], selected_annee, selected_label)
-
-    return update_fig
-"""
-
-"""
-    dcc.Graph(
-        id='graph_test',
-        figure=fig_test(selected_global[0], selected_annee, selected_label),
-        config = {'displaylogo': False}
-
-    ),"""
 
 #Mettre à jour les données du menu déroulant sélectionnées
 @callback(
@@ -92,7 +47,7 @@ def update_data(selected_years):
     prevent_initial_call=True
 )
 def update_old_value(value, old_value):
-    return update_old_value_(value, old_value)
+    return value
 
 
 # Boucle pour générer les callbacks pour chaque département
@@ -107,7 +62,10 @@ for i, cat in enumerate(categories_libre):
         prevent_initial_call=True
     )
     def toggle_collapse(value, is_open, data, cat_id=cat_id):
-        return toggle_collapse_(value, is_open, data, cat_id=cat_id)
+        if (cat_id in value and cat_id in data) or (cat_id not in value and cat_id not in data):
+            return is_open
+        return not is_open
+
 
 @callback(
     [Output("graph-container-libre", "children"),

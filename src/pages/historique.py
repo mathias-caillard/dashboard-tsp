@@ -41,57 +41,16 @@ layout = dbc.Container(children=[
         persistence = True,
         searchable=True,
         clearable=True
-
-
     ),
 
     # Boucle pour générer les graphiques
-
-            
             dbc.Container(id="graph-container-historique",
                 children=[],
                 fluid = True),
-            
-
-
-            
-
     ],
 fluid = True
 )
 
-"""
-#Mettre à jour les données des graphes
-@callback(
-    Output('graph_test', 'figure'),
-    [Input('annee-selector', 'value')])
-
-def update_data(selected_years):
-
-    global selected_global, selected_annee, selected_label
-
-    filtered_data = [data_old[selected_years[0] - min(annee) : selected_years[1] - min(annee) + 1] for data_old in data_old_global]
-    filtered_label = label[selected_years[0] - min(annee) : selected_years[1] - min(annee) + 1]
-
-    selected_global = filtered_data
-    selected_annee = [year for year in range(selected_years[0], selected_years[1] + 1)]
-    selected_label = filtered_label
-
-    #print(selected_annee)
-    #print(selected_label)
-    #print(selected_global)
-    update_fig = fig_test(selected_global[0], selected_annee, selected_label)
-
-    return update_fig
-"""
-
-"""
-    dcc.Graph(
-        id='graph_test',
-        figure=fig_test(selected_global[0], selected_annee, selected_label),
-        config = {'displaylogo': False}
-
-    ),"""
 
 #Mettre à jour les données du menu déroulant sélectionnées
 @callback(
