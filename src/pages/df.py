@@ -11,6 +11,7 @@ import numpy as np
 from flask import Flask, session
 from src.functions.fonctions_historique import *
 from src.functions.fonction_figure import *
+from src.functions.fonctions_choix_libre import generate_graphs_libre
 
 from src.data.data import *
 import dash
@@ -35,7 +36,7 @@ dash.register_page(
     )
 
 
-def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_annee) :
+def liste_graphes_df(selected_annee) :
     return [
     dcc.Graph(
         id='df1_tot',
@@ -43,13 +44,11 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
         config = {'displaylogo': False}
     ),
 
-
     dcc.Graph(
         id='df1_cam',
         figure=fig_camembert("DF-01", selected_annee, couleurs),
         config = {'displaylogo': False}
     ),
-
 
     dcc.Graph(
         id='df2_bat',
@@ -57,13 +56,11 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
         config = {'displaylogo': False}
     ),
 
-
     dcc.Graph(
         id='df3_bat',
         figure=fig_trim_baton("DF-03", selected_annee, "Temps", None),
         config = {'displaylogo': False}
     ),
-
 
     dcc.Graph(
         id='df4_bat',
@@ -71,13 +68,11 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
         config={'displaylogo': False}
     ),
 
-
     dcc.Graph(
         id='df5_bat',
         figure=fig_trim_baton("DF-05", selected_annee, "Temps", None),
         config={'displaylogo': False}
     ),
-
 
     dcc.Graph(
         id='df6_bat',
@@ -95,23 +90,6 @@ layout = dbc.Container(children=[
     ),
     dcc.Loading(id = "loading-df", color = "black", type = "circle"),
 
-
-
-    #joue le rôle de variable globale
-    dcc.Store(id='current-value-df', data=[]),
-    #Menu déourlant/moteur de recherche
-    dcc.Dropdown(
-        options=categories_historique,
-        id="checklist-input-df",
-        multi=True,
-        placeholder="Veuillez selectionner des graphes à afficher.",
-        persistence = True,
-        value = [
-
-        ],
-        disabled = True,
-        style={"display": "none"}
-    ),
     # Boucle pour générer les graphiques       
             dbc.Container(id="graph-container-historique-df",
                 children=[],
@@ -121,58 +99,12 @@ fluid = True
 )
 
 
-
-
-
-
-
-
-
-
-#Mettre à jour les données du menu déroulant sélectionnées
-@callback(
-    Output("current-value-df", "data"),
-    [Input("checklist-input-df", "value")],
-    [State("current-value-df", "data")],
-    prevent_initial_call=True
-)
-def update_old_value(value, old_value):
-    return update_old_value_(value, old_value) #dans fonctions_historique.py
-
-
-# Boucle pour générer les callbacks pour chaque département
-for i, cat in enumerate(categories_historique):
-    cat_id = cat["value"]
-
-
-    @callback(
-        Output(f"current_collapse-df{i + 1}", "is_open"),
-        [Input("checklist-input-df", "value")],
-        [State(f"collapse-df{i + 1}", "is_open"), State("current-value-df", "data")],
-        prevent_initial_call=True
-    )
-    def toggle_collapse(value, is_open, data, cat_id=cat_id):
-        return toggle_collapse_(value, is_open, data, cat_id=cat_id)
-
 @callback(
     [Output("graph-container-historique-df", "children"),
      Output("loading-df", "parent-style")], #Permet d'afficher un Spinner de Char
-    [Input("choix-annee", "value"),
-     Input("checklist-input-df", "value"),
-     ]
+    Input("choix-annee", "value"),
+
 )
 
-def generate_graphs(selected_year, value):
-    return generate_graphs_(selected_year, value, baseline_graph = liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_year))
-
-
-
-
-
-"""
-"df_old_1_tri",
-                 "df_old_1_tot",
-                 "df_old_1_comp",
-                 "df_1",
-                 "df_2"
-"""
+def generate_graphs_df(selected_year):
+    return generate_graphs(selected_year, baseline_graph = liste_graphes_df(selected_year))

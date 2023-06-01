@@ -306,29 +306,29 @@ def add_old_data_dri(liste_data):
         annee = int(str(df.columns[i]).split("-")[0])
         indice_annee = annee - annee_min
         if not math.isnan(df.iloc[1, i]):
-            liste_data[indice_annee]["DRI-01"] = [[df.iloc[1, i]]]
+            liste_data[indice_annee]["DRI-01"] = [df.iloc[1, i]]
         else:
-            liste_data[indice_annee]["DRI-01"] = [[0.]]
+            liste_data[indice_annee]["DRI-01"] = [0.]
         if not math.isnan(df.iloc[2, i]):
-            liste_data[indice_annee]["DRI-02"] = [[df.iloc[2, i]]]
+            liste_data[indice_annee]["DRI-02"] = [df.iloc[2, i]]
         else:
-            liste_data[indice_annee]["DRI-02"] = [[0.]]
+            liste_data[indice_annee]["DRI-02"] = [0.]
         if not math.isnan(df.iloc[5, i]):
-            liste_data[indice_annee]["DRI-03"] = [[df.iloc[5, i]]]
+            liste_data[indice_annee]["DRI-03"] = [df.iloc[5, i]]
         else:
-            liste_data[indice_annee]["DRI-03"] = [[0.]]
+            liste_data[indice_annee]["DRI-03"] = [0.]
         if not math.isnan(df.iloc[15, i]):
-            liste_data[indice_annee]["DRI-04"] = [[df.iloc[15, i]]]
+            liste_data[indice_annee]["DRI-04"] = [df.iloc[15, i]]
         else:
-            liste_data[indice_annee]["DRI-04"] = [[0.]]
+            liste_data[indice_annee]["DRI-04"] = [0.]
         if not math.isnan(df.iloc[3, i]):
-            liste_data[indice_annee]["DRI-05"] = [[df.iloc[3, i]]]
+            liste_data[indice_annee]["DRI-05"] = [df.iloc[3, i]]
         else:
-            liste_data[indice_annee]["DRI-05"] = [[0.]]
+            liste_data[indice_annee]["DRI-05"] = [0.]
         if not math.isnan(df.iloc[7, i]):
-            liste_data[indice_annee]["DRI-06"] = [[df.iloc[7, i]]]
+            liste_data[indice_annee]["DRI-06"] = [df.iloc[7, i]]
         else:
-            liste_data[indice_annee]["DRI-06"] = [[0.]]
+            liste_data[indice_annee]["DRI-06"] = [0.]
 
 
 data_complete = fusion_old_new_data(new_donnee)
@@ -495,60 +495,6 @@ def ponderation_total(data_indic):
         TAB.append(tab_i)
     return TAB
 
-
-
-def fig_baton_total(donnees, year, titre_graphe, titre_y):
-    fig = go.Figure()
-    for i in range(len(donnees)):
-        fig.add_trace(go.Bar(x=[departements[i]], y=[donnees[i]],
-                             name=departements[i],
-                             marker=dict(color=[couleurs[i]])))
-    # Ajout d'un titre
-    fig.update_layout(title=titre_graphe + " en " + str(year) + ", pondéré par les effectifs",
-                      xaxis_title='Départements',
-                      yaxis_title=titre_y)
-    return fig
-
-
-#Même couleur pour un département
-def fig_baton_trimestre(donnees, year, titre_graphe, titre_y):
-    Y = []
-    for i in range(len(donnees)):
-        Y.append(
-            go.Bar(
-                x=[departements[i] + " - " + tri for tri in trimestre],
-                y=donnees[i],
-                name=departements[i],
-                width=0.8,
-                marker=dict(color=couleurs[i])
-            )
-        )
-
-    fig = go.Figure(data=Y)
-    fig.update_layout(title=titre_graphe + " en " + str(year) + ", pondéré par les effectifs",
-                      xaxis_title='Départements',
-                      yaxis_title=titre_y)
-    return fig
-
-#Même couleur pour un trimestre (même données que fig_baton_trimestre
-def fig_baton_departement(donnees, year, titre_graphe, titre_y):
-    Y = []
-    for i in range(len(donnees)):
-        Y.append(
-            go.Bar(
-                x=[departements[i] + " - " + tri for tri in trimestre],
-                y=donnees[i],
-                name=departements[i],
-                marker=dict(color=couleurs),
-                width=0.8,
-            )
-        )
-    fig = go.Figure(data=Y)
-    # Ajout d'un titre
-    fig.update_layout(title=titre_graphe + " en " + str(year) + ", pondéré par les effectifs",
-                      xaxis_title="Temps",
-                      yaxis_title=titre_y)
-    return fig
 
 #Utilisée pour la régression polynomiale dans les graphes "comparaison annuelle par trimestre"
 def data_moy(data) :

@@ -24,12 +24,16 @@ dept_min = ["artemis", "citi", "eph", "inf", "rs2m", "rst"]
 #Catégories du menu déroulant
 categories_historique = [
     # Ecole
-    {"label": "Ecole - DF-01: Nombre d\'UP - Total annuel", "value": "df1_tot"},
+    {"label": "Ecole - DF-01: Nombre d\'UP - Total annuel", "value": "df1_tot_ecole"},
     {"label": "DF-02: Nombre d\'étudiants FISE - Total annuel", "value": "df2_tot"},
     {"label": "DF-03: Nombre d\'étudiants FIPA - Total annuel", "value": "df3_tot"},
     {"label": "DF-04: Nombre d\'étudiants DNM - Total annuel", "value": "df4_tot"},
     {"label": "DF-05: Nombre d\'étudiants FTLV - Total annuel", "value": "df5_tot"},
     {"label": "DF-06: Nombre total d\'étudiants - Total annuel", "value": "df6_tot"},
+
+    {"label": "Ecole - DIRE-01: Suivi des contrats de recherche - Graphique en bâton", "value": "dire1_bat"},
+    {"label": "Ecole - DIRE-02: Brevets et logiciels déposés - Graphique en bâton", "value": "dire2_bat"},
+    {"label": "Ecole - DIRE-03: Contribution au financement de l\'école - Graphique en bâton", "value": "dire3_bat"},
 
     {"label": "DRI-01: Nombre d\'étudiants de TSP partant en stage à l\'étranger - Total annuel", "value": "dri1_tot"},
     {"label": "DRI-02: Nombre d\'étudiants de TSP partant à l\'étranger (académique) - Total annuel", "value": "dri2_tot"},
@@ -61,17 +65,21 @@ categories_historique = [
 
 
 
-def generate_graphs_(selected_years, value, baseline_graph):
+def generate_graphs_historique(selected_years, value, baseline_graph):
 
     # Liste des graphiques disponibles
     graphs = {
         # Ecole
-        "df1_tot": fig_hist_total("DF-01", selected_years, 6),
+        "df1_tot_ecole": fig_hist_total("DF-01", selected_years, 6),
         "df2_tot": fig_hist_total("DF-02", selected_years, 0),
         "df3_tot": fig_hist_total("DF-03", selected_years, 0),
         "df4_tot": fig_hist_total("DF-04", selected_years, 0),
         "df5_tot": fig_hist_total("DF-05", selected_years, 0),
         "df6_tot": fig_hist_total("DF-06", selected_years, 0),
+
+        "dire1_bat": fig_hist_trim_baton("DIRE-01", selected_years, 6),
+        "dire2_bat": fig_hist_trim_baton("DIRE-02", selected_years, 6),
+        "dire3_bat": fig_hist_trim_baton("DIRE-03", selected_years, 6),
 
         "dri1_tot": fig_hist_total("DRI-01", selected_years, 0),
         "dri2_tot": fig_hist_total("DRI-02", selected_years, 0),

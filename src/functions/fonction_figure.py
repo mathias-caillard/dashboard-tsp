@@ -1,5 +1,7 @@
 import pandas as pd
 import math
+from dash import html, dcc, Output, Input, State, callback
+import dash_bootstrap_components as dbc
 import numpy as np
 import plotly.express as px
 from sklearn.preprocessing import LabelEncoder
@@ -34,6 +36,36 @@ def adapt_title_y(title_y):
         if i > 0:
             title_y = title_y[:i] + "<br>" + adapt_title_y(title_y[i + 1:])
     return title_y
+
+
+def generate_graphs(selected_annee, baseline_graph):
+    # Génération des graphiques et des collapses
+    graph_output = baseline_graph
+    new_graph_output = []
+    i = 0
+    while 2 * i < len(graph_output):
+        if (2 * i + 1 < len(graph_output)):
+            graph1 = graph_output[2 * i]
+            graph2 = graph_output[2 * i + 1]
+            new_graph_output.append(
+                dbc.Row(children=[
+                    dbc.Col(graph1, width=6),
+                    dbc.Col(graph2, width=6)
+                ])
+            )
+            new_graph_output.append(
+                html.Hr(style={'borderTop': '2px solid #000000'}))  # Ligne horizontale pour mieux séparer les graphes)
+        else:
+            graph = graph_output[2 * i]
+            new_graph_output.append(
+                dbc.Row(children=[
+                    dbc.Col(graph)
+                ])
+            )
+            new_graph_output.append(
+                html.Hr(style={'borderTop': '2px solid #000000'}))  # Ligne horizontale pour mieux séparer les graphes)
+        i += 1
+    return new_graph_output, {'display': 'none'}
 
 
 ######################################################################################################################
@@ -310,27 +342,26 @@ def fig_hist_total(code_indic, years, indice_dept):
 
     # Indicateur annuel ou DF ou DRI
     if not isinstance(data_complete_pondere[years[0] - annee_min][code_indic][0], list):
+        #print(code_indic, data_complete_pondere[years[0] - annee_min][code_indic])
         if "DF" in code_indic and code_indic != "DF-01":
             for i in range(years[0] - annee_min, years[-1] - annee_min + 1):
-                y.append(sum(data_complete_pondere[i][code_indic][indice_dept]) / 4)
-        if "DRI" in code_indic:
+                y.append(sum(data_complete_pondere[i][code_indic]) / 4)
+        elif "DRI" in code_indic:
             for i in range(years[0] - annee_min, years[-1] - annee_min + 1):
-                y.append(sum(data_complete_pondere[i][code_indic][indice_dept]))
+                y.append(sum(data_complete_pondere[i][code_indic]))
         else:
             for i in range(years[0] - annee_min, years[-1] - annee_min + 1):
                 y.append(data_complete_pondere[i][code_indic][indice_dept])
 
-        print(code_indic, data_complete_pondere[years[0] - annee_min][code_indic])
-
     # Indicateur trimestriel
     else:
-        print(code_indic, data_complete_pondere[years[0] - annee_min][code_indic])
-        if "DF" not in code_indic:
+        #print(code_indic, data_complete_pondere[years[0] - annee_min][code_indic])
+        """if "DF" not in code_indic:
             for i in range(years[0] - annee_min, years[-1] - annee_min + 1):
                 y.append(sum(data_complete_pondere[i][code_indic][indice_dept]))
-        else:
-            for i in range(years[0] - annee_min, years[-1] - annee_min + 1):
-                y.append(sum(data_complete_pondere[i][code_indic][indice_dept]) / 4)
+        else: """
+        for i in range(years[0] - annee_min, years[-1] - annee_min + 1):
+            y.append(sum(data_complete_pondere[i][code_indic][indice_dept]) / 4)
 
     if years[0] != years[-1]:
         titre_fig = adapt_title(
@@ -357,16 +388,17 @@ def fig_hist_total(code_indic, years, indice_dept):
 def fig_hist_trim_baton(code_indic, years, indice_dept):
     donnees = []
     labels = [[str(year) + " - " + tri for tri in trimestre] for year in range(years[0], years[-1] + 1)]
+    liste_years = [year for year in range(years[0], years[-1] + 1)]
     # Indicateur trimestriel
-    for i in range(years[0] - annee_min, years[-1] - annee_min):
-        donnees.append([data_complete_pondere[i][code_indic][indice_dept]])
+    for i in range(years[0] - annee_min, years[-1] - annee_min + 1):
+        donnees.append(data_complete_pondere[i][code_indic][indice_dept])
     Y = []
-    for i, year in enumerate(years):
+    for i in range(len(donnees)):
         Y.append(
             go.Bar(
                 x=labels[i],
                 y=donnees[i],
-                name=str(year),
+                name=str(liste_years[i]),
                 width=0.8,
                 marker=dict(color=couleurs_annees[i])
             )
@@ -378,19 +410,26 @@ def fig_hist_trim_baton(code_indic, years, indice_dept):
     ])
     )
     # Ajout d'un titre
-    if years[0] != years[-1]:
-        titre_fig = adapt_title(
-            dict_titres[code_indic] + " de " + str(years[0]) + " à " + str(years[-1]) + ", graphique en bâton")
+    title = dict_titres[code_indic]
+    if indice_dept != 6:
+        name_dept = departements[indice_dept]
+        title += " à " + name_dept
     else:
-        titre_fig = adapt_title(dict_titres[code_indic] + " en " + str(years[0]) + ", graphique en bâton")
+        title += " à Télécom SudParis "
+    if years[0] != years[-1]:
+        title += " de " + str(years[0]) + " à " + str(years[-1])
+    else:
+        title += " en " + str(years[0])
 
-    fig.update_layout(title=titre_fig,
+
+    fig.update_layout(title=adapt_title(title),
                       xaxis_title="Temps",
                       yaxis_title=adapt_title_y(new_titre_y[code_indic]))
     return fig
 
 
 def fig_hist_trim_courbe(code_indic, years, indice_dept):
+    liste_years = [year for year in range(years[0], years[-1] + 1)]
     donnees = []
     # Indicateur trimestriel
     for i in range(years[0] - annee_min, years[-1] - annee_min):
@@ -401,8 +440,8 @@ def fig_hist_trim_courbe(code_indic, years, indice_dept):
     label_encoder = LabelEncoder()
     trimestre_encoded = label_encoder.fit_transform([i + 1 for i, _ in enumerate(trimestre)])
 
-    for i in range(len(years)):
-        fig.add_trace(go.Scatter(x=trimestre_encoded, y=donnees[i], name="Année " + str(years[i]),
+    for i in range(len(donnees)):
+        fig.add_trace(go.Scatter(x=trimestre_encoded, y=donnees[i], name="Année " + str(liste_years[i]),
                                  line=dict(color=couleurs_annees[i])))
     # Générer les données moyennes
     y = data_moy(donnees)
@@ -423,13 +462,18 @@ def fig_hist_trim_courbe(code_indic, years, indice_dept):
         go.Scatter(x=x_pred, y=y_pred, name="Régression", line=dict(dash='dash', color='black'), marker=dict(size=10),
                    visible=visible_bool))
 
-    if years[0] != years[-1]:
-        titre_fig = adapt_title(dict_titres[code_indic] + " de " + str(years[0]) + " à " + str(
-            years[-1]) + ", comparaison entre années")
+    title = dict_titres[code_indic]
+    if indice_dept != 6:
+        name_dept = departements[indice_dept]
+        title += " à " + name_dept
     else:
-        titre_fig = adapt_title(dict_titres[code_indic] + " en " + str(years[0]) + ", comparaison entre années")
+        title += " à Télécom SudParis "
+    if years[0] != years[-1]:
+        title += " de " + str(years[0]) + " à " + str(years[-1]) + ", comparaison entre années"
+    else:
+        title += " en " + str(years[0])
 
-    fig.update_layout(title=titre_fig,
+    fig.update_layout(title=adapt_title(title),
                       xaxis_title="Trimestres",
                       yaxis_title=adapt_title_y(new_titre_y[code_indic]),
                       xaxis=dict(

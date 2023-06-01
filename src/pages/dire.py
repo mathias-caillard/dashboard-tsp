@@ -8,9 +8,8 @@ from src import config
 import dash_bootstrap_components as dbc
 from src.fig.dire_fig import *
 from src.data.data import *
-from src.functions.fonction_figure import fig_annuelle_baton, fig_camembert, fig_trim_baton, fig_trim_courbe, couleurs
+from src.functions.fonction_figure import generate_graphs, fig_annuelle_baton, fig_camembert, fig_trim_baton, fig_trim_courbe, couleurs
 from src.functions.fonctions_historique import *
-
 
 dash.register_page(
     __name__,
@@ -20,32 +19,7 @@ dash.register_page(
     active= False
                    )
 
-titres_graphe_dire = titres_graphe[4:7]
-titres_y_dire = titres_y[4:7]
-
-data_dire_pond1 = ponderation(data.data.data_dire[0])
-data_dire_pond2 = ponderation(data.data.data_dire[1])
-data_dire_pond3 = ponderation(data.data.data_dire[2])
-data_dire_pond1_total = ponderation_total(data.data.data_dire[0])
-data_dire_pond2_total = ponderation_total(data.data.data_dire[1])
-data_dire_pond3_total = ponderation_total(data.data.data_dire[2])
-
-data_dire_pond1.append(data_dire_2023[0])
-data_dire_pond2.append(data_dire_2023[1])
-data_dire_pond3.append(data_dire_2023[2])
-data_dire_pond1_total.append(data_dire_2023_total[0])
-data_dire_pond2_total.append(data_dire_2023_total[1])
-data_dire_pond3_total.append(data_dire_2023_total[2])
-
-selected_data_dire1 = data_dire_pond1[-1]
-selected_data_dire2 = data_dire_pond2[-1]
-selected_data_dire3 = data_dire_pond3[-1]
-selected_data_dire1_total = data_dire_pond1_total[-1]
-selected_data_dire2_total = data_dire_pond2_total[-1]
-selected_data_dire3_total = data_dire_pond3_total[-1]
-
-
-def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_annee) :
+def liste_graphes_dire(selected_annee) :
     return [
         dcc.Graph(
             id='dire1_bat',
@@ -130,21 +104,6 @@ layout = dbc.Container(children=[
         ),
             dcc.Loading(id = "loading-dire", color = "black", type = "circle"),
 
-            #joue le rôle de variable globale
-            dcc.Store(id='current-value-dire', data=[]),
-            #Menu déourlant/moteur de recherche
-            dcc.Dropdown(
-                options=categories_historique,
-                id="checklist-input-dire",
-                multi=True,
-                placeholder="Veuillez selectionner des graphes à afficher.",
-                persistence = True,
-                value = [
-
-                ],
-                disabled = True,
-                style={"display": "none"}
-            ),
             # Boucle pour générer les graphiques
                     dbc.Container(id="graph-container-historique-dire",
                         children=[],
@@ -153,50 +112,14 @@ layout = dbc.Container(children=[
         fluid = True
         )
 
-
-
-
-
-
-
-
-
-
-#Mettre à jour les données du menu déroulant sélectionnées
-@callback(
-            Output("current-value-dire", "data"),
-            [Input("checklist-input-dire", "value")],
-            [State("current-value-dire", "data")],
-            prevent_initial_call=True
-        )
-def update_old_value(value, old_value):
-            return update_old_value_(value, old_value) #dans fonctions_historique.py
-
-
-# Boucle pour générer les callbacks pour chaque département
-for i, cat in enumerate(categories_historique):
-    cat_id = cat["value"]
-
-
-    @callback(
-                Output(f"current_collapse-dire{i + 1}", "is_open"),
-                [Input("checklist-input-dire", "value")],
-                [State(f"collapse-dire{i + 1}", "is_open"), State("current-value-dire", "data")],
-                prevent_initial_call=True
-            )
-    def toggle_collapse(value, is_open, data, cat_id=cat_id):
-        return toggle_collapse_(value, is_open, data, cat_id=cat_id)
-
 @callback(
             [Output("graph-container-historique-dire", "children"),
              Output("loading-dire", "parent-style")], #Permet d'afficher un Spinner de Char
-            [Input("choix-annee", "value"),
-             Input("checklist-input-dire", "value"),
-             ]
+            Input("choix-annee", "value"),
         )
 
-def generate_graphs(selected_year, value):
-    return generate_graphs_(selected_year, value, baseline_graph = liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_year))
+def generate_graphs_dire(selected_year):
+    return generate_graphs(selected_year, baseline_graph = liste_graphes_dire(selected_year))
 
 
 

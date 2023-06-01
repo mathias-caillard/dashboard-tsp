@@ -1,19 +1,7 @@
 from dash import html, dcc, Output, Input, State, callback
 import dash_bootstrap_components as dbc
 from src.functions.fonction_figure import *
-from src.fig.df_fig import *
-from src.fig.dire_fig import *
-from src.fig.daf_fig import *
-from src.fig.drfd_fig import *
-from src.fig.drh_fig import *
-from src.fig.dri_fig import *
-from src.fig.departement_fig import *
-from src.fig.artemis_fig import *
-from src.fig.citi_fig import *
-from src.fig.eph_fig import *
-from src.fig.inf_fig import *
-from src.fig.rs2m_fig import *
-from src.fig.rst_fig import *
+
 
 couleurs = colors_dept
 couleurs_all = colors_all

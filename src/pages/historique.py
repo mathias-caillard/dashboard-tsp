@@ -1,4 +1,4 @@
-
+import dash
 from src.functions.fonctions_historique import *
 
 
@@ -85,7 +85,7 @@ for i, cat in enumerate(categories_historique):
      Input("checklist-input", "value")]
 )
 def generate_graphs(selected_years, value):
-    return generate_graphs_(selected_years, value, [])
+    return generate_graphs_historique(selected_years, value, [])
 
 
 
