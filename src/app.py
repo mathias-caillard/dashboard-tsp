@@ -58,7 +58,7 @@ offcanvas = html.Div(
                     value=annee[0],
                     persistence = True,
                 ),
-
+ 
 
                 dbc.Switch(
                     id="COP-switch",

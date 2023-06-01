@@ -4,6 +4,7 @@ from sklearn.preprocessing import LabelEncoder
 import plotly.graph_objects as go
 from src.config import *
 from src.data.data import data_complete, data_complete_pondere, data_radar, label_radar, new_titre_y, new_labels, dict_titres
+import plotly.colors as colors
 
 couleurs = colors_dept
 couleurs_all = colors_all
@@ -60,6 +61,13 @@ def fig_annuelle_baton(code_indic, year, titre_x, couleurs):
     fig.update_layout(title=title,
                       xaxis_title= titre_x,
                       yaxis_title= adapt_title_y(titre_y))
+    
+
+    fig.update_traces(hovertemplate="<br>".join([
+        "nombre arrondi : <b>%{y:.2f}</b>"
+    ]),
+    )
+
     return fig
 
 #Uniquement pour les indicateurs ou il y a comparaison entre départements
@@ -91,6 +99,16 @@ def fig_camembert(code_indic, year, couleurs):
     # Ajout d'un titre
     title = adapt_title(titre_graphe + " en " + str(year) + ", graphique en camembert")
     fig.update_layout(title=title)
+
+    fig.update_traces(hovertemplate="<br>".join([
+        "%{label}",
+        "<b>%{percent:.0%}</b>",
+        "nombre arrondi : %{value:.2f}"
+    ]),
+    name = ""
+    )
+
+
     return fig
 
 #Indicateur trimestriel
@@ -116,7 +134,7 @@ def fig_trim_baton(code_indic, year, titre_x, couleurs):
         if couleurs is not None:
             marker = dict(color=couleurs[i])
         else:
-            marker = dict(color="blue")
+            marker = dict(color = donnees[i],colorscale=[[0, colors.sequential.Tealgrn[0]], [1, colors.sequential.Tealgrn[-1]]])
         Y.append(
             go.Bar(
                 x=xlabel[i],
@@ -132,6 +150,14 @@ def fig_trim_baton(code_indic, year, titre_x, couleurs):
     fig.update_layout(title=title,
                       xaxis_title=titre_x,
                       yaxis_title=adapt_title_y(titre_y))
+    
+
+    fig.update_traces(hovertemplate="<br>".join([
+        "%{x}",
+        "</b>%{y}</b>"
+    ]),
+    name = ""
+    )
     return fig
 
 def fig_trim_courbe(code_indic, year, couleurs):
@@ -173,7 +199,7 @@ def fig_dept_trim_baton(code_indic, year, indice_dept):
     titre_graphe = dict_titres[code_indic]
     titre_y = new_titre_y[code_indic]
     name_dept = xlabel[0].split(" ")[0]
-    marker = dict(color="blue")
+    marker = dict(color = donnees,colorscale=[[0, colors.sequential.Tealgrn[0]], [1, colors.sequential.Tealgrn[-1]]])
     Y = go.Bar(
                 x=xlabel,
                 y=donnees,
@@ -193,6 +219,12 @@ def fig_dept_trim_baton(code_indic, year, indice_dept):
                       xaxis_title="Temps",
                       yaxis_title=adapt_title_y(titre_y),
                       )
+    
+    fig.update_traces(hovertemplate="<br>".join([
+        "%{x}",
+        "%{y}"
+    ]))
+
     return fig
 
 
@@ -221,6 +253,12 @@ def fig_radar(year, indic_dept):
         plot_bgcolor='red'
     )
 
+    fig.update_traces(hovertemplate="<br>".join([
+        "%{theta}",
+        "valeur arrondie : <b>%{r:.2f}</b>"
+        
+    ]))
+    
     return fig
 
 def fig_radar_all_dept(year):
@@ -243,6 +281,13 @@ def fig_radar_all_dept(year):
         polar=dict(radialaxis=dict(visible=True, range=[0, max(list_max)])),
         plot_bgcolor='red'
     )
+
+    
+    fig.update_traces(hovertemplate="<br>".join([
+        "%{theta}",
+        "valeur arrondie : <b>%{r:.2f}</b>"
+    ]))
+
     return fig
 
 ######################################################################################################################
