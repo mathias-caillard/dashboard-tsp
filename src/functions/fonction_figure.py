@@ -18,13 +18,18 @@ def adapt_title(title):
     return title
 
 def adapt_title_y(title_y):
-    if len(title_y) > 50:
-        i = 50
+    if len(title_y) > 48:
+        i = 48
         while i > 0 and title_y[i] != " ":
             i -= 1
         if i > 0:
             title_y = title_y[:i] + "<br>" + adapt_title_y(title_y[i + 1:])
     return title_y
+
+
+
+######################################################################################################################
+#FONCTIONS POUR GENERER UNE FIGURE D4UN INDICATEUR SUR UNE SEULE ANNEE
 
 
 #Indicateur annuel ou trimestriel (avec des départements)
@@ -185,7 +190,7 @@ def fig_dept_trim_baton(code_indic, year, indice_dept):
         title = titre_graphe + " en " + str(year)
     title = adapt_title(title + ", graphique en bâton")
     fig.update_layout(title=title,
-                      xaxis_title="Trimestres",
+                      xaxis_title="Temps",
                       yaxis_title=adapt_title_y(titre_y),
                       )
     return fig
@@ -207,9 +212,9 @@ def fig_radar(year, indic_dept):
         line_color = couleurs[indic_dept]
     ))
     if indic_dept != 6:
-        title = adapt_title("Graphe radar du département " + name_dept + " en " + str(year))
+        title = adapt_title("Graphique radar du département " + name_dept + " en " + str(year))
     else:
-        title = adapt_title("Graphe radar de Télécom SudParis en " + str(year))
+        title = adapt_title("Graphique radar de Télécom SudParis en " + str(year))
     fig.update_layout(
         title=title,
         polar=dict(radialaxis=dict(visible=True, range=[0, max(donnees)])),
@@ -240,7 +245,10 @@ def fig_radar_all_dept(year):
     )
     return fig
 
+######################################################################################################################
 
+######################################################################################################################
+#FONCTIONS POUR GENERER UNE FIGURE D4UN INDICATEUR SUR UNE PLUSIEURES ANNEES
 
 
 def fig_baton_total(donnees, year, titre_graphe, titre_y):
