@@ -8,7 +8,6 @@ from src.functions.fonction_figure import generate_graphs, fig_dept_trim_baton, 
 
 
 
-
 dash.register_page(
     __name__,
     title = "ARTEMIS",

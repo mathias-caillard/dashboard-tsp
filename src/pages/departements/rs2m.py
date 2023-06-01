@@ -78,7 +78,6 @@ def liste_graphes_rs2m(selected_annee) :
 ]
 
 
-
 layout = dbc.Container(children=[
     html.H1(
         children='Bienvenue sur la page concernant le département RS2M',

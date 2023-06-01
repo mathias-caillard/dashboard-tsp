@@ -148,7 +148,6 @@ def liste_graphes_daf(selected_annee) :
          )
     ]
 
-
 layout = dbc.Container(children=[
     html.H1(
         children='Bienvenue sur la page concernant la DAF',

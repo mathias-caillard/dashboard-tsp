@@ -63,8 +63,6 @@ categories_historique = [
 
 
 
-
-
 def generate_graphs_historique(selected_years, value, baseline_graph):
 
     # Liste des graphiques disponibles

@@ -112,6 +112,7 @@ layout = dbc.Container(children=[
         fluid = True
         )
 
+
 @callback(
             [Output("graph-container-historique-dire", "children"),
              Output("loading-dire", "parent-style")], #Permet d'afficher un Spinner de Char

@@ -70,7 +70,6 @@ def liste_graphes_departement(selected_annee) :
 ]
 
 
-
 layout = dbc.Container(children=[
     html.H1(
         children='Bienvenue sur la page proposant une comparaison entre départements',

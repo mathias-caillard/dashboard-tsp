@@ -16,7 +16,6 @@ dash.register_page(
     active= False
                    )
 
-
 def liste_graphes_rst(selected_annee) :
     return [
         dcc.Graph(

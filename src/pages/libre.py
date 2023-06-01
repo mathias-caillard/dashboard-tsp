@@ -11,6 +11,7 @@ dash.register_page(
     active= False
 )
 
+
 layout = dbc.Container(children=[
     html.H1(
         children='Dans cette page, vous pouvez afficher les graphes de votre choix.',

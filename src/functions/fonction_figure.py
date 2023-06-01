@@ -38,6 +38,7 @@ def adapt_title_y(title_y):
     return title_y
 
 
+
 def generate_graphs(selected_annee, baseline_graph):
     # Génération des graphiques et des collapses
     graph_output = baseline_graph

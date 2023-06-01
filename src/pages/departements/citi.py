@@ -83,7 +83,6 @@ def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_e
 ]
 
 
-
 layout = dbc.Container(children=[
     html.H1(
         children='Bienvenue sur la page concernant le département CITI',

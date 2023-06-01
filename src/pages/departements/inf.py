@@ -17,6 +17,7 @@ dash.register_page(
 ),
 
 
+
 def liste_graphes_inf(selected_annee) :
     return [
         dcc.Graph(

@@ -72,7 +72,6 @@ layout = dbc.Container(children=[
     ),
     dcc.Loading(id = "loading-drfd", color = "black", type = "circle"),
 
-
     # Boucle pour générer les graphiques       
             dbc.Container(id="graph-container-historique-drfd",
                 children=[],

@@ -8,6 +8,7 @@ from src.data.data import *
 from src.functions.fonction_figure import generate_graphs, fig_annuelle_baton, fig_camembert, fig_trim_baton, fig_trim_courbe, couleurs, couleurs_all
 from src.functions.fonctions_historique import *
 
+
 dash.register_page(
     __name__,
     title = "DRH",
