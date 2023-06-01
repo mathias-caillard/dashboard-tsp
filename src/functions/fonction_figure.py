@@ -153,6 +153,7 @@ def fig_trim_baton(code_indic, year, titre_x, couleurs):
     
 
     fig.update_traces(hovertemplate="<br>".join([
+        "%{label}",
         "%{x}",
         "</b>%{y}</b>"
     ]),
