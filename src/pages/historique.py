@@ -2,6 +2,7 @@
 from src.functions.fonctions_historique import *
 
 
+
 dash.register_page(
     __name__,
     title = "Historique",
@@ -22,10 +23,10 @@ layout = dbc.Container(children=[
     html.H2(children='Sélection de la plage temporelle :'),
     dcc.RangeSlider(
         id='annee-selector',
-        min=min(annee),
-        max=max(annee),
-        value=[min(annee), max(annee)],
-        marks={str(year): str(year) for year in annee},
+        min=min(annees),
+        max=max(annees),
+        value=[min(annees), max(annees)],
+        marks={str(year): str(year) for year in annees},
         step=1
     ),
 
@@ -34,7 +35,7 @@ layout = dbc.Container(children=[
 
     #Menu déourlant/moteur de recherche
     dcc.Dropdown(
-        options=categories,
+        options=categories_historique,
         id="checklist-input",
         multi=True,
         placeholder="Veuillez selectionner des graphes à afficher.",
@@ -64,7 +65,7 @@ def update_old_value(value, old_value):
 
 
 # Boucle pour générer les callbacks pour chaque département
-for i, cat in enumerate(categories):
+for i, cat in enumerate(categories_historique):
     cat_id = cat["value"]
 
 

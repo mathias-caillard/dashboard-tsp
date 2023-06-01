@@ -95,7 +95,7 @@ layout = dbc.Container(children=[
     dcc.Store(id='current-value-inf', data=[]),
     #Menu déourlant/moteur de recherche
     dcc.Dropdown(
-        options=categories,
+        options=categories_historique,
         id="checklist-input-inf",
         multi=True,
         placeholder="Veuillez selectionner des graphes à afficher.",
@@ -135,7 +135,7 @@ def update_old_value(value, old_value):
 
 
 # Boucle pour générer les callbacks pour chaque département
-for i, cat in enumerate(categories):
+for i, cat in enumerate(categories_historique):
     cat_id = cat["value"]
 
 

@@ -17,25 +17,7 @@ dash.register_page(
     active= False
                    )
 
-titres_graphe_drh = titres_graphe[9:11]
-titres_y_drh = titres_y[9:11]
 
-
-data_drh_1 = data.data.data_drh[0]
-TAB = []
-for data_annee in data_drh_1:
-    tab=[]
-    for data_dept in data_annee:
-        tab.append(sum(data_dept)/4)
-    TAB.append(tab)
-data_drh_1=TAB
-data_drh_2 = data.data.data_drh[1]
-data_drh_1.append(data_drh_2023_1)
-data_drh_2.append(data_drh_2023_2)
-
-
-selected_data_drh1 = data_drh_1[-1]
-selected_data_drh2 = data_drh_2[-1]
 
 
 
@@ -142,7 +124,7 @@ layout = dbc.Container(children=[
     dcc.Store(id='current-value-drh', data=[]),
     #Menu déourlant/moteur de recherche
     dcc.Dropdown(
-        options=categories,
+        options=categories_historique,
         id="checklist-input-drh",
         multi=True,
         placeholder="Veuillez selectionner des graphes à afficher.",
@@ -183,7 +165,7 @@ def update_old_value(value, old_value):
 
 
 # Boucle pour générer les callbacks pour chaque département
-for i, cat in enumerate(categories):
+for i, cat in enumerate(categories_historique):
     cat_id = cat["value"]
 
 
