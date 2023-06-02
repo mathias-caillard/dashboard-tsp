@@ -179,6 +179,9 @@ def adapt_old_data(code_indic, liste_old_data):
         #Distinction données trimestrielles et annuelles
         if longueur==28 or longueur==30:
             donnee_correspondante = [[0., 0., 0., 0.] for j in range(7)]
+        elif code_indic=="DAF-06":
+            donnee_correspondante = [0. for j in range(longueur + 1)]
+
         else:
             donnee_correspondante = [0. for j in range(longueur)]
         # Parcours des années
@@ -226,6 +229,14 @@ def adapt_new_data(code_indic, liste_new_data):
                 adapted_data.append(data_indic[j])
             adapted_data.append(adapted_data.pop(0))
             liste_new_data[i][code_indic] = adapted_data
+    elif code_indic=="DAF-06":
+        for i in range(len(liste_new_data)):
+            adapted_data = []
+            data_indic = liste_new_data[i][code_indic]
+            for j in range(len(data_indic)):
+                adapted_data.append(data_indic[j])
+            adapted_data.append(sum(adapted_data))
+            liste_new_data[i][code_indic] = adapted_data
 
     """
     elif longueur == 4:
@@ -267,6 +278,12 @@ def adapt_new_label(dict_label):
             for i in range(len(dict_label[code_indic])):
                 adapted_label.append(dict_label[code_indic][i])
             adapted_label.append(adapted_label.pop(0))
+            dict_label[code_indic] = adapted_label
+        elif code_indic=="DAF-06":
+            adapted_label = []
+            for i in range(len(dict_label[code_indic])):
+                adapted_label.append(dict_label[code_indic][i])
+            adapted_label.append("Ecole Année")
             dict_label[code_indic] = adapted_label
 
 

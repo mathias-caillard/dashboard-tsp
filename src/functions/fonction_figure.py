@@ -87,6 +87,8 @@ def fig_annuelle_baton(code_indic, year, titre_x, couleurs):
     titre_graphe = dict_titres[code_indic]
     titre_y = new_titre_y[code_indic]
     fig = go.Figure()
+    if code_indic=="DAF-06":
+        print(xlabel, donnees)
     # print(code_indic, donnees)
     for i in range(len(donnees)):
         if couleurs is not None:
@@ -155,11 +157,11 @@ def fig_camembert(code_indic, year, couleurs):
 # Indicateur trimestriel
 def fig_trim_baton(code_indic, year, titre_x, couleurs):
     longueur = len(data_complete_pondere[year - liste_annee_maj[0]][code_indic])
-    if "DRI" in code_indic and year < 2023:
-        donnees = data_complete_pondere[year - liste_annee_maj[0]][code_indic]
+
+    if "DRI" in code_indic and longueur==1:
+        donnees = [data_complete_pondere[year - liste_annee_maj[0]][code_indic]]
         xlabel = [["ECOLE"]]
         titre_x = ""
-
     elif longueur != 4:
         donnees = data_complete_pondere[year - liste_annee_maj[0]][code_indic]
         xlabel = new_labels[code_indic]
@@ -351,6 +353,7 @@ def fig_hist_total(code_indic, years, indice_dept):
             for i in range(years[0] - annee_min, years[-1] - annee_min + 1):
                 y.append(sum(data_complete_pondere[i][code_indic]))
         else:
+            print(code_indic, data_complete_pondere[years[0] - annee_min][code_indic])
             for i in range(years[0] - annee_min, years[-1] - annee_min + 1):
                 y.append(data_complete_pondere[i][code_indic][indice_dept])
 
@@ -434,7 +437,7 @@ def fig_hist_trim_courbe(code_indic, years, indice_dept):
     donnees = []
     # Indicateur trimestriel
     for i in range(years[0] - annee_min, years[-1] - annee_min):
-        donnees.append([data_complete_pondere[i][code_indic][indice_dept]])
+        donnees.append(data_complete_pondere[i][code_indic][indice_dept])
 
     fig = go.Figure()
     # encoder les trimestre : passer d'un String à une valeur int
@@ -493,17 +496,19 @@ def fig_hist_trim_courbe(code_indic, years, indice_dept):
 
 def fig_hist_radar(years, indice_dept):
     fig = go.Figure()
+    donnees = []
     list_max = []
+    liste_years = [year for year in range(years[0], years[-1] + 1)]
     name_dept = departements[indice_dept]
-    for i, year in enumerate(years):
-        donnees = data_radar[year - annee_min][indice_dept]
+    for i in range(years[0] - annee_min, years[-1] - annee_min + 1):
+        donnees.append( data_radar[i][indice_dept])
         list_max.append(max(donnees))
-
+    for i in range(len(donnees)):
         fig.add_trace(go.Scatterpolar(
-            r=donnees,
+            r=donnees[i],
             theta=label_radar,
             fill='toself',
-            name=name_dept + " " + str(year),
+            name=name_dept + " " + str(liste_years[i]),
             line_color=couleurs_annees[i]
         ))
     if indice_dept != 6:
@@ -528,38 +533,3 @@ def fig_hist_radar(years, indice_dept):
 
     return fig
 
-
-"""
-def fig_hist_trim(donnees, years, labels, titre_graphe, titre_y):
-    Y = []
-    for i, year in enumerate(years):
-        Y.append(
-            go.Bar(
-                x=labels[i],
-                y=donnees[i],
-                name=str(year),
-                marker=dict(color=couleurs_trimestres),
-                width=0.8,
-            )
-        )
-    fig = go.Figure(data=Y)
-
-    fig.update_traces(hovertemplate="<br>".join([
-        "Trimestre : %{x}",
-        "Total : <b>%{y:.0f}</b>",
-    ])
-    )
-
-    # Ajout d'un titre
-    if years[0] != years[-1]:
-        titre_fig = titre_graphe + " de " + str(years[0]) + " à " + str(years[-1]) + ",<br>colorisé par trimestre"
-    else:
-        titre_fig = titre_graphe + " en " + str(years[0]) + ",<br>colorisé par trimestre"
-
-    fig.update_layout(title=titre_fig,
-                      xaxis_title="Temps",
-                      yaxis_title=titre_y)
-
-    return fig
-
-"""
