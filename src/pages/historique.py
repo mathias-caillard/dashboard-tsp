@@ -19,7 +19,7 @@ layout = dbc.Container(children=[
 
     dcc.Loading(id = "loading", color = "black", type = "circle"),
 
-    html.H2(children='Sélection de la plage temporelle :'),
+    html.H2(children='Sélection de la plage temporelle:'),
     dcc.RangeSlider(
         id='annee-selector',
         min=min(annees),
@@ -32,6 +32,7 @@ layout = dbc.Container(children=[
     #joue le rôle de variable globale
     dcc.Store(id='current-value', data=[]),
 
+    html.H3(children='Sélection des indicateurs:'),
     #Menu déourlant/moteur de recherche
     dcc.Dropdown(
         options=categories_historique,

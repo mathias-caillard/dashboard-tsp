@@ -19,8 +19,8 @@ couleurs_annees = px.colors.qualitative.Plotly
 
 
 def adapt_title(title):
-    if len(title) > 68:
-        i = 68
+    if len(title) > 66:
+        i = 66
         while i > 0 and title[i] != " ":
             i -= 1
         if i > 0:
@@ -87,8 +87,7 @@ def fig_annuelle_baton(code_indic, year, titre_x, couleurs):
     titre_graphe = dict_titres[code_indic]
     titre_y = new_titre_y[code_indic]
     fig = go.Figure()
-    if code_indic=="DAF-06":
-        print(xlabel, donnees)
+
     # print(code_indic, donnees)
     for i in range(len(donnees)):
         if couleurs is not None:
@@ -345,6 +344,7 @@ def fig_hist_total(code_indic, years, indice_dept):
 
     # Indicateur annuel ou DF ou DRI
     if not isinstance(data_complete_pondere[years[0] - annee_min][code_indic][0], list):
+
         #print(code_indic, data_complete_pondere[years[0] - annee_min][code_indic])
         if "DF" in code_indic and code_indic != "DF-01":
             for i in range(years[0] - annee_min, years[-1] - annee_min + 1):
@@ -353,7 +353,7 @@ def fig_hist_total(code_indic, years, indice_dept):
             for i in range(years[0] - annee_min, years[-1] - annee_min + 1):
                 y.append(sum(data_complete_pondere[i][code_indic]))
         else:
-            print(code_indic, data_complete_pondere[years[0] - annee_min][code_indic])
+            #print(code_indic, data_complete_pondere[years[0] - annee_min][code_indic])
             for i in range(years[0] - annee_min, years[-1] - annee_min + 1):
                 y.append(data_complete_pondere[i][code_indic][indice_dept])
 
@@ -367,9 +367,22 @@ def fig_hist_total(code_indic, years, indice_dept):
         for i in range(years[0] - annee_min, years[-1] - annee_min + 1):
             y.append(sum(data_complete_pondere[i][code_indic][indice_dept]) / 4)
 
+    if "DRH" in code_indic and code_indic != "DRH-03":
+        if indice_dept >=5 and indice_dept!=11:
+            name_dept = departements[indice_dept - 5]
+        elif indice_dept <=4:
+            name_dept = services_et_dept[indice_dept]
+        else:
+            name_dept = "Télécom SudParis"
+    else:
+        if indice_dept!=6:
+            name_dept = departements[indice_dept]
+        else:
+            name_dept = "Télécom SudParis"
+
     if years[0] != years[-1]:
         titre_fig = adapt_title(
-            dict_titres[code_indic] + " de " + str(years[0]) + " à " + str(years[-1]) + ", total annuel")
+            dict_titres[code_indic] + " à " + name_dept + " de " + str(years[0]) + " à " + str(years[-1]) + ", total annuel")
         fig = px.bar(x=x, y=y, color=y, color_continuous_scale="Tealgrn")
         fig.update_traces(hovertemplate="<br>".join([
             "Année : %{x}",
@@ -379,13 +392,13 @@ def fig_hist_total(code_indic, years, indice_dept):
         fig = go.Figure(go.Indicator(
             mode="number",
             value=y[0]))
-        titre_fig = adapt_title(dict_titres[code_indic] + " en " + str(years[0]) + ", total annuel")
+        titre_fig = adapt_title(dict_titres[code_indic] + " à " + name_dept + " en " + str(years[0]) + ", total annuel")
     # Ajout d'un titre
     fig.update_layout(title=titre_fig,
                       xaxis_title="Années",
                       yaxis_title=adapt_title_y(new_titre_y[code_indic]),
                       legend_title="",
-                      hovermode="y")
+                      hovermode="x")
     return fig
 
 

@@ -60,6 +60,7 @@ couleurs_trimestres = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)', 'rgb(44, 160, 4
 
 trimestre = ['T1', 'T2', 'T3', 'T4']
 departements = ["ARTEMIS", "CITI", "EPH", "INF", "RS2M", "RST", "ECOLE"]
+services_et_dept = ["DF", "DRFD", "DIRE", "DRI", "DCOM"] + departements
 
 
 
