@@ -401,7 +401,734 @@ categories_historique = [
 def generate_graphs_historique(selected_years, value, baseline_graph):
 
     # Liste des graphiques disponibles
-    graphs = {
+    graphs = {}
+
+    #Ecole
+    if "df1_tot_ecole" in value:
+        graphs["df1_tot_ecole"] = fig_hist_total("DF-01", selected_years, 6)
+    if "df2_tot" in value:
+        graphs["df2_tot"] = fig_hist_total("DF-02", selected_years, 6)
+    if "df3_tot" in value:
+        graphs["df3_tot"] = fig_hist_total("DF-03", selected_years, 6)
+    if "df4_tot" in value:
+        graphs["df4_tot"] = fig_hist_total("DF-04", selected_years, 6)
+    if "df5_tot" in value:
+        graphs["df5_tot"] = fig_hist_total("DF-05", selected_years, 6)
+    if "df6_tot" in value:
+        graphs["df6_tot"] = fig_hist_total("DF-06", selected_years, 6)
+
+    if "drfd1_tot_ecole" in value:
+        graphs["drfd1_tot_ecole"] = fig_hist_total("DRFD-01", selected_years, 6)
+    if "drfd2_tot_ecole" in value:
+        graphs["drfd2_tot_ecole"] = fig_hist_total("DRFD-02", selected_years, 6)
+    if "drfd3_tot_ecole" in value:
+        graphs["drfd3_tot_ecole"] = fig_hist_total("DRFD-03", selected_years, 6)
+
+    if "dire1_bat_ecole" in value:
+        graphs["dire1_bat_ecole"] = fig_hist_trim_baton("DIRE-01", selected_years, 6)
+    if "dire1_cou_ecole" in value:
+        graphs["dire1_cou_ecole"] = fig_hist_trim_courbe("DIRE-01", selected_years, 6)
+    if "dire1_tot_ecole" in value:
+        graphs["dire1_tot_ecole"] = fig_hist_total("DIRE-01", selected_years, 6)
+    if "dire2_bat_ecole" in value:
+        graphs["dire2_bat_ecole"] = fig_hist_trim_baton("DIRE-02", selected_years, 6)
+    if "dire2_cou_ecole" in value:
+        graphs["dire2_cou_ecole"] = fig_hist_trim_courbe("DIRE-02", selected_years, 6)
+    if "dire2_tot_ecole" in value:
+        graphs["dire2_tot_ecole"] = fig_hist_total("DIRE-02", selected_years, 6)
+    if "dire3_bat_ecole" in value:
+        graphs["dire3_bat_ecole"] = fig_hist_trim_baton("DIRE-03", selected_years, 6)
+    if "dire3_cou_ecole" in value:
+        graphs["dire3_cou_ecole"] = fig_hist_trim_courbe("DIRE-03", selected_years, 6)
+    if "dire3_tot_ecole" in value:
+        graphs["dire3_tot_ecole"] = fig_hist_total("DIRE-03", selected_years, 6)
+
+    if "daf1_bat_ecole" in value:
+        graphs["daf1_bat_ecole"] = fig_hist_trim_baton("DAF-01", selected_years, 6)
+    if "daf1_cou_ecole" in value:
+        graphs["daf1_cou_ecole"] = fig_hist_trim_courbe("DAF-01", selected_years, 6)
+    if "daf1_tot_ecole" in value:
+        graphs["daf1_tot_ecole"] = fig_hist_total("DAF-01", selected_years, 6)
+    if "daf2_bat_ecole" in value:
+        graphs["daf2_bat_ecole"] = fig_hist_trim_baton("DAF-02", selected_years, 6)
+    if "daf2_cou_ecole" in value:
+        graphs["daf2_cou_ecole"] = fig_hist_trim_courbe("DAF-02", selected_years, 6)
+    if "daf2_tot_ecole" in value:
+        graphs["daf2_tot_ecole"] = fig_hist_total("DAF-02", selected_years, 6)
+    if "daf3_bat_ecole" in value:
+        graphs["daf3_bat_ecole"] = fig_hist_trim_baton("DAF-03", selected_years, 6)
+    if "daf3_cou_ecole" in value:
+        graphs["daf3_cou_ecole"] = fig_hist_trim_courbe("DAF-03", selected_years, 6)
+    if "daf3_tot_ecole" in value:
+        graphs["daf3_tot_ecole"] = fig_hist_total("DAF-03", selected_years, 6)
+    if "daf4_bat_ecole" in value:
+        graphs["daf4_bat_ecole"] = fig_hist_trim_baton("DAF-04", selected_years, 6)
+    if "daf4_cou_ecole" in value:
+        graphs["daf4_cou_ecole"] = fig_hist_trim_courbe("DAF-04", selected_years, 6)
+    if "daf4_tot_ecole" in value:
+        graphs["daf4_tot_ecole"] = fig_hist_total("DAF-04", selected_years, 6)
+    if "daf5_bat_ecole" in value:
+        graphs["daf5_bat_ecole"] = fig_hist_trim_baton("DAF-05", selected_years, 6)
+    if "daf5_cou_ecole" in value:
+        graphs["daf5_cou_ecole"] = fig_hist_trim_courbe("DAF-05", selected_years, 6)
+    if "daf5_tot_ecole" in value:
+        graphs["daf5_tot_ecole"] = fig_hist_total("DAF-05", selected_years, 6)
+    if "daf6_tot_ecole" in value:
+        graphs["daf6_tot_ecole"] = fig_hist_total("DAF-06", selected_years, 6)
+
+    if "drh1_tot_ecole" in value:
+        graphs["drh1_tot_ecole"] = fig_hist_total("DRH-01", selected_years, 11)
+    if "drh2_tot_ecole" in value:
+        graphs["drh2_tot_ecole"] = fig_hist_total("DRH-02", selected_years, 11)
+    if "drh3_bat_ecole" in value:
+        graphs["drh3_bat_ecole"] = fig_hist_trim_baton("DRH-03", selected_years, 6)
+    if "drh3_cou_ecole" in value:
+        graphs["drh3_cou_ecole"] = fig_hist_trim_courbe("DRH-03", selected_years, 6)
+    if "drh3_tot_ecole" in value:
+        graphs["drh3_tot_ecole"] = fig_hist_total("DRH-03", selected_years, 6)
+    if "drh4_tot_ecole" in value:
+        graphs["drh4_tot_ecole"] = fig_hist_total("DRH-04", selected_years, 11)
+    if "drh5_tot_ecole" in value:
+        graphs["drh5_tot_ecole"] = fig_hist_total("DRH-05", selected_years, 11)
+    if "drh6_tot_ecole" in value:
+        graphs["drh6_tot_ecole"] = fig_hist_total("DRH-06", selected_years, 11)
+
+    if "dri1_tot" in value:
+        graphs["dri1_tot"] = fig_hist_total("DRI-01", selected_years, 0)
+    if "dri2_tot" in value:
+        graphs["dri2_tot"] = fig_hist_total("DRI-02", selected_years, 0)
+    if "dri3_tot" in value:
+        graphs["dri3_tot"] = fig_hist_total("DRI-03", selected_years, 0)
+    if "dri4_tot" in value:
+        graphs["dri4_tot"] = fig_hist_total("DRI-04", selected_years, 0)
+    if "dri5_tot" in value:
+        graphs["dri5_tot"] = fig_hist_total("DRI-05", selected_years, 0)
+    if "dri6_tot" in value:
+        graphs["dri6_tot"] = fig_hist_total("DRI-06", selected_years, 0)
+
+    if "radar_ecole" in value:
+        graphs["radar_ecole"] = fig_hist_radar(selected_years, 6)
+
+    #ARTEMIS
+    if "df1_tot_artemis" in value:
+        graphs["df1_tot_artemis"] = fig_hist_total("DF-01", selected_years, 0)
+    if "drfd1_tot_artemis" in value:
+        graphs["drfd1_tot_artemis"] = fig_hist_total("DRFD-01", selected_years, 0)
+    if "drfd2_tot_artemis" in value:
+        graphs["drfd2_tot_artemis"] = fig_hist_total("DRFD-02", selected_years, 0)
+    if "drfd3_tot_artemis" in value:
+        graphs["drfd3_tot_artemis"] = fig_hist_total("DRFD-03", selected_years, 0)
+
+    if "dire1_bat_artemis" in value:
+        graphs["dire1_bat_artemis"] = fig_hist_trim_baton("DIRE-01", selected_years, 0)
+    if "dire1_cou_artemis" in value:
+        graphs["dire1_cou_artemis"] = fig_hist_trim_courbe("DIRE-01", selected_years, 0)
+    if "dire1_tot_artemis" in value:
+        graphs["dire1_tot_artemis"] = fig_hist_total("DIRE-01", selected_years, 0)
+    if "dire2_bat_artemis" in value:
+        graphs["dire2_bat_artemis"] = fig_hist_trim_baton("DIRE-02", selected_years, 0)
+    if "dire2_cou_artemis" in value:
+        graphs["dire2_cou_artemis"] = fig_hist_trim_courbe("DIRE-02", selected_years, 0)
+    if "dire2_tot_artemis" in value:
+        graphs["dire2_tot_artemis"] = fig_hist_total("DIRE-02", selected_years, 0)
+    if "dire3_bat_artemis" in value:
+        graphs["dire3_bat_artemis"] = fig_hist_trim_baton("DIRE-03", selected_years, 0)
+    if "dire3_cou_artemis" in value:
+        graphs["dire3_cou_artemis"] = fig_hist_trim_courbe("DIRE-03", selected_years, 0)
+    if "dire3_tot_artemis" in value:
+        graphs["dire3_tot_artemis"] = fig_hist_total("DIRE-03", selected_years, 0)
+
+    if "daf1_bat_artemis" in value:
+        graphs["daf1_bat_artemis"] = fig_hist_trim_baton("DAF-01", selected_years, 0)
+    if "daf1_cou_artemis" in value:
+        graphs["daf1_cou_artemis"] = fig_hist_trim_courbe("DAF-01", selected_years, 0)
+    if "daf1_tot_artemis" in value:
+        graphs["daf1_tot_artemis"] = fig_hist_total("DAF-01", selected_years, 0)
+    if "daf2_bat_artemis" in value:
+        graphs["daf2_bat_artemis"] = fig_hist_trim_baton("DAF-02", selected_years, 0)
+    if "daf2_cou_artemis" in value:
+        graphs["daf2_cou_artemis"] = fig_hist_trim_courbe("DAF-02", selected_years, 0)
+    if "daf2_tot_artemis" in value:
+        graphs["daf2_tot_artemis"] = fig_hist_total("DAF-02", selected_years, 0)
+    if "daf3_bat_artemis" in value:
+        graphs["daf3_bat_artemis"] = fig_hist_trim_baton("DAF-03", selected_years, 0)
+    if "daf3_cou_artemis" in value:
+        graphs["daf3_cou_artemis"] = fig_hist_trim_courbe("DAF-03", selected_years, 0)
+    if "daf3_tot_artemis" in value:
+        graphs["daf3_tot_artemis"] = fig_hist_total("DAF-03", selected_years, 0)
+    if "daf4_bat_artemis" in value:
+        graphs["daf4_bat_artemis"] = fig_hist_trim_baton("DAF-04", selected_years, 0)
+    if "daf4_cou_artemis" in value:
+        graphs["daf4_cou_artemis"] = fig_hist_trim_courbe("DAF-04", selected_years, 0)
+    if "daf4_tot_artemis" in value:
+        graphs["daf4_tot_artemis"] = fig_hist_total("DAF-04", selected_years, 0)
+    if "daf5_bat_artemis" in value:
+        graphs["daf5_bat_artemis"] = fig_hist_trim_baton("DAF-05", selected_years, 0)
+    if "daf5_cou_artemis" in value:
+        graphs["daf5_cou_artemis"] = fig_hist_trim_courbe("DAF-05", selected_years, 0)
+    if "daf5_tot_artemis" in value:
+        graphs["daf5_tot_artemis"] = fig_hist_total("DAF-05", selected_years, 0)
+    if "daf6_tot_artemis" in value:
+        graphs["daf6_tot_artemis"] = fig_hist_total("DAF-06", selected_years, 0)
+
+    if "drh1_tot_artemis" in value:
+        graphs["drh1_tot_artemis"] = fig_hist_total("DRH-01", selected_years, 5)
+    if "drh2_tot_artemis" in value:
+        graphs["drh2_tot_artemis"] = fig_hist_total("DRH-02", selected_years, 5)
+    if "drh3_bat_artemis" in value:
+        graphs["drh3_bat_artemis"] = fig_hist_trim_baton("DRH-03", selected_years, 0)
+    if "drh3_cou_artemis" in value:
+        graphs["drh3_cou_artemis"] = fig_hist_trim_courbe("DRH-03", selected_years, 0)
+    if "drh3_tot_artemis" in value:
+        graphs["drh3_tot_artemis"] = fig_hist_total("DRH-03", selected_years, 0)
+    if "drh4_tot_artemis" in value:
+        graphs["drh4_tot_artemis"] = fig_hist_total("DRH-04", selected_years, 5)
+    if "drh5_tot_artemis" in value:
+        graphs["drh5_tot_artemis"] = fig_hist_total("DRH-05", selected_years, 5)
+    if "drh6_tot_artemis" in value:
+        graphs["drh6_tot_artemis"] = fig_hist_total("DRH-06", selected_years, 5)
+
+    if "radar_artemis" in value:
+        graphs["radar_artemis"] = fig_hist_radar(selected_years, 0)
+
+    #CITI
+    if "df1_tot_citi" in value:
+        graphs["df1_tot_citi"] = fig_hist_total("DF-01", selected_years, 1)
+    if "drfd1_tot_citi" in value:
+        graphs["drfd1_tot_citi"] = fig_hist_total("DRFD-01", selected_years, 1)
+    if "drfd2_tot_citi" in value:
+        graphs["drfd2_tot_citi"] = fig_hist_total("DRFD-02", selected_years, 1)
+    if "drfd3_tot_citi" in value:
+        graphs["drfd3_tot_citi"] = fig_hist_total("DRFD-03", selected_years, 1)
+
+    if "dire1_bat_citi" in value:
+        graphs["dire1_bat_citi"] = fig_hist_trim_baton("DIRE-01", selected_years, 1)
+    if "dire1_cou_citi" in value:
+        graphs["dire1_cou_citi"] = fig_hist_trim_courbe("DIRE-01", selected_years, 1)
+    if "dire1_tot_citi" in value:
+        graphs["dire1_tot_citi"] = fig_hist_total("DIRE-01", selected_years, 1)
+    if "dire2_bat_citi" in value:
+        graphs["dire2_bat_citi"] = fig_hist_trim_baton("DIRE-02", selected_years, 1)
+    if "dire2_cou_citi" in value:
+        graphs["dire2_cou_citi"] = fig_hist_trim_courbe("DIRE-02", selected_years, 1)
+    if "dire2_tot_citi" in value:
+        graphs["dire2_tot_citi"] = fig_hist_total("DIRE-02", selected_years, 1)
+    if "dire3_bat_citi" in value:
+        graphs["dire3_bat_citi"] = fig_hist_trim_baton("DIRE-03", selected_years, 1)
+    if "dire3_cou_citi" in value:
+        graphs["dire3_cou_citi"] = fig_hist_trim_courbe("DIRE-03", selected_years, 1)
+    if "dire3_tot_citi" in value:
+        graphs["dire3_tot_citi"] = fig_hist_total("DIRE-03", selected_years, 1)
+
+    if "daf1_bat_citi" in value:
+        graphs["daf1_bat_citi"] = fig_hist_trim_baton("DAF-01", selected_years, 1)
+    if "daf1_cou_citi" in value:
+        graphs["daf1_cou_citi"] = fig_hist_trim_courbe("DAF-01", selected_years, 1)
+    if "daf1_tot_citi" in value:
+        graphs["daf1_tot_citi"] = fig_hist_total("DAF-01", selected_years, 1)
+    if "daf2_bat_citi" in value:
+        graphs["daf2_bat_citi"] = fig_hist_trim_baton("DAF-02", selected_years, 1)
+    if "daf2_cou_citi" in value:
+        graphs["daf2_cou_citi"] = fig_hist_trim_courbe("DAF-02", selected_years, 1)
+    if "daf2_tot_citi" in value:
+        graphs["daf2_tot_citi"] = fig_hist_total("DAF-02", selected_years, 1)
+    if "daf3_bat_citi" in value:
+        graphs["daf3_bat_citi"] = fig_hist_trim_baton("DAF-03", selected_years, 1)
+    if "daf3_cou_citi" in value:
+        graphs["daf3_cou_citi"] = fig_hist_trim_courbe("DAF-03", selected_years, 1)
+    if "daf3_tot_citi" in value:
+        graphs["daf3_tot_citi"] = fig_hist_total("DAF-03", selected_years, 1)
+    if "daf4_bat_citi" in value:
+        graphs["daf4_bat_citi"] = fig_hist_trim_baton("DAF-04", selected_years, 1)
+    if "daf4_cou_citi" in value:
+        graphs["daf4_cou_citi"] = fig_hist_trim_courbe("DAF-04", selected_years, 1)
+    if "daf4_tot_citi" in value:
+        graphs["daf4_tot_citi"] = fig_hist_total("DAF-04", selected_years, 1)
+    if "daf5_bat_citi" in value:
+        graphs["daf5_bat_citi"] = fig_hist_trim_baton("DAF-05", selected_years, 1)
+    if "daf5_cou_citi" in value:
+        graphs["daf5_cou_citi"] = fig_hist_trim_courbe("DAF-05", selected_years, 1)
+    if "daf5_tot_citi" in value:
+        graphs["daf5_tot_citi"] = fig_hist_total("DAF-05", selected_years, 1)
+    if "daf6_tot_citi" in value:
+        graphs["daf6_tot_citi"] = fig_hist_total("DAF-06", selected_years, 1)
+
+    if "drh1_tot_citi" in value:
+        graphs["drh1_tot_citi"] = fig_hist_total("DRH-01", selected_years, 6)
+    if "drh2_tot_citi" in value:
+        graphs["drh2_tot_citi"] = fig_hist_total("DRH-02", selected_years, 6)
+    if "drh3_bat_citi" in value:
+        graphs["drh3_bat_citi"] = fig_hist_trim_baton("DRH-03", selected_years, 1)
+    if "drh3_cou_citi" in value:
+        graphs["drh3_cou_citi"] = fig_hist_trim_courbe("DRH-03", selected_years, 1)
+    if "drh3_tot_citi" in value:
+        graphs["drh3_tot_citi"] = fig_hist_total("DRH-03", selected_years, 1)
+    if "drh4_tot_citi" in value:
+        graphs["drh4_tot_citi"] = fig_hist_total("DRH-04", selected_years, 6)
+    if "drh5_tot_citi" in value:
+        graphs["drh5_tot_citi"] = fig_hist_total("DRH-05", selected_years, 6)
+    if "drh6_tot_citi" in value:
+        graphs["drh6_tot_citi"] = fig_hist_total("DRH-06", selected_years, 6)
+
+    if "radar_citi" in value:
+        graphs["radar_citi"] = fig_hist_radar(selected_years, 1)
+
+    #EPH
+    if "df1_tot_eph" in value:
+        graphs["df1_tot_eph"] = fig_hist_total("DF-01", selected_years, 2)
+    if "drfd1_tot_eph" in value:
+        graphs["drfd1_tot_eph"] = fig_hist_total("DRFD-01", selected_years, 2)
+    if "drfd2_tot_eph" in value:
+        graphs["drfd2_tot_eph"] = fig_hist_total("DRFD-02", selected_years, 2)
+    if "drfd3_tot_eph" in value:
+        graphs["drfd3_tot_eph"] = fig_hist_total("DRFD-03", selected_years, 2)
+
+    if "dire1_bat_eph" in value:
+        graphs["dire1_bat_eph"] = fig_hist_trim_baton("DIRE-01", selected_years, 2)
+    if "dire1_cou_eph" in value:
+        graphs["dire1_cou_eph"] = fig_hist_trim_courbe("DIRE-01", selected_years, 2)
+    if "dire1_tot_eph" in value:
+        graphs["dire1_tot_eph"] = fig_hist_total("DIRE-01", selected_years, 2)
+    if "dire2_bat_eph" in value:
+        graphs["dire2_bat_eph"] = fig_hist_trim_baton("DIRE-02", selected_years, 2)
+    if "dire2_cou_eph" in value:
+        graphs["dire2_cou_eph"] = fig_hist_trim_courbe("DIRE-02", selected_years, 2)
+    if "dire2_tot_eph" in value:
+        graphs["dire2_tot_eph"] = fig_hist_total("DIRE-02", selected_years, 2)
+    if "dire3_bat_eph" in value:
+        graphs["dire3_bat_eph"] = fig_hist_trim_baton("DIRE-03", selected_years, 2)
+    if "dire3_cou_eph" in value:
+        graphs["dire3_cou_eph"] = fig_hist_trim_courbe("DIRE-03", selected_years, 2)
+    if "dire3_tot_eph" in value:
+        graphs["dire3_tot_eph"] = fig_hist_total("DIRE-03", selected_years, 2)
+
+    if "daf1_bat_eph" in value:
+        graphs["daf1_bat_eph"] = fig_hist_trim_baton("DAF-01", selected_years, 2)
+    if "daf1_cou_eph" in value:
+        graphs["daf1_cou_eph"] = fig_hist_trim_courbe("DAF-01", selected_years, 2)
+    if "daf1_tot_eph" in value:
+        graphs["daf1_tot_eph"] = fig_hist_total("DAF-01", selected_years, 2)
+    if "daf2_bat_eph" in value:
+        graphs["daf2_bat_eph"] = fig_hist_trim_baton("DAF-02", selected_years, 2)
+    if "daf2_cou_eph" in value:
+        graphs["daf2_cou_eph"] = fig_hist_trim_courbe("DAF-02", selected_years, 2)
+    if "daf2_tot_eph" in value:
+        graphs["daf2_tot_eph"] = fig_hist_total("DAF-02", selected_years, 2)
+    if "daf3_bat_eph" in value:
+        graphs["daf3_bat_eph"] = fig_hist_trim_baton("DAF-03", selected_years, 2)
+    if "daf3_cou_eph" in value:
+        graphs["daf3_cou_eph"] = fig_hist_trim_courbe("DAF-03", selected_years, 2)
+    if "daf3_tot_eph" in value:
+        graphs["daf3_tot_eph"] = fig_hist_total("DAF-03", selected_years, 2)
+    if "daf4_bat_eph" in value:
+        graphs["daf4_bat_eph"] = fig_hist_trim_baton("DAF-04", selected_years, 2)
+    if "daf4_cou_eph" in value:
+        graphs["daf4_cou_eph"] = fig_hist_trim_courbe("DAF-04", selected_years, 2)
+    if "daf4_tot_eph" in value:
+        graphs["daf4_tot_eph"] = fig_hist_total("DAF-04", selected_years, 2)
+    if "daf5_bat_eph" in value:
+        graphs["daf5_bat_eph"] = fig_hist_trim_baton("DAF-05", selected_years, 2)
+    if "daf5_cou_eph" in value:
+        graphs["daf5_cou_eph"] = fig_hist_trim_courbe("DAF-05", selected_years, 2)
+    if "daf5_tot_eph" in value:
+        graphs["daf5_tot_eph"] = fig_hist_total("DAF-05", selected_years, 2)
+    if "daf6_tot_eph" in value:
+        graphs["daf6_tot_eph"] = fig_hist_total("DAF-06", selected_years, 2)
+
+    if "drh1_tot_eph" in value:
+        graphs["drh1_tot_eph"] = fig_hist_total("DRH-01", selected_years, 7)
+    if "drh2_tot_eph" in value:
+        graphs["drh2_tot_eph"] = fig_hist_total("DRH-02", selected_years, 7)
+    if "drh3_bat_eph" in value:
+        graphs["drh3_bat_eph"] = fig_hist_trim_baton("DRH-03", selected_years, 2)
+    if "drh3_cou_eph" in value:
+        graphs["drh3_cou_eph"] = fig_hist_trim_courbe("DRH-03", selected_years, 2)
+    if "drh3_tot_eph" in value:
+        graphs["drh3_tot_eph"] = fig_hist_total("DRH-03", selected_years, 2)
+    if "drh4_tot_eph" in value:
+        graphs["drh4_tot_eph"] = fig_hist_total("DRH-04", selected_years, 7)
+    if "drh5_tot_eph" in value:
+        graphs["drh5_tot_eph"] = fig_hist_total("DRH-05", selected_years, 7)
+    if "drh6_tot_eph" in value:
+        graphs["drh6_tot_eph"] = fig_hist_total("DRH-06", selected_years, 7)
+
+    if "radar_eph" in value:
+        graphs["radar_eph"] = fig_hist_radar(selected_years, 2)
+
+    #INF
+    if "df1_tot_inf" in value:
+        graphs["df1_tot_inf"] = fig_hist_total("DF-01", selected_years, 3)
+    if "drfd1_tot_inf" in value:
+        graphs["drfd1_tot_inf"] = fig_hist_total("DRFD-01", selected_years, 3)
+    if "drfd2_tot_inf" in value:
+        graphs["drfd2_tot_inf"] = fig_hist_total("DRFD-02", selected_years, 3)
+    if "drfd3_tot_inf" in value:
+        graphs["drfd3_tot_inf"] = fig_hist_total("DRFD-03", selected_years, 3)
+
+    if "dire1_bat_inf" in value:
+        graphs["dire1_bat_inf"] = fig_hist_trim_baton("DIRE-01", selected_years, 3)
+    if "dire1_cou_inf" in value:
+        graphs["dire1_cou_inf"] = fig_hist_trim_courbe("DIRE-01", selected_years, 3)
+    if "dire1_tot_inf" in value:
+        graphs["dire1_tot_inf"] = fig_hist_total("DIRE-01", selected_years, 3)
+    if "dire2_bat_inf" in value:
+        graphs["dire2_bat_inf"] = fig_hist_trim_baton("DIRE-02", selected_years, 3)
+    if "dire2_cou_inf" in value:
+        graphs["dire2_cou_inf"] = fig_hist_trim_courbe("DIRE-02", selected_years, 3)
+    if "dire2_tot_inf" in value:
+        graphs["dire2_tot_inf"] = fig_hist_total("DIRE-02", selected_years, 3)
+    if "dire3_bat_inf" in value:
+        graphs["dire3_bat_inf"] = fig_hist_trim_baton("DIRE-03", selected_years, 3)
+    if "dire3_cou_inf" in value:
+        graphs["dire3_cou_inf"] = fig_hist_trim_courbe("DIRE-03", selected_years, 3)
+    if "dire3_tot_inf" in value:
+        graphs["dire3_tot_inf"] = fig_hist_total("DIRE-03", selected_years, 3)
+
+    if "daf1_bat_inf" in value:
+        graphs["daf1_bat_inf"] = fig_hist_trim_baton("DAF-01", selected_years, 3)
+    if "daf1_cou_inf" in value:
+        graphs["daf1_cou_inf"] = fig_hist_trim_courbe("DAF-01", selected_years, 3)
+    if "daf1_tot_inf" in value:
+        graphs["daf1_tot_inf"] = fig_hist_total("DAF-01", selected_years, 3)
+    if "daf2_bat_inf" in value:
+        graphs["daf2_bat_inf"] = fig_hist_trim_baton("DAF-02", selected_years, 3)
+    if "daf2_cou_inf" in value:
+        graphs["daf2_cou_inf"] = fig_hist_trim_courbe("DAF-02", selected_years, 3)
+    if "daf2_tot_inf" in value:
+        graphs["daf2_tot_inf"] = fig_hist_total("DAF-02", selected_years, 3)
+    if "daf3_bat_inf" in value:
+        graphs["daf3_bat_inf"] = fig_hist_trim_baton("DAF-03", selected_years, 3)
+    if "daf3_cou_inf" in value:
+        graphs["daf3_cou_inf"] = fig_hist_trim_courbe("DAF-03", selected_years, 3)
+    if "daf3_tot_inf" in value:
+        graphs["daf3_tot_inf"] = fig_hist_total("DAF-03", selected_years, 3)
+    if "daf4_bat_inf" in value:
+        graphs["daf4_bat_inf"] = fig_hist_trim_baton("DAF-04", selected_years, 3)
+    if "daf4_cou_inf" in value:
+        graphs["daf4_cou_inf"] = fig_hist_trim_courbe("DAF-04", selected_years, 3)
+    if "daf4_tot_inf" in value:
+        graphs["daf4_tot_inf"] = fig_hist_total("DAF-04", selected_years, 3)
+    if "daf5_bat_inf" in value:
+        graphs["daf5_bat_inf"] = fig_hist_trim_baton("DAF-05", selected_years, 3)
+    if "daf5_cou_inf" in value:
+        graphs["daf5_cou_inf"] = fig_hist_trim_courbe("DAF-05", selected_years, 3)
+    if "daf5_tot_inf" in value:
+        graphs["daf5_tot_inf"] = fig_hist_total("DAF-05", selected_years, 3)
+    if "daf6_tot_inf" in value:
+        graphs["daf6_tot_inf"] = fig_hist_total("DAF-06", selected_years, 3)
+
+    if "drh1_tot_inf" in value:
+        graphs["drh1_tot_inf"] = fig_hist_total("DRH-01", selected_years, 8)
+    if "drh2_tot_inf" in value:
+        graphs["drh2_tot_inf"] = fig_hist_total("DRH-02", selected_years, 8)
+    if "drh3_bat_inf" in value:
+        graphs["drh3_bat_inf"] = fig_hist_trim_baton("DRH-03", selected_years, 3)
+    if "drh3_cou_inf" in value:
+        graphs["drh3_cou_inf"] = fig_hist_trim_courbe("DRH-03", selected_years, 3)
+    if "drh3_tot_inf" in value:
+        graphs["drh3_tot_inf"] = fig_hist_total("DRH-03", selected_years, 3)
+    if "drh4_tot_inf" in value:
+        graphs["drh4_tot_inf"] = fig_hist_total("DRH-04", selected_years, 8)
+    if "drh5_tot_inf" in value:
+        graphs["drh5_tot_inf"] = fig_hist_total("DRH-05", selected_years, 8)
+    if "drh6_tot_inf" in value:
+        graphs["drh6_tot_inf"] = fig_hist_total("DRH-06", selected_years, 8)
+
+    if "radar_inf" in value:
+        graphs["radar_inf"] = fig_hist_radar(selected_years, 3)
+
+    #RS2M
+    if "df1_tot_rs2m" in value:
+        graphs["df1_tot_rs2m"] = fig_hist_total("DF-01", selected_years, 4)
+    if "drfd1_tot_rs2m" in value:
+        graphs["drfd1_tot_rs2m"] = fig_hist_total("DRFD-01", selected_years, 4)
+    if "drfd2_tot_rs2m" in value:
+        graphs["drfd2_tot_rs2m"] = fig_hist_total("DRFD-02", selected_years, 4)
+    if "drfd3_tot_rs2m" in value:
+        graphs["drfd3_tot_rs2m"] = fig_hist_total("DRFD-03", selected_years, 4)
+
+    if "dire1_bat_rs2m" in value:
+        graphs["dire1_bat_rs2m"] = fig_hist_trim_baton("DIRE-01", selected_years, 4)
+    if "dire1_cou_rs2m" in value:
+        graphs["dire1_cou_rs2m"] = fig_hist_trim_courbe("DIRE-01", selected_years, 4)
+    if "dire1_tot_rs2m" in value:
+        graphs["dire1_tot_rs2m"] = fig_hist_total("DIRE-01", selected_years, 4)
+    if "dire2_bat_rs2m" in value:
+        graphs["dire2_bat_rs2m"] = fig_hist_trim_baton("DIRE-02", selected_years, 4)
+    if "dire2_cou_rs2m" in value:
+        graphs["dire2_cou_rs2m"] = fig_hist_trim_courbe("DIRE-02", selected_years, 4)
+    if "dire2_tot_rs2m" in value:
+        graphs["dire2_tot_rs2m"] = fig_hist_total("DIRE-02", selected_years, 4)
+    if "dire3_bat_rs2m" in value:
+        graphs["dire3_bat_rs2m"] = fig_hist_trim_baton("DIRE-03", selected_years, 4)
+    if "dire3_cou_rs2m" in value:
+        graphs["dire3_cou_rs2m"] = fig_hist_trim_courbe("DIRE-03", selected_years, 4)
+    if "dire3_tot_rs2m" in value:
+        graphs["dire3_tot_rs2m"] = fig_hist_total("DIRE-03", selected_years, 4)
+
+    if "daf1_bat_rs2m" in value:
+        graphs["daf1_bat_rs2m"] = fig_hist_trim_baton("DAF-01", selected_years, 4)
+    if "daf1_cou_rs2m" in value:
+        graphs["daf1_cou_rs2m"] = fig_hist_trim_courbe("DAF-01", selected_years, 4)
+    if "daf1_tot_rs2m" in value:
+        graphs["daf1_tot_rs2m"] = fig_hist_total("DAF-01", selected_years, 4)
+    if "daf2_bat_rs2m" in value:
+        graphs["daf2_bat_rs2m"] = fig_hist_trim_baton("DAF-02", selected_years, 4)
+    if "daf2_cou_rs2m" in value:
+        graphs["daf2_cou_rs2m"] = fig_hist_trim_courbe("DAF-02", selected_years, 4)
+    if "daf2_tot_rs2m" in value:
+        graphs["daf2_tot_rs2m"] = fig_hist_total("DAF-02", selected_years, 4)
+    if "daf3_bat_rs2m" in value:
+        graphs["daf3_bat_rs2m"] = fig_hist_trim_baton("DAF-03", selected_years, 4)
+    if "daf3_cou_rs2m" in value:
+        graphs["daf3_cou_rs2m"] = fig_hist_trim_courbe("DAF-03", selected_years, 4)
+    if "daf3_tot_rs2m" in value:
+        graphs["daf3_tot_rs2m"] = fig_hist_total("DAF-03", selected_years, 4)
+    if "daf4_bat_rs2m" in value:
+        graphs["daf4_bat_rs2m"] = fig_hist_trim_baton("DAF-04", selected_years, 4)
+    if "daf4_cou_rs2m" in value:
+        graphs["daf4_cou_rs2m"] = fig_hist_trim_courbe("DAF-04", selected_years, 4)
+    if "daf4_tot_rs2m" in value:
+        graphs["daf4_tot_rs2m"] = fig_hist_total("DAF-04", selected_years, 4)
+    if "daf5_bat_rs2m" in value:
+        graphs["daf5_bat_rs2m"] = fig_hist_trim_baton("DAF-05", selected_years, 4)
+    if "daf5_cou_rs2m" in value:
+        graphs["daf5_cou_rs2m"] = fig_hist_trim_courbe("DAF-05", selected_years, 4)
+    if "daf5_tot_rs2m" in value:
+        graphs["daf5_tot_rs2m"] = fig_hist_total("DAF-05", selected_years, 4)
+    if "daf6_tot_rs2m" in value:
+        graphs["daf6_tot_rs2m"] = fig_hist_total("DAF-06", selected_years, 4)
+
+    if "drh1_tot_rs2m" in value:
+        graphs["drh1_tot_rs2m"] = fig_hist_total("DRH-01", selected_years, 9)
+    if "drh2_tot_rs2m" in value:
+        graphs["drh2_tot_rs2m"] = fig_hist_total("DRH-02", selected_years, 9)
+    if "drh3_bat_rs2m" in value:
+        graphs["drh3_bat_rs2m"] = fig_hist_trim_baton("DRH-03", selected_years, 4)
+    if "drh3_cou_rs2m" in value:
+        graphs["drh3_cou_rs2m"] = fig_hist_trim_courbe("DRH-03", selected_years, 4)
+    if "drh3_tot_rs2m" in value:
+        graphs["drh3_tot_rs2m"] = fig_hist_total("DRH-03", selected_years, 4)
+    if "drh4_tot_rs2m" in value:
+        graphs["drh4_tot_rs2m"] = fig_hist_total("DRH-04", selected_years, 9)
+    if "drh5_tot_rs2m" in value:
+        graphs["drh5_tot_rs2m"] = fig_hist_total("DRH-05", selected_years, 9)
+    if "drh6_tot_rs2m" in value:
+        graphs["drh6_tot_rs2m"] = fig_hist_total("DRH-06", selected_years, 9)
+
+    if "radar_rs2m" in value:
+        graphs["radar_rs2m"] = fig_hist_radar(selected_years, 4)
+
+    #RST
+    if "df1_tot_rst" in value:
+        graphs["df1_tot_rst"] = fig_hist_total("DF-01", selected_years, 5)
+    if "drfd1_tot_rst" in value:
+        graphs["drfd1_tot_rst"] = fig_hist_total("DRFD-01", selected_years, 5)
+    if "drfd2_tot_rst" in value:
+        graphs["drfd2_tot_rst"] = fig_hist_total("DRFD-02", selected_years, 5)
+    if "drfd3_tot_rst" in value:
+        graphs["drfd3_tot_rst"] = fig_hist_total("DRFD-03", selected_years, 5)
+    if "dire1_bat_rst" in value:
+        graphs["dire1_bat_rst"] = fig_hist_trim_baton("DIRE-01", selected_years, 5)
+    if "dire1_cou_rst" in value:
+        graphs["dire1_cou_rst"] = fig_hist_trim_courbe("DIRE-01", selected_years, 5)
+    if "dire1_tot_rst" in value:
+        graphs["dire1_tot_rst"] = fig_hist_total("DIRE-01", selected_years, 5)
+    if "dire2_bat_rst" in value:
+        graphs["dire2_bat_rst"] = fig_hist_trim_baton("DIRE-02", selected_years, 5)
+    if "dire2_cou_rst" in value:
+        graphs["dire2_cou_rst"] = fig_hist_trim_courbe("DIRE-02", selected_years, 5)
+    if "dire2_tot_rst" in value:
+        graphs["dire2_tot_rst"] = fig_hist_total("DIRE-02", selected_years, 5)
+    if "dire3_bat_rst" in value:
+        graphs["dire3_bat_rst"] = fig_hist_trim_baton("DIRE-03", selected_years, 5)
+    if "dire3_cou_rst" in value:
+        graphs["dire3_cou_rst"] = fig_hist_trim_courbe("DIRE-03", selected_years, 5)
+    if "dire3_tot_rst" in value:
+        graphs["dire3_tot_rst"] = fig_hist_total("DIRE-03", selected_years, 5)
+    if "daf1_bat_rst" in value:
+        graphs["daf1_bat_rst"] = fig_hist_trim_baton("DAF-01", selected_years, 5)
+    if "daf1_cou_rst" in value:
+        graphs["daf1_cou_rst"] = fig_hist_trim_courbe("DAF-01", selected_years, 5)
+    if "daf1_tot_rst" in value:
+        graphs["daf1_tot_rst"] = fig_hist_total("DAF-01", selected_years, 5)
+    if "daf2_bat_rst" in value:
+        graphs["daf2_bat_rst"] = fig_hist_trim_baton("DAF-02", selected_years, 5)
+    if "daf2_cou_rst" in value:
+        graphs["daf2_cou_rst"] = fig_hist_trim_courbe("DAF-02", selected_years, 5)
+    if "daf2_tot_rst" in value:
+        graphs["daf2_tot_rst"] = fig_hist_total("DAF-02", selected_years, 5)
+    if "daf3_bat_rst" in value:
+        graphs["daf3_bat_rst"] = fig_hist_trim_baton("DAF-03", selected_years, 5)
+    if "daf3_cou_rst" in value:
+        graphs["daf3_cou_rst"] = fig_hist_trim_courbe("DAF-03", selected_years, 5)
+    if "daf3_tot_rst" in value:
+        graphs["daf3_tot_rst"] = fig_hist_total("DAF-03", selected_years, 5)
+    if "daf4_bat_rst" in value:
+        graphs["daf4_bat_rst"] = fig_hist_trim_baton("DAF-04", selected_years, 5)
+    if "daf4_cou_rst" in value:
+        graphs["daf4_cou_rst"] = fig_hist_trim_courbe("DAF-04", selected_years, 5)
+    if "daf4_tot_rst" in value:
+        graphs["daf4_tot_rst"] = fig_hist_total("DAF-04", selected_years, 5)
+    if "daf5_bat_rst" in value:
+        graphs["daf5_bat_rst"] = fig_hist_trim_baton("DAF-05", selected_years, 5)
+    if "daf5_cou_rst" in value:
+        graphs["daf5_cou_rst"] = fig_hist_trim_courbe("DAF-05", selected_years, 5)
+    if "daf5_tot_rst" in value:
+        graphs["daf5_tot_rst"] = fig_hist_total("DAF-05", selected_years, 5)
+    if "daf6_tot_rst" in value:
+        graphs["daf6_tot_rst"] = fig_hist_total("DAF-06", selected_years, 5)
+    if "drh1_tot_rst" in value:
+        graphs["drh1_tot_rst"] = fig_hist_total("DRH-01", selected_years, 10)
+    if "drh2_tot_rst" in value:
+        graphs["drh2_tot_rst"] = fig_hist_total("DRH-02", selected_years, 10)
+    if "drh3_bat_rst" in value:
+        graphs["drh3_bat_rst"] = fig_hist_trim_baton("DRH-03", selected_years, 5)
+    if "drh3_cou_rst" in value:
+        graphs["drh3_cou_rst"] = fig_hist_trim_courbe("DRH-03", selected_years, 5)
+    if "drh3_tot_rst" in value:
+        graphs["drh3_tot_rst"] = fig_hist_total("DRH-03", selected_years, 5)
+    if "drh4_tot_rst" in value:
+        graphs["drh4_tot_rst"] = fig_hist_total("DRH-04", selected_years, 10)
+    if "drh5_tot_rst" in value:
+        graphs["drh5_tot_rst"] = fig_hist_total("DRH-05", selected_years, 10)
+    if "drh6_tot_rst" in value:
+        graphs["drh6_tot_rst"] = fig_hist_total("DRH-06", selected_years, 10)
+    if "radar_rst" in value:
+        graphs["radar_rst"] = fig_hist_radar(selected_years, 5)
+
+    #Autres
+    #DF
+    if "drh1_tot_df" in value:
+        graphs["drh1_tot_df"] = fig_hist_total("DRH-01", selected_years, 0)
+    if "drh2_tot_df" in value:
+        graphs["drh2_tot_df"] = fig_hist_total("DRH-02", selected_years, 0)
+    if "drh4_tot_df" in value:
+        graphs["drh4_tot_df"] = fig_hist_total("DRH-04", selected_years, 0)
+    if "drh5_tot_df" in value:
+        graphs["drh5_tot_df"] = fig_hist_total("DRH-05", selected_years, 0)
+    if "drh6_tot_df" in value:
+        graphs["drh6_tot_df"] = fig_hist_total("DRH-06", selected_years, 0)
+    #DRFD
+    if "drh1_tot_drfd" in value:
+        graphs["drh1_tot_drfd"] = fig_hist_total("DRH-01", selected_years, 1)
+    if "drh2_tot_drfd" in value:
+        graphs["drh2_tot_drfd"] = fig_hist_total("DRH-02", selected_years, 1)
+    if "drh4_tot_drfd" in value:
+        graphs["drh4_tot_drfd"] = fig_hist_total("DRH-04", selected_years, 1)
+    if "drh5_tot_drfd" in value:
+        graphs["drh5_tot_drfd"] = fig_hist_total("DRH-05", selected_years, 1)
+    if "drh6_tot_drfd" in value:
+        graphs["drh6_tot_drfd"] = fig_hist_total("DRH-06", selected_years, 1)
+    #DIRE
+    if "drh1_tot_dire" in value:
+        graphs["drh1_tot_dire"] = fig_hist_total("DRH-01", selected_years, 2)
+    if "drh2_tot_dire" in value:
+        graphs["drh2_tot_dire"] = fig_hist_total("DRH-02", selected_years, 2)
+    if "drh4_tot_dire" in value:
+        graphs["drh4_tot_dire"] = fig_hist_total("DRH-04", selected_years, 2)
+    if "drh5_tot_dire" in value:
+        graphs["drh5_tot_dire"] = fig_hist_total("DRH-05", selected_years, 2)
+    if "drh6_tot_dire" in value:
+        graphs["drh6_tot_dire"] = fig_hist_total("DRH-06", selected_years, 2)
+    #DRI
+    if "drh1_tot_dri" in value:
+        graphs["drh1_tot_dri"] = fig_hist_total("DRH-01", selected_years, 3)
+    if "drh2_tot_dri" in value:
+        graphs["drh2_tot_dri"] = fig_hist_total("DRH-02", selected_years, 3)
+    if "drh4_tot_dri" in value:
+        graphs["drh4_tot_dri"] = fig_hist_total("DRH-04", selected_years, 3)
+    if "drh5_tot_dri" in value:
+        graphs["drh5_tot_dri"] = fig_hist_total("DRH-05", selected_years, 3)
+    if "drh6_tot_dri" in value:
+        graphs["drh6_tot_dri"] = fig_hist_total("DRH-06", selected_years, 3)
+    #DCOM
+    if "drh1_tot_dcom" in value:
+        graphs["drh1_tot_dcom"] = fig_hist_total("DRH-01", selected_years, 4)
+    if "drh2_tot_dcom" in value:
+        graphs["drh2_tot_dcom"] = fig_hist_total("DRH-02", selected_years, 4)
+    if "drh4_tot_dcom" in value:
+        graphs["drh4_tot_dcom"] = fig_hist_total("DRH-04", selected_years, 4)
+    if "drh5_tot_dcom" in value:
+        graphs["drh5_tot_dcom"] = fig_hist_total("DRH-05", selected_years, 4)
+    if "drh6_tot_dcom" in value:
+        graphs["drh6_tot_dcom"] = fig_hist_total("DRH-06", selected_years, 4)
+
+
+
+    if value is None:
+        value = []
+    # Création de la liste des IDs de collapse ouverts
+    open_collapse_ids = ["collapse-df{}".format(val) for val in value]
+
+    """
+    # Génération des graphiques et des collapses
+    graph_output = baseline_graph
+    for val in value:
+        graph_output.append(
+            dbc.Collapse(
+                dcc.Graph(
+                    figure=graphs[val],
+                    config={'displaylogo': False}
+                ),
+                id="collapse-df{}".format(val),
+                is_open=("collapse-df{}".format(val) in open_collapse_ids),
+
+            )
+        )
+    """
+    # Filtrer les graphiques sélectionnés
+    selected_graphs = [graph_id for graph_id in value]
+    print(selected_graphs)
+    print()
+
+    # Générer uniquement les graphiques sélectionnés
+    graph_output = [dcc.Graph(figure=graphs[graph_id], config={'displaylogo': False}) for graph_id in selected_graphs]
+
+
+    new_graph_output = []
+
+    i = 0
+    while 2 * i < len(graph_output):
+        if (2 * i + 1 < len(graph_output)):
+
+            graph1 = graph_output[2 * i]
+            graph2 = graph_output[2 * i + 1]
+
+            new_graph_output.append(
+                dbc.Row(children=[
+                    dbc.Col(graph1, width=6),
+                    dbc.Col(graph2, width=6)
+                ])
+            )
+            new_graph_output.append(
+                html.Hr(style={'borderTop': '2px solid #000000'}))  # Ligne horizontale pour mieux séparer les graphes)
+
+        else:
+            graph = graph_output[2 * i]
+            new_graph_output.append(
+                dbc.Row(children=[
+                    dbc.Col(graph)
+                ])
+            )
+            new_graph_output.append(
+                html.Hr(style={'borderTop': '2px solid #000000'}))  # Ligne horizontale pour mieux séparer les graphes)
+        i += 1
+
+    return new_graph_output, {'display' : 'none'}
+
+
+
+def update_old_value_(value, old_value):
+    return value
+
+
+def toggle_collapse_(value, is_open, data, cat_id):
+    if (cat_id in value and cat_id in data) or (cat_id not in value and cat_id not in data):
+        return is_open
+    return not is_open
+
+"""  graphs = {
         # Ecole
         "df1_tot_ecole": fig_hist_total("DF-01", selected_years, 6),
         "df2_tot": fig_hist_total("DF-02", selected_years, 0),
@@ -745,66 +1472,4 @@ def generate_graphs_historique(selected_years, value, baseline_graph):
         "drh6_tot_dcom": fig_hist_total("DRH-06", selected_years, 4),
 
         }
-
-    if value is None:
-        value = []
-    # Création de la liste des IDs de collapse ouverts
-    open_collapse_ids = ["collapse-df{}".format(val) for val in value]
-
-    # Génération des graphiques et des collapses
-    graph_output = baseline_graph
-    for val in value:
-        graph_output.append(
-            dbc.Collapse(
-                dcc.Graph(
-                    figure=graphs[val],
-                    config={'displaylogo': False}
-                ),
-                id="collapse-df{}".format(val),
-                is_open=("collapse-df{}".format(val) in open_collapse_ids),
-
-            )
-        )
-
-    new_graph_output = []
-
-    i = 0
-    while 2 * i < len(graph_output):
-        if (2 * i + 1 < len(graph_output)):
-
-            graph1 = graph_output[2 * i]
-            graph2 = graph_output[2 * i + 1]
-
-            new_graph_output.append(
-                dbc.Row(children=[
-                    dbc.Col(graph1, width=6),
-                    dbc.Col(graph2, width=6)
-                ])
-            )
-            new_graph_output.append(
-                html.Hr(style={'borderTop': '2px solid #000000'}))  # Ligne horizontale pour mieux séparer les graphes)
-
-        else:
-            graph = graph_output[2 * i]
-            new_graph_output.append(
-                dbc.Row(children=[
-                    dbc.Col(graph)
-                ])
-            )
-            new_graph_output.append(
-                html.Hr(style={'borderTop': '2px solid #000000'}))  # Ligne horizontale pour mieux séparer les graphes)
-        i += 1
-
-    return new_graph_output, {'display' : 'none'}
-
-
-
-def update_old_value_(value, old_value):
-    return value
-
-
-def toggle_collapse_(value, is_open, data, cat_id):
-    if (cat_id in value and cat_id in data) or (cat_id not in value and cat_id not in data):
-        return is_open
-    return not is_open
-
+"""

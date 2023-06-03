@@ -87,8 +87,6 @@ def fig_annuelle_baton(code_indic, year, titre_x, couleurs):
     titre_graphe = dict_titres[code_indic]
     titre_y = new_titre_y[code_indic]
     fig = go.Figure()
-
-    # print(code_indic, donnees)
     for i in range(len(donnees)):
         if couleurs is not None:
             marker = dict(color=couleurs[i])
@@ -344,8 +342,6 @@ def fig_hist_total(code_indic, years, indice_dept):
 
     # Indicateur annuel ou DF ou DRI
     if not isinstance(data_complete_pondere[years[0] - annee_min][code_indic][0], list):
-
-        #print(code_indic, data_complete_pondere[years[0] - annee_min][code_indic])
         if "DF" in code_indic and code_indic != "DF-01":
             for i in range(years[0] - annee_min, years[-1] - annee_min + 1):
                 y.append(sum(data_complete_pondere[i][code_indic]) / 4)
@@ -353,13 +349,12 @@ def fig_hist_total(code_indic, years, indice_dept):
             for i in range(years[0] - annee_min, years[-1] - annee_min + 1):
                 y.append(sum(data_complete_pondere[i][code_indic]))
         else:
-            #print(code_indic, data_complete_pondere[years[0] - annee_min][code_indic])
             for i in range(years[0] - annee_min, years[-1] - annee_min + 1):
                 y.append(data_complete_pondere[i][code_indic][indice_dept])
 
     # Indicateur trimestriel
     else:
-        #print(code_indic, data_complete_pondere[years[0] - annee_min][code_indic])
+
         """if "DF" not in code_indic:
             for i in range(years[0] - annee_min, years[-1] - annee_min + 1):
                 y.append(sum(data_complete_pondere[i][code_indic][indice_dept]))
@@ -403,6 +398,7 @@ def fig_hist_total(code_indic, years, indice_dept):
 
 
 def fig_hist_trim_baton(code_indic, years, indice_dept):
+
     donnees = []
     labels = [[str(year) + " - " + tri for tri in trimestre] for year in range(years[0], years[-1] + 1)]
     liste_years = [year for year in range(years[0], years[-1] + 1)]
@@ -446,6 +442,7 @@ def fig_hist_trim_baton(code_indic, years, indice_dept):
 
 
 def fig_hist_trim_courbe(code_indic, years, indice_dept):
+
     liste_years = [year for year in range(years[0], years[-1] + 1)]
     donnees = []
     # Indicateur trimestriel
@@ -508,6 +505,7 @@ def fig_hist_trim_courbe(code_indic, years, indice_dept):
 
 
 def fig_hist_radar(years, indice_dept):
+
     fig = go.Figure()
     donnees = []
     list_max = []
