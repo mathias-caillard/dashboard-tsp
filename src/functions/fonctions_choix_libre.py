@@ -168,7 +168,7 @@ def generate_graphs_libre(selected_annee, value, baseline_graph):
 
 
     # Liste des graphiques disponibles
-
+    """
     graphs_libre = {
 
         # DF
@@ -324,12 +324,281 @@ def generate_graphs_libre(selected_annee, value, baseline_graph):
         "radar_global": fig_radar_all_dept(selected_annee)
 
     }
+    """
+
+    graphs_libre = {}
+    #DF
+    if "df1_tot" in value:
+        graphs_libre["df1_tot"] = fig_annuelle_baton("DF-01", selected_annee, "Départements", couleurs)
+    if "df1_cam" in value:
+        graphs_libre["df1_cam"] = fig_camembert("DF-01", selected_annee, couleurs)
+    if "df2_bat" in value:
+        graphs_libre["df2_bat"] = fig_trim_baton("DF-02", selected_annee, "Temps", None)
+    if "df3_bat" in value:
+        graphs_libre["df3_bat"] = fig_trim_baton("DF-03", selected_annee, "Temps", None)
+    if "df4_bat" in value:
+        graphs_libre["df4_bat"] = fig_trim_baton("DF-04", selected_annee, "Temps", None)
+    if "df5_bat" in value:
+        graphs_libre["df5_bat"] = fig_trim_baton("DF-05", selected_annee, "Temps", None)
+    if "df6_bat" in value:
+        graphs_libre["df6_bat"] = fig_trim_baton("DF-06", selected_annee, "Temps", None)
+    #DRFD
+    if "drfd1_tot" in value:
+        graphs_libre["drfd1_tot"] = fig_annuelle_baton("DRFD-01", selected_annee, "Départements", couleurs)
+    if "drfd1_cam" in value:
+        graphs_libre["drfd1_cam"] = fig_camembert("DRFD-01", selected_annee, couleurs)
+    if "drfd2_tot" in value:
+        graphs_libre["drfd2_tot"] = fig_annuelle_baton("DRFD-02", selected_annee, "Départements", couleurs)
+    if "drfd2_cam" in value:
+        graphs_libre["drfd2_cam"] = fig_camembert("DRFD-02", selected_annee, couleurs)
+    if "drfd3_tot" in value:
+        graphs_libre["drfd3_tot"] = fig_annuelle_baton("DRFD-03", selected_annee, "Départements", couleurs)
+    #DIRE
+    if "dire1_bat" in value:
+        graphs_libre["dire1_bat"] = fig_trim_baton("DIRE-01", selected_annee, "Départements", couleurs)
+    if "dire1_cou" in value:
+        graphs_libre["dire1_cou"] = fig_trim_courbe("DIRE-01", selected_annee, couleurs)
+    if "dire1_tot" in value:
+        graphs_libre["dire1_tot"] = fig_annuelle_baton("DIRE-01", selected_annee, "Départements", couleurs)
+    if "dire1_cam" in value:
+        graphs_libre["dire1_cam"] = fig_camembert("DIRE-01", selected_annee, couleurs)
+    if "dire2_bat" in value:
+        graphs_libre["dire2_bat"] = fig_trim_baton("DIRE-02", selected_annee, "Départements", couleurs)
+    if "dire2_cou" in value:
+        graphs_libre["dire2_cou"] = fig_trim_courbe("DIRE-02", selected_annee, couleurs)
+    if "dire2_tot" in value:
+        graphs_libre["dire2_tot"] = fig_annuelle_baton("DIRE-02", selected_annee, "Départements", couleurs)
+    if "dire2_cam" in value:
+        graphs_libre["dire2_cam"] = fig_camembert("DIRE-02", selected_annee, couleurs)
+    if "dire3_bat" in value:
+        graphs_libre["dire3_bat"] = fig_trim_baton("DIRE-03", selected_annee, "Départements", couleurs)
+    if "dire3_cou" in value:
+        graphs_libre["dire3_cou"] = fig_trim_courbe("DIRE-03", selected_annee, couleurs)
+    if "dire3_tot" in value:
+        graphs_libre["dire3_tot"] = fig_annuelle_baton("DIRE-03", selected_annee, "Départements", couleurs)
+    if "dire3_cam" in value:
+        graphs_libre["dire3_cam"] = fig_camembert("DIRE-03", selected_annee, couleurs)
+    #DAF
+    if "daf1_bat" in value:
+        graphs_libre["daf1_bat"] = fig_trim_baton("DAF-01", selected_annee, "Départements", couleurs)
+    if "daf1_cou" in value:
+        graphs_libre["daf1_cou"] = fig_trim_courbe("DAF-01", selected_annee, couleurs)
+    if "daf1_tot" in value:
+        graphs_libre["daf1_tot"] = fig_annuelle_baton("DAF-01", selected_annee, "Départements", couleurs)
+    if "daf1_cam" in value:
+        graphs_libre["daf1_cam"] = fig_camembert("DAF-01", selected_annee, couleurs)
+    if "daf2_bat" in value:
+        graphs_libre["daf2_bat"] = fig_trim_baton("DAF-02", selected_annee, "Départements", couleurs)
+    if "daf2_cou" in value:
+        graphs_libre["daf2_cou"] = fig_trim_courbe("DAF-02", selected_annee, couleurs)
+    if "daf2_tot" in value:
+        graphs_libre["daf2_tot"] = fig_annuelle_baton("DAF-02", selected_annee, "Départements", couleurs)
+    if "daf2_cam" in value:
+        graphs_libre["daf2_cam"] = fig_camembert("DAF-02", selected_annee, couleurs)
+    if "daf3_bat" in value:
+        graphs_libre["daf3_bat"] = fig_trim_baton("DAF-03", selected_annee, "Départements", couleurs)
+    if "daf3_cou" in value:
+        graphs_libre["daf3_cou"] = fig_trim_courbe("DAF-03", selected_annee, couleurs)
+    if "daf3_tot" in value:
+        graphs_libre["daf3_tot"] = fig_annuelle_baton("DAF-03", selected_annee, "Départements", couleurs)
+    if "daf3_cam" in value:
+        graphs_libre["daf3_cam"] = fig_camembert("DAF-03", selected_annee, couleurs)
+    if "daf4_bat" in value:
+        graphs_libre["daf4_bat"] = fig_trim_baton("DAF-04", selected_annee, "Départements", couleurs)
+    if "daf4_cou" in value:
+        graphs_libre["daf4_cou"] = fig_trim_courbe("DAF-04", selected_annee, couleurs)
+    if "daf4_tot" in value:
+        graphs_libre["daf4_tot"] = fig_annuelle_baton("DAF-04", selected_annee, "Départements", couleurs)
+    if "daf4_cam" in value:
+        graphs_libre["daf4_cam"] = fig_camembert("DAF-04", selected_annee, couleurs)
+    if "daf5_bat" in value:
+        graphs_libre["daf5_bat"] = fig_trim_baton("DAF-05", selected_annee, "Départements", couleurs)
+    if "daf5_cou" in value:
+        graphs_libre["daf5_cou"] = fig_trim_courbe("DAF-05", selected_annee, couleurs)
+    if "daf5_tot" in value:
+        graphs_libre["daf5_tot"] = fig_annuelle_baton("DAF-05", selected_annee, "Départements", couleurs)
+    if "daf6_bat" in value:
+        graphs_libre["daf6_bat"] = fig_annuelle_baton("DAF-06", selected_annee, "Départements", couleurs)
+    if "daf6_cam" in value:
+        graphs_libre["daf6_cam"] = fig_camembert("DAF-06", selected_annee, couleurs)
+    #DRH
+    if "drh1_tot" in value:
+        graphs_libre["drh1_tot"] = fig_annuelle_baton("DRH-01", selected_annee, "Services/Départements", couleurs_all)
+    if "drh1_cam" in value:
+        graphs_libre["drh1_cam"] = fig_camembert("DRH-01", selected_annee, couleurs_all)
+    if "drh2_tot" in value:
+        graphs_libre["drh2_tot"] = fig_annuelle_baton("DRH-02", selected_annee, "Services/Départements", couleurs_all)
+    if "drh2_cam" in value:
+        graphs_libre["drh2_cam"] = fig_camembert("DRH-02", selected_annee, couleurs_all)
+    if "drh3_bat" in value:
+        graphs_libre["drh3_bat"] = fig_trim_baton("DRH-03", selected_annee, "Départements", couleurs)
+    if "drh3_cou" in value:
+        graphs_libre["drh3_cou"] = fig_trim_courbe("DRH-03", selected_annee, couleurs)
+    if "drh3_tot" in value:
+        graphs_libre["drh3_tot"] = fig_annuelle_baton("DRH-03", selected_annee, "Départements", couleurs)
+    if "drh3_cam" in value:
+        graphs_libre["drh3_cam"] = fig_camembert("DRH-03", selected_annee, couleurs)
+    if "drh4_tot" in value:
+        graphs_libre["drh4_tot"] = fig_annuelle_baton("DRH-04", selected_annee, "Services/Départements", couleurs_all)
+    if "drh4_cam" in value:
+        graphs_libre["drh4_cam"] = fig_camembert("DRH-04", selected_annee, couleurs_all)
+    if "drh5_tot" in value:
+        graphs_libre["drh5_tot"] = fig_annuelle_baton("DRH-05", selected_annee, "Services/Départements", couleurs_all)
+    if "drh5_cam" in value:
+        graphs_libre["drh5_cam"] = fig_camembert("DRH-05", selected_annee, couleurs_all)
+    if "drh6_tot" in value:
+        graphs_libre["drh6_tot"] = fig_annuelle_baton("DRH-06", selected_annee, "Services/Départements", couleurs_all)
+    if "drh6_cam" in value:
+        graphs_libre["drh6_cam"] = fig_camembert("DRH-06", selected_annee, couleurs_all)
+    #DRI
+    if "dri1_bat" in value:
+        graphs_libre["dri1_bat"] = fig_trim_baton("DRI-01", selected_annee, "Temps", None)
+    if "dri2_bat" in value:
+        graphs_libre["dri2_bat"] = fig_trim_baton("DRI-02", selected_annee, "Temps", None)
+    if "dri3_bat" in value:
+        graphs_libre["dri3_bat"] = fig_trim_baton("DRI-03", selected_annee, "Temps", None)
+    if "dri4_bat" in value:
+        graphs_libre["dri4_bat"] = fig_trim_baton("DRI-04", selected_annee, "Temps", None)
+    if "dri5_bat" in value:
+        graphs_libre["dri5_bat"] = fig_trim_baton("DRI-05", selected_annee, "Temps", None)
+    if "dri6_tot" in value:
+        graphs_libre["dri6_tot"] = fig_annuelle_baton("DRI-06", selected_annee, "", None)
+    #ARTEMIS
+    if "radar_artemis" in value:
+        graphs_libre["radar_artemis"] = fig_radar(selected_annee, 0)
+    if "dire1_bat_artemis" in value:
+        graphs_libre["dire1_bat_artemis"] = fig_dept_trim_baton("DIRE-01", selected_annee, 0)
+    if "dire2_bat_artemis" in value:
+        graphs_libre["dire2_bat_artemis"] = fig_dept_trim_baton("DIRE-02", selected_annee, 0)
+    if "dire3_bat_artemis" in value:
+        graphs_libre["dire3_bat_artemis"] = fig_dept_trim_baton("DIRE-03", selected_annee, 0)
+    if "daf1_bat_artemis" in value:
+        graphs_libre["daf1_bat_artemis"] = fig_dept_trim_baton("DAF-01", selected_annee, 0)
+    if "daf2_bat_artemis" in value:
+        graphs_libre["daf2_bat_artemis"] = fig_dept_trim_baton("DAF-02", selected_annee, 0)
+    if "daf3_bat_artemis" in value:
+        graphs_libre["daf3_bat_artemis"] = fig_dept_trim_baton("DAF-03", selected_annee, 0)
+    if "daf4_bat_artemis" in value:
+        graphs_libre["daf4_bat_artemis"] = fig_dept_trim_baton("DAF-04", selected_annee, 0)
+    if "daf5_bat_artemis" in value:
+        graphs_libre["daf5_bat_artemis"] = fig_dept_trim_baton("DAF-05", selected_annee, 0)
+    if "drh3_bat_artemis" in value:
+        graphs_libre["drh3_bat_artemis"] = fig_dept_trim_baton("DRH-03", selected_annee, 0)
+    #CITI
+    if "radar_citi" in value:
+        graphs_libre["radar_citi"] = fig_radar(selected_annee, 1)
+    if "dire1_bat_citi" in value:
+        graphs_libre["dire1_bat_citi"] = fig_dept_trim_baton("DIRE-01", selected_annee, 1)
+    if "dire2_bat_citi" in value:
+        graphs_libre["dire2_bat_citi"] = fig_dept_trim_baton("DIRE-02", selected_annee, 1)
+    if "dire3_bat_citi" in value:
+        graphs_libre["dire3_bat_citi"] = fig_dept_trim_baton("DIRE-03", selected_annee, 1)
+    if "daf1_bat_citi" in value:
+        graphs_libre["daf1_bat_citi"] = fig_dept_trim_baton("DAF-01", selected_annee, 1)
+    if "daf2_bat_citi" in value:
+        graphs_libre["daf2_bat_citi"] = fig_dept_trim_baton("DAF-02", selected_annee, 1)
+    if "daf3_bat_citi" in value:
+        graphs_libre["daf3_bat_citi"] = fig_dept_trim_baton("DAF-03", selected_annee, 1)
+    if "daf4_bat_citi" in value:
+        graphs_libre["daf4_bat_citi"] = fig_dept_trim_baton("DAF-04", selected_annee, 1)
+    if "daf5_bat_citi" in value:
+        graphs_libre["daf5_bat_citi"] = fig_dept_trim_baton("DAF-05", selected_annee, 1)
+    if "drh3_bat_citi" in value:
+        graphs_libre["drh3_bat_citi"] = fig_dept_trim_baton("DRH-03", selected_annee, 1)
+    #EPH
+    if "radar_eph" in value:
+        graphs_libre["radar_eph"] = fig_radar(selected_annee, 2)
+    if "dire1_bat_eph" in value:
+        graphs_libre["dire1_bat_eph"] = fig_dept_trim_baton("DIRE-01", selected_annee, 2)
+    if "dire2_bat_eph" in value:
+        graphs_libre["dire2_bat_eph"] = fig_dept_trim_baton("DIRE-02", selected_annee, 2)
+    if "dire3_bat_eph" in value:
+        graphs_libre["dire3_bat_eph"] = fig_dept_trim_baton("DIRE-03", selected_annee, 2)
+    if "daf1_bat_eph" in value:
+        graphs_libre["daf1_bat_eph"] = fig_dept_trim_baton("DAF-01", selected_annee, 2)
+    if "daf2_bat_eph" in value:
+        graphs_libre["daf2_bat_eph"] = fig_dept_trim_baton("DAF-02", selected_annee, 2)
+    if "daf3_bat_eph" in value:
+        graphs_libre["daf3_bat_eph"] = fig_dept_trim_baton("DAF-03", selected_annee, 2)
+    if "daf4_bat_eph" in value:
+        graphs_libre["daf4_bat_eph"] = fig_dept_trim_baton("DAF-04", selected_annee, 2)
+    if "daf5_bat_eph" in value:
+        graphs_libre["daf5_bat_eph"] = fig_dept_trim_baton("DAF-05", selected_annee, 2)
+    if "drh3_bat_eph" in value:
+        graphs_libre["drh3_bat_eph"] = fig_dept_trim_baton("DRH-03", selected_annee, 2)
+    #INF
+    if "radar_inf" in value:
+        graphs_libre["radar_inf"] = fig_radar(selected_annee, 3)
+    if "dire1_bat_inf" in value:
+        graphs_libre["dire1_bat_inf"] = fig_dept_trim_baton("DIRE-01", selected_annee, 3)
+    if "dire2_bat_inf" in value:
+        graphs_libre["dire2_bat_inf"] = fig_dept_trim_baton("DIRE-02", selected_annee, 3)
+    if "dire3_bat_inf" in value:
+        graphs_libre["dire3_bat_inf"] = fig_dept_trim_baton("DIRE-03", selected_annee, 3)
+    if "daf1_bat_inf" in value:
+        graphs_libre["daf1_bat_inf"] = fig_dept_trim_baton("DAF-01", selected_annee, 3)
+    if "daf2_bat_inf" in value:
+        graphs_libre["daf2_bat_inf"] = fig_dept_trim_baton("DAF-02", selected_annee, 3)
+    if "daf3_bat_inf" in value:
+        graphs_libre["daf3_bat_inf"] = fig_dept_trim_baton("DAF-03", selected_annee, 3)
+    if "daf4_bat_inf" in value:
+        graphs_libre["daf4_bat_inf"] = fig_dept_trim_baton("DAF-04", selected_annee, 3)
+    if "daf5_bat_inf" in value:
+        graphs_libre["daf5_bat_inf"] = fig_dept_trim_baton("DAF-05", selected_annee, 3)
+    if "drh3_bat_inf" in value:
+        graphs_libre["drh3_bat_inf"] = fig_dept_trim_baton("DRH-03", selected_annee, 3)
+    #RS2M
+    if "radar_rs2m" in value:
+        graphs_libre["radar_rs2m"] = fig_radar(selected_annee, 4)
+    if "dire1_bat_rs2m" in value:
+        graphs_libre["dire1_bat_rs2m"] = fig_dept_trim_baton("DIRE-01", selected_annee, 4)
+    if "dire2_bat_rs2m" in value:
+        graphs_libre["dire2_bat_rs2m"] = fig_dept_trim_baton("DIRE-02", selected_annee, 4)
+    if "dire3_bat_rs2m" in value:
+        graphs_libre["dire3_bat_rs2m"] = fig_dept_trim_baton("DIRE-03", selected_annee, 4)
+    if "daf1_bat_rs2m" in value:
+        graphs_libre["daf1_bat_rs2m"] = fig_dept_trim_baton("DAF-01", selected_annee, 4)
+    if "daf2_bat_rs2m" in value:
+        graphs_libre["daf2_bat_rs2m"] = fig_dept_trim_baton("DAF-02", selected_annee, 4)
+    if "daf3_bat_rs2m" in value:
+        graphs_libre["daf3_bat_rs2m"] = fig_dept_trim_baton("DAF-03", selected_annee, 4)
+    if "daf4_bat_rs2m" in value:
+        graphs_libre["daf4_bat_rs2m"] = fig_dept_trim_baton("DAF-04", selected_annee, 4)
+    if "daf5_bat_rs2m" in value:
+        graphs_libre["daf5_bat_rs2m"] = fig_dept_trim_baton("DAF-05", selected_annee, 4)
+    if "drh3_bat_rs2m" in value:
+        graphs_libre["drh3_bat_rs2m"] = fig_dept_trim_baton("DRH-03", selected_annee, 4)
+    #RST
+    if "radar_rst" in value:
+        graphs_libre["radar_rst"] = fig_radar(selected_annee, 5)
+    if "dire1_bat_rst" in value:
+        graphs_libre["dire1_bat_rst"] = fig_dept_trim_baton("DIRE-01", selected_annee, 5)
+    if "dire2_bat_rst" in value:
+        graphs_libre["dire2_bat_rst"] = fig_dept_trim_baton("DIRE-02", selected_annee, 5)
+    if "dire3_bat_rst" in value:
+        graphs_libre["dire3_bat_rst"] = fig_dept_trim_baton("DIRE-03", selected_annee, 5)
+    if "daf1_bat_rst" in value:
+        graphs_libre["daf1_bat_rst"] = fig_dept_trim_baton("DAF-01", selected_annee, 5)
+    if "daf2_bat_rst" in value:
+        graphs_libre["daf2_bat_rst"] = fig_dept_trim_baton("DAF-02", selected_annee, 5)
+    if "daf3_bat_rst" in value:
+        graphs_libre["daf3_bat_rst"] = fig_dept_trim_baton("DAF-03", selected_annee, 5)
+    if "daf4_bat_rst" in value:
+        graphs_libre["daf4_bat_rst"] = fig_dept_trim_baton("DAF-04", selected_annee, 5)
+    if "daf5_bat_rst" in value:
+        graphs_libre["daf5_bat_rst"] = fig_dept_trim_baton("DAF-05", selected_annee, 5)
+    if "drh3_bat_rst" in value:
+        graphs_libre["drh3_bat_rst"] = fig_dept_trim_baton("DRH-03", selected_annee, 5)
+    #Autres
+    if "radar_global" in value:
+        graphs_libre["radar_global"] = fig_radar_all_dept(selected_annee)
 
     if value is None:
         value = []
     # Création de la liste des IDs de collapse ouverts
     open_collapse_ids = ["collapse-df{}".format(val) for val in value]
 
+    """
     # Génération des graphiques et des collapses
     graph_output = baseline_graph
     for val in value:
@@ -344,6 +613,13 @@ def generate_graphs_libre(selected_annee, value, baseline_graph):
 
             )
         )
+    """
+    # Filtrer les graphiques sélectionnés
+    selected_graphs = [graph_id for graph_id in value]
+
+    # Générer uniquement les graphiques sélectionnés
+    graph_output = [dcc.Graph(figure=graphs_libre[graph_id], config={'displaylogo': False}) for graph_id in selected_graphs]
+
 
     new_graph_output = []
 

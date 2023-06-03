@@ -1079,8 +1079,6 @@ def generate_graphs_historique(selected_years, value, baseline_graph):
     """
     # Filtrer les graphiques sélectionnés
     selected_graphs = [graph_id for graph_id in value]
-    print(selected_graphs)
-    print()
 
     # Générer uniquement les graphiques sélectionnés
     graph_output = [dcc.Graph(figure=graphs[graph_id], config={'displaylogo': False}) for graph_id in selected_graphs]
