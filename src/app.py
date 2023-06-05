@@ -57,46 +57,22 @@ offcanvas = html.Div(
                     value=annee[0],
                     persistence = True,
                 ),
- 
 
-                dbc.Switch(
-                    id="COP-switch",
-                    label="Objectifs COP (IP Paris)",
-                    value=False,
-                ),
-                dbc.Switch(
-                    id="IMT-switch",
-                    label="Objectifs IMT",
-                    value=False,
-                ),
+html.Hr(style={'borderTop': '2px solid #000000'}),
 
-                html.Hr(style={'borderTop': '2px solid #000000'}),
+#                dbc.Switch(
+    #                id="COP-switch",
+    #                label="Objectifs COP (IP Paris)",
+        #            value=False,
+      #          ),
+#                dbc.Switch(
+#                    id="IMT-switch",
+#                    label="Objectifs IMT",
+#                    value=False,
+#                ),
 
 
-                dbc.Switch(
-                    id="tri-switch",
-                    label="afficher indicateurs trimestriels",
-                    value=False,
-                ),
-                dbc.Switch(
-                    id="ann-switch",
-                    label="afficher indicateurs annuels",
-                    value=False,
-                ),
 
-                html.Hr(style={'borderTop': '2px solid #000000'}),
-
-                dbc.Switch(
-                    id="école-switch",
-                    label="indicateur périmètre école",
-                    value=False,
-                ),
-                dbc.Switch(
-                    id="dept-switch",
-                    label="indicateur périmètre départemental",
-                    value=False,
-                ),
-                    html.Hr(style={'borderTop': '2px solid #000000'}),
                     html.P('Télécharger les jeux de données : '),
                     html.A('indicateurs années 2023', href="/download/" + config.fichier_2023),
                     html.Br(),
