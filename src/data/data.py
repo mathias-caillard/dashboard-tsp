@@ -1,20 +1,15 @@
-
 import pandas as pd
 import math
-import plotly.graph_objects as go
 import copy
+from src.config import generate_path, fichier_historique_df, fichier_historique_dri, annee_min
 import src.config as config
-from src.config import *
 from src.data.df_data import data_df, titre_df, labels_df
 from src.data.daf_data import data_daf, titre_daf, labels_daf
 from src.data.dire_data import data_dire, titre_dire, labels_dire
 from src.data.drfd_data import data_drfd, titre_drfd, labels_drfd
 from src.data.drh_data import data_drh, titre_drh, labels_drh
 from src.data.dri_data import data_dri, titre_dri, labels_dri
-from src.equivalence_historique import equivalence_ligne, equivalence_titre, correspondance_equivalence
-
-
-
+from src.equivalence_historique import equivalence_ligne, correspondance_equivalence
 
 
 #Permet du fusionner les dictionnaires

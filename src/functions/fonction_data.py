@@ -1,5 +1,4 @@
 import math
-
 import numpy
 
 
@@ -19,19 +18,3 @@ def add_to_dict(df, debut, fin, nombre_ligne, dict_data, dict_titre, dict_label)
         dict_titre[df["REF"][i]] = df["Indicateur"][i]
         dict_label[df["REF"][i]] = x_axis
 
-"""
- #Si la case est un string
-            print(type(df.iloc[i, j]), df.iloc[i, j])
-            if isinstance(df.iloc[i, j], str, numpy.float64):
-                try:
-                    nombre = float(df.iloc[i, j])
-                    data_indic.append(nombre)
-                except ValueError:
-                    data_indic.append(0)
-            #Sinon la case est un nombre
-            else:
-                if  math.isnan(df.iloc[i, j]):
-                    data_indic.append(df.iloc[i, j])
-                else:
-                    data_indic.append(0)
-"""

@@ -1,14 +1,12 @@
-import src.config
-from src.config import generate_path
+from src.config import generate_path, liste_fichier
 import openpyxl
-import src.config as config
 import pandas as pd
 from src.functions.fonction_data import add_to_dict
 
 data_drh=[]
 labels_drh={}
 titre_drh = {}
-for nom_fichier in config.liste_fichier:
+for nom_fichier in liste_fichier:
     data_drh_annee = {}
     chemin_fichier = generate_path(nom_fichier)
     fichier_excel = openpyxl.load_workbook(chemin_fichier)

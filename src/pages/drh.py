@@ -1,13 +1,7 @@
+import dash_bootstrap_components as dbc
 import dash
-from dash import html, dcc, callback, Output, Input, State
-import pandas as pd
-import plotly.express as px
-import plotly.graph_objects as go
-from src import config
-from src.data.data import *
+from dash import html, dcc, Input, Output, callback
 from src.functions.fonction_figure import generate_graphs, fig_annuelle_baton, fig_camembert, fig_trim_baton, fig_trim_courbe, couleurs, couleurs_all
-from src.functions.fonctions_historique import *
-
 
 dash.register_page(
     __name__,
@@ -16,9 +10,6 @@ dash.register_page(
     order=6,
     active= False
                    )
-
-
-
 
 
 def liste_graphes_drh(selected_annee) :

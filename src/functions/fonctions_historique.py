@@ -3,13 +3,7 @@ from dash import html, dcc, Output, Input, State, callback
 import dash_bootstrap_components as dbc
 from src import config
 import plotly.express as px
-import plotly.graph_objects as go
-from sklearn.preprocessing import LabelEncoder
-from sklearn.linear_model import LinearRegression
-import numpy as np
-
-from src.data.data import dict_titres
-from src.functions.fonction_figure import fig_hist_total, fig_hist_trim_baton, fig_hist_trim_courbe, fig_hist_radar, couleurs_annees
+from src.functions.fonction_figure import fig_hist_total, fig_hist_trim_baton, fig_hist_trim_courbe, fig_hist_radar
 
 
 annees = config.liste_annee_maj

@@ -1,13 +1,8 @@
 import dash
-from dash import html, dcc, Input, Output, callback, State
-import pandas as pd
-import plotly.express as px
-import plotly.graph_objects as go
-from src import config
-import random as rd
-from src.data.data import *
+from dash import html, dcc, Input, Output, callback
+import dash_bootstrap_components as dbc
 from src.functions.fonction_figure import generate_graphs, fig_annuelle_baton, fig_trim_baton
-from src.functions.fonctions_historique import *
+
 
 
 dash.register_page(

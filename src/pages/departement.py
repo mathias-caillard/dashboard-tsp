@@ -1,11 +1,8 @@
 import dash
-from dash import html, dcc
-from src.fig.departement_fig import *
-import dash
 from dash import html, dcc, Output, Input, State, callback
 import dash_bootstrap_components as dbc
-from src.functions.fonction_figure import generate_graphs, fig_annuelle_baton, fig_camembert, fig_trim_baton, fig_radar, fig_radar_all_dept, couleurs
-from src.functions.fonctions_historique import *
+from src.functions.fonction_figure import generate_graphs, fig_radar, fig_radar_all_dept
+
 
 dash.register_page(
     __name__,

@@ -9,7 +9,6 @@ dash.register_page(
     active= False
                    )
 
-
 layout = html.Div([
     html.H1("À propos"),
     html.P("Cette application a été développée en 2023 par JACQUET Marin et CAILLARD Mathias, deux étudiants en 2ème année à Télécom SudParis. Le projet a été encadré par Bruno DEFUDE par Benoît JEAN dans le cadre d'un 'projet Cassiopée'."),
@@ -27,8 +26,5 @@ layout = html.Div([
     html.P("Dans l'onglet 'Historique', vous pouvez choisir et sélectionner (à l'aide d'un moteur de recherche) vos indicateurs à la carte, pour une visualisation et comparaison personnalisées."),
     html.P("Pour un graphique donnée, vous pouvez sélectionner les composantes qui vous souhaitez afficher en cliquant sur le symbole correspondant dans la légende. Un double-clique permet de ne sélectionner seulement la composante désirée. Si vous souhaitez enregistrer la figure au format png, cliquez sur sur le logo 'appareil photo'."),
     html.P("L'application exploite des données sous forme de fichiers Excels. Vous pouvez télécharger ces fichiers dans l'onglet 'Options'.")
-
-
-
 
     ])

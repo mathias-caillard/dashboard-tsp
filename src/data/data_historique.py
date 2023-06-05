@@ -1,16 +1,9 @@
-import src.data.data
-from src.config import *
-from src.equivalence_historique import equivalence_titre, equivalence_ligne
+
 import src.config
 import math
 import pandas as pd
 
 
-
-def correspondance_equivalence(code_indicateur):
-    if code_indicateur in equivalence_ligne:
-        return True
-    return False
 
 sheet_names = ["artemis", "CITI", "EPH", "INF", "RS2M", "RST", "Global"]
 colonneDebutData = 3
