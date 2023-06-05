@@ -10,6 +10,7 @@ from src.data.drfd_data import data_drfd, titre_drfd, labels_drfd
 from src.data.drh_data import data_drh, titre_drh, labels_drh
 from src.data.dri_data import data_dri, titre_dri, labels_dri
 from src.equivalence_historique import equivalence_ligne, correspondance_equivalence
+from src.data.data_historique import extract_data, extract_indic_all_sheet, convert_data_annuel, quadri_to_tri
 
 
 #Permet du fusionner les dictionnaires
@@ -37,7 +38,6 @@ titre_y = [titre_df, titre_daf, titre_drfd, titre_dire, titre_drh, titre_dri]
 new_titre_y = fusion_dict(titre_y)
 
 
-
 sheet_names = ["artemis", "CITI", "EPH", "INF", "RS2M", "RST", "Global"]
 sheet_i = [1, 2, 3, 4, 5, 6, 0]
 annees = config.liste_annee
@@ -58,88 +58,6 @@ trimestre = config.trimestre
 
 
 data_old = [{} for i in range(len(annees))]
-
-
-#Transformer quadrimestre en trimestre
-def quadri_to_tri(tab):
-    for i in range(len(tab)):
-        #print(tab[i])
-        if math.isnan(tab[i]):
-            tab[i]=0
-
-    l = []
-    l.append(0.75*tab[0])
-    l.append(0.25*tab[0] + 0.5*tab[1])
-    l.append(0.5*tab[1] + 0.25*tab[2])
-    l.append(0.75*tab[2])
-    #l.append(sum(l))
-    return l
-
-
-
-def extract_data(sheetName, ligneNumber):
-    # Chemin du fichier excel défini dans config.py
-    excel_path = config.excel_path2
-
-    # afficher toutes les colonnes (dans le terminal) des dataframes issues des lectures des fichiers Excel
-    pd.set_option('display.max_columns', None)
-
-
-    df = pd.read_excel(excel_path, sheet_name=sheetName)
-    ligne = df.iloc[ligneNumber - 2]    #ligneNumber est la ligne dans le fichier excel
-    nouveau_df = ligne.to_frame().T
-    tab = []
-    for i in range(colonneFinData, colonneDebutData, -4):
-        tab_i = []
-        for j in range(3):
-            tab_i.append(nouveau_df.iloc[0, i - j - 1])
-        tab_i = quadri_to_tri(tab_i)
-        tab.append(tab_i)
-    return tab
-
-def extract_data_numerous(sheet_name, list_line):   #Utile pour l'onglet historique
-    tab=[]
-    for line in list_line:
-        tab_line = extract_data(sheet_name, line)
-        tab.append(tab_line)
-    return tab
-
-#Data pour l'onglet historique
-data_old_df = extract_data_numerous(sheet_names[6], df_ligne)
-data_old_daf = extract_data_numerous(sheet_names[6], daf_ligne)
-data_old_dire = extract_data_numerous(sheet_names[6], dire_ligne)
-data_old_drfd = extract_data_numerous(sheet_names[6], drfd_ligne)
-data_old_drh = extract_data_numerous(sheet_names[6], drh_ligne)
-
-def convert_data_annuel(data_old):
-    converted_data = []
-    for i in range(len(data_old[0])):   #Parcours des années
-        tab = []
-        for j in range(len(data_old)):   #Parcours des departements
-            tab.append(data_old[j][i])
-        converted_data.append(tab)
-    return converted_data
-
-
-def extract_data_all_sheet(list_line):  #Utile pour la sélection de l'année
-    TAB = []
-    for line in list_line:  #Parcours des indicateurs
-        tab = []
-        for i in range(7):   #Parcours des feuilles
-            tab_sheet = extract_data(sheet_names[i], line)
-            tab.append(tab_sheet)
-        TAB.append(convert_data_annuel(tab))
-    return TAB
-
-
-#Meme chose que extract_data_all_sheet mais pour un seul indicateur
-def extract_indic_all_sheet(lineNumber):
-    tab = []
-    for i in range(7):  # Parcours des feuilles
-        tab_sheet = extract_data(sheet_names[i], lineNumber)
-        tab.append(tab_sheet)
-    return convert_data_annuel(tab)
-
 
 #Met des 0 si pas de correspondance, met les vrais données sinon
 def adapt_old_data(code_indic, liste_old_data):
@@ -182,9 +100,6 @@ def adapt_old_data(code_indic, liste_old_data):
         # Parcours des années
         for i in range(len(liste_old_data)):
             liste_old_data[i][code_indic] = donnee_correspondante
-
-
-
 
 def adapt_all_old_data(liste_old_data):
     #Parcours des indicateurs
@@ -233,14 +148,6 @@ def adapt_new_data(code_indic, liste_new_data):
             adapted_data.append(sum(adapted_data))
             liste_new_data[i][code_indic] = adapted_data
 
-    """
-    elif longueur == 4:
-        for i in range(len(liste_new_data)):
-            adapted_data = [[x for x in liste_new_data[i][code_indic]]]
-            liste_new_data[i][code_indic] = adapted_data
-    """
-
-
 
 def adapt_all_new_data(liste_new_data):
     for code_indic in liste_new_data[0]:
@@ -281,7 +188,6 @@ def adapt_new_label(dict_label):
             adapted_label.append("Ecole Année")
             dict_label[code_indic] = adapted_label
 
-
 def fusion_old_new_data(new_data):
     old_data = [{} for i in range(len(annees))]
     adapt_all_old_data(old_data)
@@ -289,7 +195,6 @@ def fusion_old_new_data(new_data):
     for data_annee in new_data:
         old_data.append(data_annee)
     return old_data
-
 
 def add_old_data_df(liste_data):
     chemin_fichier = generate_path(fichier_historique_df)
@@ -305,8 +210,6 @@ def add_old_data_df(liste_data):
         liste_data[indice_annee]["DF-04"] = 4 *[df.iloc[3, i]]
         liste_data[indice_annee]["DF-05"] = 4 *[df.iloc[4, i]]
         liste_data[indice_annee]["DF-06"] = 4 *[df.iloc[5, i]]
-
-
 
 def add_old_data_dri(liste_data):
     chemin_fichier = generate_path(fichier_historique_dri)
@@ -342,18 +245,12 @@ def add_old_data_dri(liste_data):
         else:
             liste_data[indice_annee]["DRI-06"] = [0.]
 
-
 data_complete = fusion_old_new_data(new_donnee)
 adapt_new_label(new_labels)
 add_old_data_df(data_complete)
 add_old_data_dri(data_complete)
 
-
-
-
-
 effectifs = [data_complete[i]["DRH-01"][6:12] + [sum(data_complete[i]["DRH-01"][6:12])] for i in range(len(data_complete))]
-
 
 #Détermine les indicateurs qui nécessite une pondération par les effectifs (où les départements sont comparés)
 indic_ponderation = ["DF-01",
@@ -407,105 +304,6 @@ def extract_data_radar():
     return data_radar, label_radar
 
 data_radar, label_radar = extract_data_radar()
-
-
-
-
-
-
-#Data pour la sélection d'une année(indicateurs, puis année, puis dept)
-data_df = extract_data_all_sheet(df_ligne)
-data_daf = extract_data_all_sheet(daf_ligne)
-data_dire = extract_data_all_sheet(dire_ligne)
-data_drfd = extract_data_all_sheet(drfd_ligne)
-data_drh = extract_data_all_sheet(drh_ligne)
-
-
-def extract_titre(list_line):
-    # Chemin du fichier excel défini dans config.py
-    excel_path = config.excel_path2
-
-    # afficher toutes les colonnes (dans le terminal) des dataframes issues des lectures des fichiers Excel
-    pd.set_option('display.max_columns', None)
-
-    df = pd.read_excel(excel_path, sheet_name=sheet_names[0])
-
-    titles = []
-    for i in list_line:
-        titles.append(df.iloc[i-2, 0])
-    return titles
-
-titres_y = extract_titre(liste_lignes)
-
-
-titres_graphe = [#DF
-                 "Total général des indicateurs en heures équivalentes",
-                 #DAF
-                 "Dépenses de vacataires",
-                 "Ressources propres totales",
-                 "Total des dépenses hors permanents et vacataires",
-                 #DIRE
-                 "CA sur contrats de recherche",
-                 "Brevets et logiciels déposés",
-                 "Contribution au financement de l\'école",
-                 #DRFD
-                 "Total des publications",
-                 "Nombre de doctorants",
-                 #DRH
-                 "Permanents en ETPT",
-                 "Non-permanents en ETPT"
-                ]
-
-def extract_effectif():
-    # Chemin du fichier excel défini dans config.py
-    excel_path = config.excel_path2
-    # afficher toutes les colonnes (dans le terminal) des dataframes issues des lectures des fichiers Excel
-    pd.set_option('display.max_columns', None)
-    ligneNumber = 22    #ligne des effectifs
-    TAB = []
-    for k in range(7):      #Départements
-        df = pd.read_excel(excel_path, sheet_name=sheet_names[k])
-        ligne = df.iloc[ligneNumber - 2]  # ligneNumber est la ligne dans le fichier excel
-        nouveau_df = ligne.to_frame().T
-        tab = []
-        for i in range(colonneFinData, colonneDebutData, -4):
-            tab_i = []
-            for j in range(3):
-                tab_i.append(nouveau_df.iloc[0, i - j - 1])
-            tab_i = quadri_to_tri(tab_i)
-            tab.append(tab_i)
-        TAB.append(tab)
-    return TAB
-
-
-effectif_dept = extract_effectif()
-
-def ponderation(data_indic):    #Un seul indicateur en entrée
-    TAB=[]
-    for i in range(len(data_indic)):   #Années
-        tab_i=[]
-        for j in range(7):      #Départements
-            tab_j=[]
-            for k in range(4):      #Trimestres
-                if effectif_dept[j][i][k] !=0:
-                    tab_j.append(data_indic[i][j][k]/effectif_dept[j][i][k])
-                else:
-                    tab_j.append(0)
-            tab_i.append(tab_j)
-        TAB.append(tab_i)
-    return TAB
-
-def ponderation_total(data_indic):
-    TAB = []
-    for i in range(len(data_indic)):  # Années
-        tab_i = []
-        for j in range(7):  # Départements
-            if sum(effectif_dept[j][i]) != 0:
-                tab_i.append(sum(data_indic[i][j]) / (sum(effectif_dept[j][i])/4))
-            else:
-                tab_i.append(0)
-        TAB.append(tab_i)
-    return TAB
 
 
 #Utilisée pour la régression polynomiale dans les graphes "comparaison annuelle par trimestre"

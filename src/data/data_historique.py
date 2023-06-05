@@ -58,16 +58,15 @@ def extract_data(sheetName, ligneNumber):
         tab.append(tab_i)
     return tab
 
-#Output: Données d'un Indicateur pour les années 2015 à 2022
-def extract_data_all_sheet(list_line):  #Utile pour la sélection de l'année
-    TAB = []
-    for line in list_line:  #Parcours des indicateurs
-        tab = []
-        for i in range(7):   #Parcours des feuilles
-            tab_sheet = extract_data(sheet_names[i], line)
-            tab.append(tab_sheet)
-        TAB.append(convert_data_annuel(tab))
-    return TAB
+
+def extract_indic_all_sheet(lineNumber):
+    tab = []
+    for i in range(7):  # Parcours des feuilles
+        tab_sheet = extract_data(sheet_names[i], lineNumber)
+        tab.append(tab_sheet)
+    return convert_data_annuel(tab)
+
+
 
 
 
