@@ -38,19 +38,7 @@ titre_y = [titre_df, titre_daf, titre_drfd, titre_dire, titre_drh, titre_dri]
 new_titre_y = fusion_dict(titre_y)
 
 
-sheet_names = ["artemis", "CITI", "EPH", "INF", "RS2M", "RST", "Global"]
-sheet_i = [1, 2, 3, 4, 5, 6, 0]
 annees = config.liste_annee
-colonneDebutData = 3
-colonneFinData = 34
-colonneTitre = 0
-df_ligne = [10]     #Calcul bizarre
-daf_ligne = [24, 25, 27]
-dire_ligne = [19, 20, 26]
-drfd_ligne = [17, 18]
-drh_ligne = [22, 23]
-
-liste_lignes = df_ligne + daf_ligne + dire_ligne + drfd_ligne + drh_ligne
 
 couleurs = config.colors_dept
 departements = config.departements
