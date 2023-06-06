@@ -26,15 +26,6 @@ active_page = "/"
 annee = config.liste_annee_selection
 
 
-
-"""
-#Importation des DATA
-data_df = data.data.data_df
-data_daf = data.data.data_daf
-data_dire = data.data.data_dire
-data_drfd = data.data.data_drfd
-data_drh = data.data.data_drh
-"""
 #Sidebar
 offcanvas = html.Div(
     [
