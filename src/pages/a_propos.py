@@ -25,7 +25,7 @@ layout = html.Div([
     html.P("L'application exploite des données sous forme de fichiers Excels. Vous pouvez télécharger ces fichiers dans l'onglet 'Options'."),
     html.Br(),
     html.P('Pour plus d\'informations, consulter le rapport du projet: '),
-    html.A('rapport_projet_cassiopee', href="/download/", download = rapport_cassiopee),
+    html.A('rapport_projet_cassiopee', href="/download/" + rapport_cassiopee),
     html.Br(),
     html.Br(),
 
