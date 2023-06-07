@@ -249,7 +249,7 @@ def download(filename):
 
 
 if __name__ == '__main__':
-	app.run_server(debug=True) #debug=True pour la version en production
+	app.run_server(debug=False) #debug=True pour la version en production
 
 
 
