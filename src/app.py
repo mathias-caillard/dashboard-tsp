@@ -236,11 +236,13 @@ def toggle_offcanvas(n1, is_open):
 #Permet à un utilisateur de télécharger les fichiers Excels.
 server = app.server  # Get the underlying Flask server
 @app.server.route("/download/<filename>")
-def download_excel(filename):
+def download(filename):
     if filename == config.fichier_2023 :
         return send_file(config.excel_path, as_attachment=True)
     elif filename == config.fichier_historique : 
         return send_file(config.excel_path2, as_attachment=True)
+    elif filename == config.rapport_cassiopee:
+        return send_file(config.generate_path(config.rapport_cassiopee), as_attachment=True)
 
 
 

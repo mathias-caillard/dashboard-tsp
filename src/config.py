@@ -10,6 +10,8 @@ fichier_historique = "Historique-Indicateurs-Quadri.xlsx"
 fichier_historique_df = "HistoriqueCTI_BJ.xlsx"
 fichier_historique_dri = "HistoriqueDRI.xlsx"
 
+rapport_cassiopee = "Rapport Cassiopée 47.pdf"
+
 #Chemin absolu du répertoire de travail (chemin vers src)
 root_directory = os.path.abspath(os.path.dirname(__file__))
 
