@@ -189,9 +189,8 @@ def fig_trim_baton(code_indic, year, titre_x, couleurs):
                       yaxis_title=adapt_title_y(titre_y))
 
     fig.update_traces(hovertemplate="<br>".join([
-        "%{label}",
         "%{x}",
-        "</b>%{y}</b>"
+        "<b>%{y}</b>"
     ]),
         name=""
     )
@@ -443,7 +442,7 @@ def fig_hist_trim_courbe(code_indic, years, indice_dept):
     liste_years = [year for year in range(years[0], years[-1] + 1)]
     donnees = []
     # Indicateur trimestriel
-    for i in range(years[0] - annee_min, years[-1] - annee_min):
+    for i in range(years[0] - annee_min, years[-1] - annee_min + 1):
         donnees.append(data_complete_pondere[i][code_indic][indice_dept])
 
     fig = go.Figure()
