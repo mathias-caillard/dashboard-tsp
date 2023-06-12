@@ -5,8 +5,8 @@ import plotly.express as px
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import LabelEncoder
 import plotly.graph_objects as go
-from src.config import liste_annee_maj, colors_dept, colors_all, trimestre, annee_min, departements, services_et_dept
-from src.data.data import data_moy, data_complete, data_complete_pondere, data_radar, label_radar, new_titre_y, \
+from   config import liste_annee_maj, colors_dept, colors_all, trimestre, annee_min, departements, services_et_dept
+from   data.data import data_moy, data_complete, data_complete_pondere, data_radar, label_radar, new_titre_y, \
     new_labels, dict_titres
 import plotly.colors as colors
 

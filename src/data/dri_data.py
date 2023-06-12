@@ -1,7 +1,7 @@
-from src.config import generate_path, liste_fichier
+from   config import generate_path, liste_fichier
 import openpyxl
 import pandas as pd
-from src.functions.fonction_data import add_to_dict
+from   functions.fonction_data import add_to_dict
 
 
 

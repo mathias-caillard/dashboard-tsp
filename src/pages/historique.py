@@ -1,5 +1,5 @@
 import dash
-from src.functions.fonctions_historique import *
+from   functions.fonctions_historique import *
 
 
 dash.register_page(

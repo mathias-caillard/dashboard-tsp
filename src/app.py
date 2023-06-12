@@ -11,8 +11,8 @@ import config
 
  
 
-sys.path.append(chemin_absolu_rep_parent + '\\src\\pages')   #pour pouvoir importer les variables entre fichiers dans /pages
-sys.path.append(chemin_absolu_rep_parent + '\\src\\pages\\departements')   #pour pouvoir importer les variables entre fichiers dans /pages/departements
+sys.path.append(chemin_absolu_rep_parent + '\\  \pages')   #pour pouvoir importer les variables entre fichiers dans /pages
+sys.path.append(chemin_absolu_rep_parent + '\\  \pages\\departements')   #pour pouvoir importer les variables entre fichiers dans /pages/departements
 
 
 app = Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True)   #, suppress_callback_exceptions=True

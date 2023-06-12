@@ -1,4 +1,4 @@
-from src.config import *
+from   config import *
 
 
 #afficher toutes les colonnes (dans le terminal) des dataframes issues des lectures des fichiers Excel

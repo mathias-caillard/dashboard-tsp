@@ -1,6 +1,6 @@
 import dash
 from dash import html
-from src.config import rapport_cassiopee
+from config import rapport_cassiopee
 
 dash.register_page(
     __name__,

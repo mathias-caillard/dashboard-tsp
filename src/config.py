@@ -12,7 +12,7 @@ fichier_historique_dri = "HistoriqueDRI.xlsx"
 
 rapport_cassiopee = "Rapport Cassiopée 47.pdf"
 
-#Chemin absolu du répertoire de travail (chemin vers src)
+#Chemin absolu du répertoire de travail (chemin vers   
 root_directory = os.path.abspath(os.path.dirname(__file__))
 
 rep_parent = os.path.dirname(root_directory)    #(projet cassiopé)

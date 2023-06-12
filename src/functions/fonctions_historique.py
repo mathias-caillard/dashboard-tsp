@@ -1,9 +1,9 @@
 import dash
 from dash import html, dcc, Output, Input, State, callback
 import dash_bootstrap_components as dbc
-from src import config
+import config
 import plotly.express as px
-from src.functions.fonction_figure import fig_hist_total, fig_hist_trim_baton, fig_hist_trim_courbe, fig_hist_radar
+from   functions.fonction_figure import fig_hist_total, fig_hist_trim_baton, fig_hist_trim_courbe, fig_hist_radar
 
 
 annees = config.liste_annee_maj

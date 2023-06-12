@@ -1,8 +1,8 @@
 from dash import html, dcc, Output, Input, State, callback
 import dash_bootstrap_components as dbc
-from src.functions.fonction_figure import fig_annuelle_baton, fig_radar, fig_camembert, fig_trim_baton, \
+from   functions.fonction_figure import fig_annuelle_baton, fig_radar, fig_camembert, fig_trim_baton, \
     fig_trim_courbe, fig_dept_trim_baton, fig_radar_all_dept
-from src.config import colors_dept, colors_all
+from   config import colors_dept, colors_all
 
 
 couleurs = colors_dept

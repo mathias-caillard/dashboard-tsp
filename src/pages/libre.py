@@ -1,5 +1,5 @@
 import dash
-from src.functions.fonctions_choix_libre import *
+from functions.fonctions_choix_libre import *
 
 
 

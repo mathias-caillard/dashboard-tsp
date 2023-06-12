@@ -1,7 +1,7 @@
 import dash
 from dash import html, dcc, Output, Input, State, callback
 import dash_bootstrap_components as dbc
-from src.functions.fonction_figure import generate_graphs, fig_radar, fig_radar_all_dept
+from   functions.fonction_figure import generate_graphs, fig_radar, fig_radar_all_dept
 
 
 dash.register_page(
