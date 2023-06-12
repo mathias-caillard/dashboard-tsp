@@ -2,7 +2,7 @@ from dash import html, dcc, Output, Input, State, callback
 import dash_bootstrap_components as dbc
 from   functions.fonction_figure import fig_annuelle_baton, fig_radar, fig_camembert, fig_trim_baton, \
     fig_trim_courbe, fig_dept_trim_baton, fig_radar_all_dept
-from   config import colors_dept, colors_all
+from  config import colors_dept, colors_all
 
 
 couleurs = colors_dept
@@ -443,10 +443,10 @@ def generate_graphs_libre(selected_annee, value, baseline_graph):
 
 
 
-    # Filtrer les graphiques sélectionnés
+    # Filtrer les graphiques selectionnes
     selected_graphs = [graph_id for graph_id in value]
 
-    # Générer uniquement les graphiques sélectionnés
+    # Generer uniquement les graphiques selectionnes
     graph_output = [dcc.Graph(figure=graphs_libre[graph_id], config={'displaylogo': False}) for graph_id in selected_graphs]
 
 
@@ -466,7 +466,7 @@ def generate_graphs_libre(selected_annee, value, baseline_graph):
                 ])
             )
             new_graph_output.append(
-                html.Hr(style={'borderTop': '2px solid #000000'}))  # Ligne horizontale pour mieux séparer les graphes)
+                html.Hr(style={'borderTop': '2px solid #000000'}))  # Ligne horizontale pour mieux separer les graphes)
 
         else:
             graph = graph_output[2 * i]
@@ -476,7 +476,7 @@ def generate_graphs_libre(selected_annee, value, baseline_graph):
                 ])
             )
             new_graph_output.append(
-                html.Hr(style={'borderTop': '2px solid #000000'}))  # Ligne horizontale pour mieux séparer les graphes)
+                html.Hr(style={'borderTop': '2px solid #000000'}))  # Ligne horizontale pour mieux separer les graphes)
         i += 1
 
     return new_graph_output, {'display': 'none'}

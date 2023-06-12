@@ -19,7 +19,7 @@ app = Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.BOOTSTRAP]
 load_figure_template("bootstrap")
 app._favicon = "favicon.ico"
 
-# Définir une variable active_page initialement à la page d'accueil
+# Definir une variable active_page initialement à la page d'accueil
 active_page = "/"
 
 

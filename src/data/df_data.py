@@ -14,15 +14,15 @@ for nom_fichier in liste_fichier:
     for sheet in feuilles:
         if "DF" in sheet:
             if "Tri" in sheet:
-                ligneDesTitres = 0  # Numérotation comme dans les liste, matrices...
-                nombreLignesData = 5  # Nombre de lignes de données
+                ligneDesTitres = 0  # Numerotation comme dans les liste, matrices...
+                nombreLignesData = 5  # Nombre de lignes de donnees
                 debutColonneData = 4
                 finColonneData = 7
                 df = pd.read_excel(chemin_fichier,sheet_name = sheet, header = ligneDesTitres, nrows = nombreLignesData)
                 add_to_dict(df, debutColonneData, finColonneData, nombreLignesData, data_df_annee, titre_df, labels_df)
             else:   #"Annuel" in sheet
-                ligneDesTitres = 0  # Numérotation comme dans les liste, matrices...
-                nombreLignesData = 1  # Nombre de lignes de données
+                ligneDesTitres = 0  # Numerotation comme dans les liste, matrices...
+                nombreLignesData = 1  # Nombre de lignes de donnees
                 debutColonneData = 4
                 finColonneData = 10
                 df = pd.read_excel(chemin_fichier, sheet_name=sheet, header=ligneDesTitres, nrows=nombreLignesData)

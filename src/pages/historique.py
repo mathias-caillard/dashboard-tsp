@@ -29,11 +29,11 @@ layout = dbc.Container(children=[
         step=1
     ),
 
-    #joue le rôle de variable globale
+    #joue le role de variable globale
     dcc.Store(id='current-value', data=[]),
 
     html.H3(children='Sélection des indicateurs:'),
-    #Menu déourlant/moteur de recherche
+    #Menu deroulant/moteur de recherche
     dcc.Dropdown(
         options=categories_historique,
         id="checklist-input",
@@ -44,7 +44,7 @@ layout = dbc.Container(children=[
         clearable=True
     ),
 
-    # Boucle pour générer les graphiques
+    # Boucle pour generer les graphiques
             dbc.Container(id="graph-container-historique",
                 children=[],
                 fluid = True),
@@ -53,7 +53,7 @@ fluid = True
 )
 
 
-#Mettre à jour les données du menu déroulant sélectionnées
+#Mettre a jour les donnees du menu deroulant selectionnees
 @callback(
     Output("current-value", "data"),
     [Input("checklist-input", "value")],
@@ -64,7 +64,7 @@ def update_old_value(value, old_value):
     return update_old_value_(value, old_value)
 
 
-# Boucle pour générer les callbacks pour chaque département
+# Boucle pour generer les callbacks pour chaque departement
 for i, cat in enumerate(categories_historique):
     cat_id = cat["value"]
 

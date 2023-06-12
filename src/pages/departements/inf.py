@@ -89,7 +89,7 @@ layout = dbc.Container(children=[
     dcc.Loading(id = "loading-inf", color = "black", type = "circle"),
 
 
-    # Boucle pour générer les graphiques       
+    # Boucle pour generer les graphiques
             dbc.Container(id="graph-container-historique-inf",
                 children=[],
                 fluid = True),

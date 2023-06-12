@@ -12,7 +12,7 @@ dash.register_page(
                    )
 
 
-def liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_annee) :
+def liste_graphes_citi(selected_annee) :
     return [
         dcc.Graph(
             id='radar_citi',
@@ -86,7 +86,7 @@ layout = dbc.Container(children=[
     dcc.Loading(id = "loading-citi", color = "black", type = "circle"),
 
 
-    # Boucle pour générer les graphiques       
+    # Boucle pour generer les graphiques
             dbc.Container(id="graph-container-historique-citi",
                 children=[],
                 fluid = True),
@@ -104,6 +104,6 @@ fluid = True
 )
 
 def generate_graphs_citi(selected_year):
-    return generate_graphs(selected_year, baseline_graph = liste_graphes_pas_encore_dans_historique_mais_dans_onglet_donc_cette_liste_est_temporaire(selected_year))
+    return generate_graphs(selected_year, baseline_graph = liste_graphes_citi(selected_year))
 
 

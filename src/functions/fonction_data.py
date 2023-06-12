@@ -2,7 +2,7 @@ import math
 import numpy
 
 
-#Permet d'ajouter les données, titres et labels d'un dataframe (feuille d'un fichier excel comme celui de 2023)
+#Permet d'ajouter les donnees, titres et labels d'un dataframe (feuille d'un fichier excel comme celui de 2023)
 def add_to_dict(df, debut, fin, nombre_ligne, dict_data, dict_titre, dict_label):
     x_axis = df.columns.tolist()[debut: fin + 1]
     for i in range(nombre_ligne):

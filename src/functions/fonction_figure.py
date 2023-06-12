@@ -37,7 +37,7 @@ def adapt_title_y(title_y):
 
 
 def generate_graphs(selected_annee, baseline_graph):
-    # Génération des graphiques et des collapses
+    # Generation des graphiques et des collapses
     graph_output = baseline_graph
     new_graph_output = []
     i = 0
@@ -52,7 +52,7 @@ def generate_graphs(selected_annee, baseline_graph):
                 ])
             )
             new_graph_output.append(
-                html.Hr(style={'borderTop': '2px solid #000000'}))  # Ligne horizontale pour mieux séparer les graphes)
+                html.Hr(style={'borderTop': '2px solid #000000'}))  # Ligne horizontale pour mieux separer les graphes)
         else:
             graph = graph_output[2 * i]
             new_graph_output.append(
@@ -61,23 +61,23 @@ def generate_graphs(selected_annee, baseline_graph):
                 ])
             )
             new_graph_output.append(
-                html.Hr(style={'borderTop': '2px solid #000000'}))  # Ligne horizontale pour mieux séparer les graphes)
+                html.Hr(style={'borderTop': '2px solid #000000'}))  # Ligne horizontale pour mieux separer les graphes)
         i += 1
     return new_graph_output, {'display': 'none'}
 
 
 ######################################################################################################################
-# FONCTIONS POUR GENERER UNE FIGURE D4UN INDICATEUR SUR UNE SEULE ANNEE
+# FONCTIONS POUR GENERER UNE FIGURE D'UN INDICATEUR SUR UNE SEULE ANNEE
 
 
-# Indicateur annuel ou trimestriel (avec des départements)
+# Indicateur annuel ou trimestriel (avec des departements)
 def fig_annuelle_baton(code_indic, year, titre_x, couleurs):
     longueur = len(data_complete_pondere[year - liste_annee_maj[0]][code_indic])
-    # Indicateur annuel (premier élément est un chiffre et nom une liste de 4 chiffres)
+    # Indicateur annuel (premier element est un chiffre et nom une liste de 4 chiffres)
     if not isinstance(data_complete_pondere[year - liste_annee_maj[0]][code_indic][0], list):
         donnees = data_complete_pondere[year - liste_annee_maj[0]][code_indic]
         xlabel = new_labels[code_indic]
-    # Indicateur trimestriel (comparasion entre départements)
+    # Indicateur trimestriel (comparasion entre departements)
     else:
         donnees = [sum(data_complete_pondere[year - liste_annee_maj[0]][code_indic][i]) for i in range(longueur)]
         xlabel = [new_labels[code_indic][i][0].split(" ")[0] for i in range(longueur)]
@@ -106,12 +106,12 @@ def fig_annuelle_baton(code_indic, year, titre_x, couleurs):
     return fig
 
 
-# Uniquement pour les indicateurs ou il y a comparaison entre départements
+# Uniquement pour les indicateurs ou il y a comparaison entre departements
 def fig_camembert(code_indic, year, couleurs):
     longueur = len(data_complete_pondere[year - liste_annee_maj[0]][code_indic])
-    # Indicateur annuel (premier élément est un chiffre et nom une liste de 4 chiffres)
+    # Indicateur annuel (premier element est un chiffre et nom une liste de 4 chiffres)
     if not isinstance(data_complete_pondere[year - liste_annee_maj[0]][code_indic][0], list):
-        # Total présent dans les données
+        # Total present dans les donnees
         if "Ecole" or "ECOLE" in new_labels[code_indic][-1]:
             donnees = data_complete_pondere[year - liste_annee_maj[0]][code_indic][:-1]
             xlabel = new_labels[code_indic][:-1]
@@ -120,7 +120,7 @@ def fig_camembert(code_indic, year, couleurs):
             xlabel = new_labels[code_indic]
     # Indicateur trimestriel
     else:
-        # Total présent dans les données
+        # Total present dans les donnees
         if "Ecole" or "ECOLE" in new_labels[code_indic][-1][0]:
             donnees = [sum(data_complete_pondere[year - liste_annee_maj[0]][code_indic][i]) for i in
                        range(longueur - 1)]
@@ -129,7 +129,7 @@ def fig_camembert(code_indic, year, couleurs):
             donnees = [sum(data_complete_pondere[year - liste_annee_maj[0]][code_indic][i]) for i in range(longueur)]
             xlabel = [new_labels[code_indic][i][0].split(" ")[0] for i in range(longueur)]
     titre_graphe = dict_titres[code_indic]
-    # Création du camembert
+    # Creation du camembert
     fig = go.Figure(data=[go.Pie(labels=xlabel, values=donnees, marker_colors=couleurs)])
     # Personnalisation du camembert
     fig.update_traces(hoverinfo="label+percent+value", textinfo="label+percent")
@@ -229,7 +229,7 @@ def fig_trim_courbe(code_indic, year, couleurs):
     return fig
 
 
-# Indicateur trimestriel pour un département (indice 0 correspond à ARTEMIS, 1 à CITI,..., 6 à Ecole
+# Indicateur trimestriel pour un departement (indice 0 correspond a ARTEMIS, 1 à CITI,..., 6 a Ecole
 def fig_dept_trim_baton(code_indic, year, indice_dept):
     xlabel = new_labels[code_indic][indice_dept]
     donnees = data_complete[year - liste_annee_maj[0]][code_indic][indice_dept]
@@ -245,7 +245,7 @@ def fig_dept_trim_baton(code_indic, year, indice_dept):
         marker=marker
     )
     fig = go.Figure(data=Y)
-    # Département
+    # Departement
     if indice_dept <= 5:
         title = titre_graphe + " à " + name_dept + " en " + str(year)
     # Ecole
@@ -453,18 +453,18 @@ def fig_hist_trim_courbe(code_indic, years, indice_dept):
     for i in range(len(donnees)):
         fig.add_trace(go.Scatter(x=trimestre_encoded, y=donnees[i], name="Année " + str(liste_years[i]),
                                  line=dict(color=couleurs_annees[i])))
-    # Générer les données moyennes
+    # Generer les donnees moyennes
     y = data_moy(donnees)
     # Courbe pour fitter les points
     degree = 3
     model = LinearRegression()
     model.fit(np.vander(trimestre_encoded, degree + 1), y)
 
-    # Generation des valeurs préditent
+    # Generation des valeurs preditent
     x_pred = np.arange(min(trimestre_encoded), max(trimestre_encoded), 0.1)
     y_pred = model.predict(np.vander(x_pred, degree + 1))
 
-    # Ajouter la régression polynomiale
+    # Ajouter la regression polynomiale
     visible_bool = False
     if years[0] != years[-1]:
         visible_bool = True

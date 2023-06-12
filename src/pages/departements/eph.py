@@ -88,7 +88,7 @@ layout = dbc.Container(children=[
 
 
 
-    # Boucle pour générer les graphiques       
+    # Boucle pour generer les graphiques
             dbc.Container(id="graph-container-historique-eph",
                 children=[],
                 fluid = True),

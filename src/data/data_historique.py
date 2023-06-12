@@ -26,11 +26,11 @@ def quadri_to_tri(tab):
     #l.append(sum(l))
     return l
 
-#Input: liste (départements) de listes(données en 2015 et 2022)
-#Output: liste (années) de listes (données par départements)
+#Input: liste (departements) de listes(donnees en 2015 et 2022)
+#Output: liste (annees) de listes (donnees par départements)
 def convert_data_annuel(data_old):
     converted_data = []
-    for i in range(len(data_old[0])):   #Parcours des années
+    for i in range(len(data_old[0])):   #Parcours des annees
         tab = []
         for j in range(len(data_old)):   #Parcours des departements
             tab.append(data_old[j][i])
@@ -39,7 +39,7 @@ def convert_data_annuel(data_old):
 
 
 def extract_data(sheetName, ligneNumber):
-    # Chemin du fichier excel défini dans config.py
+    # Chemin du fichier excel defini dans config.py
     excel_path = config.excel_path2
 
     # afficher toutes les colonnes (dans le terminal) des dataframes issues des lectures des fichiers Excel

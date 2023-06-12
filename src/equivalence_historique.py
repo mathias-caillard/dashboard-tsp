@@ -8,8 +8,8 @@ nom_fichier = "EquivalenceIndicateurs.xlsx"
 chemin_fichier = generate_path(nom_fichier)
 sheet = "Feuil1"
 
-ligneDesTitres = 1  # Numérotation comme dans les liste, matrices...
-nombreLignesData = 19  # Nombre de lignes de données
+ligneDesTitres = 1  # Numerotation comme dans les liste, matrices...
+nombreLignesData = 19  # Nombre de lignes de donnees
 debutColonneData = 1
 finColonneData = 3
 df = pd.read_excel(chemin_fichier,sheet_name = sheet, header = ligneDesTitres, nrows = nombreLignesData)

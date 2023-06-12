@@ -1,7 +1,7 @@
 import dash_bootstrap_components as dbc
 import dash
 from dash import html, dcc, Input, Output, callback
-from   functions.fonction_figure import generate_graphs, fig_annuelle_baton, fig_camembert, fig_trim_baton, fig_trim_courbe, couleurs, couleurs_all
+from functions.fonction_figure import generate_graphs, fig_annuelle_baton, fig_camembert, fig_trim_baton, fig_trim_courbe, couleurs, couleurs_all
 
 dash.register_page(
     __name__,
@@ -110,7 +110,7 @@ layout = dbc.Container(children=[
     ),
     dcc.Loading(id = "loading-drh", color = "black", type = "circle"),
 
-    # Boucle pour générer les graphiques       
+    # Boucle pour generer les graphiques
             dbc.Container(id="graph-container-historique-drh",
                 children=[],
                 fluid = True),

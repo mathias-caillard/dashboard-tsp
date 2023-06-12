@@ -22,7 +22,7 @@ def fusion_dict(liste_dict):
 
 def fusion_data(liste_data):      #Input: liste(services) de listes(annees) de dictionnaires (indicateurs)
     new_list = []
-    for i in range(len(liste_data[0])):     #Parcours des années
+    for i in range(len(liste_data[0])):     #Parcours des annees
         liste_dict = []
         for j in range(len(liste_data)):        #Parcours des services
             liste_dict.append(liste_data[j][i])
@@ -47,22 +47,22 @@ trimestre = config.trimestre
 
 data_old = [{} for i in range(len(annees))]
 
-#Met des 0 si pas de correspondance, met les vrais données sinon
+#Met des 0 si pas de correspondance, met les vraies donnees sinon
 def adapt_old_data(code_indic, liste_old_data):
     TAB = []
     if correspondance_equivalence(code_indic):
-        # Cas particulier pour DF-01, DFRD-01, DRFD-02 (données tri à mettre en annuelle)
+        # Cas particulier pour DF-01, DFRD-01, DRFD-02 (donnees tri à mettre en annuelle)
         if code_indic in  ["DF-01", "DRFD-01", "DRFD-02"]:
             donnee_correspondante = extract_indic_all_sheet(equivalence_ligne[code_indic])
-            # Parcours des années
+            # Parcours des annees
             for i in range(len(liste_old_data)):
                 donnee_correspondante_annuellle = [sum(x)  for x in donnee_correspondante[i]]
                 liste_old_data[i][code_indic] = donnee_correspondante_annuellle
-        #Cas particulier pour DRH-01 (données tri à mettre en annuelle)
+        #Cas particulier pour DRH-01 (donnees tri à mettre en annuelle)
         elif "DRH" in code_indic  and code_indic != "DRH-03":
             donnee_correspondante = extract_indic_all_sheet(equivalence_ligne[code_indic])
 
-            # Parcours des années
+            # Parcours des annees
             for i in range(len(liste_old_data)):
                 #Services DF, DRFD, DIRE, DRI , DCOM
                 liste = [0., 0., 0., 0., 0.]
@@ -72,12 +72,12 @@ def adapt_old_data(code_indic, liste_old_data):
                 liste_old_data[i][code_indic] = liste + donnee_correspondante_annuellle
         else:
             donnee_correspondante = extract_indic_all_sheet(equivalence_ligne[code_indic])
-            #Parcours des années
+            #Parcours des annees
             for i in range(len(liste_old_data)):
                 liste_old_data[i][code_indic] = donnee_correspondante[i]
     else:   #Pas de correspondance
         longueur = len(new_donnee[0][code_indic])
-        #Distinction données trimestrielles et annuelles
+        #Distinction donnees trimestrielles et annuelles
         if longueur==28 or longueur==30:
             donnee_correspondante = [[0., 0., 0., 0.] for j in range(7)]
         elif code_indic=="DAF-06":
@@ -85,7 +85,7 @@ def adapt_old_data(code_indic, liste_old_data):
 
         else:
             donnee_correspondante = [0. for j in range(longueur)]
-        # Parcours des années
+        # Parcours des annees
         for i in range(len(liste_old_data)):
             liste_old_data[i][code_indic] = donnee_correspondante
 
@@ -97,7 +97,7 @@ def adapt_all_old_data(liste_old_data):
 
 def adapt_new_data(code_indic, liste_new_data):
     longueur = len(liste_new_data[0][code_indic])
-    # Distinction données trimestrielles et annuelles (rien à faire si données annuelles)
+    # Distinction donnees trimestrielles et annuelles (rien à faire si donnees annuelles)
     if longueur==28:
         for i in range(len(liste_new_data)):
             adapted_data = []
@@ -240,25 +240,25 @@ add_old_data_dri(data_complete)
 
 effectifs = [data_complete[i]["DRH-01"][6:12] + [sum(data_complete[i]["DRH-01"][6:12])] for i in range(len(data_complete))]
 
-#Détermine les indicateurs qui nécessite une pondération par les effectifs (où les départements sont comparés)
+#Determine les indicateurs qui necessite une ponderation par les effectifs (où les departements sont compares)
 indic_ponderation = ["DF-01",
                      "DRFD-01", "DRFD-02", "DRFD-03",
                      "DIRE-01", "DIRE-02", "DIRE-03",
                      "DAF-01", "DAF-02", "DAF-03", "DAF-04", "DAF-05", "DAF-06"]
 
-#Pondère les données dont le code est présent dans liste_code_indic
+#Pondere les donnees dont le code est present dans liste_code_indic
 def ponderation_data(liste_data, liste_code_indic, liste_effectif):
     new_liste_data = copy.deepcopy(liste_data)
     # Parcours des indicateurs
     for code_indic in liste_code_indic:
-        # Parcours des années
+        # Parcours des annees
         for i in range(len(liste_data)):
             for j in range(len(liste_data[i][code_indic])):
                 if liste_effectif[i][j] != 0:
-                    #Si données trimestrielles
+                    #Si donnees trimestrielles
                     if isinstance(new_liste_data[i][code_indic][j], list):
                         new_liste_data[i][code_indic][j] = [liste_data[i][code_indic][j][k] / liste_effectif[i][j]  for k in range(len(new_liste_data[i][code_indic][j]))]
-                    #Si données annuelles
+                    #Si donnees annuelles
                     else:
                         new_liste_data[i][code_indic][j] = liste_data[i][code_indic][j] / liste_effectif[i][j]
     return new_liste_data
@@ -294,7 +294,7 @@ def extract_data_radar():
 data_radar, label_radar = extract_data_radar()
 
 
-#Utilisée pour la régression polynomiale dans les graphes "comparaison annuelle par trimestre"
+#Utilisee pour la regression polynomiale dans les graphes "comparaison annuelle par trimestre"
 def data_moy(data) :
     res = []
     moyT1 = 0

@@ -13,7 +13,7 @@ couleurs_annees = px.colors.qualitative.Plotly
 
 
 
-#Catégories du menu déroulant
+#Categories du menu déroulant
 categories_historique = [
     # Ecole
     {"label": "Ecole - DF-01: Nombre d\'UP - Total annuel", "value": "df1_tot_ecole"},
@@ -1053,10 +1053,10 @@ def generate_graphs_historique(selected_years, value, baseline_graph):
         value = []
 
 
-    # Filtrer les graphiques sélectionnés
+    # Filtrer les graphiques selectionnes
     selected_graphs = [graph_id for graph_id in value]
 
-    # Générer uniquement les graphiques sélectionnés
+    # Generer uniquement les graphiques selectionnes
     graph_output = [dcc.Graph(figure=graphs[graph_id], config={'displaylogo': False}) for graph_id in selected_graphs]
 
 
@@ -1076,7 +1076,7 @@ def generate_graphs_historique(selected_years, value, baseline_graph):
                 ])
             )
             new_graph_output.append(
-                html.Hr(style={'borderTop': '2px solid #000000'}))  # Ligne horizontale pour mieux séparer les graphes)
+                html.Hr(style={'borderTop': '2px solid #000000'}))  # Ligne horizontale pour mieux separer les graphes)
 
         else:
             graph = graph_output[2 * i]
@@ -1086,7 +1086,7 @@ def generate_graphs_historique(selected_years, value, baseline_graph):
                 ])
             )
             new_graph_output.append(
-                html.Hr(style={'borderTop': '2px solid #000000'}))  # Ligne horizontale pour mieux séparer les graphes)
+                html.Hr(style={'borderTop': '2px solid #000000'}))  # Ligne horizontale pour mieux separer les graphes)
         i += 1
 
     return new_graph_output, {'display' : 'none'}

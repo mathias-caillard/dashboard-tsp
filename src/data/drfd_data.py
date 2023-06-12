@@ -14,8 +14,8 @@ for nom_fichier in liste_fichier:
     feuilles = fichier_excel.sheetnames
     for sheet in feuilles:
         if "DRFD" in sheet:
-            ligneDesTitres = 0  # Numérotation comme dans les liste, matrices...
-            nombreLignesData = 3  # Nombre de lignes de données
+            ligneDesTitres = 0  # Numerotation comme dans les liste, matrices...
+            nombreLignesData = 3  # Nombre de lignes de donnees
             debutColonneData = 4
             finColonneData = 10
             df = pd.read_excel(chemin_fichier,sheet_name = sheet, header = ligneDesTitres, nrows = nombreLignesData)

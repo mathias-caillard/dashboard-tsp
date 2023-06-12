@@ -85,7 +85,7 @@ layout = dbc.Container(children=[
     ),
     dcc.Loading(id = "loading-artemis", color = "black", type = "circle"),
 
-    # Boucle pour générer les graphiques       
+    # Boucle pour generer les graphiques
             dbc.Container(id="graph-container-historique-artemis",
                 children=[],
                 fluid = True),
