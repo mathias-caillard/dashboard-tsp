@@ -6,7 +6,7 @@ from dash.exceptions import PreventUpdate
 from dash_bootstrap_templates import load_figure_template
 from config import chemin_absolu_rep_parent
 from flask import send_file
-from src import config
+import config
 
 
  
