@@ -1,7 +1,7 @@
 import dash
 from dash import html, dcc, callback, Output, Input
 import dash_bootstrap_components as dbc
-from   functions.fonction_figure import generate_graphs, fig_annuelle_baton, fig_camembert, fig_trim_baton,fig_trim_courbe, couleurs
+from functions.fonction_figure import generate_graphs, fig_annuelle_baton, fig_camembert, fig_trim_baton,fig_trim_courbe, couleurs
 
 
 
