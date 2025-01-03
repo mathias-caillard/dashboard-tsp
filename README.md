@@ -5,10 +5,13 @@ This student project was made during Spring 2023. The aim of this project is to 
 
 The Web application is developed with the framework ``Dash``. The data is processed with ``Pandas``, and visualized within the application with ``Plotly``. 
 
+Data collection is out of the scope of the project. Note that data are incomplete, hence the presence of some gaps for some periods.
 
 ![image](./documents/dashboard_TSP.png)
 
-![video](./documents/demo.mp4)
+![video](./documents/demo.gif)
+
+
 
 ## test the app
 
