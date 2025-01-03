@@ -24,15 +24,11 @@ layout = html.Div([
     html.P("Pour un graphique donnée, vous pouvez sélectionner les composantes qui vous souhaitez afficher en cliquant sur le symbole correspondant dans la légende. Un double-clique permet de ne sélectionner seulement la composante désirée. Si vous souhaitez enregistrer la figure au format png, cliquez sur sur le logo 'appareil photo'."),
     html.P("L'application exploite des données sous forme de fichiers Excels. Vous pouvez télécharger ces fichiers dans l'onglet 'Options'."),
     html.Br(),
-    html.P('Pour plus d\'informations, consulter le rapport du projet: '),
-    html.A('rapport_projet_cassiopee', href="/download/" + rapport_cassiopee),
-    html.Br(),
-    html.Br(),
 
     html.H2("Contact : "),
-    html.A("marin.jacquet@telecom-sudparis.com", href="mailto:marin.jacquet@telecom-sudparis.eu"),
+    html.A("marin.jacquet@telecom-sudparis.eu", href="mailto:marin.jacquet@telecom-sudparis.eu"),
     html.Br(),
-    html.A("mathias.caillard@telecom-sudparis.com", href="mailto:mathias.caillard@telecom-sudparis.eu"),
+    html.A("mathias.caillard@telecom-sudparis.eu", href="mailto:mathias.caillard@telecom-sudparis.eu"),
     html.P(""),
     html.Br(),
     ])
